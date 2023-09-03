@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2023-08-24">
+<meta name="dcterms.date" content="2016-12-02">
 
-<title>Giovanni Forchini - Computing exact distributions</title>
+<title>Giovanni Forchini - PhD Level Econometrics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +114,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Computing exact distributions</h1>
+      <h1 class="title">PhD Level Econometrics</h1>
                       </div>
   </div>
     
@@ -131,7 +131,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 24, 2023</p>
+        <p class="date">December 2, 2016</p>
       </div>
     </div>
     
@@ -149,18 +149,18 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 
 
 
-<section id="introduction" class="level1">
-<h1>Introduction</h1>
-<p>The computation of exact distributions relies on a set of techniques that do not seem to be part of the modern econometrician’s toolbox. Here and in the next few blog articles will review these techniques, but before I will try to persuade the reader that this is worth doing.</p>
-<p>Improvements in the computer speed and memory allow a researcher to simulate almost every conceivable distribution. So, why should we try to derive these distributions analytically? There are several reasons.</p>
-<p>First, by calculating exact distributions we may be able to deduce properties of estimators and tests that are not immediately obvious. For example, we may find that the distribution of the statistics of interest depends on some specific parameters only, or on a certain function of the parameters. We can use this knowledge to improve simulations designs, and make them faster and more efficient.</p>
-<p>Second, calculating exact distribution may emphasise aspects of the distribution that cannot be picked up by using simulations. For example, it was common in the econometric literature of the 1970s to compare estimators of the coefficient of the endogenous variables in linear structural equations by comparing their moments. However, for a common estimator, the LIML, these do not exist.</p>
-<p>Third, knowledge of the exact distribution can be very useful for generating random numbers in simulations based methods. Here the problem is that of generating random variables having a specified distribution: common algorithms, such as the “accept-reject method” and modification thereof require the knowledge of the exact distribution of the random variable one wants to generate. In the multivariate case, knowledge of some exact distribution theory can make the algorithms computationally efficient.</p>
-<p>Exact distribution can often be used in conjunction with asymptotic theory. The weakly identified structural equations models are an example of this. Here one finds that under weak instrument the asymptotic distribution of the usual estimator of the coefficients of the endogenous variables in a structural equation model formally almost the same as their exact distributions under the assumption of normal errors.</p>
-<p>The aim of this and the following few blog articles is to acquaint the reader with the main techniques that have been used or that are currently used for the evaluation of exact distributions.</p>
+<p>In the summer 2016 I was asked to contribute to the teaching of the first year MRES unit Econometric Theory at University of Warwick. The first term - my part - covered micro econometrics while the second semester is about time series.</p>
+<p>The MRES forms the first two taught year of a PhD programme in economics. All the students taking it had a background in economics and they had already seen a fair bit of econometrics at undergraduate or MSc level. I thought a lot about what the first semester of this unit should cover.</p>
+<p>I wanted this unit to:</p>
+<p>prepare the students for applied research in economics; give the students an understanding of econometrics which allows them to get the gist of research papers; cover modern topics.</p>
+<p>I did not want this unit to be a repeat, at higher level, of what they have already seen several times.</p>
+<p>Therefore,I decided to cover a bit of asymptotic theory at the start as it underpins most of modern econometrics. This was done with a lot of references to the linear regression model which should be familiar to the students, and wasfollowed by the method of moments and by the generalised method of moments with a lot of examples that the students should already have encountered in their studies.</p>
+<p>Some panel data models followed. Here, the the students could practice the use of the asymptotics as well as possibly revise the standard estimators for these models. The Anderson-Hsiao and the Arellano-Bond estimators were interesting examples of the generalised method of moments.So far the topics covered werefairly standard.</p>
+<p>At this point I decided to introduce some nonstandard topics. I started inference in panel data with common shocks, because they represent a very plausible practical situation. This was followed by quantile regression since it has important practical applications. Then I discussedsome methods for model selection, shrinkage and model reduction. These topics are often brushed aside in econometrics and negatively branded as ‘data mining’. Nonetheless, techniques like the lasso are starting to receive interest from econometricians.</p>
+<p>The final topic was missing observations since this is a situation the students will certainly come across in their careers as economists. I discussed various forms missing observations and ways to get around them: complete cases, imputation and various forms of sample selection.</p>
+<p>There are lots of interesting topics I had to leave out due to lack of time. These includes among several others: semi- and non-parametric statistics, program evaluationandcausal graphs.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

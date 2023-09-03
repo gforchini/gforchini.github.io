@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/CED1/index.html",
       "/posts/CED0/index.html",
       "/posts/AssessingIV/index.html",
       "/posts/flippingout2/index.html",
@@ -15,7 +16,7 @@
       "/posts/PhdDefense/index.html",
       "/posts/rankcondition/index.html",
       "/posts/The Makita drill/index.html",
-      "/posts/post-with-code/index.html",
+      "/posts/PhDEconometrics/index.html",
       "/posts/welcome/index.html"
     ]
   }

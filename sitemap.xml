@@ -2,74 +2,78 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://gforchini.github.io/bio.html</loc>
-    <lastmod>2023-09-03T10:36:24.207Z</lastmod>
+    <lastmod>2023-09-03T19:29:22.059Z</lastmod>
   </url>
   <url>
     <loc>https://gforchini.github.io/index.html</loc>
-    <lastmod>2023-09-03T10:36:22.978Z</lastmod>
+    <lastmod>2023-09-03T19:29:21.155Z</lastmod>
   </url>
   <url>
     <loc>https://gforchini.github.io/posts/CED0/index.html</loc>
-    <lastmod>2023-09-03T10:36:20.373Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/IdentificationVARS/index.html</loc>
-    <lastmod>2023-09-03T10:36:18.790Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/PhdDefense/index.html</loc>
-    <lastmod>2023-09-03T10:36:17.240Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/rankcondition/index.html</loc>
-    <lastmod>2023-09-03T10:36:15.750Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/overidtests/index.html</loc>
-    <lastmod>2023-09-03T10:36:13.864Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/AssessingIV/index.html</loc>
-    <lastmod>2023-09-03T10:36:12.027Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/The Makita drill/index.html</loc>
-    <lastmod>2023-09-03T10:36:09.659Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/post-with-code/index.html</loc>
-    <lastmod>2023-09-03T10:36:08.162Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/flippingout/index.html</loc>
-    <lastmod>2023-09-03T10:36:10.868Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/EtrixDataS/index.html</loc>
-    <lastmod>2023-09-03T10:36:13.135Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/Interpretation/index.html</loc>
-    <lastmod>2023-09-03T10:36:14.645Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/installation/index.html</loc>
-    <lastmod>2023-09-03T10:36:16.388Z</lastmod>
-  </url>
-  <url>
-    <loc>https://gforchini.github.io/posts/welcome/index.html</loc>
-    <lastmod>2023-09-03T10:36:17.973Z</lastmod>
+    <lastmod>2023-09-03T19:29:19.084Z</lastmod>
   </url>
   <url>
     <loc>https://gforchini.github.io/posts/flippingout2/index.html</loc>
-    <lastmod>2023-09-03T10:36:19.465Z</lastmod>
+    <lastmod>2023-09-03T19:29:17.711Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/welcome/index.html</loc>
+    <lastmod>2023-09-03T19:29:16.673Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/installation/index.html</loc>
+    <lastmod>2023-09-03T19:29:15.607Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/Interpretation/index.html</loc>
+    <lastmod>2023-09-03T19:29:14.573Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/EtrixDataS/index.html</loc>
+    <lastmod>2023-09-03T19:29:13.322Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/flippingout/index.html</loc>
+    <lastmod>2023-09-03T19:29:11.866Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/PhDEconometrics/index.html</loc>
+    <lastmod>2023-09-03T19:29:10.159Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/The Makita drill/index.html</loc>
+    <lastmod>2023-09-03T19:29:11.293Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/AssessingIV/index.html</loc>
+    <lastmod>2023-09-03T19:29:12.571Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/overidtests/index.html</loc>
+    <lastmod>2023-09-03T19:29:13.994Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/rankcondition/index.html</loc>
+    <lastmod>2023-09-03T19:29:15.185Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/PhdDefense/index.html</loc>
+    <lastmod>2023-09-03T19:29:16.213Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/IdentificationVARS/index.html</loc>
+    <lastmod>2023-09-03T19:29:17.254Z</lastmod>
+  </url>
+  <url>
+    <loc>https://gforchini.github.io/posts/CED1/index.html</loc>
+    <lastmod>2023-09-03T19:29:18.623Z</lastmod>
   </url>
   <url>
     <loc>https://gforchini.github.io/posts/troubles/index.html</loc>
-    <lastmod>2023-09-03T10:36:21.148Z</lastmod>
+    <lastmod>2023-09-03T19:29:19.561Z</lastmod>
   </url>
   <url>
     <loc>https://gforchini.github.io/about.html</loc>
-    <lastmod>2023-09-03T10:36:23.541Z</lastmod>
+    <lastmod>2023-09-03T19:29:21.589Z</lastmod>
   </url>
 </urlset>
