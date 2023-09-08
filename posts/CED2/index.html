@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2023-09-03">
+<meta name="dcterms.date" content="2023-09-08">
 
 <title>Giovanni Forchini - Computing exact distributions part 2</title>
 <style>
@@ -133,7 +133,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 3, 2023</p>
+        <p class="date">September 8, 2023</p>
       </div>
     </div>
     
@@ -254,7 +254,7 @@ pdf\left( {\hat \beta } \right) = \frac{{{2^{ - vk/2}}{{\left( {2\pi {\sigma ^2}
 \end{array}\]</span> and this is a multivariate t distribution with v+1 degrees of freedom, location parameter <span class="math inline">\(\beta\)</span> and scale parameter <span class="math inline">\({\sigma ^2}\)</span>.</p>
 <p><strong>Theorem 16.</strong> Assume that <span class="math inline">\(S\sim {W_m}\left( {n,\Sigma } \right)\)</span> and A is an <span class="math inline">\(m \times k\)</span> matrix of rank <span class="math inline">\(k \le m\)</span>. Then: 1. <span class="math inline">\(A'SA\sim {W_k}\left( {n,A'\Sigma A} \right)\)</span>; 2. <span class="math inline">\({\left( {A'{S^{ - 1}}A} \right)^{ - 1}}\sim {W_k}\left( {n - m + k,{{\left( {A'{\Sigma ^{ - 1}}A} \right)}^{ - 1}}} \right).\)</span></p>
 <p>If <span class="math inline">\(A\)</span> is a random matrix independent of <span class="math inline">\(S\)</span>, we can interpret the result above as conditional on <span class="math inline">\(A\)</span>.</p>
-<p><strong>Example 17.</strong> Suppose that <span class="math inline">\(x\)</span> has any distribution independent of <span class="math inline">\(S\sim {W_m}\left( {n,\Sigma } \right)\)</span>. We want the distribution of two statistics: <span class="math display">\[{t_1} = \frac{{x'Sx}}{{x'\Sigma x}}\]</span> and <span class="math inline">\({t_2} = \frac{{x'{\Sigma ^{ - 1}}x}}{{x'{S^{ - 1}}x}}.\)</span> Using Theorem 3, we know that <span class="math inline">\(x'Sx|x\sim {W_1}\left( {n,x'\Sigma x} \right)\)</span> so that <span class="math display">\[{t_1} = \frac{{x'Sx}}{{x'\Sigma x}}|x\sim {\chi ^2}\left( n \right).\]</span> Since <span class="math inline">\({\chi ^2}\left( n \right)\)</span> does not depend on <span class="math inline">\(x\)</span>, it must be true that <span class="math inline">\({t_1}\sim {\chi ^2}\left( n \right)\)</span> unconditionally. Likewise, <span class="math display">\[\frac{1}{{x'{S^{ - 1}}x}}|x\sim {W_1}\left( {n - m - 1,\frac{1}{{x'{\Sigma ^{ - 1}}x}}} \right),\]</span> so that <span class="math inline">\({t_2} = \frac{{x'{\Sigma ^{ - 1}}x}}{{x'{S^{ - 1}}x}}|x\sim {\chi ^2}\left( {n - m - 1} \right)\)</span>. Once again <span class="math inline">\({\chi ^2}\left( {n - m - 1} \right)\)</span> does not depend on <span class="math inline">\(x\)</span>, so the above result must be true unconditionally, i.e. <span class="math inline">\({t_2}\sim {\chi ^2}\left( {n - m - 1} \right)\)</span>.</p>
+<p><strong>Example 17.</strong> Suppose that <span class="math inline">\(x\)</span> has any distribution independent of <span class="math inline">\(S\sim {W_m}\left( {n,\Sigma } \right)\)</span>. We want the distribution of two statistics: <span class="math display">\[{t_1} = \frac{{x'Sx}}{{x'\Sigma x}}\]</span> and <span class="math inline">\({t_2} = \frac{{x'{\Sigma ^{ - 1}}x}}{{x'{S^{ - 1}}x}}.\)</span> Using Theorem 3, we know that <span class="math inline">\(x'Sx|x\sim {W_1}\left( {n,x'\Sigma x} \right)\)</span> so that <span class="math display">\[{t_1} = \frac{{x'Sx}}{{x'\Sigma x}}|x\sim {\chi ^2}\left( n \right).\]</span> Since <span class="math inline">\({\chi ^2}\left( n \right)\)</span> does not depend on <span class="math inline">\(x\)</span>, it must be true that <span class="math inline">\({t_1}\sim {\chi ^2}\left( n \right)\)</span> unconditionally. Likewise, <span class="math display">\[\frac{1}{{x'{S^{ - 1}}x}}|x\sim {W_1}\left( {n - m - 1,\frac{1}{{x'{\Sigma ^{ - 1}}x}}} \right),\]</span> so that <span class="math inline">\({t_2} = \frac{{x'{\Sigma ^{ - 1}}x}}{{x'{S^{ - 1}}x}}|x\sim {\chi ^2}\left( {n - m - 1} \right)\)</span>. Once again <span class="math inline">\({\chi ^2}\left( {n - m - 1} \right)\)</span> does not depend on <span class="math inline">\(x\)</span>, so the above result must be true unconditionally, i.e.&nbsp;<span class="math inline">\({t_2}\sim {\chi ^2}\left( {n - m - 1} \right)\)</span>.</p>
 
 
 </section>
