@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -47,7 +47,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -56,6 +62,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -103,16 +110,43 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Giovanni Forchini</span>
     </a>
@@ -123,21 +157,17 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="./about.html" rel="" target="">
- <span class="menu-text">About</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./bio.html" rel="" target="">
- <span class="menu-text">Short CV</span></a>
-  </li>  
+  <li class="dropdown-header">
+ <span class="menu-text">about.qmd</span></li>
+  <li class="dropdown-header">
+ <span class="menu-text">bio.qmd</span></li>
 </ul>
-            <div class="quarto-navbar-tools ms-auto tools-wide">
-    <a href="https://www.linkedin.com/in/giovanni-forchini-77452794/" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
-    <a href="https://twitter.com/gforchini" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
-    <a href="https://github.com/gforchini" rel="" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools tools-wide">
+    <a href="https://www.linkedin.com/in/giovanni-forchini-77452794/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+    <a href="https://twitter.com/gforchini" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
+    <a href="https://github.com/gforchini" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -150,7 +180,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
   </div>
     
   
-  <div class="quarto-title-meta">
+  <div class="quarto-title-meta column-page">
 
       
     
@@ -168,6 +198,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 
 
 
+
 <p>Here you will find my random thoughts on various aspects of econometrics and statistics and more …</p>
 
 
@@ -175,531 +206,83 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1694988000000" data-listing-file-modified-sort="1695324759681" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1757887200000" data-listing-file-modified-sort="1726412310930" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="126">
 <div class="thumbnail">
-<p><a href="./posts/CED4/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
+<p><a href="./posts/Datasources/index.html" class="no-external"></a></p><a href="./posts/Datasources/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/Datasources/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/CED4/index.html">
 <h3 class="no-anchor listing-title">
-Computing exact distributions part 4
+<a href="./posts/Datasources/index.html" class="no-external">Data sources</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/Datasources/index.html" class="no-external"></a>
 </div>
 <div class="listing-description">
-It may…<em></em>
+<a href="./posts/Datasources/index.html" class="no-external">Here is a list of possible data sources that can be useful for a master thesis in economics.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/Datasources/index.html" class="no-external">
+<div class="listing-date">
+Sep 15, 2025
+</div>
+<div class="listing-author">
+Giovanni Forchini
 </div>
 </a>
 </div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1696802400000" data-listing-file-modified-sort="1696884178000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="157">
+<div class="thumbnail">
+<p><a href="./posts/RvsStata/index.html" class="no-external"></a></p><a href="./posts/RvsStata/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/RvsStata/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/RvsStata/index.html" class="no-external">Teaching econometrics: R or Stata?</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/RvsStata/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/RvsStata/index.html" class="no-external">Last year we decided to switch from Stata to R in our Master program. This has had huge problem for the Econometrics 1 course that I teach. Econometrics 1 is an introduction…</a>
+</div>
+</div>
 <div class="metadata">
-<a href="./posts/CED4/index.html">
+<a href="./posts/RvsStata/index.html" class="no-external">
+<div class="listing-date">
+Oct 9, 2023
+</div>
+<div class="listing-author">
+Giovanni Forchini
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1694988000000" data-listing-file-modified-sort="1695324759000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1818">
+<div class="thumbnail">
+<p><a href="./posts/CED4/index.html" class="no-external"></a></p><a href="./posts/CED4/index.html" class="no-external">
+<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
+</a><p><a href="./posts/CED4/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/CED4/index.html" class="no-external">Computing exact distributions part 4</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/CED4/index.html" class="no-external"></a>
+</div>
+<div class="listing-description">
+<a href="./posts/CED4/index.html" class="no-external">It may be difficult to calculate Jacobians as the determinant of matrices of derivatives, especially when one has many variables. However, there is an alternative method…<em></em></a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/CED4/index.html" class="no-external">
 <div class="listing-date">
 Sep 18, 2023
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1694901600000" data-listing-file-modified-sort="1694944369130" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13">
-<div class="thumbnail">
-<p><a href="./posts/CED3/index.html"> <p class="card-img-top"><img src="posts/CED3/index_files/figure-html/unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p> </a></p>
-</div>
-<div class="body">
-<a href="./posts/CED3/index.html">
-<h3 class="no-anchor listing-title">
-Computing exact distributions part 3
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-We now review a general definition of integral. Although there are some techicalities the focus is on the main ideas.
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/CED3/index.html">
-<div class="listing-date">
-Sep 17, 2023
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1694124000000" data-listing-file-modified-sort="1694944529936" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10">
-<div class="thumbnail">
-<p><a href="./posts/CED2/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/CED2/index.html">
-<h3 class="no-anchor listing-title">
-Computing exact distributions part 2
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-The normal distribution is used to define other distributions by taking ‘squares’.
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/CED2/index.html">
-<div class="listing-date">
-Sep 8, 2023
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1693692000000" data-listing-file-modified-sort="1694944634619" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12">
-<div class="thumbnail">
-<p><a href="./posts/CED1/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/CED1/index.html">
-<h3 class="no-anchor listing-title">
-Computing exact distributions part 1
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-The normal distribution is one of the basic distributions used in statistics. I occurs very often especially in asymptotic theory. All students of statistics and…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/CED1/index.html">
-<div class="listing-date">
-Sep 3, 2023
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1692828000000" data-listing-file-modified-sort="1694944670292" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
-<div class="thumbnail">
-<p><a href="./posts/CED0/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/CED0/index.html">
-<h3 class="no-anchor listing-title">
-Computing exact distributions
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-The computation of exact distributions relies on a set of techniques that do not seem to be part of…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/CED0/index.html">
-<div class="listing-date">
-Aug 24, 2023
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1583017200000" data-listing-file-modified-sort="1693601083579" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
-<div class="thumbnail">
-<p><a href="./posts/AssessingIV/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/AssessingIV/index.html">
-<h3 class="no-anchor listing-title">
-Assessing IV models
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-Endogeneity is a big problem in econometric modelling and as such it is…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/AssessingIV/index.html">
-<div class="listing-date">
-Mar 1, 2020
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1572562800000" data-listing-file-modified-sort="1693572679061" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/flippingout2/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/flippingout2/index.html">
-<h3 class="no-anchor listing-title">
-Flipping out 2
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-In my previous post I discussed how I flipped the Master course Introduction to Mathematical Economics 1. But the main question is whether it worked.
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/flippingout2/index.html">
-<div class="listing-date">
-Nov 1, 2019
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1567288800000" data-listing-file-modified-sort="1693572520914" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
-<div class="thumbnail">
-<p><a href="./posts/flippingout/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/flippingout/index.html">
-<h3 class="no-anchor listing-title">
-Flipping out
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-My first attempt at flipping Mathematical Economics 1 starts today. This is a unit for Master students - obviously - in economics covering basic calculus, linear algebra…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/flippingout/index.html">
-<div class="listing-date">
-Sep 1, 2019
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-listing-date-sort="1527804000000" data-listing-file-modified-sort="1693572410317" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2">
-<div class="thumbnail">
-<p><a href="./posts/troubles/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/troubles/index.html">
-<h3 class="no-anchor listing-title">
-The trouble with doing statistics without understanding it
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-The average economics student takes at least one module in econometrics as an undergraduate. Master students normally take further econometric modules - now mostly…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/troubles/index.html">
-<div class="listing-date">
-Jun 1, 2018
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-listing-date-sort="1518044400000" data-listing-file-modified-sort="1693567330586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
-<div class="thumbnail">
-<p><a href="./posts/IdentificationVARS/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/IdentificationVARS/index.html">
-<h3 class="no-anchor listing-title">
-Identification of Structural Vector Autoregressive Models
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-In the last lecture for Econometrics B in the Economics MSc at Warwick we discussed structural vector autoregressive (SVAR) models. These are very similar to simultaneous…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/IdentificationVARS/index.html">
-<div class="listing-date">
-Feb 8, 2018
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-listing-date-sort="1517439600000" data-listing-file-modified-sort="1693571772667" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
-<div class="thumbnail">
-<p><a href="./posts/overidtests/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/overidtests/index.html">
-<h3 class="no-anchor listing-title">
-Tests for over-identification in a single structural equation: what is what?
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-There is a large number…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/overidtests/index.html">
-<div class="listing-date">
-Feb 1, 2018
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="11" data-listing-date-sort="1512255600000" data-listing-file-modified-sort="1693571348192" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8">
-<div class="thumbnail">
-<p><a href="./posts/EtrixDataS/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/EtrixDataS/index.html">
-<h3 class="no-anchor listing-title">
-Econometrics and Data Science
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-Unless you have a degree in economics or business you are unlikely to know what econometrics is. Econometrics is a set of statistical methodologies used to link economic…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/EtrixDataS/index.html">
-<div class="listing-date">
-Dec 3, 2017
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="12" data-listing-date-sort="1509490800000" data-listing-file-modified-sort="1693568696559" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/installation/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/installation/index.html">
-<h3 class="no-anchor listing-title">
-Installation and other things…
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-I was ‘installed’ as a professor of Econometrics at Umeå University on October 21, 2017. It was a wonderful day which made me feel valued. As part of…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/installation/index.html">
-<div class="listing-date">
-Nov 1, 2017
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="13" data-listing-date-sort="1500328800000" data-listing-file-modified-sort="1693568482536" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
-<div class="thumbnail">
-<p><a href="./posts/Interpretation/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/Interpretation/index.html">
-<h3 class="no-anchor listing-title">
-Interpreting the coefficients of the endogenous variables in IV models
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-In the simple linear model <span class="math inline">\(y=x \beta +u\)</span>, the (scalar) parameter <span class="math inline">\(\beta\)</span> has a very simple interpretation:
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/Interpretation/index.html">
-<div class="listing-date">
-Jul 18, 2017
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="14" data-listing-date-sort="1488495600000" data-listing-file-modified-sort="1693567501361" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
-<div class="thumbnail">
-<p><a href="./posts/PhdDefense/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/PhdDefense/index.html">
-<h3 class="no-anchor listing-title">
-A PhD thesis defense
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-Last Friday I attended…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/PhdDefense/index.html">
-<div class="listing-date">
-Mar 3, 2017
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="15" data-listing-date-sort="1486508400000" data-listing-file-modified-sort="1693567343917" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5">
-<div class="thumbnail">
-<p><a href="./posts/rankcondition/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/rankcondition/index.html">
-<h3 class="no-anchor listing-title">
-The rank condition for identification in linear simultaneous equations
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-The first two lectures of Econometrics B in the economics MSc at Warwick cover endogeneity and the challenges that it creates for…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/rankcondition/index.html">
-<div class="listing-date">
-Feb 8, 2017
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="16" data-listing-date-sort="1485385200000" data-listing-file-modified-sort="1693563406214" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
-<div class="thumbnail">
-<p><a href="./posts/The Makita drill/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/The Makita drill/index.html">
-<h3 class="no-anchor listing-title">
-The Makita Drill
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-“Data Scientist: The Sexiest Job of the 21st Century” was the title of an HBR article from 2012. It is unclear what a data…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/The Makita drill/index.html">
-<div class="listing-date">
-Jan 26, 2017
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="17" data-listing-date-sort="1480633200000" data-listing-file-modified-sort="1693768303382" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
-<div class="thumbnail">
-<p><a href="./posts/PhDEconometrics/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/PhDEconometrics/index.html">
-<h3 class="no-anchor listing-title">
-PhD Level Econometrics
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-In the summer 2016 I was asked to contribute to the…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/PhDEconometrics/index.html">
-<div class="listing-date">
-Dec 2, 2016
-</div>
-<div class="listing-author">
-Giovanni Forchini
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="18" data-listing-date-sort="1480546800000" data-listing-file-modified-sort="1693555645696" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/welcome/index.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/welcome/index.html">
-<h3 class="no-anchor listing-title">
-Welcome To My Blog
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-This is the start of my blog. I am not sure I know why I want to do this. Maybe I want to rationalize my…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/welcome/index.html">
-<div class="listing-date">
-Dec 1, 2016
 </div>
 <div class="listing-author">
 Giovanni Forchini
@@ -791,10 +374,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/gforchini\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -804,8 +404,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -817,7 +426,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -861,6 +593,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -886,6 +619,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -946,6 +705,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 
