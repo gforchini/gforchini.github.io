@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2023-11-09">
+<meta name="dcterms.date" content="2018-06-01">
 
-<title>Giovanni Forchini - Teaching econometrics: R or Stata?</title>
+<title>Giovanni Forchini - The trouble with doing statistics without understanding it</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Teaching econometrics: R or Stata?</h1>
+      <h1 class="title">The trouble with doing statistics without understanding it</h1>
                       </div>
   </div>
     
@@ -138,7 +138,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 9, 2023</p>
+        <p class="date">June 1, 2018</p>
       </div>
     </div>
     
@@ -157,21 +157,12 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 
 
 
-<p>Last year we decided to switch from Stata to R in our Master program. This has had huge problem for the Econometrics 1 course that I teach. Econometrics 1 is an introduction to microeconometrics for economists, covering linear regression model, heteroskedasticity, panel data and endogeneity/instrumental variables.</p>
-<p>First the positives. R is powerful and actively develop by lots of groups and individuals. It is at the forefront of statistics, data analytics and machine learning. Some packages are just wonderful. But … Stata is easier to use for teaching econometrics.</p>
-<p>For example, econometricians tend to correct the standard errors to make them robust to heteroskedasticity. This is accomplish in Stata with a simple command:</p>
-<p><strong>regress y x1 x2 x3, robust</strong></p>
-<p>This is easy and intuitive and I can focus on the theory underlying this command. In R, this becomes:</p>
-<p><strong>reg &lt;- lm(‘y~x1+x2+x3’,data)</strong></p>
-<p><strong>library(sandwich)</strong></p>
-<p><strong>robust_cov &lt;- vcovHC(reg, type = “HC1”)</strong></p>
-<p><strong>library(lmtest)</strong></p>
-<p><strong>coeftest(reg, vcov = robust_cov)</strong></p>
-<p>And if I want a clean table,</p>
-<p><strong>library(stargazer)</strong></p>
-<p><strong>robust_se &lt;- sqrt(diag(robust_cov))</strong></p>
-<p><strong>stargazer(reg, type = “text”,se = list(robust_se))</strong></p>
-<p>My feeling is that the students focus too much on the R command and not enough on understanding the econometrics. So something needs to be done and I already have something in mind ….</p>
+<p>The average economics student takes at least one module in econometrics as an undergraduate. Master students normally take further econometric modules - now mostly covering microeconometrics (i.e.&nbsp;linear regression in cross-sections and panel data, dummy dependent variable models like logit, probit, and censored and truncated regression).</p>
+<p>Since individuals are heterogeneous, one would expect heteroskedasticity both in cross-section and in panel data. Most lecturers tell their students to use robust standard errors in applications using linear models. This is now very easy to do in practice because such procedures have been coded up in several computer packages. For example, in my modules I tend to use Stata, which offers the robust or the cluster options.</p>
+<p>As lecturers, we tend to repeat this mantra so often that our students - and sometimes even researchers - report heteroskedasticity robust standard errors even in cases where this does not make sense.</p>
+<p>Heteroskedasticity robust standard errors for an estimator make sense when two conditions are satisfied: (1) the estimator is consistent even in the presence of heteroskedasticity and (2) the standard errors routinely reported by the statistical package are incorrectly calculated under heteroskedasticity. Hence, one needs to&nbsp; understand the effects that heteroskedasticity on the consistency of an estimator before deciding whether heteroskedasticity robust standard errors should be reported.</p>
+<p>In some situations heteroskedasticity fundamentally affects an estimator by making it inconsistent. For example the standard estimator for the Tobit model, a common model for censored regressions, is inconsistent under heteroskedasticity (see Arabmazar, A. and P. Schmidt (1981) ‘Further evidence on the robustness of the Tobit estimator to heteroskedasticity’, Journal of Econometrics 17, 253-258). Despite this, it is easy to report robust standard errors for the Tobit model since the usual robust or clustered options can be ticked. By doing this, one does not solve the essential problem of inconsistency of the estimator and may also give the researchers the impression that they have actually ‘dealt with’ heteroskedasticity when in fact they do not.</p>
+<p>If well trained students and researchers can easily fall into this trap, what happens when these tools are used by individuals without training? This is more than a speculative worry. There are lots of tools on the market that allow individuals to ‘bypass’ the experts - those who know how the methods actually work - and perform analytics or machine learning with no knowledge of statistics.</p>
 
 
 

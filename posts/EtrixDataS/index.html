@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2023-11-09">
+<meta name="dcterms.date" content="2017-12-03">
 
-<title>Giovanni Forchini - Teaching econometrics: R or Stata?</title>
+<title>Giovanni Forchini - Econometrics and Data Science</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Teaching econometrics: R or Stata?</h1>
+      <h1 class="title">Econometrics and Data Science</h1>
                       </div>
   </div>
     
@@ -138,7 +138,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 9, 2023</p>
+        <p class="date">December 3, 2017</p>
       </div>
     </div>
     
@@ -157,21 +157,38 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 
 
 
-<p>Last year we decided to switch from Stata to R in our Master program. This has had huge problem for the Econometrics 1 course that I teach. Econometrics 1 is an introduction to microeconometrics for economists, covering linear regression model, heteroskedasticity, panel data and endogeneity/instrumental variables.</p>
-<p>First the positives. R is powerful and actively develop by lots of groups and individuals. It is at the forefront of statistics, data analytics and machine learning. Some packages are just wonderful. But … Stata is easier to use for teaching econometrics.</p>
-<p>For example, econometricians tend to correct the standard errors to make them robust to heteroskedasticity. This is accomplish in Stata with a simple command:</p>
-<p><strong>regress y x1 x2 x3, robust</strong></p>
-<p>This is easy and intuitive and I can focus on the theory underlying this command. In R, this becomes:</p>
-<p><strong>reg &lt;- lm(‘y~x1+x2+x3’,data)</strong></p>
-<p><strong>library(sandwich)</strong></p>
-<p><strong>robust_cov &lt;- vcovHC(reg, type = “HC1”)</strong></p>
-<p><strong>library(lmtest)</strong></p>
-<p><strong>coeftest(reg, vcov = robust_cov)</strong></p>
-<p>And if I want a clean table,</p>
-<p><strong>library(stargazer)</strong></p>
-<p><strong>robust_se &lt;- sqrt(diag(robust_cov))</strong></p>
-<p><strong>stargazer(reg, type = “text”,se = list(robust_se))</strong></p>
-<p>My feeling is that the students focus too much on the R command and not enough on understanding the econometrics. So something needs to be done and I already have something in mind ….</p>
+<p>Unless you have a degree in economics or business you are unlikely to know what econometrics is. Econometrics is a set of statistical methodologies used to link economic models with economic data. As such econometrics provides a set of tools which are used in decision making by governments, central banks, charities, financial investment agents, advertising agencies, etc.</p>
+<p>Data science is the “sexiest job of the 21st century” (at least according to an article published in the Harvard Business Review in October 2012). Maybe that is why several of my colleagues turned overnight into data scientists. The term data science has been around for over 50 years. It was used from the 1960 as a synonym for computer science. It was equated to statistics by Professor Jeff Wu in 1997, but now it is usually thought of as having a much broader role than statistics with a great emphasis on computing.</p>
+<p>Searching the internet one finds “romantic” definitions of data science. For example a data scientist is an individual who can mix a bit programming, a bit of hacking, a bit statistics and good visualizations but is not an expert in any of its individual aspects. Or, data science is what let the data speak! Or, in the words of Sean Rad, the founder of Tinder: “Data beats emotions.”</p>
+<p>The data scientist is an “alchemist”, a data tinkerer who gets things done without having an advanced degree. In fact, several internet sites for aspiring data scientists advise data scientists not to get advanced degrees because “they get in the way”. Most competitors on the platform Kaggle - the self proclaimed home of data science and machine learning - are self taught.</p>
+<p>Despite dealing with variables which are often economic in nature, data scientists have a background in science - physics, computer science, and engineering. They use a lot of new techniques which are slowly finding their way into Econometrics. This is certainly a good thing. More openness of Econometrics is a positive and welcome development.</p>
+<p>But can data really speak on its own? Economists always spoil a party with cynical old quotes like:</p>
+<p>“Torture the data, and it will confess to anything.”</p>
+<p>says Ronald Coase, Economics, Nobel Prize Laureate.</p>
+<p>These warnings are based on experience but are usually silenced by buzzwords and the apparent unstoppable progress brought about by technology. So let’s put the buzzwords aside and go back to the 30’ before the advent of computers as we know them. In fact, human computers were used at that time.</p>
+<p>In 1936 Jan Tinbergen was commissioned by the League of Nations to test the business cycle theory, and in 1939 he published a report “Statistical Testing of Business-Cycle Theories” which started an interesting and long lasting debate among economists.</p>
+<p>Since the nineteenth century, economists have noticed a cyclical pattern in economic activity, and developed explanations sometimes appealing to physical phenomena like the cycle of the sun. Tinbergen, a former physicist, who switched to economics because he found it more socially useful, set out to build a quantitative macroeconomic model explaining the business cycle which, he hoped, could be useful to relieve the great depression.</p>
+<p>Tinbergen realized that economics wasn’t specific enough to fully specify a system of causal relationships which could be estimated from data. In particular, economics was totally uninformative about the way expectations were formed - and expectations are fundamental for economic decisions - and about the temporal effects, the lagged effects, of changes in policies. So, he tinkered. He created variables approximating expectations and lagged effects, and did what data scientists now call “features engineering”. He was using state of the art techniques and a lot of calculations - done using human computers - to estimate and test different and complex models. He had the spirit of a data scientist and he was ready to employ extensive computational power to produce his results.</p>
+<p>Tinbergen’s report for the League of Nations was widely circulated before publications and John Maynard Keynes was asked to provide a critique of Tinbergen’s methods. Keynes was a famous British economist whose influence in economics has been vast. He was a former mathematician who also wrote a book on probability.</p>
+<p>Keynes was quite a harsh critic. Some of his points were trivial but others were not and are still relevant today. Keynes took issue, although with a flowery prose, with matters which are familiar to econometricians today including dynamic specification, structural change, simultaneity bias, measurement error, omitted variable bias, spurious correlations etc. If any of these is neglected, inference becomes invalid.</p>
+<p>Some of the examples where things go wrong are quite technical and are not suitable for a general talk.</p>
+<p>However, some are not. For example, one of the point Keynes raised was that a relationship estimated with a data from a given historical period can be used for predictions or in general for modelling the relationship in another historical period only if this relationship holds in both periods. What Keynes was underlying was that this is an assumptions which needs not be true in economics because economic agents learn from the past. A recent example where this assumption fails is Google prediction of flu cases in 2008. Google researchers published a paper in Nature claiming that they could accurately forecast flu prevalence in the US two weeks earlier that the Centers for Disease Control and Prevention. However four years later the same methodology failed to estimate the peak of the flu season by quite a lot.</p>
+<p>Another point was that if economics does not lead the analysis then one would pick up spurious relationships, relationships which seem to exist but do not. Keynes was a firm believer that deductions from economic theory on the causal mechanisms of economic phenomena should fully inform data analysis. What Tinbergen was doing was “alchemy” in his view.</p>
+<p>A third point was that economic variables used as explanatory variables are usually imprecise measures of some ideal economic quantities. The error with which these variables are measured affects what we can learn from them.</p>
+<p>I like a quote from the Keynes’ review of Tinbergen report:</p>
+<p>“I hope I have not done injustice to a brave pioneer effort. The labour it involved must have been enormous. The book is full of intelligence, ingenuity, and candour; I leave it with sentiments of respect for the author.</p>
+<p>But it has been a nightmare to live with, and I fancy that other readers will find the same. I have a feeling that Prof.&nbsp;Tinbergen may agree with much of my comments, but that his reaction will be to engage another ten computors and drown his sorrows in arithmetic.”</p>
+<p>Already in 1938 we could find data scientists - Tinbergen - and economists - Keynes - inside what will become econometrics. As with any debate, support went to both sides of the arguments. There were Nobel laureates on both sides.</p>
+<p>This early debate help shape the development of econometrics, leading to a fundamental contribution in 1943 by Trygve Haavelmo. Haavelmo had good grounding in statistics.</p>
+<p>Haavelmo contribution was twofold. Firstly he regarded the economic variables as random variables, stochastic objects that is. This means that the object of statistical inference are the parameters of the probability laws generating the data. This establishes a connection between economic theory and data.</p>
+<p>Secondly, Haavelmo argued that “we shall not, by logical operations alone, be able to build a complete bridge between our model and reality”.</p>
+<p>This means that a model is a description of reality not the reality in the same way as Magritte’s picture of a pipe is not pipe. A model can be interpreted but the interpretation requires more than the model itself. This is a paradigm where “Theories with different economic meaning might lead to exactly the same probability law”. It is therefore important to understand under what conditions an interpretation is unique. This is a topic which I find very interesting and spent a considerable amount of time investigating.</p>
+<p>This has been the paradigm of econometrics for a few years. It is a paradigm in which economic theory and statistics played different but complementary parts and in which causality does not exist. It is only much later that a discussion started on whether econometric or statistical models can be used to infer causation. But this is a different story.</p>
+<p>This standard approach has also ward off a fully data based approach: data analysis needs to be directed by economics principles. Data cannot speak on its own. It speaks through economics.</p>
+<p>Although the standard approach is considered as the gold standard, Economists have always been open to all kinds of methodologies and approaches to analyse data. So much so that for example an article in the Economist warned in 2016 that “Economists are prone to fads, and the latest is machine learning” (The Economist, Nov 24th, 2016).</p>
+<p>Econometrics is mature enough to incorporate new ideas and techniques, without accepting these in an uncritical and subservient way, but modifying and adapting such methodologies to an economic context. After all, economic variables reflect agents’ decisions rather than immutable laws. Tinkering is allowed, a bit alchemy too. But they are directed and controlled by economics.</p>
+<p>So what is the sexiest job of the 21st century? Econometrics, obviously.</p>
+<p>(This is the content of my talk as part of the ‘installation’ of new professor at Umeå University on October 21, 2017).</p>
 
 
 

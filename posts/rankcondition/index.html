@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2023-09-18">
+<meta name="dcterms.date" content="2017-02-08">
 
-<title>Giovanni Forchini - Computing exact distributions part 4</title>
+<title>Giovanni Forchini - The rank condition for identification in linear simultaneous equations</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -150,7 +150,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Computing exact distributions part 4</h1>
+      <h1 class="title">The rank condition for identification in linear simultaneous equations</h1>
                       </div>
   </div>
     
@@ -167,7 +167,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 18, 2023</p>
+        <p class="date">February 8, 2017</p>
       </div>
     </div>
     
@@ -186,100 +186,35 @@ window.Quarto = {
 
 
 
-<section id="the-exterior-product" class="level2">
-<h2 class="anchored" data-anchor-id="the-exterior-product">The exterior product</h2>
-<p>It may be difficult to calculate Jacobians as the determinant of matrices of derivatives, especially when one has many variables. However, there is an alternative method based on the <em>exterior product</em> which may be useful in some cases. This approach is covered in this post.</p>
-<p>When one transforms <span class="math inline">\(x\)</span> to <span class="math inline">\(y\)</span> according to <span class="math inline">\(x = x\left( y \right)\)</span>, every component of <span class="math inline">\(x\)</span> is transformed as follows <span class="math inline">\({x_i} = {x_i}\left( {{y_1},{y_2},...{y_n}} \right)\)</span>. So the differential of <span class="math inline">\({x_i}\)</span> is <span class="math display">\[d{x_i} = \frac{{\partial {x_i}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_i}}}{{\partial {y_2}}}d{y_2} + ... + \frac{{\partial {x_i}}}{{\partial {y_n}}}d{y_n}\]</span> for i=1,2,…,n.&nbsp;I now consider the quantities <span class="math inline">\(d{x_i}\)</span>, i=1,2,…,n, and define a <em>product</em> (or more precisely the <em>exterior product</em> or <em>wedge</em> product) by two rules</p>
-<ol type="1">
-<li><p>multilinearity <span class="math display">\[d{x_i} \wedge \left( {ad{x_j} + bd{x_k}} \right) = a\left( {d{x_i} \wedge d{x_j}} \right) + b\left( {d{x_i} \wedge d{x_k}} \right)\]</span> and <span class="math display">\[\left( {ad{x_j} + bd{x_k}} \right) \wedge d{x_i} = a\left( {d{x_j} \wedge d{x_i}} \right) + b\left( {d{x_k} \wedge d{x_i}} \right)\]</span></p></li>
-<li><p>and skew-symmetry <span class="math display">\[d{x_i} \wedge d{x_j} =  - d{x_j} \wedge d{x_i}\]</span> i.e.&nbsp;if the order of two terms is reversed, the product changes sign.</p></li>
-</ol>
-<p>Notice that when I write <span class="math inline">\(d{x_1}d{x_2,}....d{x_n}\)</span> I really mean <span class="math inline">\(d{x_1} \wedge d{x_2} \wedge .... \wedge d{x_n}\)</span>. If follows from the property of skew-symmetry that <span class="math display">\[d{x_i} \wedge d{x_i} =  - d{x_i} \wedge d{x_i}\]</span> i.e.<span class="math inline">\(d{x_i} \wedge d{x_i} = 0.\)</span></p>
-<p>An important result is the following one. If <span class="math display">\[d{x_i} = \frac{{\partial {x_i}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_i}}}{{\partial {y_2}}}d{y_2} + ... + \frac{{\partial {x_i}}}{{\partial {y_n}}}d{y_n}\]</span> for <span class="math inline">\(i=1,2,…,n\)</span>, and I let <span class="math display">\[d{x_1} \wedge d{x_2} \wedge d{x_3} \wedge .... \wedge d{x_n} = J\left( {x \to y} \right)\left( {d{y_1} \wedge d{y_2} \wedge d{y_3} \wedge .... \wedge d{y_n}} \right),\]</span> so that this method is equivalent to the one considered before.</p>
-<p>I will not prove this, but I will go through an example instead. Suppose that <span class="math inline">\(n=3\)</span>, so that I need to deal with <span class="math inline">\(d{x_1} \wedge d{x_2} \wedge d{x_3}\)</span> only, and <span class="math display">\[\begin{array}{l}
-d{x_1} = \frac{{\partial {x_1}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_1}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_1}}}{{\partial {y_3}}}d{y_3}\\
-d{x_2} = \frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}\\
-d{x_3} = \frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}
-\end{array}\]</span> Then <span class="math display">\[\begin{array}{c}
-d{x_1} \wedge d{x_2} \wedge d{x_3} = \left( {\frac{{\partial {x_1}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_1}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_1}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \\
-\left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-= \frac{{\partial {x_1}}}{{\partial {y_1}}}d{y_1} \wedge \left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}d{y_2} \wedge \left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}d{y_3} \wedge \left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)
-\end{array}\]</span> because of the property of multilinearity. <span class="math display">\[\begin{array}{c}
-d{x_1} \wedge d{x_2} \wedge d{x_3} = \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_2} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_2} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_3} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)
-\end{array}\]</span> Again, this follows from multilinearity. Notice that some terms are zero because <span class="math inline">\(d{y_i} \wedge d{y_i} = 0\)</span>, <span class="math display">\[\begin{array}{c}
-d{x_1} \wedge d{x_2} \wedge d{x_3} = \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_2} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_2} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_3} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)
-\end{array}\]</span></p>
-<p>Things simplify even more. I will focus on the first term <span class="math display">\[\begin{array}{l}
-\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-= \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_2} \wedge d{y_1}\\
-+ \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge d{y_2}\\
-+ \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_2} \wedge d{y_3}
-\end{array}\]</span></p>
-<p>Now <span class="math display">\[d{y_1} \wedge d{y_2} \wedge d{y_1} =  - d{y_1} \wedge d{y_1} \wedge d{y_2}\]</span> because of skew-symmetry. But <span class="math inline">\(d{y_1} \wedge d{y_1} = 0\)</span>, so that <span class="math display">\[d{y_1} \wedge d{y_2} \wedge d{y_1} =  - d{y_1} \wedge d{y_1} \wedge d{y_2} = 0.\]</span></p>
-<p>In general, if there are two terms which are the same the outer product is zero. So <span class="math display">\[\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_2} \wedge d{y_3}.\]</span></p>
-<p>Using the same reasoning it is easy to show that <span class="math display">\[\begin{array}{c}
-\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) =  - \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge d{y_3}\\
-\frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_2} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_2} \wedge d{y_1} \wedge d{y_3}\\
-=  - \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_2} \wedge d{y_3}\\
-\frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_2} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_2} \wedge d{y_3}\\
-\frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge d{y_3}\\
-\frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_3} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_3} \wedge d{y_2} \wedge d{y_1}\\
-=  - \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge d{y_2}\\
-= \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_3} \wedge d{y_2}\\
-=  - \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_2} \wedge d{y_3}
-\end{array}\]</span></p>
-<p>Putting everything together <span class="math display">\[\begin{array}{l}
-d{x_1} \wedge d{x_2} \wedge d{x_3}\\
-= \left[ {\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_3}}} - \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_3}}} - \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_3}}} + \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_1}}} + \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_2}}} - \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}} \right]d{y_1} \wedge d{y_2} \wedge d{y_3}
-\end{array}\]</span></p>
-<p>The complicated thing in square brackets is <span class="math inline">\(J\left( {x \to y} \right)\)</span>. So <span class="math display">\[d{x_1} \wedge d{x_2} \wedge d{x_3} = J\left( {x \to y} \right)d{y_1} \wedge d{y_2} \wedge d{y_3}.\]</span> This can be rewritten as <span class="math display">\[\left( {dx} \right) = J\left( {x \to y} \right)\left( {dy} \right)\]</span> where <span class="math inline">\(\left( {dx} \right) = d{x_1} \wedge d{x_2} \wedge d{x_3}\)</span> and <span class="math inline">\(\left( {dy} \right) = d{y_1} \wedge d{y_2} \wedge d{y_3}\)</span>. Sometimes the notation <span class="math inline">\(d{x_1} \wedge d{x_2} \wedge d{x_3} \wedge ... \wedge d{x_n} = \mathop \wedge \limits_{i = 1}^n d{x_i}\)</span> is used. The quantity <span class="math inline">\(\left( {dx} \right) = \mathop \wedge \limits_{i = 1}^n d{x_i}\)</span> is called the <em>volume element</em>.</p>
-<p><strong>Example 1.</strong> Let <span class="math inline">\({q_1}\sim{\chi ^2}\left( {{v_1}} \right)\)</span> and <span class="math inline">\({q_2}\sim{\chi ^2}\left( {{v_2}} \right)\)</span> be independent random variables. Suppose I transform variables as <span class="math inline">\({q_1} = fq\)</span> and <span class="math inline">\({q_2} = q\)</span> (i.e.&nbsp;<span class="math inline">\(f = {q_1}/{q_2}\)</span>). What is the Jacobian of this transformation? To find it, I need to calculate the differentials <span class="math display">\[\begin{array}{l}
-d{q_1} = qdf + fdq\\
-d{q_2} = dq
-\end{array}\]</span> so <span class="math display">\[d{q_1} \wedge d{q_2} = \left( {qdf + fdq} \right) \wedge dq = q\left( {df \wedge dq} \right).\]</span></p>
-<p><strong>Exercise 2.</strong> Let <span class="math inline">\(x\)</span> be an <span class="math inline">\(n \times 1\)</span> vector then I denote <span class="math display">\[\left( {dx} \right) = d{x_1} \wedge d{x_2} \wedge d{x_3} \wedge ... \wedge d{x_n} = \mathop  \wedge \limits_{i = 1}^n d{x_i}\]</span> (note the order of the elements of the product). Suppose I set <span class="math inline">\(x = Ay\)</span> where <span class="math inline">\(A\)</span> is an <span class="math inline">\(n \times n\)</span> non-singular matrix. Then, I have <span class="math inline">\(\left( {dx} \right) = \left| A \right|\left( {dy} \right)\)</span>.</p>
-<p><strong>Example 3.</strong> Let <span class="math inline">\(S &gt; 0\)</span> be a positve definite matrix of dimension <span class="math inline">\((k + 1 \times k + 1)\)</span>. Partition is as <span class="math display">\[S = \left( {\begin{array}{*{20}{c}}
-{{S_{11}}}&amp;{{S_{21}}'}\\
-{{S_{21}}}&amp;{{S_{22}}}
-\end{array}} \right)\]</span> where <span class="math inline">\({S_{11}}\)</span> is <span class="math inline">\(1 \times 1\)</span>, <span class="math inline">\({S_{22}}\)</span> is <span class="math inline">\(k \times k\)</span> and <span class="math inline">\({S_{21}}\)</span> is <span class="math inline">\(k \times 1\)</span>. Let <span class="math display">\[\begin{array}{l}
-q = {S_{11}} - {S_{21}}'S_{22}^{ - 1}{S_{21}}\,\,\,\,\left( {1 \times 1} \right)\\
-r = S_{22}^{ - 1}{S_{21}}\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\left( {k \times 1} \right)\\
-R = {S_{22}}\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\left( {k \times k} \right)
-\end{array}\]</span> Then <span class="math display">\[\begin{array}{l}
-{S_{22}} = R\\
-S{{\kern 1pt} _{12}} = Rr\\
-{S_{11}} = q + r'Rr
-\end{array}\]</span> and <span class="math display">\[\begin{array}{l}
-d{S_{11}} = dq + {\text{terms in }}d{r_i}{\text{ and }}d{R_{ij}}{\text{'s}}\\
-dS{{\kern 1pt} _{12}} = \left| R \right|dr + {\text{terms in }}d{R_{ij}}{\text{'s}}\\
-d{S_{22}} = \left\{ {d{R_{ij}}} \right\}
-\end{array}\]</span> Putting things together, <span class="math display">\[\begin{array}{c}
-d{S_{11}} \wedge \left( {d{S_{12}}} \right) \wedge \left( {d{S_{22}}} \right) = dq \wedge \left| R \right|\left( {dr} \right) \wedge \left( {dR} \right) + {\text{all other terms that vanish}}\\
-= \left| R \right|dq \wedge \left( {dr} \right) \wedge \left( {dR} \right).
-\end{array}\]</span> Here I have used <span class="math display">\[\begin{array}{l}
-\left( {dr} \right) = d{r_1} \wedge d{r_2} \wedge ... \wedge d{r_k} = \mathop  \wedge \limits_{i = 1}^k d{r_i}\\
-\left( {d{S_{12}}} \right) = d{S_{12\left( 1 \right)}} \wedge d{S_{12\left( 2 \right)}} \wedge ... \wedge d{S_{12\left( k \right)}} = \mathop  \wedge \limits_{i = 1}^k d{S_{12\left( i \right)}}\\
-\left( {dR} \right) = \left( {d{R_1}} \right) \wedge \left( {d{R_2}} \right) \wedge ... \wedge \left( {d{R_k}} \right)\, = \mathop  \wedge \limits_{i = 1}^k \mathop  \wedge \limits_{j = 1}^k d{R_{ij}}\,\,\,\,{R_j} = j{\text{ - th column of }}R\\
-\left( {d{S_{22}}} \right) = \left( {d{S_{22\left( 1 \right)}}} \right) \wedge \left( {d{S_{22\left( 2 \right)}}} \right) \wedge ... \wedge \left( {d{S_{22\left( k \right)}}} \right) = \mathop  \wedge \limits_{i = 1}^k \mathop  \wedge \limits_{j = 1}^k d{S_{22\left( {i,j} \right)}}\,\,\,\,\,{S_{22\left( j \right)}} = j{\text{ - th column of }}{S_{22}}
-\end{array}\]</span></p>
+<p>The first two lectures of Econometrics B in the economics MSc at Warwick cover endogeneity and the challenges that it creates for statistical inference. In the third lecture we investigate the problem of identification. We state without proofs the rank condition for identification and apply it to several examples.</p>
+<p>After the lecture, a few students asked me where the rank condition comes from. Here is an answer (there are a few equivalent ones) … It requires a few ideas from matrix algebra.</p>
+<p>A general linear simultaneous equations model with <span class="math inline">\(m\)</span> equations - which can be thought of as the behavioural equations - can be written as</p>
+<p><span class="math inline">\(y_i = \Gamma z_i + u_i\ \ \ \ (1)\)</span></p>
+<p><span class="math inline">\(i=1,2,...,N\)</span> where <span class="math inline">\(y_i\)</span> is the <span class="math inline">\(m \times 1\)</span> vector of endogenous variables, <span class="math inline">\(B\)</span> is the <span class="math inline">\(m \times m\)</span> matrix of coefficients of the endogenous variables, <span class="math inline">\(z_i\)</span> is the <span class="math inline">\(k \times 1\)</span> vector of exogenous variables, <span class="math inline">\(\Gamma\)</span> is the <span class="math inline">\(m \times k\)</span> matrix of coefficients of the exogenous variables, <span class="math inline">\(u_i\)</span> is the <span class="math inline">\(m \times 1\)</span> vector of errors. We also assume that <span class="math inline">\(E(u_i) = 0\)</span>, <span class="math inline">\(var(u_i) = \Sigma\)</span> where <span class="math inline">\(\Sigma\)</span> is positive definite, and <span class="math inline">\(cov(u_i,u_j) = E(u_i u_j) = 0\)</span> for all <span class="math inline">\(i \ne j\)</span>.</p>
+<p>As we have noticed in the lecture, (1) and</p>
+<p><span class="math inline">\(y_i= F \Gamma z_i+ F u_i \ \ \ \ (2)\)</span></p>
+<p>have the same reduced form</p>
+<p><span class="math inline">\(y_i= B^{-1}\Gamma z_i+ B^{-1}u_i\)</span></p>
+<p>for any nonsingular matrix <span class="math inline">\(F\)</span>. In economics terms, these two systems of equations generate the same equilibrium values of the endogenous variables. Since we observe the equilibrium values only, we cannot distinguish between the two systems of equations generating them.</p>
+<p>In order to identify the parameters of the structural equations we exploit some knowledge about the problem we want to study. This knowledge, in this case, says that the structural parameters must satisfy some known linear restrictions. These restrictions need to be satisfied both by (1) and (2). For example, the restrictions may state that a particular variable does not appear in one of the equation.</p>
+<p>Identification means that (1) and (2) are the same: the only <span class="math inline">\(F\)</span> which is allowed is a diagonal matrix. Why a diagonal matrix? Because when <span class="math inline">\(F\)</span> is a diagonal matrix the coefficients of equation <span class="math inline">\(i\)</span> in (2) are the same as the coefficients of equation <span class="math inline">\(i\)</span> in (1) multiplied by a number, <span class="math inline">\(f_i\)</span> say. Multiplying all the coefficients in the same equation by the same number is allowed because usually we single out one of the endogenous variables to have coefficient equal to one. This is the same as being interested in the ratios between each coefficients and the coefficient of this variables which is singled out.</p>
+<p>Let’s put all the coefficients of (1) in a matrix <span class="math display">\[A= \left( \begin{array}{c} B' \\ -\Gamma' \end{array}\right)\]</span>. Notice that the coefficients of the first equation are in the first column of <span class="math inline">\(A\)</span>. We can partition <span class="math inline">\(A\)</span> so that <span class="math inline">\(A = (a_1,A_2)\)</span> where <span class="math inline">\(a_1\)</span> is the $m+k $ vector of parameters in the first equation and <span class="math inline">\(A_2\)</span> is a matrix containing all the parameters in the other <span class="math inline">\(m-1\)</span> equations. We will focus on the first equation. Since we can change the order in which the equations are written, this does not involve any loss of generality.</p>
+<p>As argued above we know that the restrictions satisfied by the parameters in the first equation take the linear form <span class="math inline">\(R_1 a_1 =0\)</span> where <span class="math inline">\(R_1\)</span> is a known <span class="math inline">\((r_1 \times m+k)\)</span> matrix of rank <span class="math inline">\(r_1\)</span>. Notice that if we multiply <span class="math inline">\(a_1\)</span> by a constant <span class="math inline">\(\alpha \ne 0\)</span>, <span class="math inline">\(R_1 (\alpha a_1) =0\)</span> would still hold. So using this restriction we can only hope to identify <span class="math inline">\(a_1\)</span> up to a multiplicative constant. Often, we require that one of the coefficients of <span class="math inline">\(a_1\)</span> is 1 to fix such constant.</p>
+<p>Let <span class="math inline">\(A^*= \left( \begin{array}{c} B' F'\\ -\Gamma' F' \end{array}\right) =\left( a_1^*, A_2^*\right)\)</span> be a matrix containing the coefficients in (2). The we must also have <span class="math inline">\(R_1 a_1^* =0\)</span>.</p>
+<p>Notice that <span class="math inline">\(A* =AF'\)</span> so that <span class="math inline">\(\left( a_1^*, A_2^*\right)=\left( a_1, A_2\right)F'\)</span>. Partition <span class="math inline">\(F'\)</span> as</p>
+<p><span class="math display">\[F'=\left( \begin{array}{cc}
+f_{11} &amp; f_{12} \\ f_{21}&amp;F_{22}
+\end{array} \right)\]</span> so that</p>
+<p><span class="math display">\[\left( a_1^*, A_2^*\right)=\left( a_1 f_{11} +A_2 f_{21},a_1 f_{12} + A_2 F_{22}\right).\]</span></p>
+<p>Now notice that</p>
+<p><span class="math display">\[R_1 a_1^* = R_1 \left( a_1 f_{11} +A_2 f_{21}\right) = R_1 a_1 f_{11} +R_1 A_2 f_{21}\]</span></p>
+<p>We know that <span class="math inline">\(R_1 a_1 =0\)</span> and <span class="math inline">\(R_1 a_1^*=0\)</span> so that we must have</p>
+<p><span class="math inline">\(R_1 A_2 f_{21}=0.\)</span></p>
+<p>This last equation implies that <span class="math inline">\(f_{21}=0\)</span> if and only if <span class="math inline">\(R_1A_2\)</span> has rank full rank <span class="math inline">\(m-1\)</span>. This is the rank condition for identification of the coefficients of the first equation. If this condition holds, <span class="math inline">\(a_1^*=a_1 f_{11}\)</span> so that <span class="math inline">\(a_1^*\)</span> is a multiple of <span class="math inline">\(a_1\)</span>.</p>
+<p>We can repeat this reasoning for all equations in (1) so that the coefficients of the whole system will be identified if and only if rank conditions hold for all equations. If Identification holds for the coefficients of all equations in the system then <span class="math inline">\(F\)</span> is a diagonal matrix.</p>
+<p>This proof is not mine. If I had to guess I would attribute it to Grant Hillier during my MSc in Southampton …. a few years ago.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

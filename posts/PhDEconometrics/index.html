@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2023-11-09">
+<meta name="dcterms.date" content="2016-12-02">
 
-<title>Giovanni Forchini - Teaching econometrics: R or Stata?</title>
+<title>Giovanni Forchini - PhD Level Econometrics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Teaching econometrics: R or Stata?</h1>
+      <h1 class="title">PhD Level Econometrics</h1>
                       </div>
   </div>
     
@@ -138,7 +138,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 9, 2023</p>
+        <p class="date">December 2, 2016</p>
       </div>
     </div>
     
@@ -157,21 +157,16 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 
 
 
-<p>Last year we decided to switch from Stata to R in our Master program. This has had huge problem for the Econometrics 1 course that I teach. Econometrics 1 is an introduction to microeconometrics for economists, covering linear regression model, heteroskedasticity, panel data and endogeneity/instrumental variables.</p>
-<p>First the positives. R is powerful and actively develop by lots of groups and individuals. It is at the forefront of statistics, data analytics and machine learning. Some packages are just wonderful. But … Stata is easier to use for teaching econometrics.</p>
-<p>For example, econometricians tend to correct the standard errors to make them robust to heteroskedasticity. This is accomplish in Stata with a simple command:</p>
-<p><strong>regress y x1 x2 x3, robust</strong></p>
-<p>This is easy and intuitive and I can focus on the theory underlying this command. In R, this becomes:</p>
-<p><strong>reg &lt;- lm(‘y~x1+x2+x3’,data)</strong></p>
-<p><strong>library(sandwich)</strong></p>
-<p><strong>robust_cov &lt;- vcovHC(reg, type = “HC1”)</strong></p>
-<p><strong>library(lmtest)</strong></p>
-<p><strong>coeftest(reg, vcov = robust_cov)</strong></p>
-<p>And if I want a clean table,</p>
-<p><strong>library(stargazer)</strong></p>
-<p><strong>robust_se &lt;- sqrt(diag(robust_cov))</strong></p>
-<p><strong>stargazer(reg, type = “text”,se = list(robust_se))</strong></p>
-<p>My feeling is that the students focus too much on the R command and not enough on understanding the econometrics. So something needs to be done and I already have something in mind ….</p>
+<p>In the summer 2016 I was asked to contribute to the teaching of the first year MRES unit Econometric Theory at University of Warwick. The first term - my part - covered micro econometrics while the second semester is about time series.</p>
+<p>The MRES forms the first two taught year of a PhD programme in economics. All the students taking it had a background in economics and they had already seen a fair bit of econometrics at undergraduate or MSc level. I thought a lot about what the first semester of this unit should cover.</p>
+<p>I wanted this unit to:</p>
+<p>prepare the students for applied research in economics; give the students an understanding of econometrics which allows them to get the gist of research papers; cover modern topics.</p>
+<p>I did not want this unit to be a repeat, at higher level, of what they have already seen several times.</p>
+<p>Therefore,I decided to cover a bit of asymptotic theory at the start as it underpins most of modern econometrics. This was done with a lot of references to the linear regression model which should be familiar to the students, and wasfollowed by the method of moments and by the generalised method of moments with a lot of examples that the students should already have encountered in their studies.</p>
+<p>Some panel data models followed. Here, the the students could practice the use of the asymptotics as well as possibly revise the standard estimators for these models. The Anderson-Hsiao and the Arellano-Bond estimators were interesting examples of the generalised method of moments.So far the topics covered werefairly standard.</p>
+<p>At this point I decided to introduce some nonstandard topics. I started inference in panel data with common shocks, because they represent a very plausible practical situation. This was followed by quantile regression since it has important practical applications. Then I discussedsome methods for model selection, shrinkage and model reduction. These topics are often brushed aside in econometrics and negatively branded as ‘data mining’. Nonetheless, techniques like the lasso are starting to receive interest from econometricians.</p>
+<p>The final topic was missing observations since this is a situation the students will certainly come across in their careers as economists. I discussed various forms missing observations and ways to get around them: complete cases, imputation and various forms of sample selection.</p>
+<p>There are lots of interesting topics I had to leave out due to lack of time. These includes among several others: semi- and non-parametric statistics, program evaluationandcausal graphs.</p>
 
 
 

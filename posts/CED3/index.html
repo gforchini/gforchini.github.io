@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2023-09-18">
+<meta name="dcterms.date" content="2023-09-17">
 
-<title>Giovanni Forchini - Computing exact distributions part 4</title>
+<title>Giovanni Forchini - Computing exact distributions part 3</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -150,7 +150,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Computing exact distributions part 4</h1>
+      <h1 class="title">Computing exact distributions part 3</h1>
                       </div>
   </div>
     
@@ -167,7 +167,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 18, 2023</p>
+        <p class="date">September 17, 2023</p>
       </div>
     </div>
     
@@ -186,97 +186,137 @@ window.Quarto = {
 
 
 
-<section id="the-exterior-product" class="level2">
-<h2 class="anchored" data-anchor-id="the-exterior-product">The exterior product</h2>
-<p>It may be difficult to calculate Jacobians as the determinant of matrices of derivatives, especially when one has many variables. However, there is an alternative method based on the <em>exterior product</em> which may be useful in some cases. This approach is covered in this post.</p>
-<p>When one transforms <span class="math inline">\(x\)</span> to <span class="math inline">\(y\)</span> according to <span class="math inline">\(x = x\left( y \right)\)</span>, every component of <span class="math inline">\(x\)</span> is transformed as follows <span class="math inline">\({x_i} = {x_i}\left( {{y_1},{y_2},...{y_n}} \right)\)</span>. So the differential of <span class="math inline">\({x_i}\)</span> is <span class="math display">\[d{x_i} = \frac{{\partial {x_i}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_i}}}{{\partial {y_2}}}d{y_2} + ... + \frac{{\partial {x_i}}}{{\partial {y_n}}}d{y_n}\]</span> for i=1,2,…,n.&nbsp;I now consider the quantities <span class="math inline">\(d{x_i}\)</span>, i=1,2,…,n, and define a <em>product</em> (or more precisely the <em>exterior product</em> or <em>wedge</em> product) by two rules</p>
-<ol type="1">
-<li><p>multilinearity <span class="math display">\[d{x_i} \wedge \left( {ad{x_j} + bd{x_k}} \right) = a\left( {d{x_i} \wedge d{x_j}} \right) + b\left( {d{x_i} \wedge d{x_k}} \right)\]</span> and <span class="math display">\[\left( {ad{x_j} + bd{x_k}} \right) \wedge d{x_i} = a\left( {d{x_j} \wedge d{x_i}} \right) + b\left( {d{x_k} \wedge d{x_i}} \right)\]</span></p></li>
-<li><p>and skew-symmetry <span class="math display">\[d{x_i} \wedge d{x_j} =  - d{x_j} \wedge d{x_i}\]</span> i.e.&nbsp;if the order of two terms is reversed, the product changes sign.</p></li>
-</ol>
-<p>Notice that when I write <span class="math inline">\(d{x_1}d{x_2,}....d{x_n}\)</span> I really mean <span class="math inline">\(d{x_1} \wedge d{x_2} \wedge .... \wedge d{x_n}\)</span>. If follows from the property of skew-symmetry that <span class="math display">\[d{x_i} \wedge d{x_i} =  - d{x_i} \wedge d{x_i}\]</span> i.e.<span class="math inline">\(d{x_i} \wedge d{x_i} = 0.\)</span></p>
-<p>An important result is the following one. If <span class="math display">\[d{x_i} = \frac{{\partial {x_i}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_i}}}{{\partial {y_2}}}d{y_2} + ... + \frac{{\partial {x_i}}}{{\partial {y_n}}}d{y_n}\]</span> for <span class="math inline">\(i=1,2,…,n\)</span>, and I let <span class="math display">\[d{x_1} \wedge d{x_2} \wedge d{x_3} \wedge .... \wedge d{x_n} = J\left( {x \to y} \right)\left( {d{y_1} \wedge d{y_2} \wedge d{y_3} \wedge .... \wedge d{y_n}} \right),\]</span> so that this method is equivalent to the one considered before.</p>
-<p>I will not prove this, but I will go through an example instead. Suppose that <span class="math inline">\(n=3\)</span>, so that I need to deal with <span class="math inline">\(d{x_1} \wedge d{x_2} \wedge d{x_3}\)</span> only, and <span class="math display">\[\begin{array}{l}
-d{x_1} = \frac{{\partial {x_1}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_1}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_1}}}{{\partial {y_3}}}d{y_3}\\
-d{x_2} = \frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}\\
-d{x_3} = \frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}
-\end{array}\]</span> Then <span class="math display">\[\begin{array}{c}
-d{x_1} \wedge d{x_2} \wedge d{x_3} = \left( {\frac{{\partial {x_1}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_1}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_1}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \\
-\left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-= \frac{{\partial {x_1}}}{{\partial {y_1}}}d{y_1} \wedge \left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}d{y_2} \wedge \left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}d{y_3} \wedge \left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)
-\end{array}\]</span> because of the property of multilinearity. <span class="math display">\[\begin{array}{c}
-d{x_1} \wedge d{x_2} \wedge d{x_3} = \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_2} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_2} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_3} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)
-\end{array}\]</span> Again, this follows from multilinearity. Notice that some terms are zero because <span class="math inline">\(d{y_i} \wedge d{y_i} = 0\)</span>, <span class="math display">\[\begin{array}{c}
-d{x_1} \wedge d{x_2} \wedge d{x_3} = \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_2} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_2} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-+ \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_3} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)
+<section id="integration-and-related-ideas" class="level1">
+<h1>Integration and related ideas</h1>
+<p>We now review a general definition of integral. Although there are some techicalities the focus is on the main ideas.</p>
+<section id="integration" class="level2">
+<h2 class="anchored" data-anchor-id="integration">Integration</h2>
+<p>Consider a function <span class="math inline">\(f\left( x \right)\)</span> that is non-negative. The integral <span class="math inline">\(\int\limits_{\left( {a,b} \right)} {f\left( x \right)dx}\)</span> is the area under the curve and above the horizontal axis in the interval <span class="math inline">\(\left( {a,b} \right)\)</span>. We will now look at this idea in more detail.</p>
+<p>Any density function <span class="math inline">\(f\left( x \right)\)</span> can be approximated by a step-function. To do this, we divide the interval <span class="math inline">\(\left[ {a,b} \right]\)</span> into <span class="math inline">\(k + 1\)</span> disjoint sub-intervals <span class="math inline">\(\left[ {{x_1},{x_2}} \right] = \left[ {a,{x_2}} \right]\)</span>, <span class="math inline">\(\left[ {{x_2},{x_3}} \right]\)</span>, <span class="math inline">\(\left[ {{x_3},{x_4}} \right]\)</span>, …., <span class="math inline">\(\left[ {{x_k},{x_{k + 1}}} \right] = \left[ {{x_k},b} \right]\)</span>, where <span class="math inline">\(a = {x_1} &lt; {x_2} &lt; {x_3} &lt; ... &lt; {x_k} &lt; {x_{k + 1}} = b\)</span>, and define the step function <span class="math inline">\(f\left( x \right) = {x_j}\)</span> when <span class="math inline">\(x \in \left( {{x_j},{x_{j + 1}}} \right)\)</span>. We can assume that all the intervals have the same length <span class="math inline">\(dx = {x_{j + 1}} - {x_j}\)</span> for <span class="math inline">\(j = 1,2,...,k\)</span>. Figure 1 shows an example where the function <span class="math inline">\(f\left( x \right)\)</span> is approximate by a step function in <span class="math inline">\(k = 10\)</span> intervals.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The integral of <span class="math inline">\(f\left( x \right)\)</span> over the interval <span class="math inline">\(\left( {a,b} \right)\)</span> is the area delimited by <span class="math inline">\(f\left( x \right)\)</span>, the horizontal axis, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. It can be approximated by the sum of the areas of small rectangles as in Figure 2. So, formally we have, <span class="math display">\[\begin{array}{c}
+\int\limits_{\left( {a,b} \right)} {f\left( x \right)dx}  = \mathop {\lim }\limits_{k \to \infty } \sum\limits_{i = 1}^k {f\left( {{x_i}} \right)\left( {{x_{i + 1}} - {x_i}} \right)} \\
+= \mathop {\lim }\limits_{k \to \infty } \sum\limits_{i = 1}^k {f\left( {{x_i}} \right)dx} .
 \end{array}\]</span></p>
-<p>Things simplify even more. I will focus on the first term <span class="math display">\[\begin{array}{l}
-\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
-= \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_2} \wedge d{y_1}\\
-+ \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge d{y_2}\\
-+ \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_2} \wedge d{y_3}
+<p>Notice that if <span class="math inline">\(f\left( x \right) = 1\)</span> over <span class="math inline">\(\left( {a,b} \right)\)</span>then <span class="math inline">\(\int\limits_{\left( {a,b} \right)} {1dx} = \int\limits_{\left( {a,b} \right)} {dx} = \mathop {\lim }\limits_{k \to \infty } \sum\limits_{i = 1}^k {dx} = b - a\)</span> because the sum all small intervals is the length of the segment <span class="math inline">\(\left( {a,b} \right)\)</span></p>
+<p>The concept of integral can be extended to functions that are not positive, but we do not need this because we will only deal with densities, and these are always positive. However, we need to extend the definition of integral to non-negative real functions <span class="math inline">\(f\left( x \right)\)</span> where <span class="math inline">\(x = \left( {{x^1},{x^2},...,{x^n}} \right)\)</span> is a vector in <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
+<p>Note that in our notation <span class="math inline">\({x^i}\)</span> denotes the <span class="math inline">\(i\)</span>-th component of <span class="math inline">\(x\)</span> and not a power of <span class="math inline">\(x\)</span>. In this case the integral of <span class="math inline">\(f\left( x \right)\)</span> over the set is the volume of the space between <span class="math inline">\(f\left( x \right)\)</span> the n-dimensional space in which <span class="math inline">\(x\)</span> lies and the contour of <span class="math inline">\(A\)</span>.</p>
+<p>The set <span class="math inline">\(A\)</span> can be approximated by small n-dimensional hyper-rectangles with sides <span class="math inline">\(d{x^1} = \left( {x_{{i_1} + 1}^1 - x_{{i_1}}^1} \right)\)</span>, <span class="math inline">\(d{x^2} = \left( {x_{{i_2} + 1}^2 - x_{{i_2}}^2} \right)\)</span>,…, <span class="math inline">\(d{x^n} = \left( {x_{{i_n} + 1}^n - x_{{i_n}}^n} \right)\)</span>, respectively.</p>
+<p>In Figure 3, the set <span class="math inline">\(A\)</span> is represented by a circle. We can approximate <span class="math inline">\(A\)</span> using small squares. Obviously we need to consider only those squares that intersect <span class="math inline">\(A\)</span>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The integral of <span class="math inline">\(f\left( x \right)\)</span> over the set <span class="math inline">\(A\)</span> and denoted by <span class="math inline">\(\int\limits_A {f\left( x \right)d{x^1}d{x^2}...d{x^n}}\)</span> can be expressed as <span class="math display">\[\begin{array}{c}
+\mathop {\lim }\limits_{k \to \infty } \sum\limits_{1 \le {i_1} \le k} {\sum\limits_{1 \le {i_2} \le k} {...\sum\limits_{1 \le {i_n} \le k} {f\left( {x_{{i_1}}^1,x_{{i_2}}^2,...,x_{{i_n}}^n} \right)\left( {x_{{i_1} + 1}^1 - x_{{i_1}}^1} \right)\left( {x_{{i_2} + 1}^2 - x_{{i_2}}^2} \right)....\left( {x_{{i_n} + 1}^n - x_{{i_n}}^n} \right)} } } \\
+= \mathop {\lim }\limits_{k \to \infty } \sum\limits_{1 \le {i_1} \le k} {\sum\limits_{1 \le {i_2} \le k} {...\sum\limits_{1 \le {i_n} \le k} {f\left( {x_{{i_1}}^1,x_{{i_2}}^2,...,x_{{i_n}}^n} \right)d{x^1}d{x^2}...d{x^n}} } }
+\end{array}\]</span> where the sum is over those squares that intersect <span class="math inline">\(A\)</span> only.</p>
+<p>When <span class="math inline">\(n=2\)</span>, the term <span class="math inline">\(f\left( x_{i_1}^1,x_{i_2}^2 \right)dx^1 dx^2\)</span> can be interpreted as the volume of the three-dimensional rectangle (cuboid or rectangular prism) with sides of length <span class="math inline">\(f\left( x_{i_1}^1,x_{i_2}^2 \right)\)</span>, <span class="math inline">\(d{x^1}\)</span> and <span class="math inline">\(d{x^2}\)</span>. A geometric interpretation of all elements in the sum is given in Figure 4</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig4.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4. Area of a three-dimensional “rectangle” with sides <span class="math inline">\(f(x)\)</span>, <span class="math inline">\(dx^1\)</span> and <span class="math inline">\(dx^2\)</span> in the definition of integral.</figcaption>
+</figure>
+</div>
+<p>Setting <span class="math inline">\(f\left( x \right) = 1\)</span> over <span class="math inline">\(A\)</span> gives <span class="math display">\[\begin{array}{c}
+\int\limits_A {d{x^1}d{x^2}...d{x^n}}  = \mathop {\lim }\limits_{k \to \infty } \sum\limits_{1 \le {i_1} \le k} {\sum\limits_{1 \le {i_2} \le k} {...\sum\limits_{1 \le {i_n} \le k} {d{x^1}d{x^2}...d{x^n}} } } \\
+= {\text{Volume of }}A.
 \end{array}\]</span></p>
-<p>Now <span class="math display">\[d{y_1} \wedge d{y_2} \wedge d{y_1} =  - d{y_1} \wedge d{y_1} \wedge d{y_2}\]</span> because of skew-symmetry. But <span class="math inline">\(d{y_1} \wedge d{y_1} = 0\)</span>, so that <span class="math display">\[d{y_1} \wedge d{y_2} \wedge d{y_1} =  - d{y_1} \wedge d{y_1} \wedge d{y_2} = 0.\]</span></p>
-<p>In general, if there are two terms which are the same the outer product is zero. So <span class="math display">\[\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_2} \wedge d{y_3}.\]</span></p>
-<p>Using the same reasoning it is easy to show that <span class="math display">\[\begin{array}{c}
-\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) =  - \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge d{y_3}\\
-\frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_2} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_2} \wedge d{y_1} \wedge d{y_3}\\
-=  - \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_2} \wedge d{y_3}\\
-\frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_2} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_2} \wedge d{y_3}\\
-\frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge d{y_3}\\
-\frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_3} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_3} \wedge d{y_2} \wedge d{y_1}\\
-=  - \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge d{y_2}\\
-= \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_3} \wedge d{y_2}\\
-=  - \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_2} \wedge d{y_3}
+<p>The term <span class="math inline">\(d{x^1}d{x^2}...d{x^n}\)</span> is often called the <em>volume element</em> because its integral determines the volume of the set <span class="math inline">\(A\)</span>. Notice that the expression <span class="math inline">\(d{x^i}\)</span> is regarded as both the increment of <span class="math inline">\({x^i}\)</span> and as a vector in <span class="math inline">\(\mathbb{R}^n\)</span>. We will use both these interpretations later on.</p>
+<p>In some situation we are interested in integrating non-negative functions defined on surfaces rather than planes. For example we could have a circle and a function defined on it as in Figure 5. To construct the integral in this case we consider a set of <span class="math inline">\(k\)</span> points on the circle. At each of these points we draw the tangent to the circle and construct small rectangles as illustrated in Figure 5. The integral is the limit of the sum of these rectangles as the number of points we consider on the circle goes to infinity. The generalization of these ideas to <span class="math inline">\(n\)</span>-dimensional sphere is straightforward but a little bit messy.</p>
+<p>Notice that we have already considered similar integrals when we looked at the Wishart distribution. In that case we integrated the density of the Wishart distribution over the set of positive definite matrices.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Figure5.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 5. A function defined over a sphere.</figcaption>
+</figure>
+</div>
+</section>
+</section>
+<section id="the-change-of-variable-formula-and-transformations" class="level1">
+<h1>The change of variable formula and transformations</h1>
+<p>We now study how the integral changes when we transform the variable of integration according to the rule <span class="math inline">\(x = x\left( y \right)\)</span>. When we transform <span class="math inline">\(x\)</span> to <span class="math inline">\(y\)</span> we need this transformation to be one-to-one. That is, <span class="math inline">\(x\)</span> transforms into one <span class="math inline">\(y\)</span> and it is also possible to transform back <span class="math inline">\(y\)</span> to <span class="math inline">\(x\)</span> in a unique way.</p>
+<p>We start by considering the case where <span class="math inline">\(n=1\)</span>.</p>
+<p>In this case the integral is <span class="math inline">\(\int\limits_{\left( {a,b} \right)} {f\left( x \right)dx}\)</span>. We need to understand how this integral changes:</p>
+<ul>
+<li><p>The interval <span class="math inline">\(\left( {a,b} \right)\)</span> is transformed to the interval <span class="math inline">\(\left( {{a^*},{b^*}} \right)\)</span> in such a way that <span class="math inline">\(x\left( {\left( {{a^*},{b^*}} \right)} \right) = \left( {a,b} \right)\)</span>.</p></li>
+<li><p>The function <span class="math inline">\(f\left( x \right)\)</span> changes to <span class="math inline">\(f\left( {x\left( y \right)} \right)\)</span>, and the volume element becomes <span class="math inline">\(dx\left( y \right) = x'\left( y \right)dy\)</span>.</p></li>
+</ul>
+<p>Thus <span class="math display">\[\int\limits_{\left( {a,b} \right)} {f\left( x \right)dx}  = \int\limits_{\left( {{a^*},{b^*}} \right)} {f\left( {x\left( y \right)} \right)x'\left( y \right)dy}.\]</span></p>
+<p>This is the transformation of variable formula for an integral.</p>
+<p>Suppose for simplicity that <span class="math inline">\(f\left( x \right) = 1\)</span> so that the integral we are interested in is <span class="math inline">\(\int\limits_{\left( {a,b} \right)} {dx}\)</span>, and suppose we transform <span class="math inline">\(x\)</span> according to the rule <span class="math inline">\(x = y\)</span> then <span class="math display">\[\int\limits_{\left( {a,b} \right)} {dx}  = \int\limits_{\left( {a,b} \right)} {dy}  = b - a.\]</span> If, instead, we transform <span class="math inline">\(x\)</span> according to the rule <span class="math inline">\(x = - y\)</span> we obtain <span class="math display">\[\int\limits_{\left( {a,b} \right)} {dx}  = \int\limits_{\left( { - a, - b} \right)} {\left( { - 1} \right)dy}  =  - \int\limits_{\left( { - a, - b} \right)} {dy}  =  - \left( { - b - \left( { - a} \right)} \right) = b - a.\]</span></p>
+<p>Note that in this case the length of the interval <span class="math inline">\(\left( { - a, - b} \right)\)</span> is <span class="math inline">\(\left( { - b - \left( { - a} \right)} \right) = - \left( {b - a} \right)\)</span> because it is measured in the direction left to right, even though this integral is essentially the same as the one on <span class="math inline">\(\left( {a,b} \right)\)</span>.</p>
+<p>We want to disregard these niggling problems with the sign so we want to transform <span class="math inline">\(\left( {a,b} \right)\)</span> to <span class="math inline">\(\left( {{a^*},{b^*}} \right)\)</span> with <span class="math inline">\({a^*} &lt; {b^*}\)</span> for any transformation. To be consistent with the definition of integral we need to transform the volume element to <span class="math display">\[dx\left( y \right) = \left| {x'\left( y \right)} \right|dy\]</span> where we take the absolute value of <span class="math inline">\(x'\left( y \right)\)</span>. In this notation, when we transform x according to the rule <span class="math inline">\(x = - y\)</span> we obtain <span class="math display">\[\int\limits_{\left( {a,b} \right)} {dx}  = \int\limits_{\left( { - b, - a} \right)} {\left| { - 1} \right|dy}  = \int\limits_{\left( { - b, - a} \right)} {dy}  = \left( { - a - \left( { - b} \right)} \right) = b - a.\]</span> This convention will be very useful when we look at multivariate integrals over a set <span class="math inline">\(A\)</span> because we can disregard the direction along which the integral needs to be taken.</p>
+<p>When we transform to according to <span class="math inline">\(x = x\left( y \right)\)</span>, then <span class="math inline">\(A\)</span> changes to <span class="math inline">\({A^*}\)</span> in such a way that <span class="math inline">\(A = x\left( {{A^*}} \right)\)</span> and <span class="math inline">\(f\left( x \right)\)</span> changes to <span class="math inline">\(f\left( {x\left( y \right)} \right)\)</span>. There are some small complications with the volume element. Notice that every component of <span class="math inline">\(x\)</span> transforms as follows <span class="math inline">\({x_i} = {x_i}\left( {{y_1},{y_2},...{y_n}} \right)\)</span>. So the differential of <span class="math inline">\({x_i}\)</span> is <span class="math display">\[d{x_i} = \frac{{\partial {x_i}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_i}}}{{\partial {y_2}}}d{y_2} + ... + \frac{{\partial {x_i}}}{{\partial {y_n}}}d{y_n}\]</span> for <span class="math inline">\(i=1,2,…,n\)</span>.</p>
+<p>To analyse the problem we consider the case where <span class="math inline">\(n=2\)</span>. In this case <span class="math display">\[\begin{array}{l}
+d{x_1} = \frac{{\partial {x_1}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_1}}}{{\partial {y_2}}}d{y_2}\\
+d{x_2} = \frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2}.
 \end{array}\]</span></p>
-<p>Putting everything together <span class="math display">\[\begin{array}{l}
-d{x_1} \wedge d{x_2} \wedge d{x_3}\\
-= \left[ {\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_3}}} - \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_3}}} - \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_3}}} + \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_1}}} + \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_2}}} - \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}} \right]d{y_1} \wedge d{y_2} \wedge d{y_3}
-\end{array}\]</span></p>
-<p>The complicated thing in square brackets is <span class="math inline">\(J\left( {x \to y} \right)\)</span>. So <span class="math display">\[d{x_1} \wedge d{x_2} \wedge d{x_3} = J\left( {x \to y} \right)d{y_1} \wedge d{y_2} \wedge d{y_3}.\]</span> This can be rewritten as <span class="math display">\[\left( {dx} \right) = J\left( {x \to y} \right)\left( {dy} \right)\]</span> where <span class="math inline">\(\left( {dx} \right) = d{x_1} \wedge d{x_2} \wedge d{x_3}\)</span> and <span class="math inline">\(\left( {dy} \right) = d{y_1} \wedge d{y_2} \wedge d{y_3}\)</span>. Sometimes the notation <span class="math inline">\(d{x_1} \wedge d{x_2} \wedge d{x_3} \wedge ... \wedge d{x_n} = \mathop \wedge \limits_{i = 1}^n d{x_i}\)</span> is used. The quantity <span class="math inline">\(\left( {dx} \right) = \mathop \wedge \limits_{i = 1}^n d{x_i}\)</span> is called the <em>volume element</em>.</p>
-<p><strong>Example 1.</strong> Let <span class="math inline">\({q_1}\sim{\chi ^2}\left( {{v_1}} \right)\)</span> and <span class="math inline">\({q_2}\sim{\chi ^2}\left( {{v_2}} \right)\)</span> be independent random variables. Suppose I transform variables as <span class="math inline">\({q_1} = fq\)</span> and <span class="math inline">\({q_2} = q\)</span> (i.e.&nbsp;<span class="math inline">\(f = {q_1}/{q_2}\)</span>). What is the Jacobian of this transformation? To find it, I need to calculate the differentials <span class="math display">\[\begin{array}{l}
-d{q_1} = qdf + fdq\\
-d{q_2} = dq
-\end{array}\]</span> so <span class="math display">\[d{q_1} \wedge d{q_2} = \left( {qdf + fdq} \right) \wedge dq = q\left( {df \wedge dq} \right).\]</span></p>
-<p><strong>Exercise 2.</strong> Let <span class="math inline">\(x\)</span> be an <span class="math inline">\(n \times 1\)</span> vector then I denote <span class="math display">\[\left( {dx} \right) = d{x_1} \wedge d{x_2} \wedge d{x_3} \wedge ... \wedge d{x_n} = \mathop  \wedge \limits_{i = 1}^n d{x_i}\]</span> (note the order of the elements of the product). Suppose I set <span class="math inline">\(x = Ay\)</span> where <span class="math inline">\(A\)</span> is an <span class="math inline">\(n \times n\)</span> non-singular matrix. Then, I have <span class="math inline">\(\left( {dx} \right) = \left| A \right|\left( {dy} \right)\)</span>.</p>
-<p><strong>Example 3.</strong> Let <span class="math inline">\(S &gt; 0\)</span> be a positve definite matrix of dimension <span class="math inline">\((k + 1 \times k + 1)\)</span>. Partition is as <span class="math display">\[S = \left( {\begin{array}{*{20}{c}}
-{{S_{11}}}&amp;{{S_{21}}'}\\
-{{S_{21}}}&amp;{{S_{22}}}
-\end{array}} \right)\]</span> where <span class="math inline">\({S_{11}}\)</span> is <span class="math inline">\(1 \times 1\)</span>, <span class="math inline">\({S_{22}}\)</span> is <span class="math inline">\(k \times k\)</span> and <span class="math inline">\({S_{21}}\)</span> is <span class="math inline">\(k \times 1\)</span>. Let <span class="math display">\[\begin{array}{l}
-q = {S_{11}} - {S_{21}}'S_{22}^{ - 1}{S_{21}}\,\,\,\,\left( {1 \times 1} \right)\\
-r = S_{22}^{ - 1}{S_{21}}\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\left( {k \times 1} \right)\\
-R = {S_{22}}\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\left( {k \times k} \right)
-\end{array}\]</span> Then <span class="math display">\[\begin{array}{l}
-{S_{22}} = R\\
-S{{\kern 1pt} _{12}} = Rr\\
-{S_{11}} = q + r'Rr
-\end{array}\]</span> and <span class="math display">\[\begin{array}{l}
-d{S_{11}} = dq + {\text{terms in }}d{r_i}{\text{ and }}d{R_{ij}}{\text{'s}}\\
-dS{{\kern 1pt} _{12}} = \left| R \right|dr + {\text{terms in }}d{R_{ij}}{\text{'s}}\\
-d{S_{22}} = \left\{ {d{R_{ij}}} \right\}
-\end{array}\]</span> Putting things together, <span class="math display">\[\begin{array}{c}
-d{S_{11}} \wedge \left( {d{S_{12}}} \right) \wedge \left( {d{S_{22}}} \right) = dq \wedge \left| R \right|\left( {dr} \right) \wedge \left( {dR} \right) + {\text{all other terms that vanish}}\\
-= \left| R \right|dq \wedge \left( {dr} \right) \wedge \left( {dR} \right).
-\end{array}\]</span> Here I have used <span class="math display">\[\begin{array}{l}
-\left( {dr} \right) = d{r_1} \wedge d{r_2} \wedge ... \wedge d{r_k} = \mathop  \wedge \limits_{i = 1}^k d{r_i}\\
-\left( {d{S_{12}}} \right) = d{S_{12\left( 1 \right)}} \wedge d{S_{12\left( 2 \right)}} \wedge ... \wedge d{S_{12\left( k \right)}} = \mathop  \wedge \limits_{i = 1}^k d{S_{12\left( i \right)}}\\
-\left( {dR} \right) = \left( {d{R_1}} \right) \wedge \left( {d{R_2}} \right) \wedge ... \wedge \left( {d{R_k}} \right)\, = \mathop  \wedge \limits_{i = 1}^k \mathop  \wedge \limits_{j = 1}^k d{R_{ij}}\,\,\,\,{R_j} = j{\text{ - th column of }}R\\
-\left( {d{S_{22}}} \right) = \left( {d{S_{22\left( 1 \right)}}} \right) \wedge \left( {d{S_{22\left( 2 \right)}}} \right) \wedge ... \wedge \left( {d{S_{22\left( k \right)}}} \right) = \mathop  \wedge \limits_{i = 1}^k \mathop  \wedge \limits_{j = 1}^k d{S_{22\left( {i,j} \right)}}\,\,\,\,\,{S_{22\left( j \right)}} = j{\text{ - th column of }}{S_{22}}
-\end{array}\]</span></p>
+<p>Notice that I have changed the notation slightly from <span class="math inline">\(dx^j\)</span> do <span class="math inline">\(dx_j\)</span>, as this is more often used (above this notation would have been confusing).</p>
+<p>Figure 6 gives a geometric interpretation of <span class="math inline">\(d{x_1}\)</span> and <span class="math inline">\(d{x_2}\)</span>. We saw earlier on that <span class="math inline">\(d{x_1}d{x_2}\)</span> is the area of the rectangle having <span class="math inline">\(d{x_1}\)</span> and <span class="math inline">\(d{x_2}\)</span> as sides. As we noted earlier on, the symbol <span class="math inline">\(d{x_i}\)</span> can be interpreted as a <span class="math inline">\(2\)</span>-dimensional vectors, <span class="math inline">\(d{x_i} = \left( {x_i^1,x_i^2} \right)\)</span> say. The area of the rectangle having <span class="math inline">\(d{x_1}\)</span> and <span class="math inline">\(d{x_2}\)</span> as sides is just the determinant of <span class="math display">\[\left| {\begin{array}{*{20}{c}}
+{d{x_1}}\\
+{d{x_2}}
+\end{array}} \right| = \left| {\begin{array}{*{20}{c}}
+{x_1^1}&amp;{x_1^2}\\
+{x_2^1}&amp;{x_2^2}
+\end{array}} \right|.\]</span> The differentials above suggest that <span class="math display">\[\left( {\begin{array}{*{20}{c}}
+{d{x_1}}\\
+{d{x_2}}
+\end{array}} \right) = \left( {\begin{array}{*{20}{c}}
+{\frac{{\partial {x_1}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_1}}}{{\partial {y_2}}}}\\
+{\frac{{\partial {x_2}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_2}}}{{\partial {y_2}}}}
+\end{array}} \right)\left( {\begin{array}{*{20}{c}}
+{d{y_1}}\\
+{d{y_2}}
+\end{array}} \right).\]</span></p>
+<p>Notice that <span class="math display">\[\left| {\begin{array}{*{20}{c}}
+{d{x_1}}\\
+{d{x_2}}
+\end{array}} \right| = \left| {\begin{array}{*{20}{c}}
+{\frac{{\partial {x_1}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_1}}}{{\partial {y_2}}}}\\
+{\frac{{\partial {x_2}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_2}}}{{\partial {y_2}}}}
+\end{array}} \right|\left| {\begin{array}{*{20}{c}}
+{d{y_1}}\\
+{d{y_2}}
+\end{array}} \right|,\]</span> or in a different notation <span class="math display">\[d{x_1}d{x_2} = \left| {\begin{array}{*{20}{c}}
+{\frac{{\partial {x_1}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_1}}}{{\partial {y_2}}}}\\
+{\frac{{\partial {x_2}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_2}}}{{\partial {y_2}}}}
+\end{array}} \right|d{y_1}d{y_2}.\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig6.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 6. Geometrical interpreation of <span class="math inline">\(dx_1\)</span> and <span class="math inline">\(dx_2\)</span>.</figcaption>
+</figure>
+</div>
+<p>In general if we transform the variables according to the rules <span class="math inline">\(x = x\left( y \right)\)</span> where to , then volume element <span class="math inline">\(d{x_1}d{x_2}....d{x_n}\)</span> changes according to the rule <span class="math display">\[d{x_1}d{x_2}....d{x_n} = J\left( {x \to y} \right)d{y_1}d{y_2}....d{y_n}\]</span> where <span class="math inline">\(J\left( {x \to y} \right)\)</span> denotes the Jacobian of the transformation of <span class="math inline">\(x\)</span> to <span class="math inline">\(y\)</span>, and it is given by <span class="math display">\[J\left( {x \to y} \right) = \left| {\left[ {\begin{array}{*{20}{c}}
+{\frac{{\partial {x_1}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_1}}}{{\partial {y_2}}}}&amp; \cdots &amp;{\frac{{\partial {x_1}}}{{\partial {y_n}}}}\\
+{\frac{{\partial {x_2}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_2}}}{{\partial {y_2}}}}&amp; \cdots &amp;{\frac{{\partial {x_2}}}{{\partial {y_n}}}}\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+{\frac{{\partial {x_n}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_n}}}{{\partial {y_2}}}}&amp; \cdots &amp;{\frac{{\partial {x_n}}}{{\partial {y_n}}}}
+\end{array}} \right]} \right|,\]</span> where in this case <span class="math inline">\(\left| . \right|\)</span> denotes both the determinant and the absolute value.</p>
+<p>To summarise, consider the probability of a set A <span class="math display">\[\Pr \left\{ A \right\} = \int\limits_A {pdf\left( x \right)dx}\]</span> and transform the variable of integration according to the rule <span class="math inline">\(x = x\left( y \right)\)</span>. We know that <span class="math display">\[\Pr \left\{ A \right\} = \int\limits_{A'} {pdf\left( {x\left( y \right)} \right)J\left( {x \to y} \right)dy}\]</span> where <span class="math inline">\(A = x\left( {A'} \right)\)</span>. So if <span class="math inline">\(pdf\left( x \right)\)</span> is the density of x, and then transform <span class="math inline">\(x \to y\)</span> then the density of y is <span class="math display">\[pdf\left( y \right) = pdf\left( {x\left( y \right)} \right)J\left( {x \to y} \right).\]</span> We now need to find ways for calculating the jacobian in more complex situations.</p>
 
 
 </section>

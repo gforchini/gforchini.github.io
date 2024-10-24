@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2023-11-09">
+<meta name="dcterms.date" content="2023-08-24">
 
-<title>Giovanni Forchini - Teaching econometrics: R or Stata?</title>
+<title>Giovanni Forchini - Computing exact distributions</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Teaching econometrics: R or Stata?</h1>
+      <h1 class="title">Computing exact distributions</h1>
                       </div>
   </div>
     
@@ -138,7 +138,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 9, 2023</p>
+        <p class="date">August 24, 2023</p>
       </div>
     </div>
     
@@ -157,23 +157,18 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 
 
 
-<p>Last year we decided to switch from Stata to R in our Master program. This has had huge problem for the Econometrics 1 course that I teach. Econometrics 1 is an introduction to microeconometrics for economists, covering linear regression model, heteroskedasticity, panel data and endogeneity/instrumental variables.</p>
-<p>First the positives. R is powerful and actively develop by lots of groups and individuals. It is at the forefront of statistics, data analytics and machine learning. Some packages are just wonderful. But … Stata is easier to use for teaching econometrics.</p>
-<p>For example, econometricians tend to correct the standard errors to make them robust to heteroskedasticity. This is accomplish in Stata with a simple command:</p>
-<p><strong>regress y x1 x2 x3, robust</strong></p>
-<p>This is easy and intuitive and I can focus on the theory underlying this command. In R, this becomes:</p>
-<p><strong>reg &lt;- lm(‘y~x1+x2+x3’,data)</strong></p>
-<p><strong>library(sandwich)</strong></p>
-<p><strong>robust_cov &lt;- vcovHC(reg, type = “HC1”)</strong></p>
-<p><strong>library(lmtest)</strong></p>
-<p><strong>coeftest(reg, vcov = robust_cov)</strong></p>
-<p>And if I want a clean table,</p>
-<p><strong>library(stargazer)</strong></p>
-<p><strong>robust_se &lt;- sqrt(diag(robust_cov))</strong></p>
-<p><strong>stargazer(reg, type = “text”,se = list(robust_se))</strong></p>
-<p>My feeling is that the students focus too much on the R command and not enough on understanding the econometrics. So something needs to be done and I already have something in mind ….</p>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>The computation of exact distributions relies on a set of techniques that do not seem to be part of the modern econometrician’s toolbox. Here and in the next few blog articles will review these techniques, but before I will try to persuade the reader that this is worth doing.</p>
+<p>Improvements in the computer speed and memory allow a researcher to simulate almost every conceivable distribution. So, why should I try to derive these distributions analytically? There are several reasons.</p>
+<p>First, by calculating exact distributions I may be able to deduce properties of estimators and tests that are not immediately obvious. For example, I may find that the distribution of the statistics of interest depends on some specific parameters only, or on a certain function of the parameters. I can use this knowledge to improve simulations designs, and make them faster and more efficient.</p>
+<p>Second, calculating exact distribution may emphasise aspects of the distribution that cannot be picked up by using simulations. For example, it was common in the econometric literature of the 1970s to compare estimators of the coefficient of the endogenous variables in linear structural equations by comparing their moments. However, for a common estimator, the LIML, these do not exist.</p>
+<p>Third, knowledge of the exact distribution can be very useful for generating random numbers in simulations based methods. Here the problem is that of generating random variables having a specified distribution: common algorithms, such as the “accept-reject method” and modification thereof require the knowledge of the exact distribution of the random variable one wants to generate. In the multivariate case, knowledge of some exact distribution theory can make the algorithms computationally efficient.</p>
+<p>Exact distribution can often be used in conjunction with asymptotic theory. The weakly identified structural equations models are an example of this. Here one finds that under weak instrument the asymptotic distribution of the usual estimator of the coefficients of the endogenous variables in a structural equation model formally almost the same as their exact distributions under the assumption of normal errors.</p>
+<p>The aim of this and the following few blog articles is to acquaint the reader with the main techniques that have been used or that are currently used for the evaluation of exact distributions.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

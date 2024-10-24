@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2023-11-09">
+<meta name="dcterms.date" content="2017-11-01">
 
-<title>Giovanni Forchini - Teaching econometrics: R or Stata?</title>
+<title>Giovanni Forchini - Installation and other things…</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Teaching econometrics: R or Stata?</h1>
+      <h1 class="title">Installation and other things…</h1>
                       </div>
   </div>
     
@@ -138,7 +138,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 9, 2023</p>
+        <p class="date">November 1, 2017</p>
       </div>
     </div>
     
@@ -157,21 +157,10 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 
 
 
-<p>Last year we decided to switch from Stata to R in our Master program. This has had huge problem for the Econometrics 1 course that I teach. Econometrics 1 is an introduction to microeconometrics for economists, covering linear regression model, heteroskedasticity, panel data and endogeneity/instrumental variables.</p>
-<p>First the positives. R is powerful and actively develop by lots of groups and individuals. It is at the forefront of statistics, data analytics and machine learning. Some packages are just wonderful. But … Stata is easier to use for teaching econometrics.</p>
-<p>For example, econometricians tend to correct the standard errors to make them robust to heteroskedasticity. This is accomplish in Stata with a simple command:</p>
-<p><strong>regress y x1 x2 x3, robust</strong></p>
-<p>This is easy and intuitive and I can focus on the theory underlying this command. In R, this becomes:</p>
-<p><strong>reg &lt;- lm(‘y~x1+x2+x3’,data)</strong></p>
-<p><strong>library(sandwich)</strong></p>
-<p><strong>robust_cov &lt;- vcovHC(reg, type = “HC1”)</strong></p>
-<p><strong>library(lmtest)</strong></p>
-<p><strong>coeftest(reg, vcov = robust_cov)</strong></p>
-<p>And if I want a clean table,</p>
-<p><strong>library(stargazer)</strong></p>
-<p><strong>robust_se &lt;- sqrt(diag(robust_cov))</strong></p>
-<p><strong>stargazer(reg, type = “text”,se = list(robust_se))</strong></p>
-<p>My feeling is that the students focus too much on the R command and not enough on understanding the econometrics. So something needs to be done and I already have something in mind ….</p>
+<p>I was ‘installed’ as a professor of Econometrics at Umeå University on October 21, 2017. It was a wonderful day which made me feel valued. As part of the ‘installation’ ceremony all new professors had to give a talk about their research for the general public, participate in a formal ceremony and to a banquet in the evening.</p>
+<p>The topic of my talk was Econometrics and Data Science. This was my reflection on my wider research. I wrote a post in the past where I discussed how I feel and fear that data science is done in a very uncritical way. In my talk, reported in a future post, I tried to put it into a historical context.</p>
+<p>It was also great to be able to attend talks in a variety of disciplines offered by new professors, honorary doctors and prize winners. There is definitely lots of very interesting research going on.</p>
+<p>After the formal ceremony, I expected the banquet in the evening to be formal, too. But it wasn’t. I will not reveal anything about it. I do not want to spoil the surprise for future attendees…</p>
 
 
 

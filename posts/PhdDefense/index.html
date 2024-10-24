@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2023-11-09">
+<meta name="dcterms.date" content="2017-03-03">
 
-<title>Giovanni Forchini - Teaching econometrics: R or Stata?</title>
+<title>Giovanni Forchini - A PhD thesis defense</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Teaching econometrics: R or Stata?</h1>
+      <h1 class="title">A PhD thesis defense</h1>
                       </div>
   </div>
     
@@ -138,7 +138,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 9, 2023</p>
+        <p class="date">March 3, 2017</p>
       </div>
     </div>
     
@@ -157,21 +157,12 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 
 
 
-<p>Last year we decided to switch from Stata to R in our Master program. This has had huge problem for the Econometrics 1 course that I teach. Econometrics 1 is an introduction to microeconometrics for economists, covering linear regression model, heteroskedasticity, panel data and endogeneity/instrumental variables.</p>
-<p>First the positives. R is powerful and actively develop by lots of groups and individuals. It is at the forefront of statistics, data analytics and machine learning. Some packages are just wonderful. But … Stata is easier to use for teaching econometrics.</p>
-<p>For example, econometricians tend to correct the standard errors to make them robust to heteroskedasticity. This is accomplish in Stata with a simple command:</p>
-<p><strong>regress y x1 x2 x3, robust</strong></p>
-<p>This is easy and intuitive and I can focus on the theory underlying this command. In R, this becomes:</p>
-<p><strong>reg &lt;- lm(‘y~x1+x2+x3’,data)</strong></p>
-<p><strong>library(sandwich)</strong></p>
-<p><strong>robust_cov &lt;- vcovHC(reg, type = “HC1”)</strong></p>
-<p><strong>library(lmtest)</strong></p>
-<p><strong>coeftest(reg, vcov = robust_cov)</strong></p>
-<p>And if I want a clean table,</p>
-<p><strong>library(stargazer)</strong></p>
-<p><strong>robust_se &lt;- sqrt(diag(robust_cov))</strong></p>
-<p><strong>stargazer(reg, type = “text”,se = list(robust_se))</strong></p>
-<p>My feeling is that the students focus too much on the R command and not enough on understanding the econometrics. So something needs to be done and I already have something in mind ….</p>
+<p>Last Friday I attended my first PhD ‘defense’ in the Swedish system. It was definitely enjoyable and it was interesting to discover what Mattias, the ‘defendant’, has researched in the last few years.</p>
+<p>The structure of the defense was as follows. Firstly the ‘opponent’, an established expert in the area, gave a general overview of the PhD research topic and put it into a context; secondly, he asked probing questions to the defendant - some of which were general and some very specific - which Mattias answer very confidently; thirdly the members of the grading committee - because the grade was decided by a three persons committee not by the opponent - and the public had the chance to ask further questions.</p>
+<p>The defence was public. In fact it was attended by academics, colleagues, students, friends and family. It was a rite of passage very different from the UK viva - which I experienced directly and as an internal examiner- or by the Australian thesis submission - experienced through my PhD students.</p>
+<p>The viva in the UK is a private matter between the candidate and the internal and external examiners. Although it can be certainly as intimidating as the ‘defence’, it is an individual rite of passage rather than a public one. I feel it reflects the the different ways in which education is perceived in the two countries: it is for the benefit of the individual in the UK but it is for the benefit of Society in Sweden. A fundamental difference.</p>
+<p>In Australia the thesis is submitted and two external examiners write two independent reports on the thesis recommending the award of the PhD or a resubmission subject to either small corrections or, sometimes, fundamental changes and resubmission. There is no discussion with the examiners, and as a rite of passage, it is definitely subdued.</p>
+<p>As a young non conformist PhD student the latter would have been my favourite approach. But I have changed my mind as I got older. I have come to realise that a few rites of passage are important - not so much for the individuals undergoing them - but for all the others who observe them in order to accept them as part of a group and to recognise their accomplishments. What I liked most of the defence on Friday was the fact that a layperson could have a glimpse into the research life of Mattias, and could see the hard work, determination, skills, knowledge, frustrations, pragmatism, leadership, independence and teamwork that completing a PhD requires - and that would be summarised by a recruiter as ‘proficient in stata’.</p>
 
 
 

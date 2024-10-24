@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2023-11-09">
+<meta name="dcterms.date" content="2019-09-01">
 
-<title>Giovanni Forchini - Teaching econometrics: R or Stata?</title>
+<title>Giovanni Forchini - Flipping out</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -121,7 +121,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Teaching econometrics: R or Stata?</h1>
+      <h1 class="title">Flipping out</h1>
                       </div>
   </div>
     
@@ -138,7 +138,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 9, 2023</p>
+        <p class="date">September 1, 2019</p>
       </div>
     </div>
     
@@ -157,21 +157,12 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 
 
 
-<p>Last year we decided to switch from Stata to R in our Master program. This has had huge problem for the Econometrics 1 course that I teach. Econometrics 1 is an introduction to microeconometrics for economists, covering linear regression model, heteroskedasticity, panel data and endogeneity/instrumental variables.</p>
-<p>First the positives. R is powerful and actively develop by lots of groups and individuals. It is at the forefront of statistics, data analytics and machine learning. Some packages are just wonderful. But … Stata is easier to use for teaching econometrics.</p>
-<p>For example, econometricians tend to correct the standard errors to make them robust to heteroskedasticity. This is accomplish in Stata with a simple command:</p>
-<p><strong>regress y x1 x2 x3, robust</strong></p>
-<p>This is easy and intuitive and I can focus on the theory underlying this command. In R, this becomes:</p>
-<p><strong>reg &lt;- lm(‘y~x1+x2+x3’,data)</strong></p>
-<p><strong>library(sandwich)</strong></p>
-<p><strong>robust_cov &lt;- vcovHC(reg, type = “HC1”)</strong></p>
-<p><strong>library(lmtest)</strong></p>
-<p><strong>coeftest(reg, vcov = robust_cov)</strong></p>
-<p>And if I want a clean table,</p>
-<p><strong>library(stargazer)</strong></p>
-<p><strong>robust_se &lt;- sqrt(diag(robust_cov))</strong></p>
-<p><strong>stargazer(reg, type = “text”,se = list(robust_se))</strong></p>
-<p>My feeling is that the students focus too much on the R command and not enough on understanding the econometrics. So something needs to be done and I already have something in mind ….</p>
+<p>My first attempt at flipping Mathematical Economics 1 starts today. This is a unit for Master students - obviously - in economics covering basic calculus, linear algebra, matrices, constrained and unconstrained optimisation, and a bit of differential and difference equations. The preparation took a fair amount time mostly due to the need of finding the right technology for doing this. I decided to use on PowerPoint because I can easily record my voice on the slides, keep the timing of the presentation and create a film. In my first attempt, I tried to record the screen of my laptop while writing on a tablet. This was cumbersome, my handwriting was not good and the graphs funny and imprecise.</p>
+<p>PowerPoint allows me to record short lectures with clear equations and graphs without any complicated technology. Google presentations does not support this feature so was quickly excluded.</p>
+<p>Information for the students, including references and links to material, are provided using Google Docs. They are easy to update and share.</p>
+<p>Online quizzes are essential to identify what needs to be practiced in the classes. Quizzes were and are a problem! In the end, I used Google Forms, but they are far from ideal. The problem is that I cannot type maths in Google Forms and need to use an elaborate procedure: I use an external maths editor to create a picture of an formula which is then included in Google Forms. Since pictures cannot be inserted in-line the questions are often unnatural. It is also easy to make mistakes and laborious to correct them. A Microsoft alternative to Google Forms allows for writing better equations - not in-line - but is much more constraining in its use. Other alternatives look very flashy but are pretty useless for mathematical quizzes in my view.</p>
+<p>Short lectures ranging from 1m to 20m are uploaded on YouTube as unlisted videos - I am too much of a wimp to make them public.</p>
+<p>I will shortly find out whether this approach to teaching Mathematical Economics 1 works …</p>
 
 
 
