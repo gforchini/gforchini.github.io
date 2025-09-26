@@ -1,0 +1,35 @@
+---
+title: "Teaching econometrics: R or Stata?"
+author: "Giovanni Forchini"
+date: "2023-11-9"
+---
+
+Last year we decided to switch from Stata to R in our Master program. This has had huge problem for the Econometrics 1 course that I teach. Econometrics 1 is an introduction to microeconometrics for economists, covering linear regression model, heteroskedasticity, panel data and endogeneity/instrumental variables.
+
+First the positives. R is powerful and actively develop by lots of groups and individuals. It is at the forefront of statistics, data analytics and machine learning. Some packages are just wonderful. But ... Stata is easier to use for teaching econometrics.
+
+For example, econometricians tend to correct the standard errors to make them robust to heteroskedasticity. This is accomplish in Stata with a simple command:
+
+**regress y x1 x2 x3, robust**
+
+This is easy and intuitive and I can focus on the theory underlying this command. In R, this becomes:
+
+**reg \<- lm('y\~x1+x2+x3',data)**
+
+**library(sandwich)**
+
+**robust_cov \<- vcovHC(reg, type = "HC1")**
+
+**library(lmtest)**
+
+**coeftest(reg, vcov = robust_cov)**
+
+And if I want a clean table,
+
+**library(stargazer)**
+
+**robust_se \<- sqrt(diag(robust_cov))**
+
+**stargazer(reg, type = "text",se = list(robust_se))**
+
+My feeling is that the students focus too much on the R command and not enough on understanding the econometrics. So something needs to be done and I already have something in mind ....

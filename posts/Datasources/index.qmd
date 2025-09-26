@@ -1,0 +1,105 @@
+---
+title: "Data sources"
+author: "Giovanni Forchini"
+date: "2024-09-15"
+---
+
+One of the problem that our students here at Umeå face during their master thesis is finding relevant data. Hence here is a list of possible data sources collected with the help of my colleagues. I will try to keep this up-to-date.
+
+## Micro data
+
+[European Social Survey (ESS)](https://www.europeansocialsurvey.org/)
+
+[Eurostat microdata for research](https://ec.europa.eu/eurostat/web/microdata)
+
+[World Bank Enterprise Surveys](https://www.enterprisesurveys.org/en/enterprisesurveys)
+
+[Panel data research center at Keiko University](https://www.pdrc.keio.ac.jp/pdrc/ja/)
+
+[IPUMS](https://www.ipums.org/)
+
+[The Panel Study of Income Dynamics (PSID)](https://simba.isr.umich.edu/data/data.aspx)
+
+[Public Use Microdata (PUMD)](https://www.bls.gov/cex/pumd.htm)
+
+[China Family Panel Study (CFPS)](https://www.isss.pku.edu.cn/cfps/en/index.htm)
+
+[easySHARE](https://share-eric.eu/data/data-set-details/easyshare)
+
+[LIS](https://www.lisdatacenter.org/)
+
+[Global Health Data Exchange](https://ghdx.healthdata.org/)
+
+[International Household Survey Network](http://catalog.ihsn.org/catalog/?page=1&ps=15)
+
+[The General Social Survey](https://gss.norc.org/)
+
+[DHS Program](https://dhsprogram.com/Data/)
+
+[UK data service](https://ukdataservice.ac.uk/find-data/browse/economics/)
+
+[Consumer Expenditure Surveys (CE)](https://www.bls.gov/cex/data.htm)
+
+[HFI, the Swedish retail research institute](https://hfi.se/working-papers/)
+
+[Systembolaget](https://www.omsystembolaget.se/foretagsfakta/systembolaget-i-siffror/forsaljningsstatistik/)
+
+[CESSDA](https://datacatalogue.cessda.eu/)
+
+
+## Macro data
+
+[OECD](https://data-explorer.oecd.org/)
+
+[Statistics Sweden](https://www.statistikdatabasen.scb.se/pxweb/sv/ssd/)
+
+[World Bank](https://data.worldbank.org/)
+
+[UNIDO](https://stat.unido.org/)
+
+[UN Comtrade Database](https://comtradeplus.un.org/)
+
+[NBER, Public Use Data Archive](https://www.nber.org/research/data?page=1&perPage=50)
+
+[UNICEF](https://data.unicef.org/)
+
+[ONS](https://www.ons.gov.uk/economy/datalist?filter=datasets)
+
+[St Louis FED](https://fred.stlouisfed.org/)
+
+[Energimarknadsinspektionen](https://ei.se/om-oss/statistik-och-oppna-data)
+
+[The UK Monetary Policy Event‑Study Database](https://www.bankofengland.co.uk/working-paper/2023/measuring-monetary-policy-in-the-uk-ukmpd?utm_source=Bank+of+England+updates&utm_campaign=3baab217f5-EMAIL_CAMPAIGN_2023_11_10_02_17&utm_medium=email&utm_term=0_-3baab217f5-%5BLIST_EMAIL_ID%5D)
+
+Datastream (training at <https://www.refinitiv.com/en/learning-centre/learning-catalogue?q=datastream&page=1>)
+
+<https://www.kaggle.com/datasets>
+
+<https://monitoringthefuture.org/>
+
+<https://www.acha.org/NCHA/NCHA_Home>
+
+<https://www.cdc.gov/healthyyouth/data/yrbs/index.htm>
+
+<https://www.cdc.gov/nchs/nhis/index.htm>
+
+<https://data.census.gov/>
+
+<https://www.ons.gov.uk/census>
+
+Penn World Table: <https://pwt-data-tool.streamlit.app/>
+
+<https://r2rsquaredlse.github.io/web-historicalexpectations/> Dataset on Measures of US Expected Inflation before 1978
+
+<https://eh.net/databases/>
+
+<https://clio-infra.eu/index.html>
+
+<https://www.lusem.lu.se/organisation/department-economic-history/research-department-economic-history/databases-department-economic-history>
+
+<https://riksarkivet.se>
+
+
+
+
+

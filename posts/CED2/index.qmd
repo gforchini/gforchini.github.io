@@ -1,0 +1,173 @@
+---
+title: "Computing exact distributions part 2"
+author: "Giovanni Forchini"
+date: "2023-09-08"
+---
+
+# Distributions related to the normal
+
+The normal distribution is used to define other distributions by taking 'squares'.
+
+In this post I will try to:
+
+1.  make clear what how the normal distribution can be used to define the chi-squared and the Wishart distributions;
+2.  explain how the chi-squared and the Wishart distribution can be used to 'solve' some common integrals;
+
+## The chi-square distribution
+
+**Definition 1.** Let $x$ be a $k$-dimensional vector of independent standard normal random variables and let $$q = x'x = \sum_i^k x_i^2$$ then I say that $q$ has a chi-square distribution with $k$ degrees of freedom and I write $$q \sim \chi^2(k).$$
+
+An alternative definition is the following.
+
+**Definition 2.** The random variable $q$ has a chi-square distribution with $k$ degrees of freedom (written $q\sim {\chi ^2}\left( k \right)$) when its density is $$pdf\left( q \right) = \frac{{\exp \left\{ { - q/2} \right\}{q^{\left( {k/2} \right) - 1}}}}{{{2^{k/2}}\Gamma \left( {k/2} \right)}},$$ for $q>0$.
+
+The quantity $\Gamma \left( \alpha \right)$ is called the Gamma function and it is defined by the integral $$\Gamma \left( \alpha  \right) = \int\limits_{t > 0} {\exp \left\{ { - t} \right\}{t^{\alpha  - 1}}dt} .$$ Suppose I transform the variable of integration $t \to t = aw$, a\>0, and
+
+$$\begin{array}{c}
+\Gamma \left( \alpha  \right) = \int\limits_{x > 0} {\exp \left\{ { - aw} \right\}} {\left( {aw} \right)^{\alpha  - 1}}adw\\
+ = {a^\alpha }\int\limits_{x > 0} {\exp \left\{ { - aw} \right\}{w^{\alpha  - 1}}dw} .
+\end{array}$$
+
+By rearranging the last display I have
+
+**Theorem 3.** Let $a>0$ and $\alpha > 0$, then
+
+$$\int\limits_{x > 0} {\exp \left\{ { - aw} \right\}{w^{\alpha  - 1}}dw}  = \frac{{\Gamma \left( \alpha  \right)}}{{{a^\alpha }}}.$$ {#eq-gamma-int}
+
+This integral is very important and often comes up in applications. Notice that it can be written as
+
+$$\int\limits_{x > 0} {\frac{{{a^\alpha }\exp \left\{ { - aw} \right\}{w^{\alpha  - 1}}}}{{\Gamma \left( \alpha  \right)}}dw}  = 1,$$
+
+so that by choosing $a = 1/2$ and $\alpha = k/2$ I can see that the density of a chi-square distribution does indeed integrate to 1.
+
+Here is a result that can be easily established using the integral above
+
+**Exercise 4.** If $q\sim {\chi ^2}\left( k \right)$ then $E\left( q \right) = k$ and ${\mathop{\rm var}} \left( q \right) = 2k$.
+
+The link between Definitions 1 and 2 is:
+
+**Theorem 5.** If $x\sim N\left( {0,{\sigma ^2}{I_k}} \right)$ then $q = x'x/{\sigma ^2}\sim {\chi ^2}\left( k \right)$.
+
+I will return to this point later on after a review of techniques to calculate excact distributions.
+
+## Quadratic forms and chi-square distribution
+
+It is important to know when a quadratic form in normal random variable is a chi-square distribution. The following result is useful in many situations.
+
+**Theorem 6.** If $q = x'Ax$ and $x\sim N\left( {0,\Sigma } \right)$, then $q\sim {\chi ^2}\left( k \right)$ if and only if $A\Sigma$ is idempotent (i.e. $\left( {A\Sigma } \right)\left( {A\Sigma } \right) = A\Sigma$), in this case $k = tr\left\{ {A\Sigma } \right\} = rank\left\{ {A\Sigma } \right\}$.
+
+Now consider the case where $A$ is a random matrix independent of $x$ and $x\sim N\left( {0,\Sigma } \right)$. Then if $A\Sigma$ is idempotent and $tr\left\{ {A\Sigma } \right\} = k$ and I let $$q = x'Ax,$$ I have that $$q|A\sim {\chi ^2}\left( k \right).$$
+
+Since the density of $q|A$ does not depend on A, it follows that $q\sim {\chi ^2}\left( k \right)$ unconditionally.
+
+**Example 7.** Consider a linear regression model $y = X\beta + u$ where $u|X\sim N\left( {0,{\sigma ^2}{I_n}} \right)$, and X is an ($n \times k$) random matrix of rank k with probability one. Let $q = \frac{{y'\left[ {{I_n} - X{{\left( {X'X} \right)}^{ - 1}}X'} \right]y}}{{{\sigma ^2}}}$be the sum of squared residuals divided by the error variance. It can be easily shown that $q = \frac{{u'\left[ {{I_n} - X{{\left( {X'X} \right)}^{ - 1}}X'} \right]u}}{{{\sigma ^2}}}.$
+
+Now define $A = {I_n} - X{\left( {X'X} \right)^{ - 1}}X'$ and $x = u/\sigma \sim N\left( {0,{I_n}} \right)$, so that $q = x'Ax$ and $x|A\sim N\left( {0,{I_n}} \right).$ Note that $A{I_n}$ is idempotent and that $tr\left\{ {A{I_n}} \right\} = tr\left\{ A \right\} = n - k$ so I can conclude that $$q|A\sim {\chi ^2}\left( {n - k} \right).$$ Since the density of $q|A$ does not depend on $A$ I can say that $q\sim {\chi ^2}\left( {n - k} \right)$ unconditionally.
+
+**Definition 8.** I say that $q>0$ has a non-central chi-square distribution with $k$ degrees of freedom and non-centrality parameter $\lambda$ (and write$q\sim {\chi ^2}\left( {k,\lambda } \right)$) if its density is
+
+$$pdf\left( q \right) = \frac{{\exp \left\{ { - q/2} \right\}{q^{\left( {k/2} \right) - 1}}}}{{{2^{k/2}}\Gamma \left( {k/2} \right)}}\left\{ {\exp \left\{ { - \lambda /2} \right\}\sum\limits_{j = 0}^\infty  {\frac{{{{\left( {\lambda q/4} \right)}^j}}}{{j!{{\left( {k/2} \right)}_j}}}} } \right\}$$ {#eq-non-centr-chi2-dens}
+
+where $$\begin{array}{l}
+{\left( a \right)_0} = 1\\
+{\left( a \right)_j} = a\left( {a + 1} \right)\left( {a + 2} \right)...\left( {a + j - 1} \right) = \frac{{\Gamma \left( {a + j} \right)}}{{\Gamma \left( a \right)}},
+\end{array}$$ $j = 1,2,3,...$, is the forward factorial (or Pochhammer symbol).
+
+**Theorem 9.** If $$x\sim N\left( {\mu ,\Sigma } \right)$$ and $q = x'Ax$, then $q\sim {\chi ^2}\left( {k,\lambda } \right)$ if and only if $A\Sigma$ is idempotent. Then $k = tr\left\{ {A\Sigma } \right\}$ and $\lambda = \mu 'A\mu$.
+
+**Corollary 10.** If $x\sim N\left( {\mu ,{\sigma ^2}{I_k}} \right)$ then $q = x'x/{\sigma ^2}\sim {\chi ^2}\left( {k,\mu '\mu /{\sigma ^2}} \right)$.
+
+## The Wishart distribution
+
+The Wishart distribution is a multivariate extension of the chi-square distribution. To define this, I need first to extend the multivariate normal distibution to a matrix-variate normal distribution.
+
+**Definition 11.** Let ${x_i}\sim N\left( {{\mu _i},\Sigma } \right)$, where $\Sigma$ is an ($m \times m$) positive definite matrix, for $i = 1,2,...,n$. Suppose, they are independent. Then the ($n \times m$) random matrix
+
+$$X = \left( \begin{array}{l}
+{x_1}'\\
+{x_2}'\\
+ \vdots \\
+{x_n}'
+\end{array} \right)$$ {#eq-matrix-norm}
+
+has a matrix-variate normal distribution with density
+
+$$pdf\left( X \right) = {\left( {2\pi } \right)^{ - nm/2}}{\left| \Sigma  \right|^{ - n/2}}etr\left\{ { - \frac{1}{2}{\Sigma ^{ - 1}}\left( {X - M} \right)'\left( {X - M} \right)} \right\}$$ {#eq-matrix-norm-distr}
+
+where
+
+$$M = \left( \begin{array}{l}
+{\mu _1}'\\
+{\mu _2}'\\
+ \vdots \\
+{\mu _n}'
+\end{array} \right),$$
+
+and $etr\left\{ A \right\}$ means $\exp \left\{ {tr\left[ A \right]} \right\}$ for any square matrix A. I write $X\sim N\left( {M,{I_n} \otimes \Sigma } \right)$.
+
+**Definition 12.** If the ($n \times m$) random matrix $X\sim N\left( {0,{I_n} \otimes \Sigma } \right)$, then the ($m \times m$) random matrix $S = X'X$ is said to have a Wishart distribution with n degrees of freedom and covariance matrix \$\Sigma $, and I write$S\sim {W_m}\left( {n,\Sigma } \right)\$.
+
+Notice that the matrix S is symmetric and positive definite.
+
+**Theorem 13.** If $n > m$ the density function of $S\sim {W_m}\left( {n,\Sigma } \right)$ is
+
+$$pdf\left( S \right) = \frac{{{2^{ - nm/2}}{{\left| \Sigma  \right|}^{ - n/2}}}}{{{\Gamma _m}\left( {n/2} \right)}}etr\left\{ { - \frac{1}{2}{\Sigma ^{ - 1}}S} \right\}{\left| S \right|^{\left( {n - m - 1} \right)/2}},$$ (2.13)
+
+where ${\Gamma _m}\left( a \right)$ denotes the multivariate gamma function
+
+$${\Gamma _m}\left( a \right) = {\pi ^{m\left( {m - 1} \right)/4}}\prod\limits_{i = 1}^m {\Gamma \left[ {a - \frac{1}{2}\left( {i - 1} \right)} \right]} .$$ {#eq-mult-gamma}
+
+If $m = 1$, $\Sigma = {\sigma ^2}$, $S = x'x$ and $S\sim {W_1}\left( {n,{\sigma ^2}} \right)$ is a scalar random variable. The density of S simplifies to
+
+$$pdf\left( S \right) = \frac{{{{\left( {2{\sigma ^2}} \right)}^{ - n/2}}}}{{\Gamma \left( {n/2} \right)}}etr\left\{ { - \frac{1}{{2{\sigma ^2}}}S} \right\}{S^{n/2 - 1}}.$$
+
+One can see that this is very similar to a ${\chi ^2}\left( n \right)$. Precisely, I have that
+
+$$\frac{S}{{{\sigma ^2}}}\sim {\chi ^2}\left( n \right),$$ so the Wishart can be seen as a generalization of the chi-square distribution.
+
+The density of $S$ must integrate to $1$, that is
+
+$$\begin{array}{l}
+\int\limits_{S > 0} {\frac{{{2^{ - nm/2}}{{\left| \Sigma  \right|}^{ - n/2}}}}{{{\Gamma _m}\left( {n/2} \right)}}etr\left\{ { - \frac{1}{2}{\Sigma ^{ - 1}}S} \right\}{{\left| S \right|}^{\left( {n - m - 1} \right)/2}}dS}  = 1
+\end{array}.$$
+
+Rearranging the expression in the last display one obtains
+
+$$\int\limits_{S > 0} {etr\left\{ { - \frac{1}{2}{\Sigma ^{ - 1}}S} \right\}{{\left| S \right|}^{\left( {n - m - 1} \right)/2}}dS}  = {2^{nm/2}}{\left| \Sigma  \right|^{n/2}}{\Gamma _m}\left( {n/2} \right).$$ If I set $\left( {1/2} \right){\Sigma ^{ - 1}} = W$, the above integral becomes
+
+**Theorem 14.** If $n > m$, then for any positive definite matrix $W$
+
+$$\int\limits_{S > 0} {etr\left\{ { - WS} \right\}{{\left| S \right|}^{\left( {n - m - 1} \right)/2}}dS}  = {\left| W \right|^{ - n/2}}{\Gamma _m}\left( {n/2} \right),$$ {#eq-mult-gamma-integral}
+
+This very useful integral is called the multivariate Gamma integral.
+
+**Example 15.** In a linear regression model I have that
+
+$$\hat \beta |X\sim N\left( {\beta ,{\sigma ^2}{{\left( {X'X} \right)}^{ - 1}}} \right).$$ Set $S = X'X$ so that
+
+$$\hat \beta |S\sim N\left( {\beta ,{\sigma ^2}S} \right)$$,
+
+and suppose that $S\sim {W_k}\left( {v,{I_k}} \right)$. This assumption is sometimes done in some analyses of the linear regression model. Then, I know that $$pdf\left( {\hat \beta |S} \right) = {\left( {2\pi {\sigma ^2}} \right)^{ - k/2}}{\left| S \right|^{1/2}}\exp \left\{ { - \frac{1}{{2{\sigma ^2}}}\left( {\hat \beta  - \beta } \right)'S\left( {\hat \beta  - \beta } \right)} \right\},$$ and $$pdf\left( S \right) = \frac{{{2^{ - vk/2}}}}{{{\Gamma _k}\left( {v/2} \right)}}etr\left\{ { - \frac{1}{2}S} \right\}{\left| S \right|^{\left( {v - k - 1} \right)/2}}.$$
+
+The joint density of $\hat \beta$ and S is $$\begin{array}{c}
+pdf\left( {\hat \beta ,S} \right) = \frac{{{2^{ - vk/2}}{{\left( {2\pi {\sigma ^2}} \right)}^{ - k/2}}}}{{{\Gamma _k}\left( {v/2} \right)}}etr\left\{ { - \frac{1}{2}\left[ {{I_k} + \frac{1}{{{\sigma ^2}}}\left( {\hat \beta  - \beta } \right)\left( {\hat \beta  - \beta } \right)'} \right]S} \right\}\\
+{\left| S \right|^{\left( {v + 1 - k - 1} \right)/2}}
+\end{array}.$$
+
+So the marginal density of $\hat \beta$ can be obtained by integrating out S\>0, 
+$$\begin{array}{c}
+pdf\left( {\hat \beta } \right) = \frac{{{2^{ - vk/2}}{{\left( {2\pi {\sigma ^2}} \right)}^{ - k/2}}}}{{{\Gamma _k}\left( {v/2} \right)}}\\
+\int\limits_{S > 0} {etr\left\{ { - \frac{1}{2}\left[ {{I_k} + \frac{1}{{{\sigma ^2}}}\left( {\hat \beta  - \beta } \right)\left( {\hat \beta  - \beta } \right)'} \right]S} \right\}{{\left| S \right|}^{\left( {v + 1 - k - 1} \right)/2}}dS} 
+\end{array}.$$ 
+I know that this last integral can be evaluated and 
+$$\begin{array}{l}
+pdf\left( {\hat \beta } \right) = \frac{{{2^{ - vk/2}}{{\left( {2\pi {\sigma ^2}} \right)}^{ - k/2}}{\Gamma _k}\left( {\left[ {v + 1} \right]/2} \right)}}{{{\Gamma _k}\left( {v/2} \right)}}{\left| {{I_k} + \frac{1}{{{\sigma ^2}}}\left( {\hat \beta  - \beta } \right)\left( {\hat \beta  - \beta } \right)'} \right|^{\left( {v + 1} \right)/2}}\\
+\frac{{{2^{ - vk/2}}{{\left( {2\pi {\sigma ^2}} \right)}^{ - k/2}}{\Gamma _k}\left( {\left[ {v + 1} \right]/2} \right)}}{{{\Gamma _k}\left( {v/2} \right)}}{\left( {1 + \frac{1}{{{\sigma ^2}}}\left( {\hat \beta  - \beta } \right)'\left( {\hat \beta  - \beta } \right)} \right)^{\left( {v + 1} \right)/2}}
+\end{array}$$ 
+and this is a multivariate t distribution with v+1 degrees of freedom, location parameter $\beta$ and scale parameter ${\sigma ^2}$.
+
+**Theorem 16.** Assume that $S\sim {W_m}\left( {n,\Sigma } \right)$ and A is an $m \times k$ matrix of rank $k \le m$. Then: 1. $A'SA\sim {W_k}\left( {n,A'\Sigma A} \right)$; 2. ${\left( {A'{S^{ - 1}}A} \right)^{ - 1}}\sim {W_k}\left( {n - m + k,{{\left( {A'{\Sigma ^{ - 1}}A} \right)}^{ - 1}}} \right).$
+
+If $A$ is a random matrix independent of $S$, I can interpret the result above as conditional on $A$.
+
+**Example 17.** Suppose that $x$ has any distribution independent of $S\sim {W_m}\left( {n,\Sigma } \right)$. I want the distribution of two statistics: $${t_1} = \frac{{x'Sx}}{{x'\Sigma x}}$$ and ${t_2} = \frac{{x'{\Sigma ^{ - 1}}x}}{{x'{S^{ - 1}}x}}.$ Using Theorem 3, I know that $x'Sx|x\sim {W_1}\left( {n,x'\Sigma x} \right)$ so that $${t_1} = \frac{{x'Sx}}{{x'\Sigma x}}|x\sim {\chi ^2}\left( n \right).$$ Since ${\chi ^2}\left( n \right)$ does not depend on $x$, it must be true that ${t_1}\sim {\chi ^2}\left( n \right)$ unconditionally. Likewise, $$\frac{1}{{x'{S^{ - 1}}x}}|x\sim {W_1}\left( {n - m - 1,\frac{1}{{x'{\Sigma ^{ - 1}}x}}} \right),$$ so that ${t_2} = \frac{{x'{\Sigma ^{ - 1}}x}}{{x'{S^{ - 1}}x}}|x\sim {\chi ^2}\left( {n - m - 1} \right)$. Once again ${\chi ^2}\left( {n - m - 1} \right)$ does not depend on $x$, so the above result must be true unconditionally, i.e. ${t_2}\sim {\chi ^2}\left( {n - m - 1} \right)$.

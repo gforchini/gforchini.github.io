@@ -1,0 +1,43 @@
+---
+title: "Short CV"
+about:
+  template: marquee
+#  links:
+#    - icon: google-scholar
+#      text: Google Scholar
+#      href: https://scholar.google.co.uk/citations?user=vo3K-9wAAAAJ&hl=en
+---
+
+## Education
+
+Laurea in Economia e Commercio, Università di Bergamo (Italy),
+
+Master of Economics from CORIPE P.te, Turin (Italy)
+
+MSc in Economics and Econometrics, University of Southampton (UK)
+
+PhD Econometrics, University of Southampton (UK)
+
+## Current position
+
+Professor of Econometrics, Umeå Universitet
+
+## Previous positions
+
+Professor of Econometrics, University of Surrey
+
+Associate professor of Econometrics, Monash University
+
+Senior Lecturer, Monash University
+
+Lecturer, University of York
+
+## Interests
+
+An econometrician by training, my interests are in all mathematical aspects of econometrics and statistics (or data science to be fashionable). Specific areas I have worked in are optimal inference, statistical decision theory, exact and asymptotic distribution theory, tests, tests for misspecification, structural equations models, identification, conditional inference, panel data models, saddlepoint approximations, higher order approximations, applications of differential geometry to statistics.
+
+Since January 2020 I have been collaborating with an interdisciplinary team working on pandemic and pandemic preparedness at the [MRC Centre for Global Infectious Disease Analysis and WHO Collaborating Centre for Infectious Disease Modelling](https://www.imperial.ac.uk/mrc-global-infectious-disease-analysis/), School of Public Health, Imperial College London, London, UK.
+
+## Publications
+
+Available from [Google Scholar](https://scholar.google.co.uk/citations?user=vo3K-9wAAAAJ&hl=en)

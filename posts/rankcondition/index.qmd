@@ -1,0 +1,57 @@
+---
+title: "The rank condition for identification in linear simultaneous equations"
+author: "Giovanni Forchini"
+date: "2017-02-08"
+---
+
+The first two lectures of Econometrics B in the economics MSc at Warwick cover endogeneity and the challenges that it creates for statistical inference. In the third lecture we investigate the problem of identification. We state without proofs the rank condition for identification and apply it to several examples.
+
+After the lecture, a few students asked me where the rank condition comes from. Here is an answer (there are a few equivalent ones) ... It requires a few ideas from matrix algebra.
+
+A general linear simultaneous equations model with $m$ equations - which can be thought of as the behavioural equations - can be written as
+
+$y_i = \Gamma z_i + u_i\ \ \ \ (1)$
+
+$i=1,2,...,N$ where $y_i$ is the $m \times 1$ vector of endogenous variables, $B$ is the $m \times m$ matrix of coefficients of the endogenous variables, $z_i$ is the $k \times 1$ vector of exogenous variables, $\Gamma$ is the $m \times k$ matrix of coefficients of the exogenous variables, $u_i$ is the $m \times 1$ vector of errors. We also assume that $E(u_i) = 0$, $var(u_i) = \Sigma$ where $\Sigma$ is positive definite, and $cov(u_i,u_j) = E(u_i u_j) = 0$ for all $i \ne j$.
+
+As we have noticed in the lecture, (1) and
+
+$y_i= F \Gamma z_i+ F u_i \ \ \ \ (2)$
+
+have the same reduced form
+
+$y_i= B^{-1}\Gamma z_i+ B^{-1}u_i$
+
+for any nonsingular matrix $F$. In economics terms, these two systems of equations generate the same equilibrium values of the endogenous variables. Since we observe the equilibrium values only, we cannot distinguish between the two systems of equations generating them.
+
+In order to identify the parameters of the structural equations we exploit some knowledge about the problem we want to study. This knowledge, in this case, says that the structural parameters must satisfy some known linear restrictions. These restrictions need to be satisfied both by (1) and (2). For example, the restrictions may state that a particular variable does not appear in one of the equation.
+
+Identification means that (1) and (2) are the same: the only $F$ which is allowed is a diagonal matrix. Why a diagonal matrix? Because when $F$ is a diagonal matrix the coefficients of equation $i$ in (2) are the same as the coefficients of equation $i$ in (1) multiplied by a number, $f_i$ say. Multiplying all the coefficients in the same equation by the same number is allowed because usually we single out one of the endogenous variables to have coefficient equal to one. This is the same as being interested in the ratios between each coefficients and the coefficient of this variables which is singled out.
+
+Let's put all the coefficients of (1) in a matrix $$A= \left( \begin{array}{c} B' \\ -\Gamma' \end{array}\right)$$. Notice that the coefficients of the first equation are in the first column of $A$. We can partition $A$ so that $A = (a_1,A_2)$ where $a_1$ is the \$m+k \time1 \$ vector of parameters in the first equation and $A_2$ is a matrix containing all the parameters in the other $m-1$ equations. We will focus on the first equation. Since we can change the order in which the equations are written, this does not involve any loss of generality.
+
+As argued above we know that the restrictions satisfied by the parameters in the first equation take the linear form $R_1 a_1 =0$ where $R_1$ is a known $(r_1 \times m+k)$ matrix of rank $r_1$. Notice that if we multiply $a_1$ by a constant $\alpha \ne 0$, $R_1 (\alpha a_1) =0$ would still hold. So using this restriction we can only hope to identify $a_1$ up to a multiplicative constant. Often, we require that one of the coefficients of $a_1$ is 1 to fix such constant.
+
+Let $A^*= \left( \begin{array}{c} B' F'\\ -\Gamma' F' \end{array}\right) =\left( a_1^*, A_2^*\right)$ be a matrix containing the coefficients in (2). The we must also have $R_1 a_1^* =0$.
+
+Notice that $A* =AF'$ so that $\left( a_1^*, A_2^*\right)=\left( a_1, A_2\right)F'$. Partition $F'$ as
+
+$$F'=\left( \begin{array}{cc}
+f_{11} & f_{12} \\ f_{21}&F_{22}
+\end{array} \right)$$ so that
+
+$$\left( a_1^*, A_2^*\right)=\left( a_1 f_{11} +A_2 f_{21},a_1 f_{12} + A_2 F_{22}\right).$$
+
+Now notice that
+
+$$R_1 a_1^* = R_1 \left( a_1 f_{11} +A_2 f_{21}\right) = R_1 a_1 f_{11} +R_1 A_2 f_{21}$$
+
+We know that $R_1 a_1 =0$ and $R_1 a_1^*=0$ so that we must have
+
+$R_1 A_2 f_{21}=0.$
+
+This last equation implies that $f_{21}=0$ if and only if $R_1A_2$ has rank full rank $m-1$. This is the rank condition for identification of the coefficients of the first equation. If this condition holds, $a_1^*=a_1 f_{11}$ so that $a_1^*$ is a multiple of $a_1$.
+
+We can repeat this reasoning for all equations in (1) so that the coefficients of the whole system will be identified if and only if rank conditions hold for all equations. If Identification holds for the coefficients of all equations in the system then $F$ is a diagonal matrix.
+
+This proof is not mine. If I had to guess I would attribute it to Grant Hillier during my MSc in Southampton .... a few years ago.

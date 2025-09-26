@@ -1,0 +1,14 @@
+---
+title: "About"
+image: profile.png
+about:
+  template: broadside
+#  links:
+#    - icon: google-scholar
+#      text: Google Scholar
+#      href: https://scholar.google.co.uk/citations?user=vo3K-9wAAAAJ&hl=en
+---
+
+I am professor of Econometrics at the [Department of Economics of Umeå University](https://www.umu.se/en/usbe/) in Sweden. Before joining Umeå, I spent five years in the Department of Economics at the University of Surrey (UK), five years in the Department of Econometrics and Business Statistics at Monash University (Australia) and seven years in the Department of Economics and Related Studies at the University of York (UK). I visited the School of Public Health, Imperial College London, between 2020-2022.
+
+Apart from being an academic, I enjoy reading mathematics and statistics and using these to solve real-world problems. I also engage in freelance statistical and econometrics consulting.

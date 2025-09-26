@@ -1,0 +1,78 @@
+---
+title: "Interpreting the coefficients of the endogenous variables in IV models"
+author: "Giovanni Forchini"
+date: "2017-07-18"
+---
+
+In the simple linear model $y=x \beta +u$, the (scalar) parameter $\beta$ has a very simple interpretation:
+
+$$\frac{\partial E\left( y|x \right)}{\partial x} = \beta. \ \ \ \ (1)$$
+
+That is, a marginal change in the independent variable $x$ leads to a change $\beta$ in $E\left( y|x \right)$. It is natural to carry forward this interpretation to a simple linear instrumental variable models of the form
+
+$$y=x\beta+u$$
+$$x=z'\gamma+v,$$
+
+and claim that $\frac{\partial E\left( y|x,z \right)}{\partial x} = \beta$. However, this is not the case: since $u$ and $v$ are dependent, a change in $x$ may also lead to a change in $E\left(u|x,z \right)$, which can no longer expected to be zero.
+
+For simplicity, assume that $\left( u , v\right)|z$ are a pair of normal random variables with zero mean and covariance matrix
+
+$$\Sigma = \left( \begin{array}{cc}
+\sigma_u^2 & \rho \sigma_u \sigma_v \\\rho \sigma_u \sigma_v &\sigma_v^2
+\end{array}\right).$$
+
+Although this assumption is not needed, it helps to simplify the calculations. Focus on the pair $\left( u,x\right)$. Notice that they are normally distributed given $z$,
+
+$$\left. \left(\begin{array}{c}
+u \\x
+\end{array} \right) \right| z \sim N\left(\left( \begin{array}{c} 0 \\z'\gamma \end{array}\right) , \Sigma \right).$$
+
+So that we can easily find the conditional distribution of $u$ given $x$ and $z$ as
+
+$$u | x ,z\sim N\left( \rho \frac{ \sigma_u}{\sigma_v} \left( x-z'\gamma\right) ,\left(1-\rho^2 \right) \sigma_u^2 \right).$$
+
+Notice that the conditional mean of $u$ depends on $x$ as well and on $z$ and
+
+$$\frac{\partial E\left( u|x,z\right) }{\partial x} =\rho \frac{ \sigma_u}{\sigma_v}.\ \ \ \ (2)$$
+
+Now focus on the distribution of $y$ given $x$:
+
+$$y|x,z \sim x\beta+u|x,z \sim N\left(x\beta+\rho \frac{ \sigma_u}{\sigma_v} \left( x-z'\gamma\right) ,\left(1-\rho^2 \right) \sigma_u^2 \right). \ \ \ \ (3)$$
+
+Therefore
+
+$$\frac{\partial E\left( y|x,z \right)}{\partial x} = \beta+ \rho \frac{ \sigma_u}{\sigma_v}. \ \ \ \ (4)$$
+
+Using (2) and (4), $\beta$ can be written as
+
+$$\beta = \frac{\partial E\left( y|x,z \right)}{\partial x} - \frac{\partial E\left( u|x,z \right)}{\partial x}. \ \ \ \ (5)$$
+
+Hence, $\beta$ is the change in $E\left( y|x,z \right)$ due to a change in $x$ after removing the effect that $x$ has on $u$. A graph may be useful to understand the effect of $x$ on $E\left( y|x,z \right)$:
+
+$$\begin{array}{lcccl}
+x & &\to & &v\\
+&&&&\\
+\downarrow \beta &&&&\downarrow \rho \frac{\sigma_u}{\sigma_v}\\
+&&&&\\
+y& &\leftarrow& &u
+\end{array}$$
+
+which shows how $x$ affects $y$ directly (and this direct effect is $\beta$) and indirectly through the unobserved errors (and this effect is $\rho \frac{\sigma_u}{\sigma_v}$).
+
+Pearl's causal interpretation of $\beta$ is slightly different since it is based on the assumption that it is possible to change $x$ by setting it equal to a particular value and removing the reduced form $x=z'\gamma+v$ from the system.
+
+Notice that the assumption of normality is not needed. We could have also taken the conditional expectation on both sides of the structural equation to find
+
+$$E\left( y|x,z\right) = x\beta+E\left( u|x,z \right).\ \ \ \ (6)$$
+
+One obtains the earlier result by deriving with respect to $x$ both the left and the right hand sides of (6).
+
+I conclude this note with a few observations with which econometricians usually are not familiar:
+
+- Firstly, notice that the conditional distribution of $y|x,z$ in (3) is degenerate when $\rho^2 \to 1$. Precisely, the conditional density becomes concentrated around the point $E\left(y|x,z\right) =x\beta \pm \frac{ \sigma_u}{\sigma_v} \left( x-z'\gamma\right)$ as $\rho^2 \to 1$.
+
+- Secondly, what should one be interested in? the direct effect$\frac{\partial E\left( y|x,z \right)}{\partial x}$? or the total effect $\beta=\frac{\partial E\left( y|x,z \right)}{\partial x}- \frac{\partial E\left( u|x,z \right)}{\partial x}$? This may depend on the scope of the analysis.
+
+- Thirdly, if we have a sample of iid observations $(y_i,x_i)$ $i=1,2,...,N$, as the sample size $N \to \infty$, the OLS estimator of $\beta$ tends to $\beta+\rho \frac{ \sigma_u}{\sigma_v}$. Therefore, the OLS estimator is consistent for $\frac{\partial E\left( y|x,z \right)}{\partial x}$.
+
+- The traditional interpretation of $\beta$ in econometrics is based on the observation that $E\left(y|z\right)=E\left(x|z\right) \beta+E\left(u|z\right)$ since $E\left(u|z\right)=0$ it follows that $\beta = \frac{E\left(y|z\right)}{E\left(x|z\right)}$.

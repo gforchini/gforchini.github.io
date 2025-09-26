@@ -1,0 +1,86 @@
+---
+title: "Tests for over-identification in a single structural equation: what is what?"
+author: "Giovanni Forchini"
+date: "2018-2-01"
+---
+
+There is a large number of tests for over-identification for a single structural equation and there seems to be confusion about what test is what and who suggested what. This note tries to clarify this.
+
+Consider a structural equation of the form
+
+$${y_1} = {Y_2}\beta + {Z_1}\gamma + u \ \ \ \ (1)$$
+
+with reduced form
+
+$$\left[ {{y_1},{Y_2}} \right] = {Z_1}\Phi + {Z_2}\Pi + \left[ {{v_1},{V_2}} \right] \ \ \ \ (2)$$
+
+and denote by $\hat \beta$ the TSLS estimator of $\beta$, and by $\hat u$ the TSLS vector of residuals of the regression of ${y_1}$ on $\left[ {{Y_2},{Z_1}} \right]$ with instruments ${Z_2}$. Also write $Z = \left[ {{Z_1},{Z_2}} \right]$ and define the usual projection matrix ${M_A} = {I_T} - A{\left( {A'A} \right)^{ - 1}}A'$ for any full column rank matrix $A$. Notice $y_1$ is $T \times 1$, $Y_2$ is $T \times n-1$, $Z_1$ is $T \times k_{1}$ and $Z_2$ is $T \times k_2$. The dimension of all other terms in (1) and (2) can be easily obtained.
+
+If one assumes that the rows of $\left[ {{v_1},{V_2}} \right]$ are i.i.d. with zero mean vector and covariance matrix $\Omega $ then the structural variance is ${\sigma ^2} = \left( {1, - \beta '} \right)\Omega \left( {1, - \beta '} \right)'$. The TSLS estimator of the structural variance is denoted by ${\hat \sigma ^2} = \hat u'\hat u/T$. However one can estimate this also as ${\tilde \sigma ^2} = \left( {1, - \hat \beta '} \right)\hat \Omega \left( {1, - \hat \beta '} \right)'$ where $\hat \Omega = {T^{ - 1}}\left[ {{y_1},{Y_2}} \right]'{M_Z}\left[ {{y_1},{Y_2}} \right]$.
+
+# Anderson-Rubin test
+
+This is the first test for over-identification and was proposed by Anderson and Rubin (1949) and is based on the statistic
+
+$$\mathop {\min }\limits_\beta \frac{{\left( {{y_1} - {Y_2}\beta } \right)'\left( {{M_{{Z_1}}} - {M_Z}} \right)\left( {{y_1} - {Y_2}\beta } \right)}}{{\left( {{y_1} - {Y_2}\beta } \right)'{M_Z}\left( {{y_1} - {Y_2}\beta } \right)/T}} = \frac{{\left( {{y_1} - {Y_2}{{\hat \beta }_{LIML}}} \right)'\left( {{M_{{Z_1}}} - {M_Z}} \right)\left( {{y_1} - {Y_2}{{\hat \beta }_{LIML}}} \right)}}{{\left( {{y_1} - {Y_2}{{\hat \beta }_{LIML}}} \right)'{M_Z}\left( {{y_1} - {Y_2}{{\hat \beta }_{LIML}}} \right)/T}} \ \ \ \ (3)$$
+
+where ${\hat \beta _{LIML}}$ is the LIML estimator of the structural equation in (1) with reduced form (2)
+
+# Sargan Test
+
+This test was proposed by Sargan (1958) and uses as test statistic $T{R^2}$ where ${R^2}$ is the coefficient of determination of the regression of $\hat u$ on $Z = \left( {{Z_1},{Z_2}} \right)$ which is, apart from a constant of proportionality,
+
+$$\displaystyle\frac{{\hat u'\left( {{M_{{Z_1}}} - {M_Z}} \right)\hat u}}{{{{\hat \sigma }^2}}}. \ \ \ \ (4)$$
+
+This test is generalized to the J-test by Hansen (1982). Hausman (1983) has also suggested a test having this structure but does not refer to Sargan's work.
+
+# Basmann Test
+
+Basmann (1960) suggested a modification of the Anderson-Rubin test which uses the TSLS estimator instead of the LIML estimator. This is based on the statistic
+
+$$\frac{{\left( {{y_1} - {Y_2}\hat \beta } \right)'\left( {{M_{{Z_1}}} - {M_Z}} \right)\left( {{y_1} - {Y_2}\hat \beta } \right)}}{{\left( {{y_1} - {Y_2}\hat \beta } \right)'{M_Z}\left( {{y_1} - {Y_2}\hat \beta } \right)/T}}. \ \ \ \ (5)$$
+
+It is worth rewriting this statistic to bring up some similarity and difference with Sargan statistic. Using the fact that $\hat u = {M_{{Z_1}}}\left( {{y_1} - {Y_2}\hat \beta } \right)$ and that $\left( {{M_{{Z_1}}} - {M_Z}} \right){M_{{Z_1}}} = \left( {{M_{{Z_1}}} - {M_Z}} \right)$ the numerators of Sargan and Basmann statistic are equal
+
+$$\left( {{y_1} - {Y_2}\hat \beta } \right)'\left( {{M_{{Z_1}}} - {M_Z}} \right)\left( {{y_1} - {Y_2}\hat \beta } \right) = \hat u'\left( {{M_{{Z_1}}} - {M_Z}} \right)\hat u, \ \ \ \ (6)$$
+
+however, the denominator of Basmann test statistic is
+
+$$\begin{gathered} \left( {{y_1} - {Y_2}\hat \beta } \right){M_Z}\left( {{y_1} - {Y_2}\hat \beta } \right)/T = \left( {1, - \hat \beta '} \right)\left( {{y_1},{Y_2}} \right)'{M_Z}\left( {{y_1},{Y_2}} \right)\left( \begin{gathered} 1 \hfill \\ - \hat \beta \hfill \\\end{gathered} \right)/T \\ = \left( {1, - \hat \beta '} \right)\hat \Omega \left( \begin{gathered} 1 \hfill \\ - \hat \beta \hfill \\\end{gathered} \right). \\\end{gathered}\ \ \ \ (7)$$
+
+Thus, Basmann and Sargan tests use alternative estimators of the structural variance.
+
+# Byron and Wegge test statistic
+
+Hwang (1980) has shown that the test statistics suggested by Byron (1974) and Wegge (1978) are in fact the same and shows that they can be written as
+
+$$\displaystyle\frac{{\hat \delta '{Z_2}{M_2}{Z_2}\hat \delta }}{{{{\hat \sigma }^2}}} \ \ \ \ (8)$$
+
+where $\hat \delta = {\left( {{Z_2}'{A_2}{Z_2}} \right)^{ - 1}}Z'{A_2}y$, ${M_2} = {A_2} - {A_2}{Y_2}{\left( {{Y_2}'{A_2}{Y_2}} \right)^{ - 1}}{Y_2}'{A_2}$ and ${A_2} = {M_{{Z_1}}} - {M_Z}$. Simple algebraic transformations show that
+
+$$\hat \delta '{Z_2}{M_2}{Z_2}\hat \delta = \left( {{y_1} - {Y_2}\hat \beta } \right)'\left( {{M_{{Z_1}}} - {M_Z}} \right)\left( {{y_1} - {Y_2}\hat \beta } \right) = \hat u'\left( {{M_{{Z_1}}} - {M_Z}} \right)\hat u \ \ \ \ (9)$$
+
+so that the Byron and Wegge test is identical to the Sargan test. Neither Byron nor Wegge nor Hwang refer to Sargan’s work.
+
+
+
+
+There are also some modern equivalent of these classical tests. These apply under more general conditions including for example heteroskedasticity.
+
+# Reference
+
+- Anderson, T. W. and H. Rubin (1949). "Estimation of the Parameters of a Single Equation in a Complete System of Stochastic Equations." Annals of Mathematical Statistics 21: 570-482.
+
+- Basmann, R. L. (1960). "On Finite Sample Distributions of Generalized Classical Linear Identifiability Test Statistics." Journal of the American Statistical Association 55: 650-659.
+
+- Byron, R. P. (1974). "Testing Structural Specification Using the Unrestricted Reduced Form." Econometrica 42: 869-883.
+
+- Hansen, L. P. (1982). "Large Sample Properties of Generalized Method of Moments Estimators." Econometrica 40: 1029-1054.
+
+- Hausman, J. A. (1983). "Specification and Estimation of Simultaneous Equation Models" in. Handbook of Econometrics, Volume. Z. Griliches and M. D. Intriligator. Amsterdam, North-Holland Publishing Company: 391-448.
+
+- Hwang, H.-S. (1980). "A Comparison of Tests of Overidentifying Restrictions." Econometrica 48 (7): 1821-1825.
+
+- Sargan, J. D. (1958). "The Estimation of Economic Relationships using Instrumental Variables." Econometrica 26: 393-415
+
+- Wegge, L. L. (1978). "Constrained Indirect Least Squares Estimators." Econometrica 46: 435-499.

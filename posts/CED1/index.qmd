@@ -1,0 +1,239 @@
+---
+title: "Computing exact distributions part 1"
+author: "Giovanni Forchini"
+date: "2023-09-03"
+---
+
+## The multivariate normal and related distributions
+
+The normal distribution is one of the basic distributions used in statistics. I occurs very often especially in asymptotic theory. All students of statistics and econometrics should be familiar with all its properties. In this section I generalize the normal distribution to the multivariate normal distribution. This is the joint distribution of a set of normal random variables that are not necessarily independent. 
+
+In this post I will try to:
+
+1.	make clear what is meant by mean vector and covariance matrix of a random vector;
+2.	explain what is meant by: 
+  - multivariate normal distribution, 
+  - elliptically symmetric distribution, 
+  - mean- and covariance matrix-mixed normal distribution, and
+  - spherically symmetric distribution;
+3.	to use some of the properties of the distributions in (2);
+
+
+##	Multivariate distributions, mean vectors and variance-covariance matrices
+
+A multivariate distribution is the joint distribution of two or more random variables. 
+
+In the same way univariate distribution are often summarized using means and variances, multivariate distributions are often summarized using mean vectors and variance-covariance matrices.
+	
+For the sake of simplicity I represent $n$ random variables  ${x_1},{x_2},...,{x_n}$ in the form of a column vector, $x = \left( {{x_1},{x_2},...,{x_n}} \right)'$ say. Since the components of $x$ are random, I say that $x$ is a *random vector*. 
+
+The *mean vector* of an ($n \times 1$) random vector $x = \left( {{x_1},{x_2},...,{x_n}} \right)'$ is the ($n \times 1$) vector of the means
+
+$$E\left( x \right) = \left( \begin{array}{l}
+E\left( {{x_1}} \right)\\
+E\left( {{x_2}} \right)\\
+ \vdots \\
+E\left( {{x_n}} \right)
+\end{array} \right).$${#eq-expectation}
+
+Notice that the mean vector may not exist, because its component may not be defined.  
+
+It is easy to check that if $A$ and $b$ are respectively an ($m \times n$) matrix and an ($m \times 1$) vector of constants then
+$$E\left( {Ax + b} \right) = AE\left( x \right) + b.$${#eq-texpect-trasf}
+
+Similarly, I define an ($n \times k$) random matrix $X$ as a list of ordered random variables ${x_{ij}}$ witten in $n$ rows and $k$ columns. The mean matrix of $X$  is a the  ($n \times k$) matrix $E\left( X \right)$ containing the means of the respective components $E\left( {{x_{ij}}} \right)$.  @eq-texpect-trasf generalizes to 
+$$E\left( {AX + B} \right) = AE\left( X \right) + B,$$ where $A$ and $B$ are ($m \times n$) and ($m \times k$) fixed matrices.
+
+If the random vector $x$  has mean $\mu$, the covariance matrix of $x$ is defined to be the ($n \times n$) matrix
+
+$$\Sigma  = {\rm cov} \left( x \right) = E\left[ {\left( {x - \mu } \right)\left( {x - \mu } \right)'} \right].$$	{#eq-cov}
+
+Note that the element in position (i,j), ${\sigma _{ij}} = E\left( {\left( {{x_i} - {\mu _i}} \right)\left( {{x_j} - {\mu _j}} \right)} \right)$, is the covariance between ${x_i}$ and ${x_j}$, and the element in position (i,i), ${\sigma _{ii}} = E\left[ {{{\left( {{x_i} - {\mu _i}} \right)}^2}} \right]$, is the variance of ${x_i}$.
+
+For a matrix $X$ a covariance matrix is defined as the covariance matrix of $vec(X)$ obtained by stacking the columns of $X$ one above the other.
+
+It is common to assume that a covariance matrix is positive definite, that is for any  ($n \times 1$) vector $q \ne 0$ it follows that $q'\Sigma q > 0$. This is essentially the multivariate version of the fact that a variance must be positive. Notice that I could allow a covariance matrix to be positive semi-definite (i.e. for any  ($n \times 1$) vector $q \ne 0$ it follows that $q'\Sigma q \ge 0$), but this would involve some sort of degeneracy like in the univariate case where the variance is zero. This in turn creates several complications.
+
+If A and b are respectively an ($m \times n$) and an ($m \times 1$) matrix of constants then
+$${\rm cov} \left( {Ax + b} \right) = A{\mathop{\rm cov}} \left( x \right)A',$${#eq-cov-trans}
+provided the resulting matrix is positive definite.
+
+##	The multivariate normal distribution
+
+**Definition 1.** Let $x$ be an ($n \times 1$) random vector. I say that $x$ has a multivariate normal distribution with mean $\mu$ and covariance matrix $\Sigma$, and write $x \sim N\left( {\mu ,\Sigma } \right)$, if the joint density function of the components of $x$ is
+$$pdf\left( {{x_1},...,{x_n}} \right) = pdf\left( x \right) = {\left( {2\pi } \right)^{ - n/2}}{\left| \Sigma  \right|^{ - 1/2}}\exp \left\{ { - \frac{1}{2}\left( {x - \mu } \right)'{\Sigma ^{ - 1}}\left( {x - \mu } \right)} \right\}$$ {#eq-mult-norm-dens}
+where $\left| \Sigma  \right|$ denotes the determinant of $\Sigma$.
+
+Note that the density function of $x$ has the same for values for $x$ satisfying
+
+$$\left( {x - \mu } \right)'{\Sigma ^{ - 1}}\left( {x - \mu } \right) = {\rm{constant,}}$$ {#eq-expon-part}
+
+i.e. it is constant on an ellipse. This suggests a generalization of the multivariate normal distribution. Instead of taking the exponential function I take another function $\phi$,  and write 
+$$pdf\left( x \right) = c\phi \left[ {\left( {x - \mu } \right)'{\Sigma ^{ - 1}}\left( {x - \mu } \right)} \right],$$
+where $c$ is a normalizing constant. This is the *family of elliptically symmetric densities*. Notice that $\Sigma$ is not the covariance matrix of $x$ in this case. It affects the shape of the level sets and it is known as the shape parameter. The parameter $\mu$ is the mean vector of x (provided the $E\left( x \right)$ exists). Notice that the function $\phi$ may be defined on a subset of  of the form $\left( {x - \mu } \right)'{\Sigma ^{ - 1}}\left( {x - \mu } \right) \le l \le \infty$ only because of the condition that the density of $x$ integrates to one.
+
+The family of elliptically symmetric densities is important because all marginal distributions are also elliptically symmetric and their densities have the same functional forms.
+
+If $\Sigma  = \lambda {I_n}$, then $\left( {x - \mu } \right)'\left( {x - \mu } \right) =$constant determines a circle or, more generally, a sphere. In this case the multivariate normal is a member to the family of spherically symmetric densities: $$pdf\left( x \right) = c\phi \left[ {\left( {x - \mu } \right)'\left( {x - \mu } \right)} \right].$$ 
+Here, $c$ is again a normalizing constant.
+
+Some members of elliptically symmetric and spherically symmetric family of densities can be generated as integrals of the multivariate normal distribution. I will see an example later.
+
+The following result tells use how a normal vector changes under linear transformations.
+
+**Theorem 1.**  Let $x \sim N\left( {\mu ,\Sigma } \right)$ and $A$ and $b$ be respectively an ($m \times n$)and an ($m \times 1$) matrices of constants. Let $z = Ax + b$ then $z \sim N\left( {A\mu  + b,A\Sigma A'} \right)$.
+
+An important application of Theorem 1 is the following:
+
+**Corollary 1.1.** Suppose that $A$ is an $m \times n$ random matrix distributed independently of the $n \times 1$ random vector $x \sim N\left( {\mu ,\Sigma } \right)$. Let $z = Ax$. Then, the distribution of $z$ conditional on $A$ is
+$$z|A \sim N\left( {A\mu ,A\Sigma A'} \right).$$
+
+Notice that the joint density of $z$ and $A$ is
+$$pdf\left( {z,A} \right) = pdf\left( {z|A} \right) \times pdf\left( A \right),$$
+which implies that 
+$$pdf(z)= \int_{\mathbb{R}^{m \times n}} N(A\mu,A\Sigma A') pdf(A)dA.$$
+
+In this case, I say that $z$ is a mean-and-covariance-matrix mixture of a multivariate normal with mixing density $pdf\left( A \right)$. 
+
+**Corollary 1.2.** Suppose that $A$ is an $m \times n$random matrix and that the $n \times 1$ random vector $x|A \sim N\left( {\mu \left( A \right),\Sigma \left( A \right)} \right)$. Let $z = Ax$. Then, for fixed A, one has
+$$z|A \sim N\left( {A\mu \left( A \right),A\Sigma \left( A \right)A'} \right).$$
+
+As before the joint density of $\left( {z,A} \right)$ is
+$pdf\left( {z,A} \right) = pdf\left( {z|A} \right) \times pdf\left( A \right)$
+so that 
+$$pdf(z)= \int_{\mathbb{R}^{m \times n}} N(A\mu(A),A\Sigma(A) A') pdf(A)dA.$$
+
+Once again, $$z$ is said to be a mean-and-covariance-matrix mixture of a multivariate normal with mixing density $pdf\left( A \right)$.
+
+
+**Example 1.** Let $y|X \sim N\left( {X\beta ,{\sigma ^2}{I_n}} \right)$ where $\beta $ has is a vector of dimensions $k \times 1$. This is a linear regression model $y = X\beta  + u$ where $u|X \sim N\left( {0,{\sigma ^2}{I_n}} \right)$. Let ${\hat \beta _n} = {\left( {X'X} \right)^{ - 1}}X'y$ be the OLS estimator of $\beta$, and apply Corollary 2 with $A = {\left( {X'X} \right)^{ - 1}}X'$:
+$${\hat \beta _n}|X = {\hat \beta _n}|X'X\sim N\left( {\beta ,{\sigma ^2}{{\left( {X'X} \right)}^{ - 1}}} \right).$$
+Note that 
+$$\begin{array}{c}
+pdf\left( {{{\hat \beta }_n}|X} \right) = pdf\left( {{{\hat \beta }_n}|X'X} \right)\\
+ = {\left( {2\pi {\sigma ^2}} \right)^{ - k/2}}{\left| {X'X} \right|^{1/2}}\exp \left\{ { - \frac{1}{{2{\sigma ^2}}}\left( {{{\hat \beta }_n} - \beta } \right)'X'X\left( {{{\hat \beta }_n} - \beta } \right)} \right\}
+\end{array}$$
+
+Thus, integrating over the space $X'X > 0$ I have
+
+$$\begin{array}{c}
+pdf\left( {{{\hat \beta }_n}} \right) = \int\limits_{X'X > 0} {pdf\left( {{{\hat \beta }_n}|X'X} \right)pdf\left( {X'X} \right)d\left( {X'X} \right)} \\
+ = {\left( {2\pi {\sigma ^2}} \right)^{ - k/2}}\int\limits_{X'X > 0} {{{\left| {X'X} \right|}^{1/2}}\exp \left\{ { - \frac{1}{{2{\sigma ^2}}}\left( {{{\hat \beta }_n} - \beta } \right)'X'X\left( {{{\hat \beta }_n} - \beta } \right)} \right\}} pdf\left( {X'X} \right)d\left( {X'X} \right)\\
+ = \phi \left[ {\frac{1}{{2{\sigma ^2}}}\left( {{{\hat \beta }_n} - \beta } \right)'\left( {{{\hat \beta }_n} - \beta } \right)} \right]
+\end{array}$$
+
+so that ${\hat \beta _n}$ has a elliptically symmetric distribution. 
+
+In this example, $\phi$ is obtained by evaluating the integral above. If I are interested in a sub-vector ${\hat \beta _{1n}}$ of ${\hat \beta _n}$, I can conclude that ${\hat \beta _{1n}}$ has an elliptically symmetric distribution of the form
+
+$$\phi \left[ {\frac{1}{{2{\sigma ^2}}}\left( {{{\hat \beta }_{1n}} - {\beta _1}} \right)'\left( {{{\hat \beta }_{1n}} - {\beta _1}} \right)} \right].$$
+
+This result fits in with the standard asymptotics for the linear regression model. It is usually assumed that ${n^{ - 1}}X'X{ \to ^P}Q$ as $n \to \infty$ where $Q$ is a positive definite matrix. Then
+
+$${\hat \beta _n}|{n^{ - 1}}X'X\sim N\left( {\beta ,{n^{ - 1}}{\sigma ^2}{{\left( {{n^{ - 1}}X'X} \right)}^{ - 1}}} \right)$$
+
+So that, by rearranging, one obtains
+
+$${n^{1/2}}\left( {{{\hat \beta }_n} - \beta } \right)|{n^{ - 1}}X'X \sim N\left( {0,{\sigma ^2}{{\left( {{n^{ - 1}}X'X} \right)}^{ - 1}}} \right).$$
+
+As $n \to \infty$, ${n^{ - 1}}X'X$ becomes $Q$, a non-random quantity, so that 
+
+$${n^{1/2}}\left( {{{\hat \beta }_n} - \beta } \right)|{n^{ - 1}}X'X{ \to ^L}{n^{1/2}}\left( {{{\hat \beta }_n} - \beta } \right)|Q = N\left( {0,{\sigma ^2}{Q^{ - 1}}} \right).$$
+
+Since $Q$ is fixed
+
+$${n^{1/2}}\left( {{{\hat \beta }_n} - \beta } \right){ \to ^L}N\left( {0,{\sigma ^2}{Q^{ - 1}}} \right).$$
+This is a standard result for the linear regression model.
+
+
+**Theorem 2.** Let $x\sim N\left( {\mu ,\Sigma } \right)$. Partition $x = \left( \begin{array}{l}
+{x_1}\\
+{x_2}
+\end{array} \right)\begin{array}{*{20}{c}}
+{\} {n_1}}\\
+{\} {n_2}}
+\end{array}$ , $\mu  = \left( \begin{array}{l}
+{\mu _1}\\
+{\mu _2}
+\end{array} \right)\begin{array}{*{20}{c}}
+{\} {n_1}}\\
+{\} {n_2}}
+\end{array}$
+and 
+$$\Sigma  = \left( {\begin{array}{*{20}{c}}
+\begin{array}{l}
+{\Sigma _{11}}\\
+{n_1} \times {n_1}
+\end{array}&\begin{array}{l}
+{\Sigma _{21}}'\\
+{n_1} \times {n_2}
+\end{array}\\
+\begin{array}{l}
+{\Sigma _{21}}\\
+{n_2} \times {n_1}
+\end{array}&\begin{array}{l}
+{\Sigma _{22}}\\
+{n_2} \times {n_2}
+\end{array}
+\end{array}} \right).$$ 
+Then
+$$\begin{array}{l}
+{x_1}\sim N\left( {{\mu _1},{\Sigma _{11}}} \right)\\
+{x_2}\sim N\left( {{\mu _2},{\Sigma _{22}}} \right)\\
+{x_1}|{x_2}\sim N\left( {{\mu _1} + {\Sigma _{21}}'\Sigma _{22}^{ - 1}\left( {{x_2} - {\mu _2}} \right),{\Sigma _{11.2}}} \right)
+\end{array}$$
+
+where ${\Sigma _{11.2}} = {\Sigma _{11}} - {\Sigma _{21}}'\Sigma _{22}^{ - 1}{\Sigma _{21}}$.
+
+The proof of Theorem 2 relies on two classical results for partitioned matrices: 
+$$\left| \Sigma  \right| = \left| {{\Sigma _{11}}} \right|\left| {{\Sigma _{11.2}}} \right|$$	{#eq-part-det}
+
+and 
+$${\left( {\begin{array}{*{20}{c}}
+{{\Sigma _{11}}}&{{\Sigma _{21}}'}\\
+{{\Sigma _{21}}}&{{\Sigma _{22}}}
+\end{array}} \right)^{ - 1}} = \left( {\begin{array}{*{20}{c}}
+{{A_{11}}}&{{A_{12}}}\\
+{{A_{21}}}&{{A_{22}}}
+\end{array}} \right) = \left( {\begin{array}{*{20}{c}}
+{\Sigma _{11.2}^{ - 1}}&{ - \Sigma _{11}^{ - 1}{\Sigma _{21}}'\Sigma _{22.1}^{ - 1}}\\
+{ - \Sigma _{22.1}^{ - 1}{\Sigma _{21}}\Sigma _{11}^{ - 1}}&{\Sigma _{22.1}^{ - 1}}
+\end{array}} \right),$$ {#eq-part-matr-inv}
+
+where ${\Sigma _{22.1}} = {\Sigma _{22}} - {\Sigma _{21}}\Sigma _{11}^{ - 1}{\Sigma _{21}}'$. Define $A = {\Sigma ^{ - 1}}$ and $y = x - \mu$, then, partitioning $y$ and $A$ conformably to $x$, I have
+
+$$\begin{array}{c}
+y'Ay = {y_2}'{A_{22}}{y_2} + \left( {{y_1} + A_{11}^{ - 1}{A_{12}}{y_2}} \right)'{A_{11}}\left( {{y_1} + A_{11}^{ - 1}{A_{12}}{y_2}} \right) - {y_2}'{A_{12}}'A_{11}^{ - 1}{A_{12}}{y_2}\\
+ = {y_2}'\left( {{A_{22}} - {A_{12}}'A_{11}^{ - 1}{A_{12}}} \right){y_2} + \left( {{y_1} + A_{11}^{ - 1}{A_{12}}{y_2}} \right)'{A_{11}}\left( {{y_1} + A_{11}^{ - 1}{A_{12}}{y_2}} \right)\\
+ = {y_2}'\Sigma _{22}^{ - 1}{y_2} + \left( {{y_1} - {\Sigma _{12}}\Sigma _{22}^{ - 1}{y_2}} \right)'\Sigma _{11.2}^{ - 1}\left( {{y_1} - {\Sigma _{12}}\Sigma _{22}^{ - 1}{y_2}} \right).
+\end{array}$$
+
+Replacing these in @eq-mult-norm-dens
+$$\begin{array}{c}
+pdf\left( {{x_1},{x_2}} \right) = {\left( {2\pi } \right)^{ - {n_1}/2}}{\left| {{\Sigma _{11}}} \right|^{ - 1/2}}\exp \left\{ { - \frac{1}{2}\left( {{x_2} - {\mu _2}} \right)'\Sigma _{22}^{ - 1}\left( {{x_2} - {\mu _2}} \right)} \right\} \times \\
+{\left( {2\pi } \right)^{ - {n_2}/2}}{\left| {{\Sigma _{11.2}}} \right|^{ - 1/2}}\exp \left\{ { - \frac{1}{2}\left( {{x_1} - {\mu _1} - {\Sigma _{12}}\Sigma _{22}^{ - 1}\left( {{x_2} - {\mu _2}} \right)} \right)'\Sigma _{22.1}^{ - 1}\left( {{x_1} - {\mu _1} - {\Sigma _{12}}\Sigma _{22}^{ - 1}\left( {{x_2} - {\mu _2}} \right)} \right)} \right\}
+\end{array}$$
+so that 
+$${x_2}\sim N\left( {{\mu _2},{\Sigma _{22}}} \right)$$ 
+and 
+$${x_1}|{x_2}\sim N\left( {{\mu _1} + {\Sigma _{21}}'\Sigma _{22}^{ - 1}\left( {{x_2} - {\mu _2}} \right),{\Sigma _{11.2}}} \right).$$
+
+Notice that ${\Sigma _{11.2}}$ does not depend on ${x_2}$, so that the fact that I condition on ${x_2}$ affects only the mean of the conditional distribution of ${x_1}$ given ${x_2}$. The fact that 
+$${x_1}\sim N\left( {{\mu _1},{\Sigma _{11}}} \right)$$ 
+follows in the same way. The proof is complete.
+
+
+**Corollary 2.1.** Let $x$ be as in Theorem 2. Then, ${x_1}$ and ${x_2}$ are independent if and only if ${\Sigma _{21}} = 0$.
+
+This is the case because if ${\Sigma _{21}} = 0$ then
+$${x_1}|{x_2}\sim N\left( {{\mu _1},{\Sigma _{11}}} \right)$$ 
+and this is the marginal distribution of ${x_1}$.
+
+**Corollary 2.2.**  Let $x\sim N\left( {\mu ,\Sigma } \right)$. Let ${z_1} = {A_1}x$ and ${z_2} = {A_2}x$ where ${A_1}$ and ${A_2}$ are ${k_1} \times n$ and ${k_2} \times n$ (${k_1} + {k_2} \le n$) fixed matrices. Then ${z_1}$ and ${z_2}$ are independent if and only if ${A_1}\Sigma {A_2}' = 0$.
+
+To see this point one writes $z = \left( \begin{array}{l}
+{z_1}\\
+{z_2}
+\end{array} \right)$, calculates its covariance matrix and applies Corollary 2.1.
+
+The multivariate normal distribution is used to define other distribution including the chi-square and Wishart distribution covered in the next post.

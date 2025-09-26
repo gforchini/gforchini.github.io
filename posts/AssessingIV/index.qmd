@@ -1,0 +1,85 @@
+---
+title: "Assessing IV models"
+author: "Giovanni Forchini"
+date: "2020-03-01"
+---
+Endogeneity is a big problem in econometric modelling and as such it is usually treated extensively in intermediate/advanced econometric courses at master level. In my lectures I tend to emphasis the importance of using theory to make informed choices.
+
+In the limited information approach one specifies a structural equation of the form
+
+$$y_{1i}=y_{2i} \beta + z_{1i}\gamma+u_i$$
+
+with a corresponding reduced form for the explanatory endogenous variables $y_2$ - often referred to as the first stage regression by applied economists -
+
+$$y_{2i}=z_{1i} \Pi_{1} +z_{2i} \Pi_{2} +v_i.$$
+
+In my notation the $y$s denote the endogenous variables and the $z$s the exogenous variables of which $z_{2i}$ is the vector of instruments. The observables have the following dimensions: $y_{2i}$ is $1 \times p$, $z_{1i}$ is $1 \times k_1$ and $z_{2i}$ is $1 \times k_2$
+
+The structural parameters can be estimated using instrumental variables methods. The estimation methods do not pose many problems for the students but the assessment of the reliability of the model estimated sometimes does. Assume that $y_{2i}$ is one-dimensional to avoid complications (will make a few comments only about the general case).
+
+The problem is: how well can one trust the estimated model?
+
+Three tests are usually employed by econometricians to this purpose: a test for endogeneity, a test for strength of the instruments and a test for over-identification. These need to be performed in a certain order to be informative.
+
+
+# Testing the strength of the instruments
+
+The structural parameters are identified if $\Pi_2$ has full column rank - in the lectures we usually look at this from a couple of different points of view. Testing that $\Pi_2$ has full column rank is essentially testing for identification. This is the starting point of the evaluation because if the structural parameters are not identified there is no point in assessing whether they can be estimated well - because they cannot be estimated at all.
+
+In the case where there is only one endogenous variables among the regressors, $\Pi_2$ has full column rank if it is not a zero vector. So in order to assess the identification of the model one can test $H_0: \Pi_2=0$ versus $H_1: \Pi_2\ne 0$. This can be done using an $F$ test in the first stage regression. However, one does not usually use the classical critical values because weak instruments may also cause problems similar to those caused by lack of identification. One has to be a bit more conservative. Staiger and Stock (Econometrica, 1997) have suggested a rule of thumb:
+
+> If $F >10$ conclude that the instruments satisfy the classical assumptions and are thus well behaved; however
+if $F<10$ than weak instruments may be present invalidating any kind of asymptotic inference.
+
+This is a crude rule of thumb and has been improved in more recent work. Notice that if there is more than one endogenous variables among the regressors, the F statistics need to be replaced by a multivariate version (usually the Cragg-Donald statistic which is used to test the rank of $\Pi_2$).
+
+The reason why this test is performed first is that the condition $\Pi_2$ has full rank is necessary and sufficient for the various estimators of the structural parameters to be informative and for various statistics to have standard distributions. Unless there is clear evidence that $\Pi_2$ has full rank and is bounded away from zero, the asymptotic of most statistics - including the endogeneity and overidentification tests discussed below - breaks down.
+
+# Testing endogeneity
+
+If the model passes the previous hurdle, one should then test for endogeneity. This is normally done using the Hausman test - which is not robust to heteroskedasticity - or more often the Wu test - as this can be robustified to heteroskedasticity.
+
+Once one conditions on the exogenous variables, including the instruments, the correlation between $y_{2i}$ and $u_i$ is the same as the correlation between $u_i$ and $v_i$. Once can think of modelling it as $u_i=v_i \gamma+\varepsilon_i$. If $v_i$ were observable we could test for endogeneity by testing$H_0:\eta=0$ in$y_{1i}=y_{2i} \beta + z_{1i}\gamma+ v_i \eta +\varepsilon_i.$
+
+To overcome the fact that $v_i$ is not observable, the Wu test is implemented as follows:
+
+first one estimates the first stage regression using OLS and calculate the residuals $\hat v_i$;
+the residuals are inserted into the structural equation which is now estimated using OLS $y_{1i}=y_{2i} \beta + z_{1i}\gamma+\hat v_i \eta +\varepsilon_i;$ and finally one tests whether the F test on the coefficients of these reduced form residuals is significant.
+
+Despite what its name suggests, the null hypothesis is that these coefficients are zero, that is $y_{2i}$ is exogenous - versus the alternative that they are not - $y_{2i}$ is endogenous.
+
+Notice that the first stage regression is important in testing for endogeneity, too. If it shows that the instruments are weak, the reliability is this test is undermined. In the special case where $\Pi_2=0$,$y_{2i}=z_{1i} \hat \Pi_1 +\hat v_i$, so that the model in 2 has perfect multicollinearity. Similar problem arise when $\Pi_2$ has rank less than the number of right-hand-side endogenous variables.
+
+# Testing overidentifying restrictions
+
+These are test for the null hypothesis that $H_0:E\left(\left[ z_{1i},z_{2i}\right] u_i \right)=0 $ against $H_1:E\left(\left[ z_{1i},z_{2i}\right] u_i \right)\ne0 $. It is sometimes called an orthogonality test. A previous entry discusses the different types of tests for over-identification that one can have.
+
+A test is based on the sample counterpart of $E\left( \left[ z_{1i},z_{2i}\right]u_i \right)$:
+
+$$\frac{1}{N} \sum_{i=1}^N z_i u_i .$$
+
+Notice if the orthogonality condition fails $\frac{1}{N} \sum_{i=1}^N z_i u_i \to^P \sigma_{zu}$ but if it holds $\frac{1}{N} \sum_{i=1}^N z_i u_i \to^P 0$.
+
+Obviously one cannot base a test on this because the errors are not observed. However, one can replace the errors with the TSLS residuals and consider the statistic $\bar m=\frac{1}{N} \sum_{i=1}^N z_i \hat u_i $ instead. One can show that under some regularity conditions
+
+$$\sqrt{N} \bar m \to^D N\left( 0, Asy.Cov(\bar m)\right)$$
+
+and that once can find an estimator of $Asy.Cov(\bar m)$. Thus a Wald test can be based on:
+
+$$N \bar m ' \left( \widehat{ Asy.Cov(\bar m) }\right) ^{-1}\bar m \to \chi _{k_{z_2}-p}^2$$
+
+where $\widehat{ Asy.Cov(\bar m) }= \frac{1}{N} \sum_{i=1}^N \hat u_i^2 z_i z_i'$.
+
+Notice that among the regularity conditions mentioned above include the assumption that the parameters of the model are identified so that the rank of $\Pi_2$ is $p$. If $\Pi_2$ is rank deficient the distribution of $N \bar m ' \left( \widehat{ Asy.Cov(\bar m) }\right) ^{-1}\bar m$ will not converge to a $\chi _{k_{z_2}-p}^2$ but to some other distribution.Finally notice in order to be able to perform this test one requires $k_{z_2}-p \ge 1$.
+
+# Final remarks
+
+For the reasons outlined above, one usually perform the three tests in the following order: (1) Test for the strength of the instruments; (2) Test of endogeneity and (3) tests for over identification.
+
+If the test for the strength of the instruments indicates problems we need to doubt the validity of the subsequent tests.
+
+If the instruments are good, but the second tests indicate that te potentially endogenous variables are in fact exogenous, one really needs to think very carefully about what to do next. It may be that the economic theory on the basis of which endogeneity is suspected may be wrong. Or it may be that some other assumptions made is wrong. So think carefully about the validity of the assumptions.
+
+If the first two tests are passed but overidentification fails, one needs once again to think about what goes wrong. Are the instruments really exogenous? Is the model well specified?
+
+Thinking is fundamental ...

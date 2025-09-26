@@ -1,0 +1,116 @@
+---
+title: "Computing exact distributions part 4"
+author: "Giovanni Forchini"
+date: "2023-09-18"
+---
+
+## The exterior product
+
+It may be difficult to calculate Jacobians as the determinant of matrices of derivatives, especially when one has many variables. However, there is an alternative method based on the *exterior product* which may be useful in some cases. This approach is covered in this post.
+
+When one transforms $x$ to $y$ according to $x = x\left( y \right)$, every component of $x$ is transformed as follows ${x_i} = {x_i}\left( {{y_1},{y_2},...{y_n}} \right)$. So the differential of ${x_i}$ is $$d{x_i} = \frac{{\partial {x_i}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_i}}}{{\partial {y_2}}}d{y_2} + ... + \frac{{\partial {x_i}}}{{\partial {y_n}}}d{y_n}$$ for i=1,2,...,n. I now consider the quantities $d{x_i}$, i=1,2,...,n, and define a *product* (or more precisely the *exterior product* or *wedge* product) by two rules
+
+1.  multilinearity $$d{x_i} \wedge \left( {ad{x_j} + bd{x_k}} \right) = a\left( {d{x_i} \wedge d{x_j}} \right) + b\left( {d{x_i} \wedge d{x_k}} \right)$$ and $$\left( {ad{x_j} + bd{x_k}} \right) \wedge d{x_i} = a\left( {d{x_j} \wedge d{x_i}} \right) + b\left( {d{x_k} \wedge d{x_i}} \right)$$
+
+2.  and skew-symmetry $$d{x_i} \wedge d{x_j} =  - d{x_j} \wedge d{x_i}$$ i.e. if the order of two terms is reversed, the product changes sign.
+
+Notice that when I write $d{x_1}d{x_2,}....d{x_n}$ I really mean $d{x_1} \wedge d{x_2} \wedge .... \wedge d{x_n}$. If follows from the property of skew-symmetry that $$d{x_i} \wedge d{x_i} =  - d{x_i} \wedge d{x_i}$$ i.e.$d{x_i} \wedge d{x_i} = 0.$
+
+An important result is the following one. If $$d{x_i} = \frac{{\partial {x_i}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_i}}}{{\partial {y_2}}}d{y_2} + ... + \frac{{\partial {x_i}}}{{\partial {y_n}}}d{y_n}$$ for $i=1,2,…,n$, and I let $$d{x_1} \wedge d{x_2} \wedge d{x_3} \wedge .... \wedge d{x_n} = J\left( {x \to y} \right)\left( {d{y_1} \wedge d{y_2} \wedge d{y_3} \wedge .... \wedge d{y_n}} \right),$$ so that this method is equivalent to the one considered before. 
+
+I will not prove this, but I will go through an example instead. Suppose that $n=3$, so that I need to deal with $d{x_1} \wedge d{x_2} \wedge d{x_3}$ only, and $$\begin{array}{l}
+d{x_1} = \frac{{\partial {x_1}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_1}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_1}}}{{\partial {y_3}}}d{y_3}\\
+d{x_2} = \frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}\\
+d{x_3} = \frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}
+\end{array}$$ Then $$\begin{array}{c}
+d{x_1} \wedge d{x_2} \wedge d{x_3} = \left( {\frac{{\partial {x_1}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_1}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_1}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \\
+\left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ = \frac{{\partial {x_1}}}{{\partial {y_1}}}d{y_1} \wedge \left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_2}}}d{y_2} \wedge \left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_3}}}d{y_3} \wedge \left( {\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3}} \right) \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)
+\end{array}$$ because of the property of multilinearity. $$\begin{array}{c}
+d{x_1} \wedge d{x_2} \wedge d{x_3} = \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_2} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_2} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_3} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_3} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)
+\end{array}$$ Again, this follows from multilinearity. Notice that some terms are zero because $d{y_i} \wedge d{y_i} = 0$, $$\begin{array}{c}
+d{x_1} \wedge d{x_2} \wedge d{x_3} = \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_2} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_2} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ + \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_3} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)
+\end{array}$$
+
+Things simplify even more. I will focus on the first term $$\begin{array}{l}
+\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right)\\
+ = \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_2} \wedge d{y_1}\\
+ + \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge d{y_2}\\
+ + \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_2} \wedge d{y_3}
+\end{array}$$
+
+Now $$d{y_1} \wedge d{y_2} \wedge d{y_1} =  - d{y_1} \wedge d{y_1} \wedge d{y_2}$$ because of skew-symmetry. But $d{y_1} \wedge d{y_1} = 0$, so that $$d{y_1} \wedge d{y_2} \wedge d{y_1} =  - d{y_1} \wedge d{y_1} \wedge d{y_2} = 0.$$
+
+In general, if there are two terms which are the same the outer product is zero. So $$\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_2} \wedge d{y_3}.$$
+
+Using the same reasoning it is easy to show that $$\begin{array}{c}
+\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) =  - \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_3} \wedge d{y_3}\\
+\frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_2} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_2} \wedge d{y_1} \wedge d{y_3}\\
+ =  - \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_1} \wedge d{y_2} \wedge d{y_3}\\
+\frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}d{y_2} \wedge d{y_3} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_2} \wedge d{y_3}\\
+\frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_1} \wedge d{y_2} \wedge d{y_3}\\
+\frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_3} \wedge d{y_2} \wedge \left( {\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_3}}}{{\partial {y_2}}}d{y_2} + \frac{{\partial {x_3}}}{{\partial {y_3}}}d{y_3}} \right) = \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_3} \wedge d{y_2} \wedge d{y_1}\\
+ =  - \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_3} \wedge d{y_1} \wedge d{y_2}\\
+ = \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_3} \wedge d{y_2}\\
+ =  - \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}d{y_1} \wedge d{y_2} \wedge d{y_3}
+\end{array}$$
+
+Putting everything together $$\begin{array}{l}
+d{x_1} \wedge d{x_2} \wedge d{x_3}\\
+= \left[ {\frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_3}}} - \frac{{\partial {x_1}}}{{\partial {y_1}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_3}}} - \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_3}}} + \frac{{\partial {x_1}}}{{\partial {y_2}}}\frac{{\partial {x_2}}}{{\partial {y_3}}}\frac{{\partial {x_3}}}{{\partial {y_1}}} + \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_1}}}\frac{{\partial {x_3}}}{{\partial {y_2}}} - \frac{{\partial {x_1}}}{{\partial {y_3}}}\frac{{\partial {x_2}}}{{\partial {y_2}}}\frac{{\partial {x_3}}}{{\partial {y_1}}}} \right]d{y_1} \wedge d{y_2} \wedge d{y_3}
+\end{array}$$
+
+The complicated thing in square brackets is $J\left( {x \to y} \right)$. So $$d{x_1} \wedge d{x_2} \wedge d{x_3} = J\left( {x \to y} \right)d{y_1} \wedge d{y_2} \wedge d{y_3}.$$ This can be rewritten as $$\left( {dx} \right) = J\left( {x \to y} \right)\left( {dy} \right)$$ where $\left( {dx} \right) = d{x_1} \wedge d{x_2} \wedge d{x_3}$ and $\left( {dy} \right) = d{y_1} \wedge d{y_2} \wedge d{y_3}$. Sometimes the notation $d{x_1} \wedge d{x_2} \wedge d{x_3} \wedge ... \wedge d{x_n} = \mathop \wedge \limits_{i = 1}^n d{x_i}$ is used. The quantity $\left( {dx} \right) = \mathop \wedge \limits_{i = 1}^n d{x_i}$ is called the *volume element*.
+
+**Example 1.** Let ${q_1}\sim{\chi ^2}\left( {{v_1}} \right)$ and ${q_2}\sim{\chi ^2}\left( {{v_2}} \right)$ be independent random variables. Suppose I transform variables as ${q_1} = fq$ and ${q_2} = q$ (i.e. $f = {q_1}/{q_2}$). What is the Jacobian of this transformation? To find it, I need to calculate the differentials $$\begin{array}{l}
+d{q_1} = qdf + fdq\\
+d{q_2} = dq
+\end{array}$$ so $$d{q_1} \wedge d{q_2} = \left( {qdf + fdq} \right) \wedge dq = q\left( {df \wedge dq} \right).$$
+
+**Exercise 2.** Let $x$ be an $n \times 1$ vector then I denote $$\left( {dx} \right) = d{x_1} \wedge d{x_2} \wedge d{x_3} \wedge ... \wedge d{x_n} = \mathop  \wedge \limits_{i = 1}^n d{x_i}$$ (note the order of the elements of the product). Suppose I set $x = Ay$ where $A$ is an $n \times n$ non-singular matrix. Then, I have $\left( {dx} \right) = \left| A \right|\left( {dy} \right)$.
+
+**Example 3.** Let $S > 0$ be a positve definite matrix of dimension $(k + 1 \times k + 1)$. Partition is as $$S = \left( {\begin{array}{*{20}{c}}
+{{S_{11}}}&{{S_{21}}'}\\
+{{S_{21}}}&{{S_{22}}}
+\end{array}} \right)$$ where ${S_{11}}$ is $1 \times 1$, ${S_{22}}$ is $k \times k$ and ${S_{21}}$ is $k \times 1$. Let $$\begin{array}{l}
+q = {S_{11}} - {S_{21}}'S_{22}^{ - 1}{S_{21}}\,\,\,\,\left( {1 \times 1} \right)\\
+r = S_{22}^{ - 1}{S_{21}}\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\left( {k \times 1} \right)\\
+R = {S_{22}}\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\left( {k \times k} \right)
+\end{array}$$ Then $$\begin{array}{l}
+{S_{22}} = R\\
+S{{\kern 1pt} _{12}} = Rr\\
+{S_{11}} = q + r'Rr
+\end{array}$$ 
+and 
+$$\begin{array}{l}
+d{S_{11}} = dq + {\text{terms in }}d{r_i}{\text{ and }}d{R_{ij}}{\text{'s}}\\
+dS{{\kern 1pt} _{12}} = \left| R \right|dr + {\text{terms in }}d{R_{ij}}{\text{'s}}\\
+d{S_{22}} = \left\{ {d{R_{ij}}} \right\}
+\end{array}$$ 
+Putting things together,
+$$\begin{array}{c}
+d{S_{11}} \wedge \left( {d{S_{12}}} \right) \wedge \left( {d{S_{22}}} \right) = dq \wedge \left| R \right|\left( {dr} \right) \wedge \left( {dR} \right) + {\text{all other terms that vanish}}\\
+ = \left| R \right|dq \wedge \left( {dr} \right) \wedge \left( {dR} \right).
+\end{array}$$
+Here I have used 
+$$\begin{array}{l}
+\left( {dr} \right) = d{r_1} \wedge d{r_2} \wedge ... \wedge d{r_k} = \mathop  \wedge \limits_{i = 1}^k d{r_i}\\
+\left( {d{S_{12}}} \right) = d{S_{12\left( 1 \right)}} \wedge d{S_{12\left( 2 \right)}} \wedge ... \wedge d{S_{12\left( k \right)}} = \mathop  \wedge \limits_{i = 1}^k d{S_{12\left( i \right)}}\\
+\left( {dR} \right) = \left( {d{R_1}} \right) \wedge \left( {d{R_2}} \right) \wedge ... \wedge \left( {d{R_k}} \right)\, = \mathop  \wedge \limits_{i = 1}^k \mathop  \wedge \limits_{j = 1}^k d{R_{ij}}\,\,\,\,{R_j} = j{\text{ - th column of }}R\\
+\left( {d{S_{22}}} \right) = \left( {d{S_{22\left( 1 \right)}}} \right) \wedge \left( {d{S_{22\left( 2 \right)}}} \right) \wedge ... \wedge \left( {d{S_{22\left( k \right)}}} \right) = \mathop  \wedge \limits_{i = 1}^k \mathop  \wedge \limits_{j = 1}^k d{S_{22\left( {i,j} \right)}}\,\,\,\,\,{S_{22\left( j \right)}} = j{\text{ - th column of }}{S_{22}}
+\end{array}$$

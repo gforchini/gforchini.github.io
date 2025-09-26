@@ -1,0 +1,43 @@
+---
+title: "Identification of Structural Vector Autoregressive Models"
+author: "Giovanni Forchini"
+date: "2018-02-08"
+---
+
+In the last lecture for Econometrics B in the Economics MSc at Warwick we discussed structural vector autoregressive (SVAR) models. These are very similar to simultaneous equations but identification is achieved using slightly different conditions. In the lecture we discussed a couple of identification strategies for these models but we did not get into the details as these would have led us beyond what is been required in the MSc. However, a few students asked me for some more details. These are provided here.
+
+A SVAR model of order $p$ is of the form:
+
+$$\Phi_0 y_t = \Phi_1y_{t-1} + \Phi_2y_{t-2} + ... + \Phi_p y_{t-p} +\varepsilon_t$$
+
+where $y_t$ is a vector of dimension $n$. If one multiplies right- and left-hand-sides by the inverse of $\Phi_0$, assuming that it exists, a vector autoregressive model is obtained, corresponding to the reduced form of a SVAR model:
+
+$$y_t = \Phi_0^{-1}\Phi_1y_{t-1} + \Phi_0^{-1}\Phi_2y_{t-2} + ... + \Phi_0^{-1}\Phi_p y_{t-p} + \Phi_0^{-1}\varepsilon_t$$
+
+$$= \Psi_1 y_{t-1} + \Psi_2 y_{t-2} + ... + \Psi_p y_{t-p} + \varepsilon_t^*$$
+
+where $\Psi_1=\Phi_0^{-1} \Phi_1$ .... $\Psi_p=\Phi_0^{-1} \Phi_p$. The parameters $\Psi_1$ .... $\Psi_p$ are well defined as they are the coefficient matrices of a VAR model. Similarly, $var(\varepsilon^{*}_t)$ is also well defined.
+
+Notice that by defining $\Phi_0=B$ and $\Gamma=\left[ \Phi_1,...,\Phi_p\right]$ and collecting all the right-hand-side variables into a vector $z_t$, then the SVAR model can be written as $By_t=\Gamma z_t+\varepsilon_t$ and the reduced form is $y_t=B^{-1}\Gamma z_t+B^{-1}\varepsilon_t$. This is the same model for which identification was discussed in a previous post using linear restrictions on the matrix $(B,-\Gamma)$. However, identification of SVAR models is achieved not through linear restrictions on $(B,-\Gamma)$ but by imposing restrictions on the variance-covariance matrix of $\varepsilon_t$ and $\Phi_0$.
+
+The most important assumption for identification is that $var(\varepsilon_t) =I_n$ where $I_n$ denotes an identity matrix (in general it can be any known positive definite matrix). Then, $var(\varepsilon_t^*)=\Phi_0^{-1} (\Phi_0^{-1})'$. Since $var(\varepsilon_t^*)$ is well defined, $\Phi_0$ is identified if it can be obtained uniquely from $var(\varepsilon_t^*)=\Phi_0^{-1} (\Phi_0^{-1})'$. One way to achieve identification in SVAR models is to appeal to the Choleski decomposition and assume that $\Phi_0$ - and therefore also $\Phi_0^{-1}$ - is lower triangular.
+
+Alternatively one can allow the variance-covariance matrix $Var(\varepsilon_t)$ to be a diagonal matrix - with unknown diagonal terms -, but then $\Phi_0$ is required to be lower triangular with diagonal elements equal to 1.
+
+Another strategy requires imposing long run restrictions. The intuition is that in a stationary equilibrium
+
+$y_t=y_{t-1}=...=y_{t-p}=y$
+
+so that
+
+$\displaystyle\Phi_0 y =\Phi_1y + \Phi_2y + ... + \Phi_p y$
+
+or
+
+$\displaystyle\left( \Phi_0 -\Phi_1-\Phi_2 - ... - \Phi_p\right) y=0.$
+
+Define $\Phi= \Phi_0 -\Phi_1-\Phi_2 - ... - \Phi_p$ so that one can write $\Phi y=0.$ That is $\Phi$ captures the long term relationships between the variables in $y$. These restrictions can be exploited. To do this, notice that $\Psi_1=\Phi_0^{-1} \Phi_1$, .... $\Psi_p=\Phi_0^{-1} \Phi_p$ so that
+
+$I_m-\Psi_1-...-\Psi_p=\Phi_0^{-1}\left( \Phi_0-\Phi_1-...-\Phi_p\right).$
+
+Let $\Psi =I_n-\Psi_1-...-\Psi_p$ so that $\Psi =\Phi_0^{-1} \Phi$. Notice that $\Psi$ is well defined as it depends on the coefficient matrices of the VAR model. The restrictions on $\Phi$ plus the relationship $\Psi =\Phi_0^{-1} \Phi$ are not enough to determine $\Phi_0$ uniquely. However, there is another relationship which can be exploited: $var(\varepsilon_t^*)=\Phi_0^{-1} (\Phi_0^{-1\prime})$. Notice that$var(\varepsilon_t^*)$ is well defined as it is the covariance matrix of the innovations in a VAR model.

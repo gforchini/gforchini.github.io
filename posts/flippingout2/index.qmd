@@ -1,0 +1,10 @@
+---
+title: "Flipping out 2"
+author: "Giovanni Forchini"
+date: "2019-11-01"
+---
+In my previous post I discussed how I flipped the Master course Introduction to Mathematical Economics 1. But the main question is whether it worked.
+
+Students' feedback suggests that it worked well. Students found the material easy to learn because they could do it at their own time and pace. And they could spend the contact time practicing together with my help.
+
+Obviously there are still parts that with some thinking and some work can be improved and other which need to be rethought through.  I have a list of things to do for next year. But, I admit to being surprised by how well the flipped classroom approach worked. I am thinking of implementing it for other courses.

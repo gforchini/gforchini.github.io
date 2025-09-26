@@ -1,0 +1,17 @@
+---
+title: "Flipping out"
+author: "Giovanni Forchini"
+date: "2019-09-01"
+---
+My first attempt at flipping Mathematical Economics 1 starts today. This is a unit for Master students - obviously - in economics covering basic calculus, linear algebra, matrices, constrained and unconstrained optimisation, and a bit of differential and difference equations.
+The preparation took a fair amount time mostly due to the need of finding the right technology for doing this. I decided to use on PowerPoint because I can easily record my voice on the slides, keep the timing of the presentation and create a film. In my first attempt, I tried to record the screen of my laptop while writing on a tablet. This was cumbersome, my handwriting was not good and the graphs funny and imprecise.
+
+PowerPoint allows me to record short lectures with clear equations and graphs without any complicated technology. Google presentations does not support this feature so was quickly excluded.
+
+Information for the students, including references and links to material, are provided using Google Docs. They are easy to update and share.
+
+Online quizzes are essential to identify what needs to be practiced in the classes. Quizzes were and are a problem! In the end, I used Google Forms, but they are far from ideal. The problem is that I cannot type maths in Google Forms and need to use an elaborate procedure: I use an external maths editor to create a picture of an formula which is then included in Google Forms. Since pictures cannot be inserted in-line the questions are often unnatural. It is also easy to make mistakes and laborious to correct them. A Microsoft alternative to Google Forms allows for writing better equations - not in-line - but is much more constraining in its use. Other alternatives look very flashy but are pretty useless for mathematical quizzes in my view.
+
+Short lectures ranging from 1m to 20m are uploaded on YouTube as unlisted videos - I am too much of a wimp to make them public.
+
+I will shortly find out whether this approach to teaching Mathematical Economics 1 works ...

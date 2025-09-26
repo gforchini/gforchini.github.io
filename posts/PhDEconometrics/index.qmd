@@ -1,0 +1,25 @@
+---
+title: "PhD Level Econometrics"
+author: "Giovanni Forchini"
+date: "2016-12-02"
+---
+
+In the summer 2016 I was asked to contribute to the teaching of the first year MRES unit Econometric Theory at University of Warwick. The first term - my part - covered micro econometrics while the second semester is about time series.
+
+The MRES forms the first two taught year of a PhD programme in economics. All the students taking it had a background in economics and they had already seen a fair bit of econometrics at undergraduate or MSc level. I thought a lot about what the first semester of this unit should cover.
+
+I wanted this unit to:
+
+prepare the students for applied research in economics; give the students an understanding of econometrics which allows them to get the gist of research papers; cover modern topics.
+
+I did not want this unit to be a repeat, at higher level, of what they have already seen several times.
+
+Therefore,I decided to cover a bit of asymptotic theory at the start as it underpins most of modern econometrics. This was done with a lot of references to the linear regression model which should be familiar to the students, and wasfollowed by the method of moments and by the generalised method of moments with a lot of examples that the students should already have encountered in their studies.
+
+Some panel data models followed. Here, the the students could practice the use of the asymptotics as well as possibly revise the standard estimators for these models. The Anderson-Hsiao and the Arellano-Bond estimators were interesting examples of the generalised method of moments.So far the topics covered werefairly standard.
+
+At this point I decided to introduce some nonstandard topics. I started inference in panel data with common shocks, because they represent a very plausible practical situation. This was followed by quantile regression since it has important practical applications. Then I discussedsome methods for model selection, shrinkage and model reduction. These topics are often brushed aside in econometrics and negatively branded as 'data mining'. Nonetheless, techniques like the lasso are starting to receive interest from econometricians.
+
+The final topic was missing observations since this is a situation the students will certainly come across in their careers as economists. I discussed various forms missing observations and ways to get around them: complete cases, imputation and various forms of sample selection.
+
+There are lots of interesting topics I had to leave out due to lack of time. These includes among several others: semi- and non-parametric statistics, program evaluationandcausal graphs.

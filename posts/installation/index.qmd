@@ -1,0 +1,13 @@
+---
+title: "Installation and other things..."
+author: "Giovanni Forchini"
+date: "2017-11-01"
+---
+
+I was 'installed' as a professor of Econometrics at Umeå University on October 21, 2017. It was a wonderful day which made me feel valued. As part of the 'installation' ceremony all new professors had to give a talk about their research for the general public, participate in a formal ceremony and to a banquet in the evening.
+
+The topic of my talk was Econometrics and Data Science. This was my reflection on my wider research. I wrote a post in the past where I discussed how I feel and fear that data science is done in a very uncritical way. In my talk, reported in a future post, I tried to put it into a historical context.
+
+It was also great to be able to attend talks in a variety of disciplines offered by new professors, honorary doctors and prize winners. There is definitely lots of very interesting research going on.
+
+After the formal ceremony, I expected the banquet in the evening to be formal, too. But it wasn't. I will not reveal anything about it. I do not want to spoil the surprise for future attendees...
