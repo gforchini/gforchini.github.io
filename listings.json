@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/Random_variables/index.html",
       "/posts/Randomness/index.html",
       "/posts/Datasources/index.html",
       "/posts/RvsStata/index.html",
