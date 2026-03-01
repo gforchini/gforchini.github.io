@@ -158,43 +158,21 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 <h1>What We Could Have Observed But Didn’t: Understanding Randomness in Econometrics</h1>
 <p>Students in econometrics courses often struggle with a fundamental paradox. We spend enormous effort on a single dataset: cleaning it, running regressions, calculating standard errors, interpreting coefficients. Yet the entire validity of our statistical inference rests not on this dataset alone, but on all the datasets we could have got but did not. In other words, inference depends on what could have happened under a credible mechanism, not on the particular sample we happened to observe.</p>
 <p>Think of Sliding Doors (1998). Gwyneth Paltrow’s character rushes to catch a London Underground train. The story splits into two parallel narratives: in one, she catches the train; in the other, she misses it by a second. Her life unfolds differently depending on that one moment. In inference, we have a similar idea, but our “timelines” are possible samples. Before we look at our data, many samples could have been drawn by the mechanism. We only ever see one. Validity comes from the mechanism and from the set of samples we did not see.</p>
-<section id="randomness-a-rule-not-a-look" class="level2">
-<h2 class="anchored" data-anchor-id="randomness-a-rule-not-a-look">Randomness: a rule, not a look</h2>
 <p>When we calls a sample “random,” we mean that the rule that produced it used chance in a known way: simple random sampling, stratified sampling with known probabilities, random assignment in experiments. Randomness is about the process, not about whether the data look messy or patternless.</p>
 <ul>
 <li><p>A random sample can look odd. Streaks, outliers, clusters—these happen under fair mechanisms.</p></li>
 <li><p>A non‑random sample can look “nice.” That doesn’t make it valid for inference about a population or a causal effect.</p></li>
 </ul>
 <p>We compute numbers from the sample we actually got. We trust those numbers because of the mechanism that could have produced many other samples we did not get.</p>
-</section>
-<section id="the-samples-we-didnt-see" class="level2">
-<h2 class="anchored" data-anchor-id="the-samples-we-didnt-see">The samples we didn’t see</h2>
 <p>Before you draw a sample, there are many samples you could draw. Each would give a different estimate: a different mean, a different regression coefficient, a different test statistic, a different p-value. The distribution of all the estimates you might have got is called the sampling distribution. Your observed estimate is one point in that distribution.</p>
 <p>Confidence intervals and p‑values are guarantees about the procedure across the many samples the mechanism could have produced—not probabilities about this one estimate or this one interval.</p>
 <p>If the mechanism is good (random sampling or random assignment), the procedure behaves in a predictable way across those unseen samples. If the mechanism is bad (convenience sampling, self‑selection), those guarantees vanish.</p>
-<!--
-> Core idea: Inference is about what could have happened under the mechanism, not about whether today’s sample looks typical.
--->
-</section>
-<section id="sliding-doors-the-door-is-the-rule" class="level2">
-<h2 class="anchored" data-anchor-id="sliding-doors-the-door-is-the-rule">Sliding Doors: the door is the rule</h2>
 <p>In Sliding Doors, catching the train changes the path. In sampling and assignment, the “door” is the selection/assignment rule:</p>
 <ul>
 <li><p>If the door opens by chance (everyone has a known probability to be sampled; treatment is assigned by a coin flip), then, across possible samples, we know how our methods behave.</p></li>
 <li><p>If the door opens only for certain people (phone survey at 2 p.m.; treatment “assigned” to those who shout loudest), the mechanism is biased. Bigger samples do not solve this.</p></li>
 </ul>
 <p>Luck affects your estimate; the rule determines what that estimate means.</p>
-<!--
-## Who’s on the train? Selection bias in plain language
-
-Suppose we estimate average wages by sampling people on the 8:10 train. We oversample full‑time commuters and undersample shift workers, freelancers, carers, retirees—anyone not on that platform. Same formula (the sample mean), different mechanism (how people enter the sample), different inference (we measure the commuters’ mean, not the city’s).
-
-If chance didn’t choose them, your statistics don’t mean what you think they mean.
-
--->
-</section>
-<section id="two-kinds-of-randomness-we-rely-on" class="level2">
-<h2 class="anchored" data-anchor-id="two-kinds-of-randomness-we-rely-on">Two kinds of randomness we rely on</h2>
 <p>Econometrics leans on two workhorses:</p>
 <ol type="1">
 <li>Random sampling to generalise from a sample to a population.
@@ -209,87 +187,16 @@ If chance didn’t choose them, your statistics don’t mean what you think they
 </ul></li>
 </ol>
 <p>In both cases, the unseen timelines - the samples and assignments we didn’t observe - carry the burden of validity.</p>
-<!--
-> Note: Complex surveys can yield valid inference if analysed with the correct weights/strata and design information. What matters is an explicit, defensible mechanism.
--->
-</section>
-<section id="pvalues-in-the-many-timelines-frame" class="level2">
-<h2 class="anchored" data-anchor-id="pvalues-in-the-many-timelines-frame">p‑values in the “many timelines” frame</h2>
-<p>A p‑value is the fraction of possible samples, under the null hypothesis and the mechanism, in which a statistic would be at least as extreme as the one we observed.</p>
-<p>Two consequences:</p>
-<ol type="1">
-<li><p>Mechanism matters. If the sampling/assignment rule isn’t random or credibly “as if random,” the p‑value’s interpretation breaks.</p></li>
-<li><p>It’s not the probability the null is true. It’s about the procedure across the samples we didn’t see, not a posterior probability statement.</p></li>
-</ol>
-</section>
-<section id="what-95-means-and-doesnt" class="level2">
-<h2 class="anchored" data-anchor-id="what-95-means-and-doesnt">What “95%” means (and doesn’t)</h2>
-<p>Students (and some former colleagues) often say: “A 95% confidence interval means there’s a 95% chance the true value lies in this interval.” Not in classical statistics!</p>
-<p>A 95% interval means: if we replay the mechanism and draw many samples, and each time build an interval the same way, then about 95% of those intervals would contain the true value. We only see one of those intervals, the one from our actual sample. We don’t know if this one covers the truth. We know that the procedure has a 95% success rate under the mechanism.</p>
-<p>Short version: 95% belongs to the method, not to this interval.</p>
-</section>
-<section id="mechanism-beats-luck-two-short-case-studies" class="level2">
-<h2 class="anchored" data-anchor-id="mechanism-beats-luck-two-short-case-studies">Mechanism beats luck: two short case studies</h2>
-<section id="case-1-survey-sampling-for-weekly-hours" class="level3">
-<h3 class="anchored" data-anchor-id="case-1-survey-sampling-for-weekly-hours">Case 1: Survey sampling for weekly hours</h3>
-<p>Goal: estimate average weekly hours worked.</p>
-<ul>
-<li><p>Good mechanism: a simple random sample from the city’s registry, with callbacks at different times and reasonable nonresponse procedures. Across the samples we could have had, the CI covers the truth at the advertised rate. Today’s estimate may be high or low (this is the luck part) but the method is valid.</p></li>
-<li><p>Bad mechanism: phone calls at 2 p.m. on weekdays, no callbacks. The unseen samples here are all skewed towards people at home at 2 p.m. The procedure’s coverage claim doesn’t hold for the population we care about. A big sample doesn’t fix this; it just narrows the wrong answer.</p></li>
-</ul>
-</section>
-<section id="case-2-job-traininglottery-vs.-selfselection" class="level3">
-<h3 class="anchored" data-anchor-id="case-2-job-traininglottery-vs.-selfselection">Case 2: Job training—lottery vs.&nbsp;self‑selection</h3>
-<p>Goal: estimate the causal effect of a training program.</p>
-<ul>
-<li><p>Random assignment: a lottery. We might get unlucky today (control group has many very motivated people), but across the random assignments we could have had, the estimator is unbiased and tests have the right false‑positive rate.</p></li>
-<li><p>Self‑selection: people choose whether to participate. Participants differ in motivation, time availability, or unobservables. The mechanism is not random; estimates conflate selection and treatment. Design is needed to recover “as if random” variation.</p></li>
-</ul>
-</section>
-</section>
-<section id="as-if-random-designs-when-true-randomization-is-impossible" class="level2">
-<h2 class="anchored" data-anchor-id="as-if-random-designs-when-true-randomization-is-impossible">“As if random” designs (when true randomization is impossible)</h2>
-<p>Real life often blocks true random sampling/assignment. We then try to design the analysis so that the variation used to identify the effect behaves as if random.</p>
-<ul>
-<li>Instrumental Variables (IV): an encouragement or assignment that moves treatment but is plausibly independent of outcomes except through treatment.</li>
-<li>Regression Discontinuity (RD): a threshold assigns treatment; near the cutoff, small differences behave like coin flips.</li>
-<li>Differences‑in‑Differences (DiD): parallel trends let the control group stand in for the treated group’s counterfactual path.</li>
-</ul>
-<p>These designs are attempts to restore a credible mechanism. Their validity still hinges on the unseen samples/assignments we could have had under the design’s assumptions.</p>
-</section>
-<section id="why-the-observed-sample-is-mostly-irrelevant-for-validity" class="level2">
-<h2 class="anchored" data-anchor-id="why-the-observed-sample-is-mostly-irrelevant-for-validity">Why the observed sample is (mostly) irrelevant for validity</h2>
-<p>This can sound provocative: “The sample actually obtained is irrelevant.” Here is the nuance.</p>
-<ul>
-<li><p>The observed sample is essential for computing our numbers. We need data to calculate a mean or run a regression.</p></li>
-<li><p>The observed sample is irrelevant for validity if the mechanism is good. Coverage, unbiasedness, Type I error rates—these are long‑run properties across the samples we could have drawn. Whether today’s sample looks typical or odd does not change those guarantees.</p></li>
-</ul>
-<p>If our sample looks “normal,” that does not create validity. If it looks odd, that doesn’t destroy validity, unless the oddness signals a mechanism failure (nonresponse related to outcomes, convenience sampling, attrition).</p>
-<p>We should all spend our effort on the mechanism: how units enter the sample, how treatment is assigned, how nonresponse is handled. That’s where validity lives.</p>
-</section>
-<section id="conclusions" class="level2">
-<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
 <p>So,</p>
 <ol type="1">
 <li>We compute numbers from the sample we observed.</li>
 <li>We trust those numbers because of the samples we didn’t observe but could have, under a random mechanism.</li>
-<li>If chance didn’t choose the data, classical guarantees don’t apply—no matter how fancy the methodology looks.</li>
+<li>If chance did not choose the data, classical guarantees do not apply—no matter how fancy the methodology looks.</li>
 </ol>
 <p>Econometrics is full of doors. Some open by chance; others open for reasons that bias our view. We see one path, the sample, but our confidence must come from the many paths we could have walked if the door is genuinely random. That is the heart of statistical inference: the mechanism and the counterfactual samples we never saw.</p>
 <p>The sample you have is one trip through the sliding doors. Statistical inference works because it accounts for all the trips you didn’t take.</p>
-</section>
-<section id="postscript-common-misconceptions" class="level2">
-<h2 class="anchored" data-anchor-id="postscript-common-misconceptions">Postscript: Common misconceptions</h2>
-<ul>
-<li>“Random = messy.” No.&nbsp;Random = governed by a rule with known probabilities. Messiness is in the eye of the beholder; validity is in the mechanism.</li>
-<li>“95% means our interval is right with 95% probability.” No.&nbsp;95% is the procedure’s long‑run coverage across samples we could have drawn.</li>
-<li>“A bigger sample fixes bias.” No.&nbsp;It narrows the wrong target. Mechanism beats size.</li>
-<li>“Controls in regression create randomness.” No.&nbsp;Controls can help, but they don’t replace a credible mechanism. Identification is still about how the variation was generated.</li>
-<li>“Our sample looks weird, so the method failed.” Not necessarily. Weird samples occur with known frequency under good mechanisms. The method’s guarantees are about the unseen samples.</li>
-</ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
