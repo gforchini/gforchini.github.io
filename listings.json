@@ -2,7 +2,6 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/linear_model_view/index.html",
       "/posts/as_if/index.html",
       "/posts/CI95/index.html",
       "/posts/selection_bias/index.html",
