@@ -116,7 +116,7 @@ window.Quarto = {
 <body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -151,52 +151,51 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Computing exact distributions part 3</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>Giovanni Forchini </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">September 17, 2023</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Computing exact distributions part 3</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Giovanni Forchini </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 17, 2023</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
 
 
 <section id="integration-and-related-ideas" class="level1">
 <h1>Integration and related ideas</h1>
-<p>We now review a general definition of integral. Although there are some techicalities the focus is on the main ideas.</p>
+<p>I now review a general definition of integral. Although there are some techicalities the focus is on the main ideas.</p>
 <section id="integration" class="level2">
 <h2 class="anchored" data-anchor-id="integration">Integration</h2>
-<p>Consider a function <span class="math inline">\(f\left( x \right)\)</span> that is non-negative. The integral <span class="math inline">\(\int\limits_{\left( {a,b} \right)} {f\left( x \right)dx}\)</span> is the area under the curve and above the horizontal axis in the interval <span class="math inline">\(\left( {a,b} \right)\)</span>. We will now look at this idea in more detail.</p>
-<p>Any density function <span class="math inline">\(f\left( x \right)\)</span> can be approximated by a step-function. To do this, we divide the interval <span class="math inline">\(\left[ {a,b} \right]\)</span> into <span class="math inline">\(k + 1\)</span> disjoint sub-intervals <span class="math inline">\(\left[ {{x_1},{x_2}} \right] = \left[ {a,{x_2}} \right]\)</span>, <span class="math inline">\(\left[ {{x_2},{x_3}} \right]\)</span>, <span class="math inline">\(\left[ {{x_3},{x_4}} \right]\)</span>, …., <span class="math inline">\(\left[ {{x_k},{x_{k + 1}}} \right] = \left[ {{x_k},b} \right]\)</span>, where <span class="math inline">\(a = {x_1} &lt; {x_2} &lt; {x_3} &lt; ... &lt; {x_k} &lt; {x_{k + 1}} = b\)</span>, and define the step function <span class="math inline">\(f\left( x \right) = {x_j}\)</span> when <span class="math inline">\(x \in \left( {{x_j},{x_{j + 1}}} \right)\)</span>. We can assume that all the intervals have the same length <span class="math inline">\(dx = {x_{j + 1}} - {x_j}\)</span> for <span class="math inline">\(j = 1,2,...,k\)</span>. Figure 1 shows an example where the function <span class="math inline">\(f\left( x \right)\)</span> is approximate by a step function in <span class="math inline">\(k = 10\)</span> intervals.</p>
+<p>Consider a function <span class="math inline">\(f\left( x \right)\)</span> that is non-negative. The integral <span class="math inline">\(\int\limits_{\left( {a,b} \right)} {f\left( x \right)dx}\)</span> is the area under the curve and above the horizontal axis in the interval <span class="math inline">\(\left( {a,b} \right)\)</span>. I will now look at this idea in more detail.</p>
+<p>Any density function <span class="math inline">\(f\left( x \right)\)</span> can be approximated by a step-function. To do this, I divide the interval <span class="math inline">\(\left[ {a,b} \right]\)</span> into <span class="math inline">\(k + 1\)</span> disjoint sub-intervals <span class="math inline">\(\left[ {{x_1},{x_2}} \right] = \left[ {a,{x_2}} \right]\)</span>, <span class="math inline">\(\left[ {{x_2},{x_3}} \right]\)</span>, <span class="math inline">\(\left[ {{x_3},{x_4}} \right]\)</span>, …., <span class="math inline">\(\left[ {{x_k},{x_{k + 1}}} \right] = \left[ {{x_k},b} \right]\)</span>, where <span class="math inline">\(a = {x_1} &lt; {x_2} &lt; {x_3} &lt; ... &lt; {x_k} &lt; {x_{k + 1}} = b\)</span>, and define the step function <span class="math inline">\(f\left( x \right) = {x_j}\)</span> when <span class="math inline">\(x \in \left( {{x_j},{x_{j + 1}}} \right)\)</span>. I can assume that all the intervals have the same length <span class="math inline">\(dx = {x_{j + 1}} - {x_j}\)</span> for <span class="math inline">\(j = 1,2,...,k\)</span>. Figure 1 shows an example where the function <span class="math inline">\(f\left( x \right)\)</span> is approximate by a step function in <span class="math inline">\(k = 10\)</span> intervals.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -215,15 +214,15 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>The integral of <span class="math inline">\(f\left( x \right)\)</span> over the interval <span class="math inline">\(\left( {a,b} \right)\)</span> is the area delimited by <span class="math inline">\(f\left( x \right)\)</span>, the horizontal axis, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. It can be approximated by the sum of the areas of small rectangles as in Figure 2. So, formally we have, <span class="math display">\[\begin{array}{c}
+<p>The integral of <span class="math inline">\(f\left( x \right)\)</span> over the interval <span class="math inline">\(\left( {a,b} \right)\)</span> is the area delimited by <span class="math inline">\(f\left( x \right)\)</span>, the horizontal axis, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. It can be approximated by the sum of the areas of small rectangles as in Figure 2. So, formally I have, <span class="math display">\[\begin{array}{c}
 \int\limits_{\left( {a,b} \right)} {f\left( x \right)dx}  = \mathop {\lim }\limits_{k \to \infty } \sum\limits_{i = 1}^k {f\left( {{x_i}} \right)\left( {{x_{i + 1}} - {x_i}} \right)} \\
 = \mathop {\lim }\limits_{k \to \infty } \sum\limits_{i = 1}^k {f\left( {{x_i}} \right)dx} .
 \end{array}\]</span></p>
 <p>Notice that if <span class="math inline">\(f\left( x \right) = 1\)</span> over <span class="math inline">\(\left( {a,b} \right)\)</span>then <span class="math inline">\(\int\limits_{\left( {a,b} \right)} {1dx} = \int\limits_{\left( {a,b} \right)} {dx} = \mathop {\lim }\limits_{k \to \infty } \sum\limits_{i = 1}^k {dx} = b - a\)</span> because the sum all small intervals is the length of the segment <span class="math inline">\(\left( {a,b} \right)\)</span></p>
-<p>The concept of integral can be extended to functions that are not positive, but we do not need this because we will only deal with densities, and these are always positive. However, we need to extend the definition of integral to non-negative real functions <span class="math inline">\(f\left( x \right)\)</span> where <span class="math inline">\(x = \left( {{x^1},{x^2},...,{x^n}} \right)\)</span> is a vector in <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
+<p>The concept of integral can be extended to functions that are not positive, but I do not need this because I will only deal with densities, and these are always positive. However, I need to extend the definition of integral to non-negative real functions <span class="math inline">\(f\left( x \right)\)</span> where <span class="math inline">\(x = \left( {{x^1},{x^2},...,{x^n}} \right)\)</span> is a vector in <span class="math inline">\(\mathbb{R}^n\)</span>.</p>
 <p>Note that in our notation <span class="math inline">\({x^i}\)</span> denotes the <span class="math inline">\(i\)</span>-th component of <span class="math inline">\(x\)</span> and not a power of <span class="math inline">\(x\)</span>. In this case the integral of <span class="math inline">\(f\left( x \right)\)</span> over the set is the volume of the space between <span class="math inline">\(f\left( x \right)\)</span> the n-dimensional space in which <span class="math inline">\(x\)</span> lies and the contour of <span class="math inline">\(A\)</span>.</p>
 <p>The set <span class="math inline">\(A\)</span> can be approximated by small n-dimensional hyper-rectangles with sides <span class="math inline">\(d{x^1} = \left( {x_{{i_1} + 1}^1 - x_{{i_1}}^1} \right)\)</span>, <span class="math inline">\(d{x^2} = \left( {x_{{i_2} + 1}^2 - x_{{i_2}}^2} \right)\)</span>,…, <span class="math inline">\(d{x^n} = \left( {x_{{i_n} + 1}^n - x_{{i_n}}^n} \right)\)</span>, respectively.</p>
-<p>In Figure 3, the set <span class="math inline">\(A\)</span> is represented by a circle. We can approximate <span class="math inline">\(A\)</span> using small squares. Obviously we need to consider only those squares that intersect <span class="math inline">\(A\)</span>.</p>
+<p>In Figure 3, the set <span class="math inline">\(A\)</span> is represented by a circle. I can approximate <span class="math inline">\(A\)</span> using small squares. Obviously, I need to consider only those squares that intersect <span class="math inline">\(A\)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -248,9 +247,9 @@ window.Quarto = {
 \int\limits_A {d{x^1}d{x^2}...d{x^n}}  = \mathop {\lim }\limits_{k \to \infty } \sum\limits_{1 \le {i_1} \le k} {\sum\limits_{1 \le {i_2} \le k} {...\sum\limits_{1 \le {i_n} \le k} {d{x^1}d{x^2}...d{x^n}} } } \\
 = {\text{Volume of }}A.
 \end{array}\]</span></p>
-<p>The term <span class="math inline">\(d{x^1}d{x^2}...d{x^n}\)</span> is often called the <em>volume element</em> because its integral determines the volume of the set <span class="math inline">\(A\)</span>. Notice that the expression <span class="math inline">\(d{x^i}\)</span> is regarded as both the increment of <span class="math inline">\({x^i}\)</span> and as a vector in <span class="math inline">\(\mathbb{R}^n\)</span>. We will use both these interpretations later on.</p>
-<p>In some situation we are interested in integrating non-negative functions defined on surfaces rather than planes. For example we could have a circle and a function defined on it as in Figure 5. To construct the integral in this case we consider a set of <span class="math inline">\(k\)</span> points on the circle. At each of these points we draw the tangent to the circle and construct small rectangles as illustrated in Figure 5. The integral is the limit of the sum of these rectangles as the number of points we consider on the circle goes to infinity. The generalization of these ideas to <span class="math inline">\(n\)</span>-dimensional sphere is straightforward but a little bit messy.</p>
-<p>Notice that we have already considered similar integrals when we looked at the Wishart distribution. In that case we integrated the density of the Wishart distribution over the set of positive definite matrices.</p>
+<p>The term <span class="math inline">\(d{x^1}d{x^2}...d{x^n}\)</span> is often called the <em>volume element</em> because its integral determines the volume of the set <span class="math inline">\(A\)</span>. Notice that the expression <span class="math inline">\(d{x^i}\)</span> is regarded as both the increment of <span class="math inline">\({x^i}\)</span> and as a vector in <span class="math inline">\(\mathbb{R}^n\)</span>. I will use both these interpretations later on.</p>
+<p>In some situation, I am interested in integrating non-negative functions defined on surfaces rather than planes. For example I could have a circle and a function defined on it as in Figure 5. To construct the integral in this case, I consider a set of <span class="math inline">\(k\)</span> points on the circle. At each of these points I draw the tangent to the circle and construct small rectangles as illustrated in Figure 5. The integral is the limit of the sum of these rectangles as the number of points I consider on the circle goes to infinity. The generalization of these ideas to <span class="math inline">\(n\)</span>-dimensional sphere is straightforward but a little bit messy.</p>
+<p>Notice that I have already considered similar integrals when I looked at the Wishart distribution. In that case I integrated the density of the Wishart distribution over the set of positive definite matrices.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="Figure5.png" class="img-fluid figure-img"></p>
@@ -261,25 +260,25 @@ window.Quarto = {
 </section>
 <section id="the-change-of-variable-formula-and-transformations" class="level1">
 <h1>The change of variable formula and transformations</h1>
-<p>We now study how the integral changes when we transform the variable of integration according to the rule <span class="math inline">\(x = x\left( y \right)\)</span>. When we transform <span class="math inline">\(x\)</span> to <span class="math inline">\(y\)</span> we need this transformation to be one-to-one. That is, <span class="math inline">\(x\)</span> transforms into one <span class="math inline">\(y\)</span> and it is also possible to transform back <span class="math inline">\(y\)</span> to <span class="math inline">\(x\)</span> in a unique way.</p>
-<p>We start by considering the case where <span class="math inline">\(n=1\)</span>.</p>
-<p>In this case the integral is <span class="math inline">\(\int\limits_{\left( {a,b} \right)} {f\left( x \right)dx}\)</span>. We need to understand how this integral changes:</p>
+<p>I now study how the integral changes when I transform the variable of integration according to the rule <span class="math inline">\(x = x\left( y \right)\)</span>. When I transform <span class="math inline">\(x\)</span> to <span class="math inline">\(y\)</span> I need this transformation to be one-to-one. That is, <span class="math inline">\(x\)</span> transforms into one <span class="math inline">\(y\)</span> and it is also possible to transform back <span class="math inline">\(y\)</span> to <span class="math inline">\(x\)</span> in a unique way.</p>
+<p>I start by considering the case where <span class="math inline">\(n=1\)</span>.</p>
+<p>In this case the integral is <span class="math inline">\(\int\limits_{\left( {a,b} \right)} {f\left( x \right)dx}\)</span>. I need to understand how this integral changes:</p>
 <ul>
 <li><p>The interval <span class="math inline">\(\left( {a,b} \right)\)</span> is transformed to the interval <span class="math inline">\(\left( {{a^*},{b^*}} \right)\)</span> in such a way that <span class="math inline">\(x\left( {\left( {{a^*},{b^*}} \right)} \right) = \left( {a,b} \right)\)</span>.</p></li>
 <li><p>The function <span class="math inline">\(f\left( x \right)\)</span> changes to <span class="math inline">\(f\left( {x\left( y \right)} \right)\)</span>, and the volume element becomes <span class="math inline">\(dx\left( y \right) = x'\left( y \right)dy\)</span>.</p></li>
 </ul>
 <p>Thus <span class="math display">\[\int\limits_{\left( {a,b} \right)} {f\left( x \right)dx}  = \int\limits_{\left( {{a^*},{b^*}} \right)} {f\left( {x\left( y \right)} \right)x'\left( y \right)dy}.\]</span></p>
 <p>This is the transformation of variable formula for an integral.</p>
-<p>Suppose for simplicity that <span class="math inline">\(f\left( x \right) = 1\)</span> so that the integral we are interested in is <span class="math inline">\(\int\limits_{\left( {a,b} \right)} {dx}\)</span>, and suppose we transform <span class="math inline">\(x\)</span> according to the rule <span class="math inline">\(x = y\)</span> then <span class="math display">\[\int\limits_{\left( {a,b} \right)} {dx}  = \int\limits_{\left( {a,b} \right)} {dy}  = b - a.\]</span> If, instead, we transform <span class="math inline">\(x\)</span> according to the rule <span class="math inline">\(x = - y\)</span> we obtain <span class="math display">\[\int\limits_{\left( {a,b} \right)} {dx}  = \int\limits_{\left( { - a, - b} \right)} {\left( { - 1} \right)dy}  =  - \int\limits_{\left( { - a, - b} \right)} {dy}  =  - \left( { - b - \left( { - a} \right)} \right) = b - a.\]</span></p>
+<p>Suppose for simplicity that <span class="math inline">\(f\left( x \right) = 1\)</span> so that the integral I am interested in is <span class="math inline">\(\int\limits_{\left( {a,b} \right)} {dx}\)</span>, and suppose I transform <span class="math inline">\(x\)</span> according to the rule <span class="math inline">\(x = y\)</span> then <span class="math display">\[\int\limits_{\left( {a,b} \right)} {dx}  = \int\limits_{\left( {a,b} \right)} {dy}  = b - a.\]</span> If, instead, I transform <span class="math inline">\(x\)</span> according to the rule <span class="math inline">\(x = - y\)</span> I obtain <span class="math display">\[\int\limits_{\left( {a,b} \right)} {dx}  = \int\limits_{\left( { - a, - b} \right)} {\left( { - 1} \right)dy}  =  - \int\limits_{\left( { - a, - b} \right)} {dy}  =  - \left( { - b - \left( { - a} \right)} \right) = b - a.\]</span></p>
 <p>Note that in this case the length of the interval <span class="math inline">\(\left( { - a, - b} \right)\)</span> is <span class="math inline">\(\left( { - b - \left( { - a} \right)} \right) = - \left( {b - a} \right)\)</span> because it is measured in the direction left to right, even though this integral is essentially the same as the one on <span class="math inline">\(\left( {a,b} \right)\)</span>.</p>
-<p>We want to disregard these niggling problems with the sign so we want to transform <span class="math inline">\(\left( {a,b} \right)\)</span> to <span class="math inline">\(\left( {{a^*},{b^*}} \right)\)</span> with <span class="math inline">\({a^*} &lt; {b^*}\)</span> for any transformation. To be consistent with the definition of integral we need to transform the volume element to <span class="math display">\[dx\left( y \right) = \left| {x'\left( y \right)} \right|dy\]</span> where we take the absolute value of <span class="math inline">\(x'\left( y \right)\)</span>. In this notation, when we transform x according to the rule <span class="math inline">\(x = - y\)</span> we obtain <span class="math display">\[\int\limits_{\left( {a,b} \right)} {dx}  = \int\limits_{\left( { - b, - a} \right)} {\left| { - 1} \right|dy}  = \int\limits_{\left( { - b, - a} \right)} {dy}  = \left( { - a - \left( { - b} \right)} \right) = b - a.\]</span> This convention will be very useful when we look at multivariate integrals over a set <span class="math inline">\(A\)</span> because we can disregard the direction along which the integral needs to be taken.</p>
-<p>When we transform to according to <span class="math inline">\(x = x\left( y \right)\)</span>, then <span class="math inline">\(A\)</span> changes to <span class="math inline">\({A^*}\)</span> in such a way that <span class="math inline">\(A = x\left( {{A^*}} \right)\)</span> and <span class="math inline">\(f\left( x \right)\)</span> changes to <span class="math inline">\(f\left( {x\left( y \right)} \right)\)</span>. There are some small complications with the volume element. Notice that every component of <span class="math inline">\(x\)</span> transforms as follows <span class="math inline">\({x_i} = {x_i}\left( {{y_1},{y_2},...{y_n}} \right)\)</span>. So the differential of <span class="math inline">\({x_i}\)</span> is <span class="math display">\[d{x_i} = \frac{{\partial {x_i}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_i}}}{{\partial {y_2}}}d{y_2} + ... + \frac{{\partial {x_i}}}{{\partial {y_n}}}d{y_n}\]</span> for <span class="math inline">\(i=1,2,…,n\)</span>.</p>
-<p>To analyse the problem we consider the case where <span class="math inline">\(n=2\)</span>. In this case <span class="math display">\[\begin{array}{l}
+<p>We want to disregard these niggling problems with the sign so I want to transform <span class="math inline">\(\left( {a,b} \right)\)</span> to <span class="math inline">\(\left( {{a^*},{b^*}} \right)\)</span> with <span class="math inline">\({a^*} &lt; {b^*}\)</span> for any transformation. To be consistent with the definition of integral I need to transform the volume element to <span class="math display">\[dx\left( y \right) = \left| {x'\left( y \right)} \right|dy\]</span> where I take the absolute value of <span class="math inline">\(x'\left( y \right)\)</span>. In this notation, when I transform x according to the rule <span class="math inline">\(x = - y\)</span> I obtain <span class="math display">\[\int\limits_{\left( {a,b} \right)} {dx}  = \int\limits_{\left( { - b, - a} \right)} {\left| { - 1} \right|dy}  = \int\limits_{\left( { - b, - a} \right)} {dy}  = \left( { - a - \left( { - b} \right)} \right) = b - a.\]</span> This convention will be very useful when I look at multivariate integrals over a set <span class="math inline">\(A\)</span> because I can disregard the direction along which the integral needs to be taken.</p>
+<p>When I transform to according to <span class="math inline">\(x = x\left( y \right)\)</span>, then <span class="math inline">\(A\)</span> changes to <span class="math inline">\({A^*}\)</span> in such a way that <span class="math inline">\(A = x\left( {{A^*}} \right)\)</span> and <span class="math inline">\(f\left( x \right)\)</span> changes to <span class="math inline">\(f\left( {x\left( y \right)} \right)\)</span>. There are some small complications with the volume element. Notice that every component of <span class="math inline">\(x\)</span> transforms as follows <span class="math inline">\({x_i} = {x_i}\left( {{y_1},{y_2},...{y_n}} \right)\)</span>. So the differential of <span class="math inline">\({x_i}\)</span> is <span class="math display">\[d{x_i} = \frac{{\partial {x_i}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_i}}}{{\partial {y_2}}}d{y_2} + ... + \frac{{\partial {x_i}}}{{\partial {y_n}}}d{y_n}\]</span> for <span class="math inline">\(i=1,2,…,n\)</span>.</p>
+<p>To analyse the problem I consider the case where <span class="math inline">\(n=2\)</span>. In this case <span class="math display">\[\begin{array}{l}
 d{x_1} = \frac{{\partial {x_1}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_1}}}{{\partial {y_2}}}d{y_2}\\
 d{x_2} = \frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}}}{{\partial {y_2}}}d{y_2}.
 \end{array}\]</span></p>
 <p>Notice that I have changed the notation slightly from <span class="math inline">\(dx^j\)</span> do <span class="math inline">\(dx_j\)</span>, as this is more often used (above this notation would have been confusing).</p>
-<p>Figure 6 gives a geometric interpretation of <span class="math inline">\(d{x_1}\)</span> and <span class="math inline">\(d{x_2}\)</span>. We saw earlier on that <span class="math inline">\(d{x_1}d{x_2}\)</span> is the area of the rectangle having <span class="math inline">\(d{x_1}\)</span> and <span class="math inline">\(d{x_2}\)</span> as sides. As we noted earlier on, the symbol <span class="math inline">\(d{x_i}\)</span> can be interpreted as a <span class="math inline">\(2\)</span>-dimensional vectors, <span class="math inline">\(d{x_i} = \left( {x_i^1,x_i^2} \right)\)</span> say. The area of the rectangle having <span class="math inline">\(d{x_1}\)</span> and <span class="math inline">\(d{x_2}\)</span> as sides is just the determinant of <span class="math display">\[\left| {\begin{array}{*{20}{c}}
+<p>Figure 6 gives a geometric interpretation of <span class="math inline">\(d{x_1}\)</span> and <span class="math inline">\(d{x_2}\)</span>. I saw earlier on that <span class="math inline">\(d{x_1}d{x_2}\)</span> is the area of the rectangle having <span class="math inline">\(d{x_1}\)</span> and <span class="math inline">\(d{x_2}\)</span> as sides. As I noted earlier on, the symbol <span class="math inline">\(d{x_i}\)</span> can be interpreted as a <span class="math inline">\(2\)</span>-dimensional vectors, <span class="math inline">\(d{x_i} = \left( {x_i^1,x_i^2} \right)\)</span> say. The area of the rectangle having <span class="math inline">\(d{x_1}\)</span> and <span class="math inline">\(d{x_2}\)</span> as sides is just the determinant of <span class="math display">\[\left| {\begin{array}{*{20}{c}}
 {d{x_1}}\\
 {d{x_2}}
 \end{array}} \right| = \left| {\begin{array}{*{20}{c}}
@@ -314,13 +313,13 @@ d{x_2} = \frac{{\partial {x_2}}}{{\partial {y_1}}}d{y_1} + \frac{{\partial {x_2}
 <figcaption>Figure 6. Geometrical interpreation of <span class="math inline">\(dx_1\)</span> and <span class="math inline">\(dx_2\)</span>.</figcaption>
 </figure>
 </div>
-<p>In general if we transform the variables according to the rules <span class="math inline">\(x = x\left( y \right)\)</span> where to , then volume element <span class="math inline">\(d{x_1}d{x_2}....d{x_n}\)</span> changes according to the rule <span class="math display">\[d{x_1}d{x_2}....d{x_n} = J\left( {x \to y} \right)d{y_1}d{y_2}....d{y_n}\]</span> where <span class="math inline">\(J\left( {x \to y} \right)\)</span> denotes the Jacobian of the transformation of <span class="math inline">\(x\)</span> to <span class="math inline">\(y\)</span>, and it is given by <span class="math display">\[J\left( {x \to y} \right) = \left| {\left[ {\begin{array}{*{20}{c}}
+<p>In general if I transform the variables according to the rules <span class="math inline">\(x = x\left( y \right)\)</span> where to , then volume element <span class="math inline">\(d{x_1}d{x_2}....d{x_n}\)</span> changes according to the rule <span class="math display">\[d{x_1}d{x_2}....d{x_n} = J\left( {x \to y} \right)d{y_1}d{y_2}....d{y_n}\]</span> where <span class="math inline">\(J\left( {x \to y} \right)\)</span> denotes the Jacobian of the transformation of <span class="math inline">\(x\)</span> to <span class="math inline">\(y\)</span>, and it is given by <span class="math display">\[J\left( {x \to y} \right) = \left| {\left[ {\begin{array}{*{20}{c}}
 {\frac{{\partial {x_1}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_1}}}{{\partial {y_2}}}}&amp; \cdots &amp;{\frac{{\partial {x_1}}}{{\partial {y_n}}}}\\
 {\frac{{\partial {x_2}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_2}}}{{\partial {y_2}}}}&amp; \cdots &amp;{\frac{{\partial {x_2}}}{{\partial {y_n}}}}\\
 \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
 {\frac{{\partial {x_n}}}{{\partial {y_1}}}}&amp;{\frac{{\partial {x_n}}}{{\partial {y_2}}}}&amp; \cdots &amp;{\frac{{\partial {x_n}}}{{\partial {y_n}}}}
 \end{array}} \right]} \right|,\]</span> where in this case <span class="math inline">\(\left| . \right|\)</span> denotes both the determinant and the absolute value.</p>
-<p>To summarise, consider the probability of a set A <span class="math display">\[\Pr \left\{ A \right\} = \int\limits_A {pdf\left( x \right)dx}\]</span> and transform the variable of integration according to the rule <span class="math inline">\(x = x\left( y \right)\)</span>. We know that <span class="math display">\[\Pr \left\{ A \right\} = \int\limits_{A'} {pdf\left( {x\left( y \right)} \right)J\left( {x \to y} \right)dy}\]</span> where <span class="math inline">\(A = x\left( {A'} \right)\)</span>. So if <span class="math inline">\(pdf\left( x \right)\)</span> is the density of x, and then transform <span class="math inline">\(x \to y\)</span> then the density of y is <span class="math display">\[pdf\left( y \right) = pdf\left( {x\left( y \right)} \right)J\left( {x \to y} \right).\]</span> We now need to find ways for calculating the jacobian in more complex situations.</p>
+<p>To summarise, consider the probability of a set A <span class="math display">\[\Pr \left\{ A \right\} = \int\limits_A {pdf\left( x \right)dx}\]</span> and transform the variable of integration according to the rule <span class="math inline">\(x = x\left( y \right)\)</span>. I know that <span class="math display">\[\Pr \left\{ A \right\} = \int\limits_{A'} {pdf\left( {x\left( y \right)} \right)J\left( {x \to y} \right)dy}\]</span> where <span class="math inline">\(A = x\left( {A'} \right)\)</span>. So if <span class="math inline">\(pdf\left( x \right)\)</span> is the density of x, and then transform <span class="math inline">\(x \to y\)</span> then the density of y is <span class="math display">\[pdf\left( y \right) = pdf\left( {x\left( y \right)} \right)J\left( {x \to y} \right).\]</span> I now need to find ways for calculating the jacobian in more complex situations.</p>
 
 
 </section>
