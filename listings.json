@@ -2,8 +2,9 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/CI95/index.html",
+      "/posts/linear_model_view/index.html",
       "/posts/as_if/index.html",
+      "/posts/CI95/index.html",
       "/posts/selection_bias/index.html",
       "/posts/desing_vs_model/index.html",
       "/posts/RCT_survery_causality/index.html",
