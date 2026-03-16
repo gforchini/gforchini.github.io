@@ -33,3 +33,6 @@ cache/
 # Keep renv.lock for reproducibility; ignore local libs/staging
 renv/library/
 renv/staging/
+
+/.quarto/
+**/*.quarto_ipynb
