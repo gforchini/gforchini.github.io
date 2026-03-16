@@ -1,0 +1,56 @@
+---
+title: "What We Could Have Observed But Didn't: Understanding Randomness in Econometrics"
+date: 2026-01-10
+tags: [econometrics, randomness, sampling, inference, teaching]
+slug: what-we-could-have-observed
+---
+
+# What We Could Have Observed But Didn't: Understanding Randomness in Econometrics
+
+Students in econometrics courses often struggle with a fundamental paradox. We spend enormous effort on a single dataset: cleaning it, running regressions, calculating standard errors, interpreting coefficients. Yet the entire validity of our statistical inference rests not on this dataset alone, but on all the datasets we could have got but did not. In other words, inference depends on what could have happened under a credible mechanism, not on the particular sample we happened to observe.
+
+Think of Sliding Doors (1998). Gwyneth Paltrow’s character rushes to catch a London Underground train. The story splits into two parallel narratives: in one, she catches the train; in the other, she misses it by a second. Her life unfolds differently depending on that one moment. In inference, we have a similar idea, but our “timelines” are possible samples. Before we look at our data, many samples could have been drawn by the mechanism. We only ever see one. Validity comes from the mechanism and from the set of samples we did not see.
+
+When we calls a sample “random,” we mean that the rule that produced it used chance in a known way: simple random sampling, stratified sampling with known probabilities, random assignment in experiments. Randomness is about the process, not about whether the data look messy or patternless.
+
+-   A random sample can look odd. Streaks, outliers, clusters—these happen under fair mechanisms.
+
+-   A non‑random sample can look “nice.” That doesn’t make it valid for inference about a population or a causal effect.
+
+We compute numbers from the sample we actually got. We trust those numbers because of the mechanism that could have produced many other samples we did not get.
+
+Before you draw a sample, there are many samples you could draw. Each would give a different estimate: a different mean, a different regression coefficient, a different test statistic, a different p-value. The distribution of all the estimates you might have got is called the sampling distribution. Your observed estimate is one point in that distribution.
+
+Confidence intervals and p‑values are guarantees about the procedure across the many samples the mechanism could have produced—not probabilities about this one estimate or this one interval.
+
+If the mechanism is good (random sampling or random assignment), the procedure behaves in a predictable way across those unseen samples. If the mechanism is bad (convenience sampling, self‑selection), those guarantees vanish.
+
+In Sliding Doors, catching the train changes the path. In sampling and assignment, the “door” is the selection/assignment rule:
+
+-   If the door opens by chance (everyone has a known probability to be sampled; treatment is assigned by a coin flip), then, across possible samples, we know how our methods behave.
+
+-   If the door opens only for certain people (phone survey at 2 p.m.; treatment “assigned” to those who shout loudest), the mechanism is biased. Bigger samples do not solve this.
+
+Luck affects your estimate; the rule determines what that estimate means.
+
+Econometrics leans on two workhorses:
+
+1.  Random sampling to generalise from a sample to a population.
+    -   Example: a labour‑force survey that draws households at random from a frame.
+    -   If the design is genuinely random (or properly accounted for when complex), confidence intervals for population features have their advertised long‑run coverage.
+
+2.  Random assignment to identify causal effects.
+    -   Example: lottery assignment to a job‑training program.
+    -   Even if today’s treated and control groups look imbalanced by luck, across the many assignments we could have had, the estimator is unbiased and tests have the right false‑positive rate.
+
+In both cases, the unseen timelines - the samples and assignments we didn’t observe - carry the burden of validity.
+
+So,
+
+1.  We compute numbers from the sample we observed.
+2.  We trust those numbers because of the samples we didn’t observe but could have, under a random mechanism.
+3.  If chance did not choose the data, classical guarantees do not apply, no matter how fancy the methodology looks.
+
+Econometrics is full of doors. Some open by chance; others open for reasons that bias our view. We see one path, the sample, but our confidence must come from the many paths we could have walked if the door is genuinely random. That is the heart of statistical inference: the mechanism and the counterfactual samples we never saw.
+
+The sample you have is one trip through the sliding doors. Statistical inference works because it accounts for all the trips you didn’t take.

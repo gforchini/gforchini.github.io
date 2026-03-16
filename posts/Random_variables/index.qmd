@@ -1,0 +1,69 @@
+---
+title: "Random Variables: The Mechanism Behind the Numbers"  
+date: 2026-02-4
+tags: [econometrics, random variables, probability, expected value, teaching]
+slug: random-variables-mechanism
+---
+
+# Random Variables: The Mechanism Behind the Numbers
+
+You calculate a sample mean from your data: 45.3. Your textbook tells you this estimates $\mathbb{E}[X]$, the expected value of a random variable $X$. You dutifully write this in your assignment.
+
+But here is a question most students never ask: What is a random variable? Not the textbook definition with sample spaces and sigma‑algebras. What does it mean, and why do we need this seemingly abstract concept?
+
+In my last post, I discussed how statistical inference depends on samples we never observed. The validity of your confidence interval comes not from the 500 people in your dataset, but from all the other samples of 500 you could have drawn but did not. Today, we go one level deeper: even for a single observation, we need to think about values we did not observe but could have.
+
+Suppose you are studying income. You survey someone and they report earning £45000 last year. That is one number, one observation, one fact.
+
+But consider what might vary:
+
+-   Measurement: with rounding or recall error, you might have recorded £45500.
+
+-   Timing: if you had asked at a different time (e.g., after a bonus), perhaps £47000.
+
+-   Sampling: if you had sampled a different person, you would likely record a different income because people genuinely differ.
+
+Only £45000 appears in your dataset. But the probability model you use describes other values that could have been recorded under the same general conditions. A random variable is the formal device that describe these possibilities and their probabilities.
+
+A random variable is a function that maps underlying random outcomes to numbers. In any single run, we see only the number it produces.
+
+Econometricians and statisticians distinguish between $X$ (capital) and $x$ (lowercase):
+
+-   $X$ is the random variable, the mechanism (or data‑generating process) that can produce many different values with certain probabilities.
+
+-   $x$ is the realization, the particular value you observed (e.g., £45000).
+
+This distinction matters. When we write $\mathbb{E}[X]$, $\operatorname{Var}(X)$, or $\mathbb{P}(X>50000)$, we are making statements about the mechanism, all the values $X$ could take and how likely they are, not about the already observed $x$.
+
+Just as your sample is one draw from a sampling distribution, your observed value $x$ is one draw from the distribution of $X$.
+
+Think of the values you did not observe as ghost values. This is shorthand for the other values the mechanism could have produced. The probability distribution of $X$ describes:
+
+-   Which values are possible (the support),
+
+-   How likely each value is (probabilities or density),
+
+-   Measures of central tendency (mean, median, mode) summarize where values tend to be; $E[X]$ is one such measure, but it need not be a "typical" value. (the expected value),
+
+-   How spread out they are (the variance).
+
+You never see the whole distribution directly. You see one value, $x$. But understanding $X$ and its distribution is essential for inference.
+
+Clarification: “Ghost values” here means “unobserved possible values under the probability model” and do not necessarily have a causal meaning.
+
+“Random” in random variable is a confusing word.“Random variable” can sound like a variable that is uncertain. But it’s a variable whose value is determined by a well‑defined mechanism that involves chance. The outcome is uncertain until observed, but the mechanism is not and follows probability rules.
+
+In income studies, randomness enters because:
+
+1.  We don’t know which person the sampling process will select (sampling randomness), and
+
+2.  Even given a specific person and question, measurement and context can vary slightly (measurement/timing randomness).
+
+Both are mechanisms that imply unobserved possible values.  It’s the mechanism that lets us reason about procedures we could repeat and about uncertainty before observing.
+
+The expected value $\mathbb{E}[X]$ is the long‑run average you would get if you could observe $X$ repeatedly under the same conditions. It is defined by the mechanism, not your particular data.
+
+If the true mechanism implies $\mathbb{E}[X]=£44000$ and you observe $x=£45000$, the expected value does not change; it’s a property of the mechanism. Your sample mean from $n$ observations, $\bar{x}$, is a statistic you use to estimate $\mathbb{E}[X]$. The sample mean is a random variable as it depends on the specific values that are observed. A different sample would produce a different sample mean.
+
+To conclude, random variables formalize the idea that data come from mechanisms; we observe one outcome among many possibilities, and valid inference requires reasoning about the possibilities we did not observe.
+
