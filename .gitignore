@@ -1,0 +1,35 @@
+# --- macOS Finder metadata ---
+.DS_Store
+
+# --- R / RStudio ---
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+.Rproj.user/
+
+# Keep the .Rproj file (handy for collaborators)
+# *.Rproj  # (uncomment ONLY if you really want to exclude the project file)
+
+# --- Quarto / knitr build artifacts ---
+# Quarto output (not needed if you deploy with GitHub Actions)
+_site/
+.quarto/
+
+# Freeze cache (commit only if you rely on frozen outputs)
+# _freeze/
+
+# knitr caches (R Markdown / Quarto)
+*_cache/
+cache/
+
+# --- Python/Jupyter odds and ends (sometimes used in Quarto projects) ---
+.ipynb_checkpoints/
+
+# --- Credentials / environment (don’t commit secrets) ---
+.Renviron
+
+# --- renv (R reproducible env) ---
+# Keep renv.lock for reproducibility; ignore local libs/staging
+renv/library/
+renv/staging/
