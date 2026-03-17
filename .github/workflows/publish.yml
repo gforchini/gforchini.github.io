@@ -25,16 +25,10 @@ jobs:
       # Install the R packages your .qmd files use
       - name: Install R packages for rendering
         uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          # List packages explicitly (add others you use)
-          packages: |
-            any::knitr
-            any::rmarkdown
-            any::ggplot2
-            # any::tidyverse
-            # any::dplyr
-            # any::readr
-            # any::<add others here>
+        
+      - with:
+        packages: any::knitr, any::rmarkdown, any::ggplot2
+
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
