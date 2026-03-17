@@ -1,35 +1,40 @@
-on:
+oon:
   workflow_dispatch:
   push:
     branches: main
 
 name: Quarto Publish
 
-# (Optional) opt in to Node 24 now for JS-based actions
 env:
+  # Optional: opt-in to Node 24 for JS-based actions now (warning-free)
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # needed to push to gh-pages
+      contents: write
+
     steps:
       - name: Check out repository
-        uses: actions/checkout@v5
-
-      # Install R for knitr-based .qmd files
+        uses: actions/checkout@v5  # Node 24–ready
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: '4.5.2'  # or any recent stable version
-
-      # Install the R packages your posts need (add more as required)
-      - name: Install R packages
-        run: |
-          Rscript -e 'install.packages(c("knitr","rmarkdown"), repos = "https://cloud.r-project.org")'
-          # If you use other packages (e.g., tidyverse, ggplot2, etc.), add them here
-          # Rscript -e 'install.packages(c("tidyverse","ggplot2"), repos = "https://cloud.r-project.org")'
+          r-version: '4.5.2'       # any recent release is fine
+      # Install the R packages your .qmd files use
+      - name: Install R packages for rendering
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          # List packages explicitly (add others you use)
+          packages: |
+            any::knitr
+            any::rmarkdown
+            any::ggplot2
+            # any::tidyverse
+            # any::dplyr
+            # any::readr
+            # any::<add others here>
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
