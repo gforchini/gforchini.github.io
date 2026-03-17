@@ -26,7 +26,7 @@ jobs:
       - name: Install R packages for rendering
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          packages: any::knitr, any::rmarkdown, any::ggplot2
+          packages: any::knitr, any::rmarkdown, any::ggplot2, any::latex2exp
 
 
       - name: Set up Quarto
