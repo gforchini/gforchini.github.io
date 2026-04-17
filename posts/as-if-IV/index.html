@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2020-03-01">
+<meta name="dcterms.date" content="2026-04-16">
 
-<title>Assessing IV models – Giovanni Forchini</title>
+<title>As‑If by Instrument: What IV Really Buys You – Giovanni Forchini</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -82,35 +81,6 @@ gtag('js', new Date());
 gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 </script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -160,24 +130,18 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Assessing IV models</h1>
+<h1 class="title">As‑If by Instrument: What IV Really Buys You</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Giovanni Forchini </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 1, 2020</p>
+      <p class="date">April 16, 2026</p>
     </div>
   </div>
   
@@ -189,57 +153,36 @@ window.Quarto = {
 </header>
 
 
-<p>Endogeneity is a big problem in econometric modelling and as such it is usually treated extensively in intermediate/advanced econometric courses at master level. In my lectures I tend to emphasis the importance of using theory to make informed choices.</p>
-<p>In the limited information approach one specifies a structural equation of the form</p>
-<p><span class="math display">\[y_{1i}=y_{2i} \beta + z_{1i}\gamma+u_i\]</span></p>
-<p>with a corresponding reduced form for the explanatory endogenous variables <span class="math inline">\(y_2\)</span> - often referred to as the first stage regression by applied economists -</p>
-<p><span class="math display">\[y_{2i}=z_{1i} \Pi_{1} +z_{2i} \Pi_{2} +v_i.\]</span></p>
-<p>In my notation the <span class="math inline">\(y\)</span>s denote the endogenous variables and the <span class="math inline">\(z\)</span>s the exogenous variables of which <span class="math inline">\(z_{2i}\)</span> is the vector of instruments. The observables have the following dimensions: <span class="math inline">\(y_{2i}\)</span> is <span class="math inline">\(1 \times p\)</span>, <span class="math inline">\(z_{1i}\)</span> is <span class="math inline">\(1 \times k_1\)</span> and <span class="math inline">\(z_{2i}\)</span> is <span class="math inline">\(1 \times k_2\)</span></p>
-<p>The structural parameters can be estimated using instrumental variables methods. The estimation methods do not pose many problems for the students but the assessment of the reliability of the model estimated sometimes does. Assume that <span class="math inline">\(y_{2i}\)</span> is one-dimensional to avoid complications (will make a few comments only about the general case).</p>
-<p>The problem is: how well can one trust the estimated model?</p>
-<p>Three tests are usually employed by econometricians to this purpose: a test for endogeneity, a test for strength of the instruments and a test for over-identification. These need to be performed in a certain order to be informative.</p>
-<section id="testing-the-strength-of-the-instruments" class="level1">
-<h1>Testing the strength of the instruments</h1>
-<p>The structural parameters are identified if <span class="math inline">\(\Pi_2\)</span> has full column rank - in the lectures we usually look at this from a couple of different points of view. Testing that <span class="math inline">\(\Pi_2\)</span> has full column rank is essentially testing for identification. This is the starting point of the evaluation because if the structural parameters are not identified there is no point in assessing whether they can be estimated well - because they cannot be estimated at all.</p>
-<p>In the case where there is only one endogenous variables among the regressors, <span class="math inline">\(\Pi_2\)</span> has full column rank if it is not a zero vector. So in order to assess the identification of the model one can test <span class="math inline">\(H_0: \Pi_2=0\)</span> versus <span class="math inline">\(H_1: \Pi_2\ne 0\)</span>. This can be done using an <span class="math inline">\(F\)</span> test in the first stage regression. However, one does not usually use the classical critical values because weak instruments may also cause problems similar to those caused by lack of identification. One has to be a bit more conservative. Staiger and Stock (Econometrica, 1997) have suggested a rule of thumb:</p>
-<blockquote class="blockquote">
-<p>If <span class="math inline">\(F &gt;10\)</span> conclude that the instruments satisfy the classical assumptions and are thus well behaved; however if <span class="math inline">\(F&lt;10\)</span> than weak instruments may be present invalidating any kind of asymptotic inference.</p>
-</blockquote>
-<p>This is a crude rule of thumb and has been improved in more recent work. Notice that if there is more than one endogenous variables among the regressors, the F statistics need to be replaced by a multivariate version (usually the Cragg-Donald statistic which is used to test the rank of <span class="math inline">\(\Pi_2\)</span>).</p>
-<p>The reason why this test is performed first is that the condition <span class="math inline">\(\Pi_2\)</span> has full rank is necessary and sufficient for the various estimators of the structural parameters to be informative and for various statistics to have standard distributions. Unless there is clear evidence that <span class="math inline">\(\Pi_2\)</span> has full rank and is bounded away from zero, the asymptotic of most statistics - including the endogeneity and overidentification tests discussed below - breaks down.</p>
-</section>
-<section id="testing-endogeneity" class="level1">
-<h1>Testing endogeneity</h1>
-<p>If the model passes the previous hurdle, one should then test for endogeneity. This is normally done using the Hausman test - which is not robust to heteroskedasticity - or more often the Wu test - as this can be robustified to heteroskedasticity.</p>
-<p>Once one conditions on the exogenous variables, including the instruments, the correlation between <span class="math inline">\(y_{2i}\)</span> and <span class="math inline">\(u_i\)</span> is the same as the correlation between <span class="math inline">\(u_i\)</span> and <span class="math inline">\(v_i\)</span>. Once can think of modelling it as <span class="math inline">\(u_i=v_i \gamma+\varepsilon_i\)</span>. If <span class="math inline">\(v_i\)</span> were observable we could test for endogeneity by testing<span class="math inline">\(H_0:\eta=0\)</span> in<span class="math inline">\(y_{1i}=y_{2i} \beta + z_{1i}\gamma+ v_i \eta +\varepsilon_i.\)</span></p>
-<p>To overcome the fact that <span class="math inline">\(v_i\)</span> is not observable, the Wu test is implemented as follows:</p>
-<p>first one estimates the first stage regression using OLS and calculate the residuals <span class="math inline">\(\hat v_i\)</span>; the residuals are inserted into the structural equation which is now estimated using OLS <span class="math inline">\(y_{1i}=y_{2i} \beta + z_{1i}\gamma+\hat v_i \eta +\varepsilon_i;\)</span> and finally one tests whether the F test on the coefficients of these reduced form residuals is significant.</p>
-<p>Despite what its name suggests, the null hypothesis is that these coefficients are zero, that is <span class="math inline">\(y_{2i}\)</span> is exogenous - versus the alternative that they are not - <span class="math inline">\(y_{2i}\)</span> is endogenous.</p>
-<p>Notice that the first stage regression is important in testing for endogeneity, too. If it shows that the instruments are weak, the reliability is this test is undermined. In the special case where <span class="math inline">\(\Pi_2=0\)</span>,<span class="math inline">\(y_{2i}=z_{1i} \hat \Pi_1 +\hat v_i\)</span>, so that the model in 2 has perfect multicollinearity. Similar problem arise when <span class="math inline">\(\Pi_2\)</span> has rank less than the number of right-hand-side endogenous variables.</p>
-</section>
-<section id="testing-overidentifying-restrictions" class="level1">
-<h1>Testing overidentifying restrictions</h1>
-<p>These are test for the null hypothesis that $H_0:E(u_i )=0 $ against $H_1:E(u_i ) $. It is sometimes called an orthogonality test. A previous entry discusses the different types of tests for over-identification that one can have.</p>
-<p>A test is based on the sample counterpart of <span class="math inline">\(E\left( \left[ z_{1i},z_{2i}\right]u_i \right)\)</span>:</p>
-<p><span class="math display">\[\frac{1}{N} \sum_{i=1}^N z_i u_i .\]</span></p>
-<p>Notice if the orthogonality condition fails <span class="math inline">\(\frac{1}{N} \sum_{i=1}^N z_i u_i \to^P \sigma_{zu}\)</span> but if it holds <span class="math inline">\(\frac{1}{N} \sum_{i=1}^N z_i u_i \to^P 0\)</span>.</p>
-<p>Obviously one cannot base a test on this because the errors are not observed. However, one can replace the errors with the TSLS residuals and consider the statistic $m= _{i=1}^N z_i u_i $ instead. One can show that under some regularity conditions</p>
-<p><span class="math display">\[\sqrt{N} \bar m \to^D N\left( 0, Asy.Cov(\bar m)\right)\]</span></p>
-<p>and that once can find an estimator of <span class="math inline">\(Asy.Cov(\bar m)\)</span>. Thus a Wald test can be based on:</p>
-<p><span class="math display">\[N \bar m ' \left( \widehat{ Asy.Cov(\bar m) }\right) ^{-1}\bar m \to \chi _{k_{z_2}-p}^2\]</span></p>
-<p>where <span class="math inline">\(\widehat{ Asy.Cov(\bar m) }= \frac{1}{N} \sum_{i=1}^N \hat u_i^2 z_i z_i'\)</span>.</p>
-<p>Notice that among the regularity conditions mentioned above include the assumption that the parameters of the model are identified so that the rank of <span class="math inline">\(\Pi_2\)</span> is <span class="math inline">\(p\)</span>. If <span class="math inline">\(\Pi_2\)</span> is rank deficient the distribution of <span class="math inline">\(N \bar m ' \left( \widehat{ Asy.Cov(\bar m) }\right) ^{-1}\bar m\)</span> will not converge to a <span class="math inline">\(\chi _{k_{z_2}-p}^2\)</span> but to some other distribution.Finally notice in order to be able to perform this test one requires <span class="math inline">\(k_{z_2}-p \ge 1\)</span>.</p>
-</section>
-<section id="final-remarks" class="level1">
-<h1>Final remarks</h1>
-<p>For the reasons outlined above, one usually perform the three tests in the following order: (1) Test for the strength of the instruments; (2) Test of endogeneity and (3) tests for over identification.</p>
-<p>If the test for the strength of the instruments indicates problems we need to doubt the validity of the subsequent tests.</p>
-<p>If the instruments are good, but the second tests indicate that te potentially endogenous variables are in fact exogenous, one really needs to think very carefully about what to do next. It may be that the economic theory on the basis of which endogeneity is suspected may be wrong. Or it may be that some other assumptions made is wrong. So think carefully about the validity of the assumptions.</p>
-<p>If the first two tests are passed but overidentification fails, one needs once again to think about what goes wrong. Are the instruments really exogenous? Is the model well specified?</p>
-<p>Thinking is fundamental …</p>
+<p>Up to now, the “as‑if random” story has been about what you can do with rich pre‑treatment information. You match, you weight, you regress, and you hope that—after conditioning on the right variables, the remaining differences in treatment are determined by luck. But sometimes you simply do not believe that conditioning will ever be enough. Motivation, ability, networks, expectations, local enforcement, health, bargaining power: these are precisely the forces that drive both treatment and outcomes, and they are either unmeasured or badly measured. In those situations, there is a different route to “as‑if”: you stop trying to explain treatment away with controls, and instead look for a source of variation that moves treatment for reasons unrelated to the outcome. That is the idea of an instrument.</p>
+<p>Instrumental variables (IV) is often taught as a two‑stage trick. That is a misleading. IV is not a trick. It is a very specific claim about a mechanism. If it is credible, it buys you something powerful: a causal effect identified by a piece of variation that behaves like an assignment device. If it is not credible, it buys you very little besides a false sense of rigor. The goal of this post is to make clear what IV really buys you, and what it does not.</p>
+<p>Suppose you would like to estimate the effect of education on wages. You run a regression of wages on schooling and some controls. The worry is not that the equation is wrong algebraically; the worry is that schooling is chosen. People with higher ability, better family background, or stronger ambition tend to get more education and also earn more even without extra schooling. Those forces sit in the “leftover” part of the wage equation and are correlated with education. Hence, the regression’s leftover term is linked to treatment, and the treatment coefficient mixes the effect of schooling with the effect of those unobservables.</p>
+<p>IV enters with a different thought experiment. Instead of trying to measure all the forces that make education endogenous, you look for a variable that changes education but is otherwise unrelated to wages except through education. If you can find such a variable and defend it, then the variation in education that comes from this behaves as if it were assigned. You can then estimate the effect of education using only that “as‑if assigned” component.</p>
+<p>This is the core promise of IV: it tries to reintroduce an assignment‑like mechanism into an observational world.</p>
+<p>An instrument is a variable that does two jobs at once.</p>
+<p>First, it must move treatment. If the nudge does not actually change who takes the programme or who gets more schooling, it cannot reveal anything about the treatment’s effect. In practice this is called relevance, but the plain meaning is: if the instrument barely changes treatment, then you are trying to estimate a causal effect using almost no real variation.</p>
+<p>Second, the instrument must be as‑good‑as random with respect to the outcome, once you account for basic pre‑treatment factors. More precisely, the instrument must affect the outcome only through its effect on treatment, not through any other channel that reaches the outcome. This is the famous exclusion restriction, but again the plain meaning is: the IV should not have its own direct effect on wages, nor should it be a marker for unmeasured wage‑relevant factors.</p>
+<p>When both claims are credible, IV creates a very specific comparison. It compares people whose treatment status differs because of the IV, not because of their unobserved characteristics.</p>
+<p>IV buys you a causal effect for the people whose treatment choice is actually changed by the instrument, using only the variation in treatment generated by that instrument.</p>
+<p>Notice that IV does not, in general, identify “the” average causal effect for everyone. It identifies an effect for a particular group, often called compliers, and that group depends on the instrument.</p>
+<p>This is not a technical detail. It is the central interpretation.</p>
+<p>Consider a policy that increases the distance cost of attending university by opening or closing a local campus. Some people would go to university regardless. Some people would not go regardless. Some people are on the margin: they go when the campus is nearby and do not go when it is far. IV learns about the return to education from this marginal group, because they are the ones whose education is actually changed by the instrument.</p>
+<p>That is what IV “sees.” It does not see the return to education for the always‑go group, because their education does not change with the instrument. It does not see the return for the never‑go group, for the same reason. IV estimates the effect for those who respond to the instrument. The estimate is “local” to the instrument, not universal.</p>
+<p>Once you accept this, many debates about IV become easier. The right question is not “is IV estimating the average treatment effect?” but “who are the compliers in this setting, and do I care about their effect?” In policy terms, that is often exactly what you want: a reform changes behaviour only for some people, and the relevant effect is the effect for those whose behaviour actually changes.</p>
+<p>IV is often presented as a way to escape modelling. In reality, IV requires a model, just not the same model as regression adjustment.</p>
+<p>To defend an instrument, you must be able to tell a coherent story about why the instrument shifts treatment and why it does not reach the outcome through other channels. That story is always context‑dependent. Distance to a college is more plausible as an instrument when it mainly affects the cost of attendance, and less plausible when distance is also a proxy for local labour markets, school quality, family sorting, or regional economic opportunities. A draft lottery number is more plausible when it changes military service assignment, and less plausible when it also changes later schooling decisions, migration, or health in ways not mediated by the treatment you claim to study.</p>
+<p>The point is not that these instruments are “good” or “bad” in the abstract. The point is that the exclusion claim is a mechanism claim, and it lives or dies on institutional details. Without a model of the world (i.e.&nbsp;who sorts where, what channels exist, what timing is plausible) you cannot defend the idea that the instrument is as‑good‑as random with respect to the outcome.</p>
+<p>“As‑if” is always a mechanism statement. IV simply changes which mechanism you must defend.</p>
+<p>Three failures that matter.</p>
+<p>The first failure is the obvious one: the instrument does not really move treatment. When the first stage is weak, IV becomes unstable. Estimates jump wildly across specifications, standard errors blow up, and, more importantly, small violations of the exclusion story can generate large distortions. Weak instruments make IV fragile. They do not merely reduce precision; they can invalidate the comforting intuition that “IV fixes endogeneity.”</p>
+<p>The second failure is the subtle one: the instrument reaches the outcome through channels other than treatment. This can happen in mundane ways. A policy rule used as an instrument might also change expectations, prices, or local labour demand. A geographic instrument might also capture regional differences that directly influence the outcome. A scheduling rule might affect who applies, not just who gets treated. These are not technical quibbles; they are alternative causal pathways. If they exist, the IV estimate is no longer an effect of treatment alone.</p>
+<p>The third failure is interpretational: even when IV is valid, people talk about it as if it were estimating a general effect for everyone. It rarely is. The estimate is tied to the instrument and to the group of people whose treatment status the instrument changes. If you report an IV estimate without saying who it pertains to, you are asking the reader to pretend that treatment effects are the same for everyone or that the complier group is “representative.” That is an additional assumption, and it is often untrue.</p>
+<p>It is tempting to say: first regress treatment on the instrument, then regress outcome on the predicted treatment. This is useful as a computational recipe, but it is not the conceptual content. The conceptual content is that the instrument extracts the component of treatment variation that is “as‑if assigned,” and then asks how the outcome moves with that component.</p>
+<p>The danger of focusing on the recipe is that it encourages mechanical behaviour: “I need an IV; I will find something correlated with treatment.” Correlation is not enough. The exclusion story is the whole game.</p>
+<p>Matching, weighting, and regression adjustment try to make treatment “as‑if random” by conditioning on observed pre‑treatment information. IV tries to make treatment “as‑if random” by isolating a component of treatment variation generated by an external nudge. Both approaches are attempts to restore a comparison that resembles random assignment, but they rely on different credibility pillars.</p>
+<p>When conditioning is plausible because you measured the right drivers and have overlap, the selection‑on‑observables road can be persuasive and transparent. When conditioning is implausible because crucial drivers are unobserved or because treatment selection is deeply endogenous, IV can be the cleaner road (if you can defend the instrument).</p>
+<p>In practice, the best papers treat IV as part of a broader argument. They show that the instrument truly shifts treatment; they make the exclusion story plausible with institutional details and auxiliary checks; they describe who the compliers are; and they avoid claiming more than the design supports.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

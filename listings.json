@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/as-if-IV/index.html",
       "/posts/Matching_weighting_regression/index.html",
       "/posts/linear_model_view/index.html",
       "/posts/as_if/index.html",
