@@ -1,6 +1,6 @@
 ---
 title: "Cut-offs and Trends: Local Randomness and Parallel Worlds"
-date: 2026-04-27
+date: 2026-04-30
 tags: [econometrics, causality, as-if random, regression discontinuity, differences-in-differences]
 slug: cutoffs-and-trends-local-randomness-and-parallel-worlds
 ---
