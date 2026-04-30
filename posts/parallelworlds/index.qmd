@@ -1,0 +1,46 @@
+---
+title: "Cut-offs and Trends: Local Randomness and Parallel Worlds"
+date: 2026-04-27
+tags: [econometrics, causality, as-if random, regression discontinuity, differences-in-differences]
+slug: cutoffs-and-trends-local-randomness-and-parallel-worlds
+---
+
+So far we have treated “as‑if random” as a claim we try to make plausible either by conditioning on pre‑treatment information (matching, weighting, regression) or by isolating a nudge that moves treatment for reasons unrelated to the outcome (instruments). There is, however, another family of arguments that economists love because they feel closer to an experiment. Instead of modelling selection away, we look for settings where the world itself creates something that resembles random assignment. The first is regression discontinuity, where a cut‑off rule creates a local comparison that can behave like a coin flip. The second is differences‑in‑differences, where time and a comparison group allow us to build a counterfactual path. They are different designs, but they share the same ambition: to construct a contrast that is credible because the mechanism generating it can be defended.
+
+Many policies are not assigned by discretion but by rules. Scholarships are awarded to students above a score; benefits apply to households below an income threshold; inspections are triggered if a risk index crosses a line; remedial tutoring is offered to pupils under a benchmark. These rules generate a discontinuity: being just above the threshold can mean a different treatment than being just below.
+
+The regression discontinuity idea starts from a simple observation. While people can often influence their outcomes, it is hard to fine‑tune where you land relative to a threshold when there is noise, measurement, timing, and administrative friction. If that is true in your setting, then among units very close to the cut‑off, those just above and those just below are similar in all the messy ways we worry about. They are the same kinds of students, firms, or households, except that the rule assigns them different treatment. In that narrow window, the assignment mechanism can look “as‑if random”.
+
+Notice what is and is not being claimed. The design is not claiming that the whole treated population is comparable to the whole untreated population. It claims something more modest and more believable: near the threshold, the groups are comparable. The causal effect one identifies is therefore local. It answers a specific question: what is the effect of crossing the cut‑off for units at the margin.
+
+Students sometimes complain that RD is “only local” and therefore unsatisfactory. But the locality is the point. The marginal units are often exactly those policy makers care about. If a scholarship threshold is 80, the policy lever is about what happens to students near 80, not about students who score 20 or 99. RD gives you a credible estimate where the policy actually bites. The honest way to read an RD estimate is therefore: “this is the effect for people close to the threshold, in this institutional setting, under this measurement and enforcement regime.” The further you move away from the threshold, the more your estimate becomes an extrapolation rather than an experiment.
+
+The entire credibility of RD lives in one question: can units precisely manipulate the running variable in order to sort across the threshold? If they can, then those just above and just below are no longer comparable, because the threshold has become a sorting device for unobservables. Manipulation need not be dramatic. Coaching, retesting, selective reporting, bunching of income, strategic timing of applications, any behaviour that makes the running variable respond to incentives can create non‑random sorting at the cut‑off. Even when individuals cannot manipulate precisely, institutions sometimes can; administrators can smooth, bend, or override the rule.
+
+A second failure is simple but common: analysts treat RD as a flexible regression problem rather than a design problem. In RD, the shape of the relationship between the running variable and the outcome matters because you are estimating a jump at a point. A poor choice of window (too wide) invites bias; a too‑narrow window invites noise. The discipline is to treat the bandwidth and functional form as part of the design, not as a knob to turn until the result looks nice.
+
+Now move to a different setting. A policy is introduced in one region but not another. Or introduced at different times across regions. Or introduced for one group but not another. You observe outcomes before and after the policy. You want to know what changed because of the policy, not because of other forces.
+
+Differences‑in‑differences (DiD) begins with an uncomfortable fact: you cannot observe the treated group’s outcome after the policy and what the treated group would have done after the policy if the policy had not occurred. The latter is the missing counterfactual path. DiD proposes to approximate it using a comparison group. The guiding idea is that, absent the policy, treated and comparison groups would have followed parallel trends over time. If that is true, then the change in the comparison group is a good proxy for the change that would have occurred in the treated group anyway. Subtracting that proxy from the treated group’s observed change isolates the policy’s effect.
+
+Parallel trends does not mean the treated and comparison groups have the same level before the policy. They can start from different levels. It means that, in the absence of treatment, their outcomes would have moved in the same way over time.
+
+This is a strong claim because it is about a world we do not observe. We can never test it directly. We can, however, make it more or less plausible by looking at pre‑policy patterns, by using domain knowledge about what drives outcomes in the two groups, and by choosing comparison groups that share the same exposure to shocks and seasonality.
+
+A common mistake is to treat “no visible pre‑trend difference” as a certificate of validity. Pre‑trends are informative but not decisive. They are necessary evidence, not sufficient proof.
+
+What can go wrong with DiD? 
+
+The first problem is that “treated” and “comparison” groups can be hit by different shocks. If the treated group experiences a local boom, a sectoral collapse, or a concurrent policy change around the time of the reform, the DiD contrast will attribute that shock to the policy.
+
+The second problem is anticipation. If people change behaviour before the official policy date—firms hiring early, households re‑timing purchases—then the pre‑period is already contaminated.
+
+The third problem is that modern policy settings often involve staggered adoption: different places adopt at different times. In these settings, the simple textbook DiD can produce weighted averages that are difficult to interpret and can even assign negative weights in some configurations. The fix is not to abandon DiD, but to be explicit about the estimand and to use estimators designed for staggered timing.
+
+Finally, DiD requires discipline about the unit of analysis and dependence. Outcomes within regions or firms are correlated over time; standard errors need to respect that dependence rather than pretending each row is an independent draw.
+
+
+To summarise: both RD and DiD are best seen as attempts to import an experimental logic into observational settings by leaning on rules and timing. RD claims that, near a threshold, assignment behaves like chance. The credibility comes from the inability to precisely sort and from continuity in everything else. DiD claims that, absent treatment, groups would have evolved similarly. The credibility comes from institutional knowledge, choice of comparison, and evidence from pre‑policy patterns. 
+
+Neither design produces universal truth. Both produce effects that are conditional on being near the cut‑off, or on the plausibility of parallel trends, or on the absence of manipulation, or on stable measurement and comparable exposure to shocks. The virtue of these designs is that the assumptions are not just algebra; they are statements about concrete mechanisms that a reader can interrogate.
+
