@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/diagnostic/index.html",
       "/posts/parallelworlds/index.html",
       "/posts/as-if-IV/index.html",
       "/posts/Matching_weighting_regression/index.html",
