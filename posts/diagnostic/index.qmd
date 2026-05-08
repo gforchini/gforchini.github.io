@@ -1,0 +1,88 @@
+---
+title: "Defending ‘As-If’: Diagnostics, Falsification, and How to Write It"
+date: 2026-05-08
+tags: [econometrics, causality, as-if random, identification, robustness]
+slug: defending-as-if-diagnostics-falsification-writing
+---
+
+By now the pattern should be clear. “As‑if random” is not a mood and not a rhetorical flourish. It is a claim about a mechanism: the treatment contrast you are using behaves like a fair assignment once you have done whatever your design requires such as conditioning on credible pre‑treatment information, isolating an instrument‑driven nudge, focusing near a cut‑off, or relying on parallel trends.
+
+The uncomfortable part is that the central assumption is never fully testable, because it is always about a world you do not observe. That does not mean “anything goes”. It means you need to treat your “as‑if” claim as something to be defended in public. This post is about that defence: what to show, what to stress‑test, and how to write it without either overselling or hiding behind vague disclaimers.
+
+1) Start by stating the mechanism in one paragraph.
+
+A good “as‑if” section begins with a simple description of how treatment happens in the world. Who is eligible? Who decides? What costs and constraints matter? What timing matters? If you cannot describe the assignment mechanism in prose, your reader cannot evaluate your identification strategy, and you are unlikely to have evaluated it yourself.
+
+Once you write that paragraph, the rest becomes easier. You can list what must be true for your comparison to behave like chance. You can then show evidence that speaks to those conditions.
+
+2) In selection-on-observables designs: overlap and balance are the first gate.
+
+If your “as‑if” claim relies on conditioning—matching, weighting, regression adjustment—then the first gate is overlap. You should be able to show that treated and untreated units live in the same region of the pre‑treatment covariate space. If they do not, you are extrapolating. Your estimate will then be driven by functional form rather than by comparison.
+
+The second gate is balance after whatever adjustment you use. If your adjustment is meant to make treated and untreated comparable on pre‑treatment drivers, then show that it achieved that. This is not about winning a cosmetic contest. It is about demonstrating that the predictable component of selection was actually removed for the variables you believe matter.
+
+Balance and overlap do not prove your claim, because unobservables remain. But they can disprove it quickly. If you cannot balance the observables you care about, there is little reason to believe you have balanced the unobservables.
+
+3) “Bad controls” and timing: defend what you condition on.
+
+A surprisingly common failure is controlling for variables that are not pre‑treatment. The result can look sophisticated and still be biased because the model is adjusting away part of the treatment’s effect or creating spurious paths. A good defence is to state explicitly that the conditioning set is defined using pre‑treatment information only, and to explain why the chosen variables are upstream drivers of both treatment and outcome.
+
+This is where domain knowledge matters more than technique. A reader will forgive a simple model with a clear timing story more readily than a complicated model that conditions on questionable variables.
+
+4) In IV designs: show the nudge and defend the exclusion story
+
+For IV, the first gate is that the instrument truly moves treatment. If the nudge is weak, the analysis becomes fragile and the estimates become sensitive to small violations of the key assumptions. This is not a matter of preference; it is a matter of what variation you actually have.
+
+The second gate is the exclusion story: why the instrument cannot reach the outcome except through treatment. This is not something a regression output can “prove”. It is an institutional argument. Your job is to articulate plausible alternative channels and explain why they do not apply in your setting, or why they are too small to matter.
+
+The third gate is interpretation. IV estimates are typically local to those whose treatment is changed by the instrument. A strong defence therefore includes a short description of who those people are in the context of the study, and why their effect is policy‑relevant.
+
+5) In RD designs: the key enemy is manipulation
+
+For RD, the core question is whether units can sort across the cut‑off. If there is bunching or manipulation, the near‑threshold comparison is no longer as‑if random.
+
+A credible RD analysis therefore shows that the running variable does not exhibit suspicious density jumps at the threshold and that pre‑treatment covariates evolve smoothly through the cut‑off. You are not trying to “pass a test”; you are trying to demonstrate that nothing else changes discretely at the threshold except treatment assignment.
+
+Then comes design discipline. RD is sensitive to bandwidth choices and functional form around the threshold because it is about estimating a jump at a point. A good defence is to show that the estimate is stable across reasonable windows and does not rely on a single fragile specification.
+
+6) In DiD designs: the key enemy is non-parallel counterfactual trends.
+
+For DiD, the key claim is that, absent the policy, treated and comparison groups would have moved in parallel. You cannot test this directly, but you can make it more credible.
+
+Start by showing pre‑policy trends. If they diverge dramatically before treatment, the parallel trends story is implausible. If they track each other closely, the story is more plausible, but not proven.
+
+Then address the obvious threats: differential shocks, concurrent policies, anticipation, and changing composition. If a region adopts a policy in the middle of an industry shock that hits it uniquely, your reader will rightly doubt the contrast. Your job is to show that the comparison group shares the relevant exposures, or to narrow the design until it does.
+
+Finally, treat staggered adoption with respect. When timing varies across units, “textbook DiD” can blend different comparisons into hard‑to‑interpret averages. A good defence is to state what effect you are averaging and why the estimator you use matches that target.
+
+7) Falsification is not theatre.
+
+Because the central assumptions are not fully testable, credibility comes from predictions the design makes that you can check.
+
+In an RD, if the cut‑off is only supposed to change treatment, then variables that cannot possibly respond should not jump at the threshold. In a DiD, outcomes that should not respond to the policy can serve as placebos. In IV, if the instrument is truly excluded, it should not predict outcomes in contexts where treatment cannot change.
+
+These checks do not “prove” identification, but they can reveal when the story is implausible. More importantly, they communicate that you have thought about what your mechanism would imply beyond the headline coefficient.
+
+8) Sensitivity: how wrong would the story need to be to change the conclusion?
+
+A clean way to write observational work is to acknowledge that the key assumption might be violated and then ask: by how much would it need to be violated to overturn the result? This can be done informally. If your effect disappears when you trim a small region of weak overlap, that is informative. If your estimate flips sign under minor changes in specification, that is informative. If your conclusion relies entirely on a narrow and fragile modelling choice, say so.
+
+The goal is not to confess weakness for its own sake. The goal is to make clear what part of the conclusion is driven by the design and what part is driven by modelling choices.
+
+9) How to write “as-if” honestly
+
+Most papers fail not because the author is dishonest, but because they are vague. Vagueness looks safe, but it is not. It invites the reader to fill in the missing mechanism with their own doubts.
+
+A useful template is to write three short paragraphs.
+
+First, state the mechanism and the identifying assumption in plain language: what makes treatment variation plausibly as‑if random in your setting.
+
+Second, show the evidence that speaks to the assumption: overlap and balance; first stage and institutional detail; density and covariate continuity; pre‑trends and placebos.
+
+Third, state the scope: for whom the effect is identified (near the cut‑off, compliers, treated group, overlapping region), and what types of violations would threaten it.
+
+If you can do those three paragraphs clearly, you will have done most of the work of identification.
+
+
+The six parts of this series can be compressed into a single claim. Causality in econometrics is never delivered by a regression table alone. It is delivered by a defended mechanism—sometimes real randomisation, sometimes design that mimics it, and sometimes a model‑assisted claim that what remains behaves like chance. The better you can describe and defend that mechanism, the more your numbers mean.
+
