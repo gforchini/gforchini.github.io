@@ -1,0 +1,64 @@
+---
+title: "How I(1) variables entered the ARDL model (and what that changed)"
+date: 2026-05-26
+tags: [econometrics, ARDL, integration,  cointegration,  stationarity]
+slug: ARDL
+---
+
+
+When students meet ARDL models today, they often meet them after cointegration, after unit-root tests, and, very often, through a software menu that offers “short run” and “long run” coefficients at the click of a button. That ordering is historically upside down. ARDL models did not arrive as an “extension” of cointegration. They were the default language of dynamic single‑equation econometrics long before cointegration became a keyword, and the later cointegration literature forced people to think much harder about what ARDL models mean when variables drift.
+
+This post is a historical prologue. I want to explain (i) what ARDL/ADL models were trying to do in the 1970s and early 1980s, (ii) why the arrival of $I(1)$ variables created a crisis for “levels” modelling, (iii) how the error‑correction and cointegration revolution reframed the issue, and (iv) how the ARDL tradition was later “rehabilitated” to handle $I(1)$ regressors without pretending that nothing had changed. 
+
+In the pre‑cointegration era, the econometric problem was usually posed as dynamic specification: how to match the lagged reactions implied (or suggested) by economic theory to the persistence structure seen in the data, while ending up with an innovation that behaves like noise.  The practical objects were finite and infinite distributed lags, partial adjustment, and the general idea that a good single equation needs both dynamics and an interpretable long‑run solution (long‑run multipliers). 
+
+This is exactly the world in which ARDL models make sense: the dependent variable depends on its own lags and on lags of the regressors. You can think of the “long run” as the steady‑state of that dynamic system and the “short run” as the transitional dynamics. Even in the late 1980s, Wickens and Breusch were discussing dynamic specification precisely with an eye to long‑run multipliers and how to estimate and report them from ADL/ARDL formulations. 
+
+In that world, stationarity was not always front and centre. Many applied papers treated trending macro variables by de‑trending or by working in growth rates. But macro series did not politely cooperate. They wandered.
+
+Once economists took seriously the possibility that many macro variables are difference‑stationary ($I(1)$), “regressions in levels” became suspicious. If two unrelated series wander, a regression can look highly significant simply because both drift, not because they are economically linked. The key point for our story is that ARDL models are still regressions in levels, just with lags added. If the underlying variables are $I(1)$, adding lags does not magically remove the danger. It can make the regression look even more impressive. 
+
+What saved the idea of modelling levels was not more lags. It was a conceptual shift: if variables are $I(1)$, a meaningful long‑run relationship requires that some combination of levels is stationary, so that deviations are temporary rather than drifting forever. That is the notion later formalised as cointegration and linked to error‑correction representations. 
+
+Phillips and Loretan’s historical discussion is helpful here because it explicitly connects the earlier "error‑correction modelling" tradition (Sargan, Hendry, and the LSE approach) to the realisation that if levels enter a differenced equation, some linear combination must be stationary, otherwise the model becomes spurious. 
+
+Engle and Granger crystallised the logic in their representation result: if a set of series are $I(1)$ but there exists a stationary linear combination, then there is an error‑correction representation in which the stationary deviation from the long‑run relation enters as a correction term. This result matters for ARDL models because it tells you what a “levels term” is allowed to mean. It is not a long‑run coefficient in a vague sense. It is a stationary disequilibrium term that drives adjustment. Without that stationarity, the equilibrium‑correction interpretation collapses. 
+
+At around the same time, a large methodological literature developed on how to estimate these long‑run relations and how to do inference properly in cointegrated settings (system approaches like Johansen, and single‑equation approaches like fully modified methods).  Phillips and Hansen’s fully‑modified IV framework, for example, is explicitly about inference in cointegrated regressions with $I(1)$ processes and the corrections needed for endogeneity and serial correlation. 
+
+So by the early 1990s, “levels modelling” had been disciplined: you could still talk about long‑run relationships, but now you had to pair them with a stationary deviation term and the right asymptotic theory. 
+
+At this point, it was tempting to say: cointegration has replaced ARDL; the old ADL/ARDL approach is no longer appropriate when variables are $I(1)$. Pesaran and Shin explicitly push against that temptation. Their ARDL programme is best read as a rehabilitation of the single‑equation dynamic approach in the presence of $I(1)$ variables, not as a denial of the cointegration revolution. 
+
+The key move is subtle but important. They argue that if you appropriately augment the lag order, then the ARDL framework can deliver consistent estimation of short‑run parameters and meaningful long‑run coefficients even when regressors are $I(1)$, and they compare this approach to other cointegration estimators like the fully modified approach.  The later Cambridge chapter version makes the same broad point and situates it explicitly against the backdrop of the cointegration literature that had developed because many believed the traditional ARDL approach was no longer applicable with $I(1)$ variables. 
+
+This is the historical moment that matters for students’ confusion. Once you allow $I(1)$ variables into ARDL models, you inherit new consequences. First, the long run is no longer just a steady‑state algebraic object; it becomes entangled with questions of stochastic trends and whether the implied deviation term is stationary. The model might still be estimable, but the interpretation now depends on whether the levels combination behaves properly. Second, the lag structure stops being mere “dynamics for fit” and becomes part of the asymptotic justification. The phrase “after appropriate augmentation of the order” is doing a lot of work: it is telling you that under‑lagging can break the desirable properties you want to claim. Third, inference becomes delicate. The earlier long‑run multiplier discussion in the stationary world already cared about how to compute standard errors for long‑run coefficients from an ADL formulation.  With $I(1)$ variables, you add the whole cointegration‑style inferential problem on top. That is why the “rehabilitation” story is not “ARDL is always safe.” It is ARDL can be made coherent under conditions, and you should know what those conditions buy you.
+
+Now we can place Pesaran–Shin–Smith (2001) in the right spot. It is not “what ARDL is.” It is a later piece that addresses a practical irritation in the 1990s cointegration/ARDL debate: you often do not know with certainty which regressors are $I(0)$ and which are $I(1)$, and pre‑testing each variable can be messy and can inject another layer of uncertainty.  Their bounds approach proposes a way to test for a level relationship in a conditional framework even when regressors might be $I(0)$ or $I(1)$. 
+
+Historically, then, PSS is best read as a convenient extension of the rehabilitated ARDL approach, not as its definition. It is one chapter in the longer story: ARDL was the original language of dynamic single‑equation modelling; cointegration disciplined “levels”; ARDL was then re‑argued as a coherent approach even with $I(1)$ variables; and bounds testing was introduced to reduce the reliance on sharp integration classifications in empirical work. 
+
+If you start from this historical perspective, one confusion disappears immediately. The question is not “Can I include $I(1)$ variables in an ARDL?” The answer is: yes, people have been doing it for decades, and there is a literature explaining when and why it can be coherent.  The real question is: “Once I do, what did I just commit myself to saying about ‘levels’, ‘long run’, and ‘adjustment’?” That is where most theses become internally inconsistent. 
+
+And that is precisely what the next posts will focus on. There we will assess the key conceptual inheritance from the cointegration revolution and apply it to mixed‑order ARDLs: if you want an error‑correction interpretation, the correction term must be stationary. That sounds obvious once you say it, but it is the single most common point of failure in student work. 
+
+
+
+### Core references for this post (historical spine)
+
+Hendry, Pagan & Sargan (1984), “Dynamic Specification” (Handbook of Econometrics Vol 2)
+
+Wickens & Breusch (1988), “Dynamic Specification, the Long-Run and The Estimation of Transformed Regression Models”
+
+Engle & Granger (1987), “Co-Integration and Error Correction: Representation, Estimation, and Testing”
+
+Johansen (1991), “Estimation and Hypothesis Testing of Cointegration Vectors in Gaussian Vector Autoregressive Models”
+
+Phillips & Hansen (1990), “Statistical Inference in Instrumental Variables Regression with I(1) Processes”
+
+Phillips & Loretan (1991), “Estimating Long-Run Economic Equilibria”
+
+Pesaran & Shin (1995), "An Autoregressive Distributed Lag Modelling Approach to Cointegration Analysis"
+
+Pesaran, Shin & Smith (2001): "Bounds Testing Approaches to the Analysis of Level Relationships"
+
