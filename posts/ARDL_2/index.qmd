@@ -1,0 +1,95 @@
+---
+title: "The Non‑Negotiable Rule: the “Error‑Correction Term” must be I(0)"
+date: 2026-06-9
+tags: [econometrics, ARDL, integration,  cointegration,  stationarity]
+slug: ARDL
+---
+
+
+In a previous post, I tried to put ARDL back in its historical context. ARDL started life as a workhorse for dynamic specification: how to represent lagged adjustment and long‑run multipliers in single equations.  When I(1) variables entered the room, “levels” stopped being innocent: you could still write an ARDL in levels, but you could not automatically interpret it as a stable long‑run relationship. 
+
+This post isolates the one rule that students violate most often, and it is the rule that makes the phrase *error correction* "mean" something rather than *sound* like something: "If you interpret a term as “error correction”, that term must be stationary (I(0))." 
+
+That’s it. Everything else including cointegration language, “equilibrium” stories, speeds of adjustment, rides on that stationarity.
+
+What do we mean by “error correction”?
+
+Start with a simple ARDL(1,1) in levels:
+$$
+y_t = a + \phi y_{t-1} + \theta x_t + \gamma x_{t-1} + u_t.
+$$
+
+This is an innocuous dynamic regression. Now rewrite it in a form that exposes adjustment. Subtract $y_{t-1}$ from both sides:
+$$
+\Delta y_t
+= a + (\phi-1) y_{t-1} + \theta x_t + \gamma x_{t-1} + u_t.
+$$
+
+With a bit of algebra you can group the lagged levels as a single “deviation” term:
+
+$$
+\Delta y_t
+= a + \lambda \left( y_{t-1} - \beta x_{t-1} \right)
++ \theta \Delta x_t + u_t,
+$$
+where $\lambda = (\phi-1)$ and $\beta = -\frac{\gamma}{\phi-1}$ (assuming $\phi \neq 1$). This is the familiar “conditional ECM / UECM” form used throughout the ARDL tradition. 
+
+The term in parentheses,
+$$
+ECT_{t-1} = y_{t-1} - \beta x_{t-1},
+$$
+is what people call the error‑correction term. The label is only justified if $ECT_{t-1}$ is I(0). 
+
+Why? Because “correction” is a statement about deviations being temporary. If deviations wander like a random walk, there is nothing to “correct” back to. 
+
+This is precisely the content of the Engle–Granger representation logic: when variables share a stable long‑run relationship, the deviations from it are stationary and appear in an error‑correction representation. 
+
+
+An “error‑correction model” claims that the system has a reference level (call it equilibrium if you like) and that when the system is away from that reference, some force pushes it back. That only makes sense if being away from the reference is an I(0) phenomenon: it fluctuates around zero and does not drift without bound. 
+
+So the rule is not a technicality. It is the definition of the story you are trying to tell.
+
+Let's see what happens when this rule is violated. Suppose you form an $ECT_{t-1}$ that is actually I(1). Then the ECM becomes something like
+$$
+\Delta y_t = \lambdaECT_{t-1} + \cdots
+$$
+with $ECT_{t-1}$ drifting. But $\Delta y_t$ is typically an I(0) object (differences of many macro series behave like that), so you end up “explaining” an I(0) variable with an I(1) regressor. If $\lambda\neq 0$, the right-hand side inherits nonstationarity unless other terms cancel it in a knife‑edge way. The model is then internally incoherent: either the residuals become nonstationary (spurious), or the coefficient must effectively be zero, or your classification of integration was wrong. This is the reason Phillips and Loretan stress that putting levels into a differenced equation implicitly requires stationary combinations—otherwise you are back in spurious territory. 
+
+This is also why, historically, ECM thinking forced time‑series econometrics to confront stochastic trends rather than treat “levels terms” as harmless. 
+
+ARDL can include I(1) variables, but you must be clear about what you are claiming.
+
+**Case A:** $y_t$ and $x_t$ are both I(1), and they are cointegrated. Then there exists a $\beta$ such that
+$$
+y_t - \beta x_t \sim I(0).
+$$
+
+In this case, the error‑correction term is stationary, and an ECM/UECM interpretation is coherent. That is the Engle–Granger story in one line. This is also where single‑equation dynamic modelling and cointegration meet historically: the ARDL representation is compatible with a cointegrating relation when the deviation term is I(0). 
+
+**Case B:** $y_t$ is I(0) but you include an I(1) regressor $x_t$ “in the long run”
+
+This is where student writing often goes off the rails. If $y_t$ is I(0), then a term like
+$$
+ECT_{t-1} = y_{t-1} - \beta x_{t-1}
+$$
+cannot be I(0) unless $\beta = 0$ (or unless $x_{t-1}$ is actually not I(1), or unless you have constructed a stationary transformation of $x$). Put bluntly: an I(0) variable cannot “track” an I(1) variable in levels with a stable stationary deviation unless the I(1) component is not really there. 
+
+So if $y$ is I(0) and $x$ is I(1), you typically have two coherent options:
+
+1.  Keep the long‑run/levels block stationary, and let the I(1) variable enter in differences (short-run dynamics). This retains coherence but changes your interpretation: you are not estimating a long‑run effect of the level of $x$ on the level of $y$; you are estimating how changes in $x$ affect changes in $y$. This sits naturally in the ARDL tradition as “dynamic multipliers” without a cointegrating equilibrium story. 
+
+2.  Replace the I(1) level by a stationary combination (an index or residual) if economic reasoning insists on a “level anchor”. That is, you don’t put $x$ in levels; you put an I(0) object built from the relevant I(1) fundamentals. The logic for this comes straight from the cointegration idea: what enters as a deviation term must be stationary. 
+
+We will return to this in later parts because it is the cleanest way to reconcile “I want a long‑run anchor” with “my dependent variable is stationary.”
+
+At this point one might say: “Fine, this is just cointegration/ECM.” But notice what happened historically. The ARDL tradition was not abandoned; it was reinterpreted. Pesaran and Shin’s rehabilitation argument is exactly that: ARDL models remain a sensible single‑equation framework for long‑run analysis even when regressors are I(1), provided you handle the dynamics and the long‑run object correctly. 
+
+That is why the stationarity of the correction term is  key. It is the bridge between ARDL as dynamic specification and ARDL in a world with stochastic trends.
+
+A small warning about language (because this is where theses get marked down). When you see $\lambda (y_{t-1}-\beta x_{t-1})$ in your regression, it is tempting to write “long‑run equilibrium” and “speed of adjustment” automatically. Don’t. Write those phrases only if you have earned the right to call $ECT_{t-1}$ stationary. Otherwise call it what it is: a levels term or a mean‑reversion anchor (and be explicit about the stationarity classification you are relying on). This is not pedantry; it is examiner‑proofing. 
+
+Part 3 will tackle the most common mismatch in practice: ARDL with a mixture of I(0) and I(1) regressors, where the temptation is to throw everything into the “levels block” and then talk about equilibrium correction. We will separate three notions that students mix up: (i) an algebraic long‑run multiplier, (ii) a cointegrating equilibrium, and (iii) a stationary level anchor for an I(0) dependent variable. The goal will be to make it impossible to write an internally inconsistent “long run” section ever again.
+
+### References for this post
+
+Phillips, P. & Loretan, M. (1991), Estimating Long‑Run Economic Equilibria — historical perspective on ECM practice, spurious regression risk, and why stationary combinations matter. 
