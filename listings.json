@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/ARDL_2/index.html",
       "/posts/ARDL_1/index.html",
       "/posts/diagnostic/index.html",
       "/posts/parallelworlds/index.html",
