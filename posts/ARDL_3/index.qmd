@@ -1,0 +1,73 @@
+---
+title: "UECM vs ECM vs the *levels block*: what are you assuming when you re‑write an ARDL?"
+date: 2026-06-23
+tags: [econometrics, ARDL, integration,  cointegration,  stationarity, UECM, ECM]
+slug: ARDL
+---
+
+ARDL models did not start as “cointegration tools” and once I(1) variables entered the room, the phrase error correction became meaningful only if the deviation term is stationary. In this post I want to pin down a source of persistent confusion: students write an ARDL in “error‑correction form”, see a lagged levels combination, and automatically start talking about equilibrium, cointegration, and speed of adjustment. That jump is usually too quick. 
+
+The key idea is that the same algebraic reparameterisation can be read in three different ways, depending on what you assume about integration and stationarity. Those three readings correspond to three objects you will see in applied work: the ARDL, the UECM (unrestricted error‑correction model), and the ECM (error‑correction model). They look similar on the page, but they do not carry the same assumptions. 
+
+Take a simple $ARDL( p, q )$ with one regressor $x_t$ (the extension to many regressors is mechanical):
+
+$$
+y_t = c + \sum_{i=1}^{p}\phi_i y_{t-i} + \sum_{j=0}^{q}\theta_j x_{t-j} + u_t.
+$$
+
+This is the traditional single‑equation dynamic specification: lags of $y$ capture persistence; distributed lags of $x$ capture delayed effects; and the *long run* is the steady state implied by the lag structure. Historically, this is exactly where ARDL lives: dynamic specification and long‑run multipliers, not yet cointegration rhetoric. 
+
+Now do the standard reparameterisation: subtract $y_{t-1}$ from both sides, collect differences, and isolate lagged levels. You obtain a conditional *error‑correction‑type* representation.
+
+The reparameterised form is typically written like this (again, one regressor for simplicity):
+
+$$
+\Delta y_t = a + \lambda\, y_{t-1} + \delta\, x_{t-1} + \sum_{i=1}^{p-1}\psi_i\,\Delta y_{t-i} + \sum_{j=0}^{q-1}\omega_j\,\Delta x_{t-j} + \varepsilon_t.
+$$
+
+This is what most textbooks and software call an *unrestricted error‑correction model* (UECM): it contains both lagged levels ($y_{t-1}, x_{t-1}$) and differences ($\Delta y&, &\Delta x$). The crucial word is unrestricted: at this stage we have not imposed any particular structure on the relationship between $y_{t-1}$ and $x_{t-1}$; we have simply rewritten the ARDL in a form that makes “levels vs changes” visible. 
+
+So what is being assumed here? Nothing beyond the ARDL itself. The UECM is algebraically equivalent to the ARDL: it is the same model written differently. The presence of $y_{t-1}$ and $x_{t-1}$ in this equation does not automatically mean there is a stable equilibrium in levels. It just means you have chosen a parameterisation that exposes the model’s long‑run component. 
+
+This is the first big conceptual checkpoint: UECM is not yet ECM in the economic sense. It is a convenient form for estimation and for certain tests, but the “correction” interpretation comes later, if it comes at all.
+
+To move from UECM to an ECM, you typically re‑express the lagged levels block as a single deviation term:
+
+$$
+\Delta y_t = a + \alpha\,\big( y_{t-1} - \beta x_{t-1} \big) + \sum_{i=1}^{p-1}\psi_i\,\Delta y_{t-i} + \sum_{j=0}^{q-1}\omega_j\,\Delta x_{t-j} + \varepsilon_t.
+$$
+
+This step is still algebra if you define $\beta = -\delta/\lambda$ (when $\lambda \neq 0$) and set $\alpha=\lambda$. But the interpretation now invites a strong claim: the term $y_{t-1}-\beta x_{t-1}$ is treated as a deviation from a long‑run relation, and $\alpha$ is treated as a speed of adjustment back toward it. 
+
+Here is the non‑negotiable assumption that makes that story true:
+
+$$
+ECT_{t-1} = y_{t-1}-\beta x_{t-1} \;\;\text{must be}\;\; I(0).
+$$
+
+This is not a stylistic preference; it is exactly the content of the Engle–Granger representation logic: when there is a meaningful long‑run relation among I(1) variables, the deviation from it is stationary and appears in an error‑correction representation. Phillips and Loretan make the same point historically: if you put levels into a differenced equation and the implied residual (deviation) is not stationary, you are back to spuriousness in disguise.
+
+So the clean distinction is:
+
+- UECM: “Here is an ARDL reparameterised with lagged levels and differences.” (No equilibrium story required.) 
+
+- ECM: “The lagged levels combination is a stationary deviation from a long‑run relation, and the coefficient on it is a correction speed.” (Requires $ECT\sim I(0)$.) 
+
+Students often refer to $\lambda y_{t-1} + \delta x_{t-1}$ as “the long‑run block” or “levels block”. That phrase is fine as a description of the algebra, but it hides a fork in the road. If both $y$ and $x$ are I(1) and cointegrated, then the levels block can be interpreted as the stationary deviation term multiplied by an adjustment speed. That is the classical ECM meaning. 
+
+If $y$ is I(0) (already stationary), then talking about cointegration between $y$ and $x$ is usually incorrect, because cointegration is fundamentally a concept about I(1) variables sharing a stochastic trend. In that case, the lagged levels terms may still be useful as a mean‑reversion anchor for $y$, but only if the resulting combination is stationary; otherwise the “correction” narrative is empty. 
+
+So “levels block” is not a free licence. It is a signal that you must decide what you are claiming about stationarity of the implied deviation and about the stochastic properties of the variables involved. 
+
+What exactly are you assuming when you write an ARDL “in error‑correction form”?
+
+It helps to state the assumptions explicitly, because they are different depending on which label you want to use. If you write an ARDL in UECM form and stop there, you are mainly assuming you have a sensible dynamic specification (lags, stability, and a well‑behaved innovation). That is the Hendry–Pagan–Sargan tradition: dynamic and stochastic specification as the central discipline. 
+
+If you write it as an ECM and interpret the $ECT$ coefficient, you are assuming something stronger: that there exists a stationary deviation term that ties the levels together, and that the dynamics include correction toward that relation. That is the Engle–Granger discipline, and it is precisely what separates “levels terms in a regression” from “equilibrium correction.” 
+
+If you use the phrase “cointegration” in a strict sense, you are typically assuming $y$ and at least one regressor are I(1) and that a stationary linear combination exists. System‑based approaches like Johansen transfer this logic in a multivariate framework, which is why the language “cointegration vectors” and “adjustment coefficients” is natural there. 
+
+Seen this way, the UECM/ECM distinction is not semantics; it is the difference between “reparameterisation” and “equilibrium claim.” 
+
+I am deliberately not making Pesaran–Shin–Smith (2001) the centre of this series of posts. But it is worth placing it correctly. The bounds framework is essentially a way to use the UECM form to test whether lagged levels matter in a way consistent with a level relationship, without having to commit sharply to whether each regressor is I(0) or I(1). It is a useful procedure, but it does not remove the conceptual requirement we have been discussing: if you want to tell an error‑correction story, the implied deviation must still be stationary. 
+
