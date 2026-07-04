@@ -1,0 +1,81 @@
+---
+title: "When y is I(0): stop saying “cointegration” (and start saying what you mean)"
+date: 2026-07-4
+tags: [econometrics, ARDL, integration,  cointegration,  stationarity, UECM, ECM]
+slug: ARDL
+---
+
+In previous posts I insisted on one rule. If one wants an error‑correction interpretation, the object one calls “the error” must be stationary. That rule comes straight out of the cointegration/ECM logic. Deviations from a long‑run relation must have finite variance, otherwise there is nothing to correct back to. 
+
+This post is about a very common (and very slippery) case I often read in theses: the dependent variable looks stationary, $y\sim I(0)$, but some regressors look nonstationary, $x\sim I(1)$. Students then write an ARDL/UECM with lagged levels of $y$ and $x$, label the levels block “long‑run equilibrium”, call the lagged levels combination an “ECT”, and interpret the coefficient as speed of adjustment. That is usually a mistake, not necessarily because the regression cannot be estimated, but because the language and the logic no longer match what the stochastic properties allow. 
+
+Let’s make this precise. Cointegration is fundamentally about $I(1)$ variables that share a common stochastic trend. Engle and Granger define it exactly in those terms: each series is $I(1)$, but some linear combination is $I(0)$, so deviations from the “equilibrium” are stationary. 
+
+If $y$ is already $I(0)$, there is no stochastic trend in $y$ to “co‑integrate” with anything. In that case, writing “$y$ is cointegrated with $x$” is, at best, an abuse of terminology and, at worst, a sign that the model is internally incoherent. One should not use “long‑run equilibrium/cointegration” language when the dependent variable is stationary as the words are trying to apply a concept that was invented to deal with nonstationary variables. 
+
+What is going wrong?
+
+Start from the standard UECM form (one regressor for clarity):
+$$
+\Delta y_t = a + \lambda y_{t-1} + \delta x_{t-1} + \text{(short-run terms in } \Delta y,\Delta x) + \varepsilon_t.
+$$
+People then rewrite the lagged levels as an “ECT”:
+$$
+\Delta y_t = a + \alpha\big(y_{t-1}-\beta x_{t-1}\big) + \text{short-run terms} + \varepsilon_t,
+\quad \text{where}\quad \beta=-\delta/\lambda.
+$$
+
+Now look at the object inside parentheses:
+$$
+ECT_{t-1} = y_{t-1}-\beta x_{t-1}.
+$$
+
+If $x\sim I(1)$ and $y\sim I(0)$, then $ECT_{t-1}$ will typically be $I(1)$ unless $\beta=0$. The reason is simple: subtracting an $I(1)$ term from an $I(0)$ term does not remove the stochastic trend. The $I(1)$ dominates. So either:
+
+1.  $\beta=0$, meaning the “levels effect” of $x$ disappears (and the ECT reduces to just $y_{t-1}$, which can be stationary), or
+2.  $x$ is not actually $I(1)$ (e.g., it is trend-stationary or breaks), or
+3.  the model implies a nonstationary “ECT”, in which case the phrase “error correction” is not justified. 
+
+This is the key message of Phillips and Loretan’s discussion of ECMs: if you put levels into a differenced equation, the implied equilibrium error must be stationary; otherwise you are walking back into spuriousness. 
+
+So what does a “levels block” mean when $y$ is $I(0)$? It can mean something perfectly sensible. But one has to say the right thing.
+
+When $y\sim I(0)$, a lagged-level term like $y_{t-1}$ is naturally interpreted as mean reversion. It pulls the series back toward its typical range. This is not cointegration. It is just stationarity plus dynamics. This sits comfortably inside the older dynamic-specification tradition (long-run multipliers, adjustment paths) that predates cointegration. 
+
+The mistake is to extend this story to include raw $I(1)$ regressors in the same “equilibrium-correction” block. Once you do that, you are implicitly claiming that the combination you formed is stationary. If it is not, the story breaks. 
+
+So the correct language shifts. Instead of “cointegration between $y$ and $x$”, one should say something like:
+
+   “a levels/mean-reversion relationship for $y$, with short-run effects of changes in $x$” (if $x$ is $I(1)$ and enters in differences), or
+   “a stationary index built from trending fundamentals enters the levels block” (if you really want a levels anchor). 
+
+
+There are three coherent modelling strategies in the $y\sim I(0)$, $x\sim I(1)$ case
+
+Strategy A: keep trending regressors out of the “levels block”. This is the conservative, clean approach. One lets $y$ be mean-reverting in levels, and allows the $I(1)$ regressor to affect $y$ only through changes:
+$$
+\Delta y_t = a + \lambda y_{t-1} + \sum \psi_i \Delta y_{t-i} + \sum \omega_j \Delta x_{t-j} + \varepsilon_t.
+$$
+Here the “levels block” is truly stationary (it is about $y$ reverting), and the $I(1)$ variable enters as an $I(0)$ object ($\Delta x$). This avoids pretending that an $I(0)$ $y$ has a cointegrating equilibrium with an $I(1)$ $x$. 
+
+Historically, this is very much in the spirit of ARDL as dynamic modelling: one is estimating dynamic multipliers (i.e. how changes in inputs propagate through time) without forcing a cointegration narrative.
+
+Strategy B: replace $I(1)$ levels with a stationary combination (an “anchor index”). Sometimes economics insists on a levels-type anchor even though the dependent variable is stationary (think of a stationary spread, a stationary premium, or a stationary deviation from policy target). In that case, one does not put raw $I(1)$ levels into the ECT. Instead they construct an $I(0)$ object from the $I(1)$ variables (typically a residual from a long-run relation among them) and use that residual as the levels regressor.
+
+This is exactly the cointegration idea applied properly: the thing one places in the “equilibrium deviation” role must be stationary. Engle–Granger’s definition of cointegration is literally “a linear combination is stationary.”  Phillips and Ouliaris’ residual-based logic makes the same point from the testing perspective: cointegration is about a stationary residual from a levels regression. 
+
+So one might have:
+$$
+\Delta y_t = a + \lambda y_{t-1} + \rho\, z_{t-1} + \text{short-run terms} + \varepsilon_t,
+$$
+where $z_{t-1}$ is a stationary index built from the trending fundamentals. That preserves a coherent “levels anchor” story without smuggling $I(1)$ drift into the correction term. 
+
+Strategy C: reconsider the classification (breaks and deterministic trends). Sometimes what looks like $I(1)$ is actually trend-stationary with breaks, or the dependent variable is “almost” $I(1)$ in finite samples. This is not the place to do structural-break econometrics, but it is worth saying: the entire argument above depends on the correct classification of what is truly $I(0)$ and what is truly $I(1)$. Unit-root testing is difficult, and the literature has always warned that “pre-testing uncertainty” is real. 
+
+This is one reason later ARDL literature valued procedures that are less brittle to exact $I(0)$/$I(1)$ classification. But brittleness in tests does not justify sloppy interpretation: it just means one should be cautious and explicit about what they are assuming. 
+
+So, if $y$ is I(0), replace the words “cointegration / long-run equilibrium / error correction” with “levels anchor / mean reversion / long-run association in levels” unless you can point to a clearly stationary deviation term that justifies the ECM story. This is not cosmetic. It is how you prevent your model from claiming more than its stochastic structure permits. 
+
+You can now see why the historical perspective matters. The pre‑cointegration ARDL world was comfortable talking about long-run multipliers in dynamic models.  The cointegration/ECM revolution forced “levels” to earn its interpretation via stationarity of deviations.  Later work (including Pesaran–Shin and then bounds testing) rehabilitated ARDL for $I(1)$ regressors, but it did not repeal the stationarity logic; it made the single-equation approach more workable. 
+
+So when one writes an ARDL/UECM with a stationary dependent variable and trending regressors, the right question is not “can I estimate it?” It is “what object is stationary, and therefore what story am I allowed to tell?”
