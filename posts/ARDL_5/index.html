@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2017-07-18">
+<meta name="dcterms.date" content="2026-07-23">
 
-<title>Interpreting the coefficients of the endogenous variables in IV models – Giovanni Forchini</title>
+<title>What Goes in Levels, What Goes in Differences – Giovanni Forchini</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -160,24 +159,18 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Interpreting the coefficients of the endogenous variables in IV models</h1>
+<h1 class="title">What Goes in Levels, What Goes in Differences</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Giovanni Forchini </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">July 18, 2017</p>
+      <p class="date">July 23, 2026</p>
     </div>
   </div>
   
@@ -189,49 +182,71 @@ window.Quarto = {
 </header>
 
 
-<p>In the simple linear model <span class="math inline">\(y=x \beta +u\)</span>, the (scalar) parameter <span class="math inline">\(\beta\)</span> has a very simple interpretation:</p>
-<p><span class="math display">\[\frac{\partial E\left( y|x \right)}{\partial x} = \beta. \ \ \ \ (1)\]</span></p>
-<p>That is, a marginal change in the independent variable <span class="math inline">\(x\)</span> leads to a change <span class="math inline">\(\beta\)</span> in <span class="math inline">\(E\left( y|x \right)\)</span>. It is natural to carry forward this interpretation to a simple linear instrumental variable models of the form</p>
-<p><span class="math display">\[y=x\beta+u\]</span> <span class="math display">\[x=z'\gamma+v,\]</span></p>
-<p>and claim that <span class="math inline">\(\frac{\partial E\left( y|x,z \right)}{\partial x} = \beta\)</span>. However, this is not the case: since <span class="math inline">\(u\)</span> and <span class="math inline">\(v\)</span> are dependent, a change in <span class="math inline">\(x\)</span> may also lead to a change in <span class="math inline">\(E\left(u|x,z \right)\)</span>, which can no longer expected to be zero.</p>
-<p>For simplicity, assume that <span class="math inline">\(\left( u , v\right)|z\)</span> are a pair of normal random variables with zero mean and covariance matrix</p>
-<p><span class="math display">\[\Sigma = \left( \begin{array}{cc}
-\sigma_u^2 &amp; \rho \sigma_u \sigma_v \\\rho \sigma_u \sigma_v &amp;\sigma_v^2
-\end{array}\right).\]</span></p>
-<p>Although this assumption is not needed, it helps to simplify the calculations. Focus on the pair <span class="math inline">\(\left( u,x\right)\)</span>. Notice that they are normally distributed given <span class="math inline">\(z\)</span>,</p>
-<p><span class="math display">\[\left. \left(\begin{array}{c}
-u \\x
-\end{array} \right) \right| z \sim N\left(\left( \begin{array}{c} 0 \\z'\gamma \end{array}\right) , \Sigma \right).\]</span></p>
-<p>So that we can easily find the conditional distribution of <span class="math inline">\(u\)</span> given <span class="math inline">\(x\)</span> and <span class="math inline">\(z\)</span> as</p>
-<p><span class="math display">\[u | x ,z\sim N\left( \rho \frac{ \sigma_u}{\sigma_v} \left( x-z'\gamma\right) ,\left(1-\rho^2 \right) \sigma_u^2 \right).\]</span></p>
-<p>Notice that the conditional mean of <span class="math inline">\(u\)</span> depends on <span class="math inline">\(x\)</span> as well and on <span class="math inline">\(z\)</span> and</p>
-<p><span class="math display">\[\frac{\partial E\left( u|x,z\right) }{\partial x} =\rho \frac{ \sigma_u}{\sigma_v}.\ \ \ \ (2)\]</span></p>
-<p>Now focus on the distribution of <span class="math inline">\(y\)</span> given <span class="math inline">\(x\)</span>:</p>
-<p><span class="math display">\[y|x,z \sim x\beta+u|x,z \sim N\left(x\beta+\rho \frac{ \sigma_u}{\sigma_v} \left( x-z'\gamma\right) ,\left(1-\rho^2 \right) \sigma_u^2 \right). \ \ \ \ (3)\]</span></p>
-<p>Therefore</p>
-<p><span class="math display">\[\frac{\partial E\left( y|x,z \right)}{\partial x} = \beta+ \rho \frac{ \sigma_u}{\sigma_v}. \ \ \ \ (4)\]</span></p>
-<p>Using (2) and (4), <span class="math inline">\(\beta\)</span> can be written as</p>
-<p><span class="math display">\[\beta = \frac{\partial E\left( y|x,z \right)}{\partial x} - \frac{\partial E\left( u|x,z \right)}{\partial x}. \ \ \ \ (5)\]</span></p>
-<p>Hence, <span class="math inline">\(\beta\)</span> is the change in <span class="math inline">\(E\left( y|x,z \right)\)</span> due to a change in <span class="math inline">\(x\)</span> after removing the effect that <span class="math inline">\(x\)</span> has on <span class="math inline">\(u\)</span>. A graph may be useful to understand the effect of <span class="math inline">\(x\)</span> on <span class="math inline">\(E\left( y|x,z \right)\)</span>:</p>
-<p><span class="math display">\[\begin{array}{lcccl}
-x &amp; &amp;\to &amp; &amp;v\\
-&amp;&amp;&amp;&amp;\\
-\downarrow \beta &amp;&amp;&amp;&amp;\downarrow \rho \frac{\sigma_u}{\sigma_v}\\
-&amp;&amp;&amp;&amp;\\
-y&amp; &amp;\leftarrow&amp; &amp;u
-\end{array}\]</span></p>
-<p>which shows how <span class="math inline">\(x\)</span> affects <span class="math inline">\(y\)</span> directly (and this direct effect is <span class="math inline">\(\beta\)</span>) and indirectly through the unobserved errors (and this effect is <span class="math inline">\(\rho \frac{\sigma_u}{\sigma_v}\)</span>).</p>
-<p>Pearl’s causal interpretation of <span class="math inline">\(\beta\)</span> is slightly different since it is based on the assumption that it is possible to change <span class="math inline">\(x\)</span> by setting it equal to a particular value and removing the reduced form <span class="math inline">\(x=z'\gamma+v\)</span> from the system.</p>
-<p>Notice that the assumption of normality is not needed. We could have also taken the conditional expectation on both sides of the structural equation to find</p>
-<p><span class="math display">\[E\left( y|x,z\right) = x\beta+E\left( u|x,z \right).\ \ \ \ (6)\]</span></p>
-<p>One obtains the earlier result by deriving with respect to <span class="math inline">\(x\)</span> both the left and the right hand sides of (6).</p>
-<p>I conclude this note with a few observations with which econometricians usually are not familiar:</p>
+<p>The central difficulty with ARDL models is not estimation. Software will estimate them quite happily. The difficulty is interpretation. Once variables of different integration orders appear in the same dynamic equation, the words “short run”, “long run”, “levels”, “error correction”, and “cointegration” stop being interchangeable.</p>
+<p>This post is meant to be practical. It gives a decision workflow for mixed <span class="math inline">\(I(0)/I(1)\)</span> ARDL models. The aim is not to replace judgement, but to prevent the most common mistake: putting variables into a “levels block” because the ARDL form allows it, and then interpreting the result as an equilibrium relation without checking whether the object being corrected is stationary.</p>
+<p>The organising principle is simple. In an ARDL, variables can appear in levels and differences. But the interpretation of the levels block depends on the integration properties of the variables and on whether the implied deviation is stationary.</p>
+<p>Start with the dependent variable. A good ARDL specification does not begin with the regressors. It begins with the dependent variable. Ask first: is the variable you are trying to explain <span class="math inline">\(I(0)\)</span> or <span class="math inline">\(I(1)\)</span>?</p>
+<p>This matters because the dependent variable determines the kind of story the model can tell.</p>
+<p>If the dependent variable is <span class="math inline">\(I(1)\)</span>, then a levels relationship with other <span class="math inline">\(I(1)\)</span> variables may be a genuine cointegrating relationship. In that case, an error-correction interpretation is possible. The dependent variable and the regressors may drift over time, but a particular combination of them is stationary. Deviations from that combination are temporary, and the model describes how the system adjusts when it is away from its long-run path.</p>
+<p>If the dependent variable is <span class="math inline">\(I(0)\)</span>, the story is different. A stationary dependent variable does not share a stochastic trend with an <span class="math inline">\(I(1)\)</span> variable. It can display persistence and mean reversion, and it can be affected by changes in nonstationary variables, but calling this “cointegration” is usually misleading. The language should shift from “cointegrating equilibrium” to something more modest: a levels relationship, a mean-reversion anchor, or a long-run association in stationary objects.</p>
+<p>So the first fork is:</p>
 <ul>
-<li><p>Firstly, notice that the conditional distribution of <span class="math inline">\(y|x,z\)</span> in (3) is degenerate when <span class="math inline">\(\rho^2 \to 1\)</span>. Precisely, the conditional density becomes concentrated around the point <span class="math inline">\(E\left(y|x,z\right) =x\beta \pm \frac{ \sigma_u}{\sigma_v} \left( x-z'\gamma\right)\)</span> as <span class="math inline">\(\rho^2 \to 1\)</span>.</p></li>
-<li><p>Secondly, what should one be interested in? the direct effect<span class="math inline">\(\frac{\partial E\left( y|x,z \right)}{\partial x}\)</span>? or the total effect <span class="math inline">\(\beta=\frac{\partial E\left( y|x,z \right)}{\partial x}- \frac{\partial E\left( u|x,z \right)}{\partial x}\)</span>? This may depend on the scope of the analysis.</p></li>
-<li><p>Thirdly, if we have a sample of iid observations <span class="math inline">\((y_i,x_i)\)</span> <span class="math inline">\(i=1,2,...,N\)</span>, as the sample size <span class="math inline">\(N \to \infty\)</span>, the OLS estimator of <span class="math inline">\(\beta\)</span> tends to <span class="math inline">\(\beta+\rho \frac{ \sigma_u}{\sigma_v}\)</span>. Therefore, the OLS estimator is consistent for <span class="math inline">\(\frac{\partial E\left( y|x,z \right)}{\partial x}\)</span>.</p></li>
-<li><p>The traditional interpretation of <span class="math inline">\(\beta\)</span> in econometrics is based on the observation that <span class="math inline">\(E\left(y|z\right)=E\left(x|z\right) \beta+E\left(u|z\right)\)</span> since <span class="math inline">\(E\left(u|z\right)=0\)</span> it follows that <span class="math inline">\(\beta = \frac{E\left(y|z\right)}{E\left(x|z\right)}\)</span>.</p></li>
+<li><p>If <span class="math inline">\(y_t\)</span> is <span class="math inline">\(I(1)\)</span>, ask whether there is a stationary combination of <span class="math inline">\(y_t\)</span> and the relevant level regressors.</p></li>
+<li><p>If <span class="math inline">\(y_t\)</span> is <span class="math inline">\(I(0)\)</span>, ask what stationary object can legitimately appear in the levels block.</p></li>
 </ul>
+<p>Everything else follows from that distinction.</p>
+<p><strong>Case 1.</strong> Suppose the dependent variable is <span class="math inline">\(I(1)\)</span>. This is the classical cointegration case. Think of examples like log consumption, log income, log money demand, log prices, or other macroeconomic levels that appear to drift over time.</p>
+<p>An ARDL in this setting can be written in a conditional error-correction form. The lagged levels enter because you are asking whether there is a long-run relationship tying the variables together. If the dependent variable and some regressors are <span class="math inline">\(I(1)\)</span>, the natural question is whether the implied long-run residual is <span class="math inline">\(I(0)\)</span>.</p>
+<p>For example, suppose the long-run relation is written informally as <span class="math display">\[
+y_t = \beta_0 + \beta_1 x_{1t} + \beta_2 x_{2t} + e_t.
+\]</span> If <span class="math inline">\(y_t\)</span>, <span class="math inline">\(x_{1t}\)</span>, and <span class="math inline">\(x_{2t}\)</span> are <span class="math inline">\(I(1)\)</span>, then this relationship is meaningful as a cointegrating relation only if <span class="math display">\[
+e_t = y_t - \beta_0 - \beta_1 x_{1t} - \beta_2 x_{2t}
+\]</span> is <span class="math inline">\(I(0)\)</span>.</p>
+<p>That stationary residual is the object that can enter an ECM. It is the error-correction term. Without it, you only have levels in a regression; you do not have error correction.</p>
+<p>In this case, the levels block can contain <span class="math inline">\(I(1)\)</span> variables because the model is not claiming that each level is stationary. It is claiming that a particular combination of levels is stationary. That is the cointegration story. The safe interpretation is: “The variables are individually persistent, but the estimated levels combination is stationary. The coefficient on the lagged deviation measures adjustment toward that long-run relation.”</p>
+<p>This is the setting in which the words “cointegration”, “long-run equilibrium”, and “error correction” are at home.</p>
+<p><strong>Case 2.</strong> Now suppose the dependent variable is <span class="math inline">\(I(0)\)</span>. This is where many applied ARDL interpretations become confused.</p>
+<p>If <span class="math inline">\(y_t\)</span> is stationary, then it already returns to its own mean or deterministic path. A lagged <span class="math inline">\(y_{t-1}\)</span> term naturally captures persistence and mean reversion. There is nothing wrong with that. The problem begins when we combine a stationary dependent variable with raw <span class="math inline">\(I(1)\)</span> regressors in the levels block and then call the result an error-correction term.</p>
+<p>Suppose <span class="math display">\[
+y_t \sim I(0), \qquad x_t \sim I(1).
+\]</span> If we form <span class="math display">\[
+y_{t-1} - \beta x_{t-1},
+\]</span></p>
+<p>then this object will usually be <span class="math inline">\(I(1)\)</span> unless <span class="math inline">\(\beta = 0\)</span>. The <span class="math inline">\(I(1)\)</span> component in <span class="math inline">\(x_{t-1}\)</span> dominates. A stationary variable cannot cancel the stochastic trend in a nonstationary variable.</p>
+<p>So if <span class="math inline">\(y_t\)</span> is <span class="math inline">\(I(0)\)</span>, a raw <span class="math inline">\(I(1)\)</span> regressor generally should not appear inside something you call an error-correction term. If it does, the term is not stationary, and the “correction” interpretation breaks down.</p>
+<p>There are two coherent ways forward.</p>
+<p>The first is to keep the <span class="math inline">\(I(1)\)</span> regressor out of the levels block and let it enter in differences. Then the model says that changes in <span class="math inline">\(x_t\)</span> affect changes or movements in <span class="math inline">\(y_t\)</span>, while <span class="math inline">\(y_t\)</span> itself may revert toward its own mean or toward a stationary levels anchor.</p>
+<p>A simple form would be <span class="math display">\[
+\Delta y_t = a + \lambda y_{t-1} + \sum_i \psi_i \Delta y_{t-i} + \sum_j \omega_j \Delta x_{t-j} + u_t.
+\]</span> Here <span class="math inline">\(y_{t-1}\)</span> is stationary because <span class="math inline">\(y_t\)</span> is stationary, and <span class="math inline">\(\Delta x_t\)</span> is stationary if <span class="math inline">\(x_t\)</span> is <span class="math inline">\(I(1)\)</span>. The model is coherent. But it is not a cointegrating ECM between <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>. It is a dynamic mean-reversion model for <span class="math inline">\(y\)</span> with short-run effects of changes in <span class="math inline">\(x\)</span>.</p>
+<p>The second option is to replace the raw <span class="math inline">\(I(1)\)</span> variable by a stationary object. If economic theory says that some long-run pressure matters, construct that pressure as an <span class="math inline">\(I(0)\)</span> variable. For example, if two <span class="math inline">\(I(1)\)</span> variables share a long-run relation, their stationary residual can be used as an index of disequilibrium or imbalance.</p>
+<p>Then the model might look like <span class="math display">\[
+\Delta y_t = a + \lambda y_{t-1} + \rho z_{t-1} + \text{short-run dynamics} + u_t,
+\]</span> where <span class="math inline">\(z_t\)</span> is an <span class="math inline">\(I(0)\)</span> index or residual. This is coherent because every object in the levels block is stationary.</p>
+<p>The safe interpretation is then: “Because the dependent variable is stationary, I do not interpret the model as cointegration between <span class="math inline">\(y\)</span> and the raw <span class="math inline">\(I(1)\)</span> regressors. The levels block contains stationary objects only. Nonstationary variables enter in differences unless transformed into stationary combinations.”</p>
+<p>This sentence would save many thesis chapters.</p>
+<p><strong>Case 3.</strong> Some regressors are <span class="math inline">\(I(0)\)</span>, some are <span class="math inline">\(I(1)\)</span>. This is the mixed case for which ARDL is famous. But “mixed” does not mean “undisciplined”.</p>
+<p>If a regressor is <span class="math inline">\(I(0)\)</span>, it can appear in levels without creating a stochastic-trend problem. A stationary variable in levels is still stationary. It may belong in the levels block if economic reasoning suggests that the level of that variable affects the level or mean-reversion path of <span class="math inline">\(y_t\)</span>.</p>
+<p>If a regressor is <span class="math inline">\(I(1)\)</span>, you need to decide why it is there.</p>
+<ul>
+<li><p>If <span class="math inline">\(y_t\)</span> is <span class="math inline">\(I(1)\)</span>, an <span class="math inline">\(I(1)\)</span> regressor may belong in a cointegrating levels relationship, provided the implied residual is <span class="math inline">\(I(0)\)</span>.</p></li>
+<li><p>If <span class="math inline">\(y_t\)</span> is <span class="math inline">\(I(0)\)</span>, an <span class="math inline">\(I(1)\)</span> regressor usually belongs in differences unless you first transform it into an <span class="math inline">\(I(0)\)</span> combination.</p></li>
+</ul>
+<p>This gives a simple practical rule: <span class="math inline">\(I(0)\)</span> variables may live in the levels block. <span class="math inline">\(I(1)\)</span> variables may live in the levels block only if they help form a stationary long-run combination. Otherwise, use differences or construct a stationary index.</p>
+<p>That rule is more useful than saying “ARDL allows <span class="math inline">\(I(0)\)</span> and <span class="math inline">\(I(1)\)</span>”.</p>
+<p>What about deterministic trends? Before moving on, there is a subtle but important point. Some variables are not <span class="math inline">\(I(1)\)</span>, but trend-stationary. Others look <span class="math inline">\(I(1)\)</span> because of structural breaks. Others are persistent enough that tests disagree. This matters because the decision tree depends on how you classify the series. A deterministic trend is not the same as a stochastic trend. A variable that is stationary around a trend may be used differently from a variable that contains a unit root. Similarly, a break in the mean can make a stationary series look nonstationary if the break is ignored.</p>
+<p>So the workflow is not: “run one unit-root test and obey it mechanically.” The workflow is: look at the data, think about the economics, consider deterministic components and breaks, and use tests as evidence rather than as an oracle. Still, uncertainty about classification does not justify careless interpretation. If you are unsure whether a variable is <span class="math inline">\(I(0)\)</span> or <span class="math inline">\(I(1)\)</span>, write that uncertainty into the interpretation. Do not simply choose the language that makes the results sound most impressive.</p>
+<p>What goes in differences?</p>
+<p>Differences are natural for <span class="math inline">\(I(1)\)</span> variables when you do not have a stationary level combination. If <span class="math inline">\(x_t\)</span> is <span class="math inline">\(I(1)\)</span>, then <span class="math inline">\(\Delta x_t\)</span> is usually <span class="math inline">\(I(0)\)</span>, and it can enter the short-run dynamics of the ARDL.</p>
+<p>This is not a second-best option. It answers a different question. Instead of asking whether the level of <span class="math inline">\(x_t\)</span> anchors the level of <span class="math inline">\(y_t\)</span>, you ask how changes in <span class="math inline">\(x_t\)</span> affect <span class="math inline">\(y_t\)</span> over time.</p>
+<p>This is where the older ARDL tradition becomes useful. Distributed lag models are about dynamic effects. They tell us how a movement in a regressor propagates through the dependent variable over subsequent periods. In that sense, an ARDL can be informative even when there is no cointegrating relation. You just need to stop calling the result “long-run equilibrium”.</p>
+<p>For example, if the dependent variable is stationary inflation and an explanatory variable is a nonstationary commodity price level, it may be more coherent to model inflation as responding to commodity price changes rather than to the commodity price level itself. The resulting coefficients describe dynamic pass-through, not cointegration.</p>
+<p>That is a perfectly legitimate economic object.</p>
+<p>What goes in levels? A useful levels block should contain objects whose level has a stable interpretation in the model. These may be stationary variables, deterministic components, lagged dependent variables when the dependent variable is stationary, or stationary deviations built from nonstationary fundamentals.</p>
+<p>What should not go there is a raw <span class="math inline">\(I(1)\)</span> variable simply because the ARDL software permits lagged levels.</p>
+<p>When deciding whether something belongs in levels, ask: can this object be persistently away from its typical value without the model becoming incoherent? If yes, it may belong in the levels block. If no, it probably belongs in differences, or it must be transformed into a stationary object first.</p>
+<p>None of this is meant to make ARDL unattractive. Quite the opposite. ARDL is useful because it forces us to think jointly about persistence, short-run dynamics, and long-run implications. Its flexibility is a strength. But flexibility is not the same as “everything goes”.</p>
+<p>The historical lesson is that ARDL began as dynamic specification, then had to be disciplined by the cointegration revolution once <span class="math inline">\(I(1)\)</span> variables entered the model. That discipline remains. The model can contain variables of different integration orders, but the story you tell must match the stationary objects the model actually contains.</p>
 
 
 
