@@ -1,0 +1,128 @@
+---
+title: "What Goes in Levels, What Goes in Differences"
+date: 2026-07-23
+tags: [econometrics, ARDL, integration,  cointegration,  stationarity, UECM, ECM]
+slug: ARDL
+---
+
+The central difficulty with ARDL models is not estimation. Software will estimate them quite happily. The difficulty is interpretation. Once variables of different integration orders appear in the same dynamic equation, the words “short run”, “long run”, “levels”, “error correction”, and “cointegration” stop being interchangeable.
+
+This post is meant to be practical. It gives a decision workflow for mixed $I(0)/I(1)$ ARDL models. The aim is not to replace judgement, but to prevent the most common mistake: putting variables into a “levels block” because the ARDL form allows it, and then interpreting the result as an equilibrium relation without checking whether the object being corrected is stationary.
+
+The organising principle is simple. In an ARDL, variables can appear in levels and differences. But the interpretation of the levels block depends on the integration properties of the variables and on whether the implied deviation is stationary.
+
+Start with the dependent variable. A good ARDL specification does not begin with the regressors. It begins with the dependent variable. Ask first: is the variable you are trying to explain $I(0)$ or $I(1)$?
+
+This matters because the dependent variable determines the kind of story the model can tell.
+
+If the dependent variable is $I(1)$, then a levels relationship with other $I(1)$ variables may be a genuine cointegrating relationship. In that case, an error-correction interpretation is possible. The dependent variable and the regressors may drift over time, but a particular combination of them is stationary. Deviations from that combination are temporary, and the model describes how the system adjusts when it is away from its long-run path.
+
+If the dependent variable is $I(0)$, the story is different. A stationary dependent variable does not share a stochastic trend with an $I(1)$ variable. It can display persistence and mean reversion, and it can be affected by changes in nonstationary variables, but calling this “cointegration” is usually misleading. The language should shift from “cointegrating equilibrium” to something more modest: a levels relationship, a mean-reversion anchor, or a long-run association in stationary objects.
+
+So the first fork is:
+
+- If $y_t$ is $I(1)$, ask whether there is a stationary combination of $y_t$ and the relevant level regressors.
+
+- If $y_t$ is $I(0)$, ask what stationary object can legitimately appear in the levels block.
+
+Everything else follows from that distinction.
+
+**Case 1.** Suppose the dependent variable is $I(1)$. This is the classical cointegration case. Think of examples like log consumption, log income, log money demand, log prices, or other macroeconomic levels that appear to drift over time.
+
+An ARDL in this setting can be written in a conditional error-correction form. The lagged levels enter because you are asking whether there is a long-run relationship tying the variables together. If the dependent variable and some regressors are $I(1)$, the natural question is whether the implied long-run residual is $I(0)$.
+
+For example, suppose the long-run relation is written informally as
+$$
+y_t = \beta_0 + \beta_1 x_{1t} + \beta_2 x_{2t} + e_t.
+$$
+If $y_t$, $x_{1t}$, and $x_{2t}$ are $I(1)$, then this relationship is meaningful as a cointegrating relation only if
+$$
+e_t = y_t - \beta_0 - \beta_1 x_{1t} - \beta_2 x_{2t}
+$$
+is $I(0)$.
+
+That stationary residual is the object that can enter an ECM. It is the error-correction term. Without it, you only have levels in a regression; you do not have error correction.
+
+In this case, the levels block can contain $I(1)$ variables because the model is not claiming that each level is stationary. It is claiming that a particular combination of levels is stationary. That is the cointegration story. The safe interpretation is: “The variables are individually persistent, but the estimated levels combination is stationary. The coefficient on the lagged deviation measures adjustment toward that long-run relation.”
+
+This is the setting in which the words “cointegration”, “long-run equilibrium”, and “error correction” are at home.
+
+**Case 2.**  Now suppose the dependent variable is $I(0)$. This is where many applied ARDL interpretations become confused.
+
+If $y_t$ is stationary, then it already returns to its own mean or deterministic path. A lagged $y_{t-1}$ term naturally captures persistence and mean reversion. There is nothing wrong with that. The problem begins when we combine a stationary dependent variable with raw $I(1)$ regressors in the levels block and then call the result an error-correction term.
+
+Suppose
+$$
+y_t \sim I(0), \qquad x_t \sim I(1).
+$$
+If we form
+$$
+y_{t-1} - \beta x_{t-1},
+$$
+
+then this object will usually be $I(1)$ unless $\beta = 0$. The $I(1)$ component in $x_{t-1}$ dominates. A stationary variable cannot cancel the stochastic trend in a nonstationary variable.
+
+So if $y_t$ is $I(0)$, a raw $I(1)$ regressor generally should not appear inside something you call an error-correction term. If it does, the term is not stationary, and the “correction” interpretation breaks down.
+
+There are two coherent ways forward.
+
+The first is to keep the $I(1)$ regressor out of the levels block and let it enter in differences. Then the model says that changes in $x_t$ affect changes or movements in $y_t$, while $y_t$ itself may revert toward its own mean or toward a stationary levels anchor.
+
+A simple form would be
+$$
+\Delta y_t = a + \lambda y_{t-1} + \sum_i \psi_i \Delta y_{t-i} + \sum_j \omega_j \Delta x_{t-j} + u_t.
+$$
+Here $y_{t-1}$ is stationary because $y_t$ is stationary, and $\Delta x_t$ is stationary if $x_t$ is $I(1)$. The model is coherent. But it is not a cointegrating ECM between $y$ and $x$. It is a dynamic mean-reversion model for $y$ with short-run effects of changes in $x$.
+
+The second option is to replace the raw $I(1)$ variable by a stationary object. If economic theory says that some long-run pressure matters, construct that pressure as an $I(0)$ variable. For example, if two $I(1)$ variables share a long-run relation, their stationary residual can be used as an index of disequilibrium or imbalance.
+
+Then the model might look like
+$$
+\Delta y_t = a + \lambda y_{t-1} + \rho z_{t-1} + \text{short-run dynamics} + u_t,
+$$
+where $z_t$ is an $I(0)$ index or residual. This is coherent because every object in the levels block is stationary.
+
+The safe interpretation is then: “Because the dependent variable is stationary, I do not interpret the model as cointegration between $y$ and the raw $I(1)$ regressors. The levels block contains stationary objects only. Nonstationary variables enter in differences unless transformed into stationary combinations.”
+
+This sentence would save many thesis chapters.
+
+**Case 3.** Some regressors are $I(0)$, some are $I(1)$. This is the mixed case for which ARDL is famous. But “mixed” does not mean “undisciplined”.
+
+If a regressor is $I(0)$, it can appear in levels without creating a stochastic-trend problem. A stationary variable in levels is still stationary. It may belong in the levels block if economic reasoning suggests that the level of that variable affects the level or mean-reversion path of $y_t$.
+
+If a regressor is $I(1)$, you need to decide why it is there.
+
+- If $y_t$ is $I(1)$, an $I(1)$ regressor may belong in a cointegrating levels relationship, provided the implied residual is $I(0)$.
+
+- If $y_t$ is $I(0)$, an $I(1)$ regressor usually belongs in differences unless you first transform it into an $I(0)$ combination.
+
+This gives a simple practical rule: $I(0)$ variables may live in the levels block. $I(1)$ variables may live in the levels block only if they help form a stationary long-run combination. Otherwise, use differences or construct a stationary index.
+
+That rule is more useful than saying “ARDL allows $I(0)$ and $I(1)$”.
+
+What about deterministic trends? Before moving on, there is a subtle but important point. Some variables are not $I(1)$, but trend-stationary. Others look $I(1)$ because of structural breaks. Others are persistent enough that tests disagree. This matters because the decision tree depends on how you classify the series. A deterministic trend is not the same as a stochastic trend. A variable that is stationary around a trend may be used differently from a variable that contains a unit root. Similarly, a break in the mean can make a stationary series look nonstationary if the break is ignored.
+
+So the workflow is not: “run one unit-root test and obey it mechanically.” The workflow is: look at the data, think about the economics, consider deterministic components and breaks, and use tests as evidence rather than as an oracle. Still, uncertainty about classification does not justify careless interpretation. If you are unsure whether a variable is $I(0)$ or $I(1)$, write that uncertainty into the interpretation. Do not simply choose the language that makes the results sound most impressive.
+
+What goes in differences?
+
+Differences are natural for $I(1)$ variables when you do not have a stationary level combination. If $x_t$ is $I(1)$, then $\Delta x_t$ is usually $I(0)$, and it can enter the short-run dynamics of the ARDL.
+
+This is not a second-best option. It answers a different question. Instead of asking whether the level of $x_t$ anchors the level of $y_t$, you ask how changes in $x_t$ affect $y_t$ over time.
+
+This is where the older ARDL tradition becomes useful. Distributed lag models are about dynamic effects. They tell us how a movement in a regressor propagates through the dependent variable over subsequent periods. In that sense, an ARDL can be informative even when there is no cointegrating relation. You just need to stop calling the result “long-run equilibrium”.
+
+For example, if the dependent variable is stationary inflation and an explanatory variable is a nonstationary commodity price level, it may be more coherent to model inflation as responding to commodity price changes rather than to the commodity price level itself. The resulting coefficients describe dynamic pass-through, not cointegration.
+
+That is a perfectly legitimate economic object.
+
+What goes in levels? A useful levels block should contain objects whose level has a stable interpretation in the model. These may be stationary variables, deterministic components, lagged dependent variables when the dependent variable is stationary, or stationary deviations built from nonstationary fundamentals.
+
+What should not go there is a raw $I(1)$ variable simply because the ARDL software permits lagged levels.
+
+When deciding whether something belongs in levels, ask: can this object be persistently away from its typical value without the model becoming incoherent? If yes, it may belong in the levels block. If no, it probably belongs in differences, or it must be transformed into a stationary object first.
+
+None of this is meant to make ARDL unattractive. Quite the opposite. ARDL is useful because it forces us to think jointly about persistence, short-run dynamics, and long-run implications. Its flexibility is a strength. But flexibility is not the same as "everything goes".
+
+The historical lesson is that ARDL began as dynamic specification, then had to be disciplined by the cointegration revolution once $I(1)$ variables entered the model. That discipline remains. The model can contain variables of different integration orders, but the story you tell must match the stationary objects the model actually contains.
+
