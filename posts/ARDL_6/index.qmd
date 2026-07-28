@@ -1,0 +1,126 @@
+---
+title: "Cointegration Among Regressors: Useful,  But Not the One May Think"
+date: 2026-07-23
+tags: [econometrics, ARDL, integration,  cointegration,  stationarity, UECM, ECM]
+slug: ARDL
+---
+
+Suppose the dependent variable is stationary, but two or more regressors are $I(1)$. You test those regressors and find that they are cointegrated. What should you do with that result?
+
+Many students/researchers make one of two mistakes. The first mistake is to conclude that because the regressors are cointegrated, their raw levels can now be placed freely in the ARDL levels block. The second mistake is the opposite: they run cointegration tests among regressors, report the results, and then do nothing with them. The section then sits in the thesis/paper like an orphan, disconnected from the model actually estimated. 
+
+Both mistakes come from the same misunderstanding. Cointegration among regressors is not automatically a licence to include all of them in levels. What it gives you is a stationary combination of those regressors. That stationary combination may be useful. But it is the combination, not the raw $I(1)$ variables separately, that has earned a place in a stationary levels block.  We will consider both mistakes below.
+
+**Case 1.** Suppose two variables, $x_{1t}$ and $x_{2t}$, are both $I(1)$. Individually, they drift. But suppose there exists a coefficient $\gamma$ such that
+$$
+z_t = x_{1t} - \gamma x_{2t}
+$$
+is $I(0)$. Then $x_{1t}$ and $x_{2t}$ are cointegrated, and $z_t$ is the stationary deviation from their long-run relation.
+
+The crucial point is this:
+$$
+x_{1t} \sim I(1), \qquad x_{2t} \sim I(1), \qquad z_t = x_{1t}-\gamma x_{2t} \sim I(0).
+$$
+Cointegration does not make $x_{1t}$ stationary. It does not make $x_{2t}$ stationary. It makes a particular linear combination stationary. That is the object one can use.
+
+Take a macro example. Suppose you are modelling a stationary variable such as an inflation gap, a risk premium, an unemployment gap, or a stationary policy spread. Call it $y_t$, and suppose
+$$
+y_t \sim I(0).
+$$
+
+Now suppose there are two trending fundamentals, say a nominal money stock and a price level:
+$$
+m_t \sim I(1), \qquad p_t \sim I(1).
+$$
+
+Economics might suggest that money and prices share a long-run relation. One estimates
+$$
+m_t = a + \gamma p_t + v_t
+$$
+and finds that the residual
+$$
+v_t = m_t - a - \gamma p_t
+$$
+is stationary.
+
+This does not mean that you should write an ARDL for $y_t$ and put both $m_{t-1}$ and $p_{t-1}$ as raw levels in the error-correction block. If $y_t$ is $I(0)$, and both $m_t$ and $p_t$ are $I(1)$, then a generic expression like
+$$
+y_{t-1} - \beta_1 m_{t-1} - \beta_2 p_{t-1}
+$$
+will not usually be $I(0)$. It will be $I(0)$ only for very particular combinations of $\beta_1$ and $\beta_2$, namely combinations that eliminate the stochastic trend in $m_t$ and $p_t$.
+
+What you can do is use the stationary residual $v_t$. Then an ARDL/UECM-type model might include $v_{t-1}$ as a level regressor, because $v_t$ is $I(0)$. In words, $v_t$ becomes an index of “monetary imbalance”, “excess liquidity”, or whatever economic interpretation the context supports.
+
+The model then says something coherent: the stationary dependent variable $y_t$ may respond to a stationary imbalance constructed from nonstationary fundamentals.
+
+That is different from saying that $y_t$, $m_t$, and $p_t$ are cointegrated.
+
+Why this matters for the levels block? If the dependent variable is $I(0)$, the levels block must contain stationary objects. Lagged $y_t$ is stationary. $I(0)$ regressors are stationary. Stationary residuals or indices are stationary. Raw $I(1)$ variables are not.
+
+So the question is not: “Are my regressors cointegrated?”
+
+A better question is: “Does the cointegration result give me a stationary object that has an economic interpretation and belongs in the levels block?”
+
+If yes, one uses it. If no, one does not force it.
+
+Notice that cointegration among regressors is not cointegration with the dependent variable. This distinction is easy to miss.
+
+Suppose $x_{1t}$ and $x_{2t}$ are cointegrated. That tells you something about the relationship between $x_1$ and $x_2$. It does not automatically tell you that $y_t$ is part of the same cointegrating system.
+
+If $y_t$ is $I(0)$, then saying “$y_t$ is cointegrated with $x_{1t}$ and $x_{2t}$” is usually the wrong language. A better sentence is: “The $I(1)$ regressors appear to share a stationary long-run deviation. I use that stationary deviation as an explanatory level variable in a model for the stationary dependent variable.”
+
+That sentence is much more precise. It tells the reader exactly what the cointegration test is doing in the empirical strategy.
+
+**Case 2.** Let's move on to the second problem, the “orphan cointegration test” problem: first, the student/researcher runs unit-root tests followed by several cointegration tests among some variables; then they estimate an ARDL where those tests do not actually affect the specification. 
+
+A cointegration test should have a job. If it has no job, remove it, or the reader is left wondering why the tests were included.
+
+There are two clean choices.
+
+The first is to use the result. If two or more $I(1)$ regressors are cointegrated, construct the stationary residual and include it as an economically meaningful index in the levels block. Then explain why that residual belongs in the model.
+
+The second is to de-emphasise the result. You might say that you tested cointegration among the regressors as an exploratory exercise, but that the baseline model does not impose a stationary index; therefore the $I(1)$ regressors enter only in differences. That is perfectly acceptable. It is much better than presenting cointegration tests as if they justify a modelling choice that you do not actually make.
+
+What you should avoid is the middle ground: testing cointegration, not using the residual, but still talking as if the test supports the long-run part of the ARDL.
+
+How can one construct the stationary index? The simplest version is residual-based.
+
+First, estimate the long-run relation among the $I(1)$ variables:
+$$
+x_{1t} = a + \gamma x_{2t} + v_t.
+$$
+
+Second, compute
+$$
+\hat v_t = x_{1t} - \hat a - \hat\gamma x_{2t}.
+$$
+
+Third, test whether $\hat v_t$ is $I(0)$, or at least show convincing evidence that it behaves as a stationary deviation.
+
+Fourth, use $\hat v_t$ in the ARDL as a stationary level variable:
+$$
+\Delta y_t = a + \lambda y_{t-1} + \rho \hat v_{t-1} + \text{short-run dynamics} + u_t.
+$$
+
+This specification now has a coherent interpretation. The stationary dependent variable adjusts to its own lag and to a stationary imbalance among the fundamentals. The raw $I(1)$ variables need not appear separately in the levels block.
+
+Of course, this raises ordinary modelling questions. Should the cointegrating relation include a trend? Should the coefficient be stable? Are there breaks? Is the residual economically interpretable? These questions matter. A residual with no economic meaning is not much better than a black-box factor.
+
+What can one call the residual? The name matters because it shapes the interpretation. One might call it an “imbalance index”, a “fundamental gap”, a “misalignment measure”, a “pressure variable”, or a “stationary fiscal/monetary/external index”, depending on the context.
+
+Avoid calling it “the cointegration term with $y$” if $y$ is not part of the cointegrating relation. It is a stationary residual constructed from the regressors. It may help explain $y$, but it is not evidence that $y$ is cointegrated with them.
+
+But one should not use a cointegrating residual just because it can be constructed. The residual needs an economic role.
+
+There are at least four reasons not to use such residual in the regression.
+
+First, the cointegration evidence may be weak or unstable. If the residual is stationary only under one specification, one sample period, or one deterministic trend choice, one needs to be cautious.
+
+Second, the residual may be difficult to interpret. If the long-run relation is purely statistical, the resulting index may add mystery rather than clarity.
+
+Third, the residual may duplicate information already present in other stationary variables. Adding it can create multicollinearity or muddy the interpretation.
+
+Fourth, the residual may be generated in a first step, and uncertainty from that first step is often ignored in the second-step ARDL. In many applications this may be a minor issue, but it is worth acknowledging when the residual is central to the model.
+
+The principle is simple: a stationary residual is admissible, but not automatically useful.
+
