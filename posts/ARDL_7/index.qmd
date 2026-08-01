@@ -1,0 +1,94 @@
+---
+title: "Bounds Testing Done Properly: What the F-test Is Actually Testing"
+date: 2026-08-01
+tags: [econometrics, ARDL, integration,  cointegration,  stationarity, UECM, ECM]
+slug: ARDL
+---
+
+In the previous posts I deliberately kept bounds testing in the background. ARDL is older and broader than the Pesaran–Shin–Smith bounds procedure. It began as a way of thinking about dynamic single-equation models, lag structures, and long-run multipliers. The arrival of $I(1)$ variables forced the ARDL tradition to confront cointegration and error correction, but ARDL itself is not reducible to one test.
+
+Still, the bounds test matters because it is the route by which many students first encounter ARDL. They estimate an ARDL, click “bounds test”, see whether the F-statistic is above or below a critical value, and then write either “cointegration exists” or “there is no cointegration”. But this is too quick. The bounds test is useful, but it is often misunderstood.
+
+The purpose of this post is simple: to explain what the bounds test is actually testing, what it is not testing, and why rejecting the null does not remove the need to think carefully about the levels block.
+
+The practical problem Pesaran, Shin and Smith addressed was not “how do we define ARDL?” but something narrower and extremely useful: how can we test for a level relationship when we are uncertain whether the regressors are $I(0)$ or $I(1)$?
+
+Classical cointegration methods were developed mainly for the case where the variables are $I(1)$. But in practice, unit-root tests are often inconclusive. One variable looks $I(1)$ under one test and $I(0)$ under another. Another is persistent but economically bounded. Another shifts because of a break. If we force ourselves to classify every variable perfectly before modelling, we may build the whole analysis on fragile pre-tests.
+
+The bounds approach tries to reduce that fragility. It asks whether the lagged levels in a conditional error-correction representation are jointly significant, and it compares the resulting statistic to two sets of critical values: one assuming the relevant variables are $I(0)$, the other assuming they are $I(1)$. If the statistic is above the upper bound, there is evidence of a level relationship. If it is below the lower bound, there is not. If it lies between the bounds, the test is inconclusive.
+
+This is clever and useful. But it is not magic.
+
+Take a simple ARDL with one regressor and write it in the unrestricted error-correction form:
+$$
+\Delta y_t = a + \lambda y_{t-1} + \delta x_{t-1} + \sum_i \psi_i \Delta y_{t-i} + \sum_j \omega_j \Delta x_{t-j} + u_t.
+$$
+The bounds test asks whether the lagged levels matter jointly. In this simple case, the null is
+$$
+H_0: \lambda = 0,\quad \delta = 0.
+$$
+Under this null, there is no level relationship in the conditional model. The short-run dynamics may still matter; the differences may still explain movements in $\Delta y_t$. But the lagged levels do not enter in a way that suggests a stable level relationship.
+
+The alternative is that the lagged levels matter:
+$$
+H_1: (\lambda,\delta) \neq (0,0).
+$$
+This is why the bounds test is often described as a test for a level relationship. It is a test of whether the levels block has explanatory content in the UECM.
+
+But notice the wording. It is not, in the first instance, a test that “all variables are cointegrated”. It is a test of the joint significance of lagged levels in a particular conditional dynamic equation.
+
+That distinction matters.
+
+The bounds test does not classify your variables as $I(0)$ or $I(1)$. It was designed precisely because that classification may be uncertain.
+
+The bounds test does not allow $I(2)$ variables. This is a point students often miss. The relevant critical values are built around $I(0)$ and $I(1)$ cases. If a variable is $I(2)$, the logic breaks. So bounds testing does not eliminate unit-root work; it reduces dependence on exact $I(0)/I(1)$ classification, but you still need enough evidence to rule out $I(2)$.
+
+The bounds test does not decide the economic meaning of the levels block. It tells you whether lagged levels are jointly significant in the conditional model. It does not tell you whether the levels relationship should be interpreted as cointegration, mean reversion, a stationary anchor, or a misspecified mixture of variables.
+
+The bounds test does not rescue bad dynamics. If the lag length is inappropriate, residuals are serially correlated, deterministic terms are badly chosen, or structural breaks are ignored, the test result may be misleading. Bounds testing sits inside a model. If the model is poor, the test inherits the problem.
+
+Most importantly for this recent series, the bounds test does not repeal the rule from earlier posts that: if you want an error-correction interpretation, the correction term must be stationary.
+
+A significant bounds test may suggest that levels matter. It does not give you permission to interpret a nonstationary “ECT” as if it were a stationary deviation.
+
+Pesaran, Shin and Smith use the language of "level relationships". That phrase is important. It is broader than strict Engle–Granger cointegration language.
+
+Cointegration is usually about $I(1)$ variables sharing a common stochastic trend so that some linear combination is $I(0)$. If $y_t$ and $x_t$ are both $I(1)$, and the estimated levels combination
+$$
+y_t - \beta x_t
+$$
+is $I(0)$, then the language of cointegration and error correction is natural.
+
+But ARDL applications often involve mixtures. Some regressors may be $I(0)$. The dependent variable may itself be $I(0)$. In those cases, a “level relationship” may still be empirically meaningful, but it is not automatically a cointegrating equilibrium in the strict sense.
+
+This is why the phrase “bounds test confirms cointegration” is often too loose. A safer sentence is: the bounds test rejects the null of no level relationship in the conditional ARDL/UECM specification. Then, separately, you explain what that level relationship means given the integration properties of the variables.
+
+A typical applied paragraph goes like this: “The F-statistic exceeds the upper bound. Therefore, the variables are cointegrated. The ECT is negative and significant, so the model converges to long-run equilibrium.”
+
+This may be correct in some cases. But it may also be wrong.
+
+It is correct if the variables involved are $I(1)$, the implied deviation is stationary, the specification is adequate, and the economics supports a long-run equilibrium interpretation.
+
+It is wrong if the dependent variable is $I(0)$ and some raw $I(1)$ regressors have been placed in the levels block without forming a stationary combination. It is also wrong if the “ECT” is merely a lagged levels bundle whose stationarity has not been considered. And it is definitely wrong if the model diagnostics are poor.
+
+A better paragraph would be more careful: “The bounds test rejects the null of no level relationship. Since the dependent variable is $I(1)$ and the implied deviation from the estimated levels relation is stationary, I interpret the lagged deviation as an error-correction term.”
+
+Or, in a different case: “The bounds test suggests that lagged levels matter in the conditional model. Because the dependent variable is stationary, I do not interpret this as cointegration. I interpret the levels terms as a mean-reversion or stationary levels relationship, with nonstationary regressors entering only through differences or stationary combinations.”
+
+Another source of confusion is the treatment of intercepts and trends. Bounds testing is not independent of deterministic components. Whether the model includes no intercept, a restricted intercept, an unrestricted intercept, a trend, or combinations of these changes the relevant critical values and changes the interpretation of the level relationship.
+
+This is not just a technical nuisance. A deterministic trend changes what we mean by stationarity and adjustment. A level relationship around a constant mean is different from a relationship around a deterministic trend. A model with an unrestricted trend is making a different claim from a model with no trend.
+
+So the deterministic part of the model should not be chosen casually. It should follow from the data and the economics. If the variables visibly trend because of deterministic growth, that should be reflected. If the trend is a proxy for omitted structural change, that is a different issue. If there are breaks, a simple trend may not be enough.
+
+The practical message is simple: the bounds test should not be treated as a black box. The test is conditional on the deterministic specification choosen.
+
+ARDL models are dynamic models. The lag structure is not decoration.
+
+Too few lags leave serial correlation and misspecified dynamics. Too many lags waste degrees of freedom and can make inference unstable. In small samples, this is not an innocent choice. The estimated long-run coefficients, bounds statistic, and adjustment term all depend on the lag length.
+
+Information criteria are useful, but they are not a substitute for judgement. If AIC wants many lags and BIC wants fewer, you need to explain your choice. If the chosen model leaves serial correlation in the residuals, the choice is probably not defensible. If a slightly different lag order changes the conclusion entirely, that is part of the story.
+
+A good applied paper does not simply report the selected ARDL order. It explains why the order is reasonable and shows that the key interpretation is not an artefact of one fragile lag choice.
+
+
