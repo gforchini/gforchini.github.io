@@ -6,10 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Giovanni Forchini">
-<meta name="dcterms.date" content="2018-02-08">
+<meta name="dcterms.date" content="2026-08-14">
 
-<title>Identification of Structural Vector Autoregressive Models – Giovanni Forchini</title>
+<title>Dynamic Multipliers in ARDL: The Impulse Response You Already Have – Giovanni Forchini</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -163,24 +162,18 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Identification of Structural Vector Autoregressive Models</h1>
+<h1 class="title">Dynamic Multipliers in ARDL: The Impulse Response You Already Have</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Giovanni Forchini </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">February 8, 2018</p>
+      <p class="date">August 14, 2026</p>
     </div>
   </div>
   
@@ -192,25 +185,84 @@ window.Quarto = {
 </header>
 
 
-<p>In the last lecture for Econometrics B in the Economics MSc at Warwick we discussed structural vector autoregressive (SVAR) models. These are very similar to simultaneous equations but identification is achieved using slightly different conditions. In the lecture we discussed a couple of identification strategies for these models but we did not get into the details as these would have led us beyond what is been required in the MSc. However, a few students asked me for some more details. These are provided here.</p>
-<p>A SVAR model of order <span class="math inline">\(p\)</span> is of the form:</p>
-<p><span class="math display">\[\Phi_0 y_t = \Phi_1y_{t-1} + \Phi_2y_{t-2} + ... + \Phi_p y_{t-p} +\varepsilon_t\]</span></p>
-<p>where <span class="math inline">\(y_t\)</span> is a vector of dimension <span class="math inline">\(n\)</span>. If one multiplies right- and left-hand-sides by the inverse of <span class="math inline">\(\Phi_0\)</span>, assuming that it exists, a vector autoregressive model is obtained, corresponding to the reduced form of a SVAR model:</p>
-<p><span class="math display">\[y_t = \Phi_0^{-1}\Phi_1y_{t-1} + \Phi_0^{-1}\Phi_2y_{t-2} + ... + \Phi_0^{-1}\Phi_p y_{t-p} + \Phi_0^{-1}\varepsilon_t\]</span></p>
-<p><span class="math display">\[= \Psi_1 y_{t-1} + \Psi_2 y_{t-2} + ... + \Psi_p y_{t-p} + \varepsilon_t^*\]</span></p>
-<p>where <span class="math inline">\(\Psi_1=\Phi_0^{-1} \Phi_1\)</span> …. <span class="math inline">\(\Psi_p=\Phi_0^{-1} \Phi_p\)</span>. The parameters <span class="math inline">\(\Psi_1\)</span> …. <span class="math inline">\(\Psi_p\)</span> are well defined as they are the coefficient matrices of a VAR model. Similarly, <span class="math inline">\(var(\varepsilon^{*}_t)\)</span> is also well defined.</p>
-<p>Notice that by defining <span class="math inline">\(\Phi_0=B\)</span> and <span class="math inline">\(\Gamma=\left[ \Phi_1,...,\Phi_p\right]\)</span> and collecting all the right-hand-side variables into a vector <span class="math inline">\(z_t\)</span>, then the SVAR model can be written as <span class="math inline">\(By_t=\Gamma z_t+\varepsilon_t\)</span> and the reduced form is <span class="math inline">\(y_t=B^{-1}\Gamma z_t+B^{-1}\varepsilon_t\)</span>. This is the same model for which identification was discussed in a previous post using linear restrictions on the matrix <span class="math inline">\((B,-\Gamma)\)</span>. However, identification of SVAR models is achieved not through linear restrictions on <span class="math inline">\((B,-\Gamma)\)</span> but by imposing restrictions on the variance-covariance matrix of <span class="math inline">\(\varepsilon_t\)</span> and <span class="math inline">\(\Phi_0\)</span>.</p>
-<p>The most important assumption for identification is that <span class="math inline">\(var(\varepsilon_t) =I_n\)</span> where <span class="math inline">\(I_n\)</span> denotes an identity matrix (in general it can be any known positive definite matrix). Then, <span class="math inline">\(var(\varepsilon_t^*)=\Phi_0^{-1} (\Phi_0^{-1})'\)</span>. Since <span class="math inline">\(var(\varepsilon_t^*)\)</span> is well defined, <span class="math inline">\(\Phi_0\)</span> is identified if it can be obtained uniquely from <span class="math inline">\(var(\varepsilon_t^*)=\Phi_0^{-1} (\Phi_0^{-1})'\)</span>. One way to achieve identification in SVAR models is to appeal to the Choleski decomposition and assume that <span class="math inline">\(\Phi_0\)</span> - and therefore also <span class="math inline">\(\Phi_0^{-1}\)</span> - is lower triangular.</p>
-<p>Alternatively one can allow the variance-covariance matrix <span class="math inline">\(Var(\varepsilon_t)\)</span> to be a diagonal matrix - with unknown diagonal terms -, but then <span class="math inline">\(\Phi_0\)</span> is required to be lower triangular with diagonal elements equal to 1.</p>
-<p>Another strategy requires imposing long run restrictions. The intuition is that in a stationary equilibrium</p>
-<p><span class="math inline">\(y_t=y_{t-1}=...=y_{t-p}=y\)</span></p>
-<p>so that</p>
-<p><span class="math inline">\(\displaystyle\Phi_0 y =\Phi_1y + \Phi_2y + ... + \Phi_p y\)</span></p>
-<p>or</p>
-<p><span class="math inline">\(\displaystyle\left( \Phi_0 -\Phi_1-\Phi_2 - ... - \Phi_p\right) y=0.\)</span></p>
-<p>Define <span class="math inline">\(\Phi= \Phi_0 -\Phi_1-\Phi_2 - ... - \Phi_p\)</span> so that one can write <span class="math inline">\(\Phi y=0.\)</span> That is <span class="math inline">\(\Phi\)</span> captures the long term relationships between the variables in <span class="math inline">\(y\)</span>. These restrictions can be exploited. To do this, notice that <span class="math inline">\(\Psi_1=\Phi_0^{-1} \Phi_1\)</span>, …. <span class="math inline">\(\Psi_p=\Phi_0^{-1} \Phi_p\)</span> so that</p>
-<p><span class="math inline">\(I_m-\Psi_1-...-\Psi_p=\Phi_0^{-1}\left( \Phi_0-\Phi_1-...-\Phi_p\right).\)</span></p>
-<p>Let <span class="math inline">\(\Psi =I_n-\Psi_1-...-\Psi_p\)</span> so that <span class="math inline">\(\Psi =\Phi_0^{-1} \Phi\)</span>. Notice that <span class="math inline">\(\Psi\)</span> is well defined as it depends on the coefficient matrices of the VAR model. The restrictions on <span class="math inline">\(\Phi\)</span> plus the relationship <span class="math inline">\(\Psi =\Phi_0^{-1} \Phi\)</span> are not enough to determine <span class="math inline">\(\Phi_0\)</span> uniquely. However, there is another relationship which can be exploited: <span class="math inline">\(var(\varepsilon_t^*)=\Phi_0^{-1} (\Phi_0^{-1\prime})\)</span>. Notice that<span class="math inline">\(var(\varepsilon_t^*)\)</span> is well defined as it is the covariance matrix of the innovations in a VAR model.</p>
+<p>In the last few posts I have focused on the interpretation of levels in ARDL models. The main lesson has been that ARDL is flexible, but flexibility is not licence to do anything one likes. Once <span class="math inline">\(I(0)\)</span> and <span class="math inline">\(I(1)\)</span> variables appear in the same dynamic equation, we must be careful about what lives in levels, what lives in differences, and what can legitimately be called an error-correction term.</p>
+<p>This post shifts attention from levels to dynamics.</p>
+<p>An ARDL is not just a device for reporting “short-run” and “long-run” coefficients. It is a dynamic model. Its natural object is a path: how does <span class="math inline">\(y_t\)</span> respond over time to a movement in <span class="math inline">\(x_t\)</span>? In modern macroeconomics we often call such paths impulse responses. In the older ARDL language, they are often called dynamic multipliers. The names differ, but the idea is closely related.</p>
+<p>The purpose of this post is to make this connection clear.</p>
+<p>Take a simple ARDL(1,1): <span class="math display">\[
+y_t = c + \phi y_{t-1} + \theta_0 x_t + \theta_1 x_{t-1} + u_t.
+\]</span></p>
+<p>A common applied presentation reports <span class="math inline">\(\theta_0\)</span> as a short-run coefficient and then computes a long-run coefficient as <span class="math display">\[
+\frac{\theta_0+\theta_1}{1-\phi}.
+\]</span></p>
+<p>That long-run coefficient is useful, but it is only the end of the story. It tells us where the system eventually settles after a permanent change in <span class="math inline">\(x\)</span>, assuming the model is stable. It does not tell us how the system gets there.</p>
+<p>The more informative object is the whole sequence: <span class="math display">\[
+\frac{\partial y_t}{\partial x_t}, \quad
+\frac{\partial y_{t+1}}{\partial x_t}, \quad
+\frac{\partial y_{t+2}}{\partial x_t}, \quad \ldots
+\]</span></p>
+<p>This sequence is the dynamic multiplier path. It tells us how a change in <span class="math inline">\(x_t\)</span> propagates through <span class="math inline">\(y\)</span> over time.</p>
+<p>Historically, this is very much in the older dynamic-specification tradition. ARDL models were designed to represent lagged adjustment, delayed effects, persistence, and long-run multipliers, not merely to produce one “long-run” number. Hendry, Pagan and Sargan discuss dynamic specification as a central part of empirical econometric modelling, and Wickens and Breusch focus explicitly on transformed dynamic regressions and long-run interpretation.</p>
+<p>In a single-equation ARDL, the phrase dynamic multiplier is usually more precise. It describes the response of <span class="math inline">\(y\)</span> to a movement in a regressor <span class="math inline">\(x\)</span>, holding fixed the structure of the model. In a VAR or structural VAR, the phrase impulse response is more common. There the “impulse” is often a shock to one equation in a multivariate system, and identification becomes central: what exactly is the shock, and why should we interpret it causally?</p>
+<p>But conceptually, the ARDL dynamic multiplier and the VAR impulse response share a common purpose: they trace the time profile of an effect.</p>
+<p>The difference is that the ARDL is usually conditional and single-equation. It asks: given a movement in <span class="math inline">\(x\)</span>, how does <span class="math inline">\(y\)</span> respond according to this dynamic equation? It does not automatically explain where the movement in <span class="math inline">\(x\)</span> came from.</p>
+<p>Return to the ARDL(1,1): <span class="math display">\[
+y_t = c + \phi y_{t-1} + \theta_0 x_t + \theta_1 x_{t-1} + u_t.
+\]</span></p>
+<p>Suppose <span class="math inline">\(x_t\)</span> increases by one unit at time <span class="math inline">\(t\)</span>, and then remains one unit higher forever. What happens to <span class="math inline">\(y\)</span>?</p>
+<p>At impact, <span class="math inline">\(y_t\)</span> moves by <span class="math display">\[
+m_0 = \theta_0.
+\]</span></p>
+<p>One period later, the effect comes through two channels: the lagged effect of <span class="math inline">\(x\)</span>, and the persistence of <span class="math inline">\(y\)</span>: <span class="math display">\[
+m_1 = \phi m_0 + \theta_1.
+\]</span></p>
+<p>Two periods later: <span class="math display">\[
+m_2 = \phi m_1.
+\]</span></p>
+<p>Three periods later: <span class="math display">\[
+m_3 = \phi m_2.
+\]</span></p>
+<p>And so on.</p>
+<p>If <span class="math inline">\(|\phi|&lt;1\)</span>, the system stabilises and the cumulative effect converges to the long-run multiplier: <span class="math display">\[
+\frac{\theta_0+\theta_1}{1-\phi}.
+\]</span></p>
+<p>That long-run coefficient is therefore not a mysterious separate object. It is the limit of the dynamic adjustment path.</p>
+<p>This matters for interpretation. Reporting only the short-run and long-run coefficients can hide economically important information.</p>
+<p>Two ARDL models may have the same long-run multiplier but very different adjustment paths. In one model, most of the effect occurs immediately. In another, the effect builds slowly. In a third, the response overshoots and then returns. These are substantively different stories, even if the final long-run multiplier is identical.</p>
+<p>For policy questions, timing often matters as much as the final level. A policy variable that changes output after one quarter is different from one that affects output only after three years. A price shock that passes through quickly is different from one that leaks into the dependent variable slowly. A financial variable that overshoots and reverses tells a different story from one that converges smoothly.</p>
+<p>The ARDL already contains this information. Dynamic multipliers are simply the way to display it.</p>
+<p>A crucial choice is whether the movement in <span class="math inline">\(x\)</span> is temporary or permanent.</p>
+<p>If <span class="math inline">\(x_t\)</span> rises for one period and then returns to baseline, the dynamic multiplier traces the effect of a one-off pulse. The response dies out through the lag structure if the model is stable.</p>
+<p>If <span class="math inline">\(x_t\)</span> rises and remains permanently higher, the response traces adjustment toward a new steady state. That is the path whose endpoint is the long-run multiplier.</p>
+<p>These are different thought experiments.</p>
+<p>With stationary regressors, a permanent level shift may be interpreted as a shift in the mean or deterministic component of the regressor. With <span class="math inline">\(I(1)\)</span> regressors, a permanent change in the level is often natural because shocks accumulate. With differenced <span class="math inline">\(I(1)\)</span> regressors, the interpretation changes again: a one-off increase in <span class="math inline">\(\Delta x_t\)</span> is a permanent increase in the level of <span class="math inline">\(x_t\)</span>.</p>
+<p>This is one reason mixed <span class="math inline">\(I(0)/I(1)\)</span> ARDL models need careful language. The same graph can mean different things depending on whether the regressor is stationary, nonstationary in levels, or included in differences.</p>
+<p>Suppose <span class="math inline">\(x_t\)</span> is <span class="math inline">\(I(1)\)</span>, and for the reasons discussed in earlier posts you decide not to include its raw level in the levels block. Instead, you include <span class="math inline">\(\Delta x_t\)</span>: <span class="math display">\[
+\Delta y_t = a + \lambda y_{t-1} + \omega_0 \Delta x_t + \omega_1 \Delta x_{t-1} + u_t.
+\]</span></p>
+<p>This is a coherent specification when <span class="math inline">\(y_t\)</span> is <span class="math inline">\(I(0)\)</span> and <span class="math inline">\(x_t\)</span> is <span class="math inline">\(I(1)\)</span>. The model says that changes in <span class="math inline">\(x\)</span> move <span class="math inline">\(y\)</span>, while <span class="math inline">\(y\)</span> itself may be mean-reverting.</p>
+<p>The dynamic multiplier now answers a slightly different question:</p>
+<blockquote class="blockquote">
+<p>What is the response of <span class="math inline">\(y\)</span> to a one-period change in <span class="math inline">\(x\)</span>?</p>
+</blockquote>
+<p>If <span class="math inline">\(\Delta x_t\)</span> jumps by one unit for one period, then <span class="math inline">\(x_t\)</span> itself has moved permanently by one unit. The response of <span class="math inline">\(y\)</span> is therefore a response to an innovation in the level of <span class="math inline">\(x\)</span>, but the ARDL sees it through <span class="math inline">\(\Delta x\)</span>.</p>
+<p>This subtlety matters. When a nonstationary variable enters only in differences, an “impulse” to <span class="math inline">\(\Delta x\)</span> is not merely a temporary disturbance to the growth rate; it may imply a lasting shift in the level of <span class="math inline">\(x\)</span>. The interpretation depends on the data-generating process you have in mind.</p>
+<p>Now suppose <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span> are <span class="math inline">\(I(1)\)</span> and cointegrated. Then an ECM form is appropriate: <span class="math display">\[
+\Delta y_t = a + \alpha (y_{t-1}-\beta x_{t-1}) + \sum_i \psi_i \Delta y_{t-i} + \sum_j \omega_j \Delta x_{t-j} + u_t.
+\]</span></p>
+<p>Here the dynamics have two parts.</p>
+<p>First, changes in <span class="math inline">\(x\)</span> can affect <span class="math inline">\(\Delta y_t\)</span> directly through the short-run coefficients.</p>
+<p>Second, if <span class="math inline">\(y\)</span> moves away from the long-run relation <span class="math inline">\(y=\beta x\)</span>, the error-correction term pushes it back.</p>
+<p>A dynamic multiplier in this setting captures both effects: the immediate response to changes in <span class="math inline">\(x\)</span>, and the gradual adjustment of <span class="math inline">\(y\)</span> toward the cointegrating relation.</p>
+<p>This is why the stationarity of the error-correction term mattered so much in earlier posts. If the deviation term is not stationary, then the dynamic response is not “adjustment back” to anything meaningful.</p>
+<p>Dynamic multipliers require a stable dynamic system. In the ARDL(1,1) example, this was the condition <span class="math inline">\(|\phi|&lt;1\)</span>. In higher-order ARDLs, the condition is that the roots of the autoregressive polynomial lie outside the unit circle.</p>
+<p>If the model is unstable, the response path may explode. That may be theoretically meaningful in rare cases, but it is usually a sign that the specification is not appropriate for the interpretation being offered. This is another reason why lag length matters. A poorly chosen lag structure can produce misleading persistence, artificial oscillations, or unstable response paths.</p>
+<p>A dynamic multiplier path is estimated. Therefore, it should have uncertainty bands.</p>
+<p>There are several ways to obtain them: delta-method approximations, simulation from the estimated parameter distribution, or bootstrap procedures. The choice depends on the model, the sample size, and whether generated regressors or multi-step transformations are involved. Uncertainty around a dynamic multiplier is uncertainty about the whole path, not just about a single coefficient. A long-run multiplier may be insignificant even if the short-run response is sharp; a short-run coefficient may be insignificant while the cumulative response becomes meaningful over several periods.</p>
+<p>So dynamic plots can reveal patterns that coefficient tables hide.</p>
+<p>Notice that dynamic multipliers describe propagation. They do not automatically identify causality. If <span class="math inline">\(x_t\)</span> is predetermined, policy-controlled, or plausibly exogenous, the dynamic multiplier may have a causal interpretation. If <span class="math inline">\(x_t\)</span> is jointly determined with <span class="math inline">\(y_t\)</span>, then the path is descriptive unless you have an identification strategy.</p>
+<p>This distinction becomes central when we move toward impulse response functions in VARs and local projections. There, the question is not merely “what is the dynamic response?” but “response to what kind of shock, identified how?”</p>
+<p>ARDL does not remove that question. It only gives you a disciplined way to trace dynamics once the relevant movement in <span class="math inline">\(x\)</span> has been specified.</p>
 
 
 
