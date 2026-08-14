@@ -1,0 +1,145 @@
+---
+title: "Dynamic Multipliers in ARDL: The Impulse Response You Already Have"
+date: 2026-08-14
+tags: [econometrics, ARDL, integration, short run multiplier , long run multiplier, dynamic multiplier, impulse response]
+slug: ARDL
+---
+
+In the last few posts I have focused on the interpretation of levels in ARDL models. The main lesson has been that ARDL is flexible, but flexibility is not licence to do anything one likes. Once $I(0)$ and $I(1)$ variables appear in the same dynamic equation, we must be careful about what lives in levels, what lives in differences, and what can legitimately be called an error-correction term.
+
+This post shifts attention from levels to dynamics.
+
+An ARDL is not just a device for reporting “short-run” and “long-run” coefficients. It is a dynamic model. Its natural object is a path: how does $y_t$ respond over time to a movement in $x_t$? In modern macroeconomics we often call such paths impulse responses. In the older ARDL language, they are often called dynamic multipliers. The names differ, but the idea is closely related.
+
+The purpose of this post is to make this connection clear.
+
+Take a simple ARDL(1,1):
+$$
+y_t = c + \phi y_{t-1} + \theta_0 x_t + \theta_1 x_{t-1} + u_t.
+$$
+
+A common applied presentation reports $\theta_0$ as a short-run coefficient and then computes a long-run coefficient as
+$$
+\frac{\theta_0+\theta_1}{1-\phi}.
+$$
+
+That long-run coefficient is useful, but it is only the end of the story. It tells us where the system eventually settles after a permanent change in $x$, assuming the model is stable. It does not tell us how the system gets there.
+
+The more informative object is the whole sequence:
+$$
+\frac{\partial y_t}{\partial x_t}, \quad
+\frac{\partial y_{t+1}}{\partial x_t}, \quad
+\frac{\partial y_{t+2}}{\partial x_t}, \quad \ldots
+$$
+
+This sequence is the dynamic multiplier path. It tells us how a change in $x_t$ propagates through $y$ over time.
+
+Historically, this is very much in the older dynamic-specification tradition. ARDL models were designed to represent lagged adjustment, delayed effects, persistence, and long-run multipliers, not merely to produce one “long-run” number. Hendry, Pagan and Sargan discuss dynamic specification as a central part of empirical econometric modelling, and Wickens and Breusch focus explicitly on transformed dynamic regressions and long-run interpretation.
+
+In a single-equation ARDL, the phrase dynamic multiplier is usually more precise. It describes the response of $y$ to a movement in a regressor $x$, holding fixed the structure of the model. In a VAR or structural VAR, the phrase impulse response is more common. There the “impulse” is often a shock to one equation in a multivariate system, and identification becomes central: what exactly is the shock, and why should we interpret it causally? 
+
+But conceptually, the ARDL dynamic multiplier and the VAR impulse response share a common purpose: they trace the time profile of an effect.
+
+The difference is that the ARDL is usually conditional and single-equation. It asks: given a movement in $x$, how does $y$ respond according to this dynamic equation? It does not automatically explain where the movement in $x$ came from. 
+
+Return to the ARDL(1,1):
+$$
+y_t = c + \phi y_{t-1} + \theta_0 x_t + \theta_1 x_{t-1} + u_t.
+$$
+
+Suppose $x_t$ increases by one unit at time $t$, and then remains one unit higher forever. What happens to $y$?
+
+At impact, $y_t$ moves by
+$$
+m_0 = \theta_0.
+$$
+
+One period later, the effect comes through two channels: the lagged effect of $x$, and the persistence of $y$:
+$$
+m_1 = \phi m_0 + \theta_1.
+$$
+
+Two periods later:
+$$
+m_2 = \phi m_1.
+$$
+
+Three periods later:
+$$
+m_3 = \phi m_2.
+$$
+
+And so on.
+
+If $|\phi|<1$, the system stabilises and the cumulative effect converges to the long-run multiplier:
+$$
+\frac{\theta_0+\theta_1}{1-\phi}.
+$$
+
+That long-run coefficient is therefore not a mysterious separate object. It is the limit of the dynamic adjustment path.
+
+This matters for interpretation. Reporting only the short-run and long-run coefficients can hide economically important information.
+
+Two ARDL models may have the same long-run multiplier but very different adjustment paths. In one model, most of the effect occurs immediately. In another, the effect builds slowly. In a third, the response overshoots and then returns. These are substantively different stories, even if the final long-run multiplier is identical.
+
+For policy questions, timing often matters as much as the final level. A policy variable that changes output after one quarter is different from one that affects output only after three years. A price shock that passes through quickly is different from one that leaks into the dependent variable slowly. A financial variable that overshoots and reverses tells a different story from one that converges smoothly.
+
+The ARDL already contains this information. Dynamic multipliers are simply the way to display it.
+
+A crucial choice is whether the movement in $x$ is temporary or permanent.
+
+If $x_t$ rises for one period and then returns to baseline, the dynamic multiplier traces the effect of a one-off pulse. The response dies out through the lag structure if the model is stable.
+
+If $x_t$ rises and remains permanently higher, the response traces adjustment toward a new steady state. That is the path whose endpoint is the long-run multiplier.
+
+These are different thought experiments.
+
+With stationary regressors, a permanent level shift may be interpreted as a shift in the mean or deterministic component of the regressor. With $I(1)$ regressors, a permanent change in the level is often natural because shocks accumulate. With differenced $I(1)$ regressors, the interpretation changes again: a one-off increase in $\Delta x_t$ is a permanent increase in the level of $x_t$.
+
+This is one reason mixed $I(0)/I(1)$ ARDL models need careful language. The same graph can mean different things depending on whether the regressor is stationary, nonstationary in levels, or included in differences.
+
+Suppose $x_t$ is $I(1)$, and for the reasons discussed in earlier posts you decide not to include its raw level in the levels block. Instead, you include $\Delta x_t$:
+$$
+\Delta y_t = a + \lambda y_{t-1} + \omega_0 \Delta x_t + \omega_1 \Delta x_{t-1} + u_t.
+$$
+
+This is a coherent specification when $y_t$ is $I(0)$ and $x_t$ is $I(1)$. The model says that changes in $x$ move $y$, while $y$ itself may be mean-reverting.
+
+The dynamic multiplier now answers a slightly different question:
+
+> What is the response of $y$ to a one-period change in $x$?
+
+If $\Delta x_t$ jumps by one unit for one period, then $x_t$ itself has moved permanently by one unit. The response of $y$ is therefore a response to an innovation in the level of $x$, but the ARDL sees it through $\Delta x$.
+
+This subtlety matters. When a nonstationary variable enters only in differences, an “impulse” to $\Delta x$ is not merely a temporary disturbance to the growth rate; it may imply a lasting shift in the level of $x$. The interpretation depends on the data-generating process you have in mind.
+
+Now suppose $y$ and $x$ are $I(1)$ and cointegrated. Then an ECM form is appropriate:
+$$
+\Delta y_t = a + \alpha (y_{t-1}-\beta x_{t-1}) + \sum_i \psi_i \Delta y_{t-i} + \sum_j \omega_j \Delta x_{t-j} + u_t.
+$$
+
+Here the dynamics have two parts.
+
+First, changes in $x$ can affect $\Delta y_t$ directly through the short-run coefficients.
+
+Second, if $y$ moves away from the long-run relation $y=\beta x$, the error-correction term pushes it back.
+
+A dynamic multiplier in this setting captures both effects: the immediate response to changes in $x$, and the gradual adjustment of $y$ toward the cointegrating relation.
+
+This is why the stationarity of the error-correction term mattered so much in earlier posts. If the deviation term is not stationary, then the dynamic response is not “adjustment back” to anything meaningful.
+
+Dynamic multipliers require a stable dynamic system. In the ARDL(1,1) example, this was the condition $|\phi|<1$. In higher-order ARDLs, the condition is that the roots of the autoregressive polynomial lie outside the unit circle.
+
+If the model is unstable, the response path may explode. That may be theoretically meaningful in rare cases, but it is usually a sign that the specification is not appropriate for the interpretation being offered. This is another reason why lag length matters. A poorly chosen lag structure can produce misleading persistence, artificial oscillations, or unstable response paths.
+
+A dynamic multiplier path is estimated. Therefore, it should have uncertainty bands.
+
+There are several ways to obtain them: delta-method approximations, simulation from the estimated parameter distribution, or bootstrap procedures. The choice depends on the model, the sample size, and whether generated regressors or multi-step transformations are involved. Uncertainty around a dynamic multiplier is uncertainty about the whole path, not just about a single coefficient. A long-run multiplier may be insignificant even if the short-run response is sharp; a short-run coefficient may be insignificant while the cumulative response becomes meaningful over several periods.
+
+So dynamic plots can reveal patterns that coefficient tables hide.
+
+Notice that dynamic multipliers describe propagation. They do not automatically identify causality. If $x_t$ is predetermined, policy-controlled, or plausibly exogenous, the dynamic multiplier may have a causal interpretation. If $x_t$ is jointly determined with $y_t$, then the path is descriptive unless you have an identification strategy.
+
+This distinction becomes central when we move toward impulse response functions in VARs and local projections. There, the question is not merely “what is the dynamic response?” but “response to what kind of shock, identified how?”
+
+ARDL does not remove that question. It only gives you a disciplined way to trace dynamics once the relevant movement in $x$ has been specified.
