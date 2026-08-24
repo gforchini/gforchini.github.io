@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2026-08-24">
+
+<title>Impulse Responses: ARDL vs VAR vs VECM – Giovanni Forchini</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-d63a2c9c8df14b07662b36303925c8cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-EW8G9TEY50"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Giovanni Forchini</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../bio.html"> 
+<span class="menu-text">Short CV</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://www.linkedin.com/in/giovanni-forchini-77452794/" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-linkedin"></i></a>
+    <a href="https://twitter.com/gforchini" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-twitter"></i></a>
+    <a href="https://github.com/gforchini" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Impulse Responses: ARDL vs VAR vs VECM</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 24, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In my last post I argued that an ARDL model already contains an impulse-response-type object. In the older single-equation language, we call it a dynamic multiplier: the path traced by <span class="math inline">\(y_t\)</span> after a change in <span class="math inline">\(x_t\)</span>. The short-run coefficient is the first point on that path. The long-run coefficient, when it exists, is the endpoint.</p>
+<p>This post places that idea next to the more familiar VAR impulse response function. Students often learn impulse responses through VARs and then treat ARDL multipliers as something completely different. They are not completely different. They are different ways of tracing dynamic effects. What changes is the modelling environment: single equation versus system, conditional versus joint, stationary variables versus integrated variables, and reduced-form movements versus identified shocks.</p>
+<p>The main message is simple: ARDL dynamic multipliers, VAR impulse responses, and VECM impulse responses all trace dynamic propagation. What differs is what is treated as endogenous, what is assumed about integration and cointegration, and what kind of shock is being interpreted.</p>
+<p>Start with the ARDL logic. In a simple model, <span class="math display">\[
+y_t = c + \sum_{i=1}^{p}\phi_i y_{t-i} + \sum_{j=0}^{q}\theta_j x_{t-j} + u_t,
+\]</span> we ask how <span class="math inline">\(y_t\)</span> responds over time to a change in <span class="math inline">\(x_t\)</span>. This is a conditional question. The equation conditions on a path for <span class="math inline">\(x_t\)</span>. It does not explain where that path came from.</p>
+<p>If <span class="math inline">\(x_t\)</span> increases today, the response of <span class="math inline">\(y_t\)</span> depends on the contemporaneous coefficient, the lagged effects of <span class="math inline">\(x\)</span>, and the autoregressive persistence in <span class="math inline">\(y\)</span>. The path that results is the dynamic multiplier. This is not conceptually mysterious: the ARDL is a machine for turning an input path into an output path.</p>
+<p>That conditional nature is both a strength and a limitation. It is a strength because the model is simple and transparent. It is a limitation because the movement in <span class="math inline">\(x_t\)</span> is not automatically a structural shock. If <span class="math inline">\(x_t\)</span> is policy-controlled or plausibly exogenous, the dynamic multiplier may have a causal interpretation. If <span class="math inline">\(x_t\)</span> is jointly determined with <span class="math inline">\(y_t\)</span>, the multiplier is descriptive unless you add an identification story.</p>
+<p>So ARDL answers: Given a specified movement in <span class="math inline">\(x\)</span>, how does <span class="math inline">\(y\)</span> respond under this single-equation dynamic model?</p>
+<p>It does not automatically answer: What is the causal effect of an unexpected structural shock to <span class="math inline">\(x\)</span>?</p>
+<p>That latter question is where VARs enter.</p>
+<p>A VAR treats several variables as jointly endogenous. Instead of writing one equation for <span class="math inline">\(y_t\)</span> conditional on <span class="math inline">\(x_t\)</span>, we write a system where each variable depends on lags of all variables.</p>
+<p>For two variables, a simple VAR might be written as <span class="math display">\[
+\begin{pmatrix} y_t \\ x_t \end{pmatrix} = c + A_1 \begin{pmatrix} y_{t-1} \\ x_{t-1} \end{pmatrix} + \cdots + A_p \begin{pmatrix} y_{t-p} \\ x_{t-p} \end{pmatrix} + e_t.
+\]</span></p>
+<p>Now <span class="math inline">\(x_t\)</span> is no longer treated as an externally given path. It is part of the system. A shock to <span class="math inline">\(x\)</span> can affect <span class="math inline">\(y\)</span>, and <span class="math inline">\(y\)</span> can later feed back into <span class="math inline">\(x\)</span>. The impulse response traces the effect of a disturbance through the entire dynamic system.</p>
+<p>This is why VARs became so influential in macroeconomics after Sims. They allow the researcher to model dynamic feedback without imposing a large simultaneous-equation structure at the outset. But the price is that the shocks <span class="math inline">\(e_t\)</span> in a reduced-form VAR are generally correlated. They are not automatically structural shocks. To interpret an impulse response causally, you must decide what the shock is.</p>
+<p>This is where Cholesky orderings, sign restrictions, long-run restrictions, external instruments, and other identification schemes appear. A VAR gives you a dynamic system. Identification gives economic meaning to the shocks.</p>
+<p>So VAR answers: How does a shock propagate through a joint system of endogenous variables?</p>
+<p>But to make the shock causal, you need an identifying assumption.</p>
+<p>If all variables in the VAR are I(0), life is relatively straightforward. The system is stable if the relevant roots lie outside the unit circle. A shock produces a response path that eventually dies out. The impulse response returns to baseline because the variables are stationary.</p>
+<p>For example, if <span class="math inline">\(y_t\)</span> is an output gap and <span class="math inline">\(x_t\)</span> is an interest-rate gap, both stationary, a VAR impulse response asks how an identified monetary shock affects the output gap over time. Provided the model is stable, the effect eventually fades.</p>
+<p>This is the environment in which impulse responses are easiest to interpret. Shocks are temporary disturbances to a stable system. The response path shows propagation and decay.</p>
+<p>Things become more delicate when variables are I(1). A shock to an I(1) variable can have a permanent effect on its level. If you estimate a VAR in levels with nonstationary variables without cointegration, standard stationary VAR intuition no longer applies. The system may not return to its previous baseline because the variables themselves do not have fixed unconditional means.</p>
+<p>There are three common responses, each with different implications:</p>
+<ul>
+<li><p>The first is to difference the variables and estimate a VAR in differences. This makes the variables stationary if they are I(1). But it throws away information about possible long-run relationships among levels. If the variables are cointegrated, differencing alone is misspecified because it omits the error-correction term.</p></li>
+<li><p>The second is to estimate a VAR in levels. In some forecasting contexts, VARs in levels can behave reasonably, and there is a literature on inference in such systems. But if the question is about long-run equilibrium and adjustment among I(1) variables, a plain levels VAR can hide the structure you need to interpret.</p></li>
+<li><p>The third is to use a VECM: a vector error-correction model. This is the natural framework when variables are I(1) and cointegrated.</p></li>
+</ul>
+<p>A VECM is essentially a VAR rewritten to separate short-run changes from long-run deviations. A simple schematic form is <span class="math display">\[
+\Delta z_t = \Pi z_{t-1} + \Gamma_1 \Delta z_{t-1} + \cdots + \Gamma_{p-1}\Delta z_{t-p+1} + e_t,
+\]</span> where <span class="math inline">\(z_t\)</span> is a vector of I(1) variables. If the variables are cointegrated, the matrix <span class="math inline">\(\Pi\)</span> can be written as <span class="math display">\[
+\Pi = \alpha \beta',
+\]</span> where <span class="math inline">\(\beta' z_{t-1}\)</span> contains the stationary cointegrating relations and <span class="math inline">\(\alpha\)</span> contains the adjustment coefficients.</p>
+<p>This looks technical, but the intuition is simple. The VECM says:</p>
+<ol type="1">
+<li>variables may drift in levels;</li>
+<li>some combinations of levels are stationary;</li>
+<li>short-run changes respond both to past changes and to deviations from the long-run relations.</li>
+</ol>
+<p>That is exactly the multivariate version of the ECM logic from earlier posts.</p>
+<p>Impulse responses from a VECM therefore contain two kinds of dynamics. There are short-run propagation effects through lagged differences, and there are long-run adjustment effects through the cointegrating relations. A shock may have permanent effects on some variables, but the system is constrained by the long-run relationships.</p>
+<p>An ARDL/error-correction model can be seen as a single-equation cousin of the VECM. The ARDL focuses on one dependent variable and conditions on the regressors. The VECM models the whole vector jointly.</p>
+<p>This distinction matters.</p>
+<p>If you believe that the regressors are weakly exogenous for the long-run parameters of interest, a single-equation ARDL/ECM may be appropriate. You can estimate the equation for <span class="math inline">\(y_t\)</span> without modelling the full system. This is one reason the ARDL tradition remained attractive: it offers a manageable single-equation approach to long-run dynamics.</p>
+<p>If, however, all variables adjust jointly to disequilibrium, and feedback across equations is central to the economics, a VECM may be more natural. It lets each variable respond to the cointegrating deviations and to short-run changes in the others.</p>
+<p>So the choice is not “ARDL good, VECM bad” or the reverse. The question is: Do I need a conditional single-equation model, or do I need a joint system?</p>
+<p>What if some variables are I(0) and others are I(1)? This is the awkward but common case.</p>
+<p>In an ARDL, mixed integration can be handled carefully because the model is conditional and because stationary variables can enter in levels while I(1) variables may enter in levels only when the implied object is stationary, or otherwise in differences.</p>
+<p>In a VAR/VECM setting, mixed integration requires equal care. I(0) variables do not participate in cointegration in the same way as I(1) variables, because they do not contain stochastic trends. They may enter the system as stationary variables, as controls, or as variables that affect short-run dynamics. But one should not blindly throw I(0) and I(1) variables into a VECM and interpret every levels relation as cointegration.</p>
+<p>The same rule from the ARDL discussion reappears: Find the stationary objects first. Interpret second.</p>
+<p>If the nonstationary variables are cointegrated, the stationary cointegrating relations can enter the model. Stationary variables can appear in levels because they are already I(0). Nonstationary variables not tied into a stationary relation usually belong in differences if the aim is a stationary dynamic system.</p>
+<p>When variables are I(1), impulse responses require particular care because a shock may permanently change the level of a variable.</p>
+<p>Suppose <span class="math inline">\(x_t\)</span> is I(1). A one-time innovation to <span class="math inline">\(\Delta x_t\)</span> raises the level of <span class="math inline">\(x_t\)</span> permanently. If <span class="math inline">\(y_t\)</span> responds to the level of <span class="math inline">\(x_t\)</span>, the response of <span class="math inline">\(y\)</span> may also have a long-lasting or permanent component. If <span class="math inline">\(y_t\)</span> and <span class="math inline">\(x_t\)</span> are cointegrated, the response must respect the long-run relation. If they are not cointegrated, the shock can create a permanent divergence.</p>
+<p>This is why plotting an impulse response without explaining the stochastic nature of the variables can be misleading. A transitory response in a stationary VAR is a different object from a permanent-level response in an integrated system.</p>
+<p>The label “impulse response” is the same. The thought experiment is not.</p>
+<p>Another source of confusion concerns cumulative impulse responses.</p>
+<p>If the dependent variable is a growth rate or a first difference, the response of the level is the cumulative sum of the responses. For example, if a model explains <span class="math inline">\(\Delta y_t\)</span>, and you want the effect on <span class="math inline">\(y_t\)</span>, you must cumulate the response over horizons.</p>
+<p>This is especially important when comparing ARDLs, VARs in differences, and local projections. A response of <span class="math inline">\(\Delta y\)</span> is not the same as a response of <span class="math inline">\(y\)</span>. Many empirical papers become hard to read because they switch between levels and differences without making clear which object is being plotted.</p>
+<p>A useful writing habit is to label response graphs explicitly:</p>
+<ul>
+<li>“Response of <span class="math inline">\(\Delta y\)</span>”<br>
+</li>
+<li>“Cumulative response of <span class="math inline">\(y\)</span>”<br>
+</li>
+<li>“Response of the level of <span class="math inline">\(y\)</span>”<br>
+</li>
+<li>“Response to a one-unit innovation in <span class="math inline">\(\Delta x\)</span>”<br>
+</li>
+<li>“Response to a permanent level shift in <span class="math inline">\(x\)</span>”</li>
+</ul>
+<p>These labels prevent many misunderstandings.</p>
+<p>Neither ARDL dynamic multipliers nor VAR impulse responses automatically <em>solve</em> identification.</p>
+<p>In an ARDL, the movement in <span class="math inline">\(x_t\)</span> must be interpreted. Is it exogenous? Is it policy-driven? Is it a forecast error? Is it jointly determined with <span class="math inline">\(y_t\)</span>?</p>
+<p>In a VAR, the reduced-form residuals are mixtures of structural shocks. A Cholesky ordering imposes a recursive timing assumption. Sign restrictions impose qualitative restrictions on responses. External instruments isolate shock variation using outside information. Narrative restrictions use historical episodes. Each choice changes what “the shock” means.</p>
+<p>So impulse response analysis always has two layers:</p>
+<ol type="1">
+<li>the propagation model, which tells us how variables move after a disturbance;</li>
+<li>the identification strategy, which tells us what disturbance we are talking about.</li>
+</ol>
+<p>ARDL, VAR and VECM differ in the first layer. They do not eliminate the second.</p>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/gforchini\.github\.io\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
