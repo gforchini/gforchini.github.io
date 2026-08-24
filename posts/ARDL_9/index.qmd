@@ -1,0 +1,147 @@
+---
+title: "Impulse Responses: ARDL vs VAR vs VECM"
+date: 2026-08-24
+tags: [econometrics, ARDL, integration,  VAR,  VECM, Impulse Response function]
+slug: ARDL
+---
+
+
+In my last post I argued that an ARDL model already contains an impulse-response-type object. In the older single-equation language, we call it a dynamic multiplier: the path traced by $y_t$ after a change in $x_t$. The short-run coefficient is the first point on that path. The long-run coefficient, when it exists, is the endpoint.
+
+This post places that idea next to the more familiar VAR impulse response function. Students often learn impulse responses through VARs and then treat ARDL multipliers as something completely different. They are not completely different. They are different ways of tracing dynamic effects. What changes is the modelling environment: single equation versus system, conditional versus joint, stationary variables versus integrated variables, and reduced-form movements versus identified shocks.
+
+The main message is simple: ARDL dynamic multipliers, VAR impulse responses, and VECM impulse responses all trace dynamic propagation. What differs is what is treated as endogenous, what is assumed about integration and cointegration, and what kind of shock is being interpreted.
+
+Start with the ARDL logic. In a simple model,
+$$
+y_t = c + \sum_{i=1}^{p}\phi_i y_{t-i} + \sum_{j=0}^{q}\theta_j x_{t-j} + u_t,
+$$
+we ask how $y_t$ responds over time to a change in $x_t$. This is a conditional question. The equation conditions on a path for $x_t$. It does not explain where that path came from.
+
+If $x_t$ increases today, the response of $y_t$ depends on the contemporaneous coefficient, the lagged effects of $x$, and the autoregressive persistence in $y$. The path that results is the dynamic multiplier. This is not conceptually mysterious: the ARDL is a machine for turning an input path into an output path.
+
+That conditional nature is both a strength and a limitation. It is a strength because the model is simple and transparent. It is a limitation because the movement in $x_t$ is not automatically a structural shock. If $x_t$ is policy-controlled or plausibly exogenous, the dynamic multiplier may have a causal interpretation. If $x_t$ is jointly determined with $y_t$, the multiplier is descriptive unless you add an identification story.
+
+So ARDL answers: Given a specified movement in $x$, how does $y$ respond under this single-equation dynamic model?
+
+It does not automatically answer: What is the causal effect of an unexpected structural shock to $x$?
+
+That latter question is where VARs enter.
+
+A VAR treats several variables as jointly endogenous. Instead of writing one equation for $y_t$ conditional on $x_t$, we write a system where each variable depends on lags of all variables.
+
+For two variables, a simple VAR might be written as
+$$
+\begin{pmatrix} y_t \\ x_t \end{pmatrix} = c + A_1 \begin{pmatrix} y_{t-1} \\ x_{t-1} \end{pmatrix} + \cdots + A_p \begin{pmatrix} y_{t-p} \\ x_{t-p} \end{pmatrix} + e_t.
+$$
+
+Now $x_t$ is no longer treated as an externally given path. It is part of the system. A shock to $x$ can affect $y$, and $y$ can later feed back into $x$. The impulse response traces the effect of a disturbance through the entire dynamic system.
+
+This is why VARs became so influential in macroeconomics after Sims. They allow the researcher to model dynamic feedback without imposing a large simultaneous-equation structure at the outset. But the price is that the shocks $e_t$ in a reduced-form VAR are generally correlated. They are not automatically structural shocks. To interpret an impulse response causally, you must decide what the shock is.
+
+This is where Cholesky orderings, sign restrictions, long-run restrictions, external instruments, and other identification schemes appear. A VAR gives you a dynamic system. Identification gives economic meaning to the shocks.
+
+So VAR answers: How does a shock propagate through a joint system of endogenous variables?
+
+But to make the shock causal, you need an identifying assumption.
+
+If all variables in the VAR are I(0), life is relatively straightforward. The system is stable if the relevant roots lie outside the unit circle. A shock produces a response path that eventually dies out. The impulse response returns to baseline because the variables are stationary.
+
+For example, if $y_t$ is an output gap and $x_t$ is an interest-rate gap, both stationary, a VAR impulse response asks how an identified monetary shock affects the output gap over time. Provided the model is stable, the effect eventually fades.
+
+This is the environment in which impulse responses are easiest to interpret. Shocks are temporary disturbances to a stable system. The response path shows propagation and decay.
+
+Things become more delicate when variables are I(1). A shock to an I(1) variable can have a permanent effect on its level. If you estimate a VAR in levels with nonstationary variables without cointegration, standard stationary VAR intuition no longer applies. The system may not return to its previous baseline because the variables themselves do not have fixed unconditional means.
+
+There are three common responses, each with different implications:
+
+- The first is to difference the variables and estimate a VAR in differences. This makes the variables stationary if they are I(1). But it throws away information about possible long-run relationships among levels. If the variables are cointegrated, differencing alone is misspecified because it omits the error-correction term.
+
+- The second is to estimate a VAR in levels. In some forecasting contexts, VARs in levels can behave reasonably, and there is a literature on inference in such systems. But if the question is about long-run equilibrium and adjustment among I(1) variables, a plain levels VAR can hide the structure you need to interpret.
+
+- The third is to use a VECM: a vector error-correction model. This is the natural framework when variables are I(1) and cointegrated.
+
+
+A VECM is essentially a VAR rewritten to separate short-run changes from long-run deviations. A simple schematic form is
+$$
+\Delta z_t = \Pi z_{t-1} + \Gamma_1 \Delta z_{t-1} + \cdots + \Gamma_{p-1}\Delta z_{t-p+1} + e_t,
+$$
+where $z_t$ is a vector of I(1) variables. If the variables are cointegrated, the matrix $\Pi$ can be written as
+$$
+\Pi = \alpha \beta',
+$$
+where $\beta' z_{t-1}$ contains the stationary cointegrating relations and $\alpha$ contains the adjustment coefficients.
+
+This looks technical, but the intuition is simple. The VECM says:
+
+1.  variables may drift in levels;
+2.  some combinations of levels are stationary;
+3.  short-run changes respond both to past changes and to deviations from the long-run relations.
+
+That is exactly the multivariate version of the ECM logic from earlier posts.
+
+Impulse responses from a VECM therefore contain two kinds of dynamics. There are short-run propagation effects through lagged differences, and there are long-run adjustment effects through the cointegrating relations. A shock may have permanent effects on some variables, but the system is constrained by the long-run relationships.
+
+An ARDL/error-correction model can be seen as a single-equation cousin of the VECM. The ARDL focuses on one dependent variable and conditions on the regressors. The VECM models the whole vector jointly.
+
+This distinction matters.
+
+If you believe that the regressors are weakly exogenous for the long-run parameters of interest, a single-equation ARDL/ECM may be appropriate. You can estimate the equation for $y_t$ without modelling the full system. This is one reason the ARDL tradition remained attractive: it offers a manageable single-equation approach to long-run dynamics.
+
+If, however, all variables adjust jointly to disequilibrium, and feedback across equations is central to the economics, a VECM may be more natural. It lets each variable respond to the cointegrating deviations and to short-run changes in the others.
+
+So the choice is not “ARDL good, VECM bad” or the reverse. The question is: Do I need a conditional single-equation model, or do I need a joint system?
+
+
+
+What if some variables are I(0) and others are I(1)? This is the awkward but common case.
+
+In an ARDL, mixed integration can be handled carefully because the model is conditional and because stationary variables can enter in levels while I(1) variables may enter in levels only when the implied object is stationary, or otherwise in differences.
+
+In a VAR/VECM setting, mixed integration requires equal care. I(0) variables do not participate in cointegration in the same way as I(1) variables, because they do not contain stochastic trends. They may enter the system as stationary variables, as controls, or as variables that affect short-run dynamics. But one should not blindly throw I(0) and I(1) variables into a VECM and interpret every levels relation as cointegration.
+
+The same rule from the ARDL discussion reappears: Find the stationary objects first. Interpret second.
+
+If the nonstationary variables are cointegrated, the stationary cointegrating relations can enter the model. Stationary variables can appear in levels because they are already I(0). Nonstationary variables not tied into a stationary relation usually belong in differences if the aim is a stationary dynamic system.
+
+
+When variables are I(1), impulse responses require particular care because a shock may permanently change the level of a variable.
+
+Suppose $x_t$ is I(1). A one-time innovation to $\Delta x_t$ raises the level of $x_t$ permanently. If $y_t$ responds to the level of $x_t$, the response of $y$ may also have a long-lasting or permanent component. If $y_t$ and $x_t$ are cointegrated, the response must respect the long-run relation. If they are not cointegrated, the shock can create a permanent divergence.
+
+This is why plotting an impulse response without explaining the stochastic nature of the variables can be misleading. A transitory response in a stationary VAR is a different object from a permanent-level response in an integrated system.
+
+The label “impulse response” is the same. The thought experiment is not.
+
+
+Another source of confusion concerns cumulative impulse responses.
+
+If the dependent variable is a growth rate or a first difference, the response of the level is the cumulative sum of the responses. For example, if a model explains $\Delta y_t$, and you want the effect on $y_t$, you must cumulate the response over horizons.
+
+This is especially important when comparing ARDLs, VARs in differences, and local projections. A response of $\Delta y$ is not the same as a response of $y$. Many empirical papers become hard to read because they switch between levels and differences without making clear which object is being plotted.
+
+A useful writing habit is to label response graphs explicitly:
+
+- “Response of $\Delta y$”\
+- “Cumulative response of $y$”\
+- “Response of the level of $y$”\
+- “Response to a one-unit innovation in $\Delta x$”\
+- “Response to a permanent level shift in $x$”
+
+These labels prevent many misunderstandings.
+
+
+
+Neither ARDL dynamic multipliers nor VAR impulse responses automatically *solve* identification.
+
+In an ARDL, the movement in $x_t$ must be interpreted. Is it exogenous? Is it policy-driven? Is it a forecast error? Is it jointly determined with $y_t$?
+
+In a VAR, the reduced-form residuals are mixtures of structural shocks. A Cholesky ordering imposes a recursive timing assumption. Sign restrictions impose qualitative restrictions on responses. External instruments isolate shock variation using outside information. Narrative restrictions use historical episodes. Each choice changes what “the shock” means.
+
+So impulse response analysis always has two layers:
+
+1.  the propagation model, which tells us how variables move after a disturbance;
+2.  the identification strategy, which tells us what disturbance we are talking about.
+
+ARDL, VAR and VECM differ in the first layer. They do not eliminate the second.
+
