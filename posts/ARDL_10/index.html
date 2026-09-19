@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2026-04-16">
+<meta name="dcterms.date" content="2026-09-19">
 
-<title>As‑If by Instrument: What IV Really Buys You – Giovanni Forchini</title>
+<title>Local Projections: Impulse Responses Without a Full System – Giovanni Forchini</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -84,6 +84,35 @@ gtag('js', new Date());
 gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -133,7 +162,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">As‑If by Instrument: What IV Really Buys You</h1>
+<h1 class="title">Local Projections: Impulse Responses Without a Full System</h1>
 </div>
 
 
@@ -144,7 +173,7 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">April 16, 2026</p>
+      <p class="date">September 19, 2026</p>
     </div>
   </div>
   
@@ -156,34 +185,60 @@ gtag('config', 'G-EW8G9TEY50', { 'anonymize_ip': true});
 </header>
 
 
-<p>Up to now, the “as‑if random” story has been about what you can do with rich pre‑treatment information. You match, you weight, you regress, and you hope that—after conditioning on the right variables, the remaining differences in treatment are determined by luck. But sometimes you simply do not believe that conditioning will ever be enough. Motivation, ability, networks, expectations, local enforcement, health, bargaining power: these are precisely the forces that drive both treatment and outcomes, and they are either unmeasured or badly measured. In those situations, there is a different route to “as‑if”: you stop trying to explain treatment away with controls, and instead look for a source of variation that moves treatment for reasons unrelated to the outcome. That is the idea of an instrument.</p>
-<p>Instrumental variables (IV) is often taught as a two‑stage trick. That is a misleading. IV is not a trick. It is a very specific claim about a mechanism. If it is credible, it buys you something powerful: a causal effect identified by a piece of variation that behaves like an assignment device. If it is not credible, it buys you very little besides a false sense of rigor. The goal of this post is to make clear what IV really buys you, and what it does not.</p>
-<p>Suppose you would like to estimate the effect of education on wages. You run a regression of wages on schooling and some controls. The worry is not that the equation is wrong algebraically; the worry is that schooling is chosen. People with higher ability, better family background, or stronger ambition tend to get more education and also earn more even without extra schooling. Those forces sit in the “leftover” part of the wage equation and are correlated with education. Hence, the regression’s leftover term is linked to treatment, and the treatment coefficient mixes the effect of schooling with the effect of those unobservables.</p>
-<p>IV enters with a different thought experiment. Instead of trying to measure all the forces that make education endogenous, you look for a variable that changes education but is otherwise unrelated to wages except through education. If you can find such a variable and defend it, then the variation in education that comes from this behaves as if it were assigned. You can then estimate the effect of education using only that “as‑if assigned” component.</p>
-<p>This is the core promise of IV: it tries to reintroduce an assignment‑like mechanism into an observational world.</p>
-<p>An instrument is a variable that does two jobs at once.</p>
-<p>First, it must move treatment. If the nudge does not actually change who takes the programme or who gets more schooling, it cannot reveal anything about the treatment’s effect. In practice this is called relevance, but the plain meaning is: if the instrument barely changes treatment, then you are trying to estimate a causal effect using almost no real variation.</p>
-<p>Second, the instrument must be as‑good‑as random with respect to the outcome, once you account for basic pre‑treatment factors. More precisely, the instrument must affect the outcome only through its effect on treatment, not through any other channel that reaches the outcome. This is the famous exclusion restriction, but again the plain meaning is: the IV should not have its own direct effect on wages, nor should it be a marker for unmeasured wage‑relevant factors.</p>
-<p>When both claims are credible, IV creates a very specific comparison. It compares people whose treatment status differs because of the IV, not because of their unobserved characteristics.</p>
-<p>IV buys you a causal effect for the people whose treatment choice is actually changed by the instrument, using only the variation in treatment generated by that instrument.</p>
-<p>Notice that IV does not, in general, identify “the” average causal effect for everyone. It identifies an effect for a particular group, often called compliers, and that group depends on the instrument.</p>
-<p>This is not a technical detail. It is the central interpretation.</p>
-<p>Consider a policy that increases the distance cost of attending university by opening or closing a local campus. Some people would go to university regardless. Some people would not go regardless. Some people are on the margin: they go when the campus is nearby and do not go when it is far. IV learns about the return to education from this marginal group, because they are the ones whose education is actually changed by the instrument.</p>
-<p>That is what IV “sees.” It does not see the return to education for the always‑go group, because their education does not change with the instrument. It does not see the return for the never‑go group, for the same reason. IV estimates the effect for those who respond to the instrument. The estimate is “local” to the instrument, not universal.</p>
-<p>Once you accept this, many debates about IV become easier. The right question is not “is IV estimating the average treatment effect?” but “who are the compliers in this setting, and do I care about their effect?” In policy terms, that is often exactly what you want: a reform changes behaviour only for some people, and the relevant effect is the effect for those whose behaviour actually changes.</p>
-<p>IV is often presented as a way to escape modelling. In reality, IV requires a model, just not the same model as regression adjustment.</p>
-<p>To defend an instrument, you must be able to tell a coherent story about why the instrument shifts treatment and why it does not reach the outcome through other channels. That story is always context‑dependent. Distance to a college is more plausible as an instrument when it mainly affects the cost of attendance, and less plausible when distance is also a proxy for local labour markets, school quality, family sorting, or regional economic opportunities. A draft lottery number is more plausible when it changes military service assignment, and less plausible when it also changes later schooling decisions, migration, or health in ways not mediated by the treatment you claim to study.</p>
-<p>The point is not that these instruments are “good” or “bad” in the abstract. The point is that the exclusion claim is a mechanism claim, and it lives or dies on institutional details. Without a model of the world (i.e.&nbsp;who sorts where, what channels exist, what timing is plausible) you cannot defend the idea that the instrument is as‑good‑as random with respect to the outcome.</p>
-<p>“As‑if” is always a mechanism statement. IV simply changes which mechanism you must defend.</p>
-<p>Three failures that matter.</p>
-<p>The first failure is the obvious one: the instrument does not really move treatment. When the first stage is weak, IV becomes unstable. Estimates jump wildly across specifications, standard errors blow up, and, more importantly, small violations of the exclusion story can generate large distortions. Weak instruments make IV fragile. They do not merely reduce precision; they can invalidate the comforting intuition that “IV fixes endogeneity.”</p>
-<p>The second failure is the subtle one: the instrument reaches the outcome through channels other than treatment. This can happen in mundane ways. A policy rule used as an instrument might also change expectations, prices, or local labour demand. A geographic instrument might also capture regional differences that directly influence the outcome. A scheduling rule might affect who applies, not just who gets treated. These are not technical quibbles; they are alternative causal pathways. If they exist, the IV estimate is no longer an effect of treatment alone.</p>
-<p>The third failure is interpretational: even when IV is valid, people talk about it as if it were estimating a general effect for everyone. It rarely is. The estimate is tied to the instrument and to the group of people whose treatment status the instrument changes. If you report an IV estimate without saying who it pertains to, you are asking the reader to pretend that treatment effects are the same for everyone or that the complier group is “representative.” That is an additional assumption, and it is often untrue.</p>
-<p>It is tempting to say: first regress treatment on the instrument, then regress outcome on the predicted treatment. This is useful as a computational recipe, but it is not the conceptual content. The conceptual content is that the instrument extracts the component of treatment variation that is “as‑if assigned,” and then asks how the outcome moves with that component.</p>
-<p>The danger of focusing on the recipe is that it encourages mechanical behaviour: “I need an IV; I will find something correlated with treatment.” Correlation is not enough. The exclusion story is the whole game.</p>
-<p>Matching, weighting, and regression adjustment try to make treatment “as‑if random” by conditioning on observed pre‑treatment information. IV tries to make treatment “as‑if random” by isolating a component of treatment variation generated by an external nudge. Both approaches are attempts to restore a comparison that resembles random assignment, but they rely on different credibility pillars.</p>
-<p>When conditioning is plausible because you measured the right drivers and have overlap, the selection‑on‑observables road can be persuasive and transparent. When conditioning is implausible because crucial drivers are unobserved or because treatment selection is deeply endogenous, IV can be the cleaner road (if you can defend the instrument).</p>
-<p>In practice, the best papers treat IV as part of a broader argument. They show that the instrument truly shifts treatment; they make the exclusion story plausible with institutional details and auxiliary checks; they describe who the compliers are; and they avoid claiming more than the design supports.</p>
+<p>In the previous post, I compared ARDL dynamic multipliers, VAR impulse responses, and VECM impulse responses. The common object was a response path: how does a variable move after a disturbance? The difference was the modelling framework. ARDLs are conditional and single-equation. VARs model a system jointly. VECMs add long-run restrictions when variables are I(1) and cointegrated.</p>
+<p>This post turns to local projections, introduced by Òscar Jordà in 2005, which have become one of the most popular ways of estimating impulse responses in applied macroeconometrics.</p>
+<p>The attraction is easy to understand. Instead of estimating a full dynamic system and then deriving impulse responses from it, local projections estimate the response directly, horizon by horizon. If you want the response of <span class="math inline">\(y\)</span> one period ahead, estimate a regression for <span class="math inline">\(y_{t+1}\)</span>. If you want the response four periods ahead, estimate a regression for <span class="math inline">\(y_{t+4}\)</span>. Repeat for each horizon. Then plot the coefficients.</p>
+<p>This makes local projections flexible, transparent, and easy to explain. But, as always, flexibility is not a permission to do whatever you want.</p>
+<p>Suppose you are interested in how <span class="math inline">\(y\)</span> responds to a shock <span class="math inline">\(s_t\)</span>. A local projection estimates regressions of the form <span class="math display">\[
+y_{t+h} = a_h + \beta_h s_t + \Gamma_h W_t + u_{t+h},
+\]</span> for horizons <span class="math inline">\(h = 0,1,2,\ldots,H\)</span>.</p>
+<p>Here <span class="math inline">\(s_t\)</span> is the shock or treatment-like variable whose dynamic effect you want to trace. <span class="math inline">\(W_t\)</span> contains controls: lags of <span class="math inline">\(y\)</span>, lags of the shock, lags of other variables, deterministic terms, or other conditioning information. The coefficient <span class="math inline">\(\beta_h\)</span> is interpreted as the response of <span class="math inline">\(y\)</span> at horizon <span class="math inline">\(h\)</span> to the shock at time <span class="math inline">\(t\)</span>.</p>
+<p>The impulse response is then the sequence <span class="math display">\[
+\beta_0,\beta_1,\beta_2,\ldots,\beta_H.
+\]</span> That is why local projections are so intuitive. Each point on the response graph comes from its own regression.</p>
+<p>In a VAR, you estimate a system of equations and then compute impulse responses from the estimated dynamic structure. The response at horizon <span class="math inline">\(h\)</span> is implied by the same set of estimated autoregressive coefficients that governs all horizons.</p>
+<p>In local projections, you estimate each horizon separately. The response at horizon 1 does not mechanically force the response at horizon 2, and so on. This is the source of both the appeal and the danger.</p>
+<p>The appeal is flexibility. If the true dynamics are complicated, nonlinear, state-dependent, or badly approximated by a low-order VAR, local projections can be more robust. You are not asking one dynamic system to get every horizon right.</p>
+<p>The danger is noise. Because each horizon is estimated separately, local projection impulse responses can be jagged, imprecise, and sensitive in small samples. A VAR imposes more structure. Local projections impose less. Less structure can mean less bias, but often more variance.</p>
+<p>So the choice is not “VAR good, LP bad” or “LP good, VAR obsolete”. The choice is a bias–variance trade-off.</p>
+<p>Local projections also connect naturally to the ARDL discussion. An ARDL dynamic multiplier answers the question: given a change in <span class="math inline">\(x_t\)</span>, what path does <span class="math inline">\(y\)</span> follow under the estimated lag structure? The path is derived from one dynamic equation.</p>
+<p>A local projection asks: what is the direct association between the shock at time <span class="math inline">\(t\)</span> and <span class="math inline">\(y\)</span> at horizon <span class="math inline">\(t+h\)</span>, controlling for relevant history?</p>
+<p>So ARDL and local projections can answer similar dynamic questions, but they do so differently.</p>
+<p>If the ARDL is correctly specified, it can be efficient because it uses the dynamic structure tightly. If the ARDL lag structure is wrong, the derived multiplier path may be misleading. Local projections are less tied to one assumed dynamic law, but they pay for that flexibility with wider confidence intervals.</p>
+<p>If <span class="math inline">\(y_t\)</span> is stationary, then regressions for <span class="math inline">\(y_{t+h}\)</span> are usually straightforward, provided the controls are chosen sensibly and the shock is well-defined.</p>
+<p>If <span class="math inline">\(y_t\)</span> is I(1), projecting the level <span class="math inline">\(y_{t+h}\)</span> can be problematic unless the specification accounts for stochastic trends, cointegration, or deterministic components. Often, researchers project differences or growth rates instead: <span class="math display">\[
+\Delta y_{t+h} = a_h + \beta_h s_t + \Gamma_h W_t + u_{t+h}.
+\]</span></p>
+<p>But if you estimate responses of <span class="math inline">\(\Delta y\)</span>, and you want to talk about the level of <span class="math inline">\(y\)</span>, you must cumulate the responses.</p>
+<p>For example, if <span class="math inline">\(\beta_h\)</span> is the response of <span class="math inline">\(\Delta y_{t+h}\)</span>, then the cumulative response of the level up to horizon <span class="math inline">\(H\)</span> is <span class="math display">\[
+\sum_{h=0}^{H} \beta_h.
+\]</span></p>
+<p>This sounds elementary, but it is a common source of confusion. A response of a growth rate is not a response of a level. A response of a first difference is not automatically a response of the original variable.</p>
+<p>Suppose <span class="math inline">\(y_t\)</span> and <span class="math inline">\(x_t\)</span> are I(1) and cointegrated. A VAR in differences would omit the long-run correction term and may be misspecified. The VECM solves this by including the stationary cointegrating deviations.</p>
+<p>The same logic applies to local projections. If the variables are cointegrated and the long-run relation matters for adjustment, then the local projection controls should include relevant stationary error-correction terms. Otherwise you may be estimating horizon-by-horizon regressions that ignore the force pulling the system back toward its long-run relation.</p>
+<p>A local projection in a cointegrated setting might therefore look like <span class="math display">\[
+\Delta y_{t+h} = a_h + \beta_h s_t + \rho_h ECT_{t-1} + \Gamma_h W_t + u_{t+h},
+\]</span></p>
+<p>where <span class="math inline">\(ECT_{t-1}\)</span> is a stationary deviation from a long-run relation.</p>
+<p>This is simply the local projection analogue of respecting cointegration. The format changes. The stationarity logic does not.</p>
+<p>Local projections estimate impulse responses. But, like VARs and ARDL multipliers, they do not magically define the shock. The shock <span class="math inline">\(s_t\)</span> needs identification. The variable <span class="math inline">\(s_t\)</span> must have an interpretation. It might be a monetary policy shock, a fiscal shock, a commodity price shock, an external instrument, a forecast error, a narrative shock, or a treatment indicator. The local projection estimates the dynamic effect of that object, but the credibility of the interpretation depends on how <span class="math inline">\(s_t\)</span> is constructed. If <span class="math inline">\(s_t\)</span> is genuinely exogenous, or plausibly as-if random conditional on controls, then the local projection can be given a causal interpretation. If <span class="math inline">\(s_t\)</span> is endogenous, the coefficients trace conditional correlations over horizons, not causal effects.</p>
+<p>A local projection needs controls. The most common controls are lags of the dependent variable, lags of the shock, and lags of other relevant variables. These controls serve two purposes. First, they help make the shock conditionally exogenous. If the shock is only unpredictable after conditioning on past information, then that past information belongs in the regression. Second, they improve precision and reduce residual serial correlation.</p>
+<p>But controls can also create problems. If you include variables affected by the shock between time <span class="math inline">\(t\)</span> and horizon <span class="math inline">\(t+h\)</span>, you may block part of the dynamic effect you want to estimate. This is the time-series version of the “bad control” problem. Controls should usually be predetermined relative to the shock time. The safest baseline is to condition on information available at time <span class="math inline">\(t-1\)</span>, plus the shock at time <span class="math inline">\(t\)</span>, unless your identification strategy says otherwise.</p>
+<p>Local projections create a practical inference issue. When you regress <span class="math inline">\(y_{t+h}\)</span> on <span class="math inline">\(s_t\)</span>, the error term <span class="math inline">\(u_{t+h}\)</span> will often be serially correlated, especially for larger <span class="math inline">\(h\)</span>. Different projected horizons share observations. This is not a small detail: standard errors that ignore this dependence can be too small. In practice, local projection papers often use heteroskedasticity-and-autocorrelation robust standard errors, such as Newey–West type corrections, with bandwidths that reflect the projection horizon. Bootstrap methods are also common.</p>
+<p>Local projections became popular because they are flexible in ways VARs are not.</p>
+<ul>
+<li><p>They can easily allow for nonlinearities: <span class="math display">\[
+y_{t+h} = a_h + \beta_h^{(1)} s_t \cdot I(\text{state}=1) + \beta_h^{(0)} s_t \cdot I(\text{state}=0) + \Gamma_h W_t + u_{t+h}.
+\]</span> This lets you ask whether shocks have different effects in recessions and expansions, high- and low-inflation periods, crisis and normal times, fixed and floating exchange-rate regimes, and so on.</p></li>
+<li><p>They also handle external instruments naturally. If the shock is identified by an instrument, you can estimate local projection IV regressions horizon by horizon.</p></li>
+<li><p>They are easy to communicate. A reader can understand “this regression estimates the effect four quarters ahead” more easily than they can unpack a complicated VAR propagation formula.</p></li>
+</ul>
+<p>But this popularity has also produced mechanical use. Local projections are not a substitute for thinking about integration, stationarity, controls, identification, or inference.</p>
+<p>What is the actual difference between LP vs VAR?</p>
+<p>A useful result is that, under sufficiently unrestricted specifications, VARs and local projections can be seen as estimating the same underlying impulse responses. The difference is not usually the estimand but the finite-sample trade-off.</p>
+<p>A VAR imposes dynamic structure and therefore tends to be smoother and more efficient if the structure is approximately correct. But misspecification can distort the entire response path.</p>
+<p>A local projection is more robust to dynamic misspecification because each horizon is estimated directly. But it is often less precise, and the estimated path may look noisy. So a good empirical strategy often reports both, or uses one as a robustness check for the other. If VAR and LP responses tell broadly the same story, the dynamic conclusion is more credible. If they differ sharply, the difference itself is informative: the response may be sensitive to dynamic modelling choices.</p>
+<p>In summary. Local projections estimate impulse responses directly, one horizon at a time. That makes them flexible and intuitive. They are especially attractive when dynamics may be misspecified, nonlinear, or state-dependent.</p>
 
 
 
