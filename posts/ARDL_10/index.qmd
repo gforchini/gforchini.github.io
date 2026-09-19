@@ -1,0 +1,110 @@
+---
+title: "Local Projections: Impulse Responses Without a Full System"
+date: 2026-09-19
+tags: [econometrics, ARDL, local projections,  cointegration,  stationarity, impulse responses, VAR, VECM]
+slug: ARDL
+---
+
+In the previous post, I compared ARDL dynamic multipliers, VAR impulse responses, and VECM impulse responses. The common object was a response path: how does a variable move after a disturbance? The difference was the modelling framework. ARDLs are conditional and single-equation. VARs model a system jointly. VECMs add long-run restrictions when variables are I(1) and cointegrated.
+
+This post turns to local projections, introduced by Òscar Jordà in 2005, which have become one of the most popular ways of estimating impulse responses in applied macroeconometrics.
+
+The attraction is easy to understand. Instead of estimating a full dynamic system and then deriving impulse responses from it, local projections estimate the response directly, horizon by horizon. If you want the response of $y$ one period ahead, estimate a regression for $y_{t+1}$. If you want the response four periods ahead, estimate a regression for $y_{t+4}$. Repeat for each horizon. Then plot the coefficients.
+
+This makes local projections flexible, transparent, and easy to explain. But, as always, flexibility is not a permission to do whatever you want.
+
+Suppose you are interested in how $y$ responds to a shock $s_t$. A local projection estimates regressions of the form
+$$
+y_{t+h} = a_h + \beta_h s_t + \Gamma_h W_t + u_{t+h},
+$$
+for horizons $h = 0,1,2,\ldots,H$.
+
+Here $s_t$ is the shock or treatment-like variable whose dynamic effect you want to trace. $W_t$ contains controls: lags of $y$, lags of the shock, lags of other variables, deterministic terms, or other conditioning information. The coefficient $\beta_h$ is interpreted as the response of $y$ at horizon $h$ to the shock at time $t$.
+
+The impulse response is then the sequence
+$$
+\beta_0,\beta_1,\beta_2,\ldots,\beta_H.
+$$
+That is why local projections are so intuitive. Each point on the response graph comes from its own regression.
+
+In a VAR, you estimate a system of equations and then compute impulse responses from the estimated dynamic structure. The response at horizon $h$ is implied by the same set of estimated autoregressive coefficients that governs all horizons.
+
+In local projections, you estimate each horizon separately. The response at horizon 1 does not mechanically force the response at horizon 2, and so on. This is the source of both the appeal and the danger.
+
+The appeal is flexibility. If the true dynamics are complicated, nonlinear, state-dependent, or badly approximated by a low-order VAR, local projections can be more robust. You are not asking one dynamic system to get every horizon right.
+
+The danger is noise. Because each horizon is estimated separately, local projection impulse responses can be jagged, imprecise, and sensitive in small samples. A VAR imposes more structure. Local projections impose less. Less structure can mean less bias, but often more variance.
+
+So the choice is not “VAR good, LP bad” or “LP good, VAR obsolete”. The choice is a bias–variance trade-off.
+
+Local projections also connect naturally to the ARDL discussion. An ARDL dynamic multiplier answers the question: given a change in $x_t$, what path does $y$ follow under the estimated lag structure? The path is derived from one dynamic equation.
+
+A local projection asks: what is the direct association between the shock at time $t$ and $y$ at horizon $t+h$, controlling for relevant history?
+
+So ARDL and local projections can answer similar dynamic questions, but they do so differently.
+
+If the ARDL is correctly specified, it can be efficient because it uses the dynamic structure tightly. If the ARDL lag structure is wrong, the derived multiplier path may be misleading. Local projections are less tied to one assumed dynamic law, but they pay for that flexibility with wider confidence intervals.
+
+If $y_t$ is stationary, then regressions for $y_{t+h}$ are usually straightforward, provided the controls are chosen sensibly and the shock is well-defined.
+
+If $y_t$ is I(1), projecting the level $y_{t+h}$ can be problematic unless the specification accounts for stochastic trends, cointegration, or deterministic components. Often, researchers project differences or growth rates instead:
+$$
+\Delta y_{t+h} = a_h + \beta_h s_t + \Gamma_h W_t + u_{t+h}.
+$$
+
+But if you estimate responses of $\Delta y$, and you want to talk about the level of $y$, you must cumulate the responses.
+
+For example, if $\beta_h$ is the response of $\Delta y_{t+h}$, then the cumulative response of the level up to horizon $H$ is
+$$
+\sum_{h=0}^{H} \beta_h.
+$$
+
+This sounds elementary, but it is a common source of confusion. A response of a growth rate is not a response of a level. A response of a first difference is not automatically a response of the original variable. 
+
+Suppose $y_t$ and $x_t$ are I(1) and cointegrated. A VAR in differences would omit the long-run correction term and may be misspecified. The VECM solves this by including the stationary cointegrating deviations.
+
+The same logic applies to local projections. If the variables are cointegrated and the long-run relation matters for adjustment, then the local projection controls should include relevant stationary error-correction terms. Otherwise you may be estimating horizon-by-horizon regressions that ignore the force pulling the system back toward its long-run relation.
+
+A local projection in a cointegrated setting might therefore look like
+$$
+\Delta y_{t+h} = a_h + \beta_h s_t + \rho_h ECT_{t-1} + \Gamma_h W_t + u_{t+h},
+$$
+
+where $ECT_{t-1}$ is a stationary deviation from a long-run relation.
+
+This is simply the local projection analogue of respecting cointegration. The format changes. The stationarity logic does not.
+
+
+Local projections estimate impulse responses. But, like VARs and ARDL multipliers, they do not magically define the shock. The shock $s_t$ needs identification.  The variable $s_t$ must have an interpretation. It might be a monetary policy shock, a fiscal shock, a commodity price shock, an external instrument, a forecast error, a narrative shock, or a treatment indicator. The local projection estimates the dynamic effect of that object, but the credibility of the interpretation depends on how $s_t$ is constructed. If $s_t$ is genuinely exogenous, or plausibly as-if random conditional on controls, then the local projection can be given a causal interpretation. If $s_t$ is endogenous, the coefficients trace conditional correlations over horizons, not causal effects.
+
+A local projection needs controls. The most common controls are lags of the dependent variable, lags of the shock, and lags of other relevant variables. These controls serve two purposes. First, they help make the shock conditionally exogenous. If the shock is only unpredictable after conditioning on past information, then that past information belongs in the regression. Second, they improve precision and reduce residual serial correlation.
+
+But controls can also create problems. If you include variables affected by the shock between time $t$ and horizon $t+h$, you may block part of the dynamic effect you want to estimate. This is the time-series version of the “bad control” problem. Controls should usually be predetermined relative to the shock time. The safest baseline is to condition on information available at time $t-1$, plus the shock at time $t$, unless your identification strategy says otherwise.
+
+Local projections create a practical inference issue. When you regress $y_{t+h}$ on $s_t$, the error term $u_{t+h}$ will often be serially correlated, especially for larger $h$. Different projected horizons share observations. This is not a small detail: standard errors that ignore this dependence can be too small. In practice, local projection papers often use heteroskedasticity-and-autocorrelation robust standard errors, such as Newey–West type corrections, with bandwidths that reflect the projection horizon. Bootstrap methods are also common.
+
+
+Local projections became popular because they are flexible in ways VARs are not. 
+
+- They can easily allow for nonlinearities:
+$$
+y_{t+h} = a_h + \beta_h^{(1)} s_t \cdot I(\text{state}=1) + \beta_h^{(0)} s_t \cdot I(\text{state}=0) + \Gamma_h W_t + u_{t+h}.
+$$
+This lets you ask whether shocks have different effects in recessions and expansions, high- and low-inflation periods, crisis and normal times, fixed and floating exchange-rate regimes, and so on.
+
+- They also handle external instruments naturally. If the shock is identified by an instrument, you can estimate local projection IV regressions horizon by horizon.
+
+- They are easy to communicate. A reader can understand “this regression estimates the effect four quarters ahead” more easily than they can unpack a complicated VAR propagation formula.
+
+But this popularity has also produced mechanical use. Local projections are not a substitute for thinking about integration, stationarity, controls, identification, or inference.
+
+What is the actual difference between LP vs VAR?
+
+A useful result is that, under sufficiently unrestricted specifications, VARs and local projections can be seen as estimating the same underlying impulse responses. The difference is not usually the estimand but the finite-sample trade-off.
+
+A VAR imposes dynamic structure and therefore tends to be smoother and more efficient if the structure is approximately correct. But misspecification can distort the entire response path. 
+
+A local projection is more robust to dynamic misspecification because each horizon is estimated directly. But it is often less precise, and the estimated path may look noisy. So a good empirical strategy often reports both, or uses one as a robustness check for the other. If VAR and LP responses tell broadly the same story, the dynamic conclusion is more credible. If they differ sharply, the difference itself is informative: the response may be sensitive to dynamic modelling choices.
+
+In summary.  Local projections estimate impulse responses directly, one horizon at a time. That makes them flexible and intuitive. They are especially attractive when dynamics may be misspecified, nonlinear, or state-dependent.
+
